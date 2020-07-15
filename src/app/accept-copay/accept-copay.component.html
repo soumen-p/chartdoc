@@ -1,0 +1,141 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+
+    <!-- START CONTENT -->
+    <section id="main-content" class="sidebar_shift">
+        <section class="wrapper main-wrapper row">
+
+            <div class="col-12">
+                <div class="page-title">
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">ACCEPT CO-PAY</h1><!-- PAGE HEADING TAG - END -->
+                    </div>                    
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+
+            <div class="col-xl-12">
+                <section class="box ">
+                    <form [formGroup]="acceptcopayForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+                    <header class="panel_header">
+                        <div class="row">
+                            <div class="col-10">
+                                <h2 class="title float-left">Accept Co-pay</h2>
+                            </div>
+                            <div class="col-2" style="padding-top: 20px;">
+                                
+                                <button type="submit" class="btn btn-primary"  style="margin-right: 10px;">Finish</button>
+                                <button type="button" class="btn" (click)="reset()">Cancel</button>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                        
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEmail4">Payment Type<span class="text-danger"> *</span></label>
+                                                    <!-- <select class="form-control"  formControlName="paymenttypeId">
+                                                        <option value="0" >---Select---</option>
+                                                        <option value="D">Doctor Specific</option>
+                                                    </select> -->
+                                                    <select class="form-control" name="" id="service" formControlName="paymenttype" selected >
+                                                        <option value="0">--Select--</option>
+                                                      <option *ngFor="let item of paymentTypes" value="{{item.id}}"> {{item.name}} </option>
+                                                    </select>
+                                                    <span class="text-danger" *ngIf="acceptcopayForm.hasError('required', ['paymenttype']) && formDir.submitted">
+                                                        Payment Type is required.
+                                                    </span>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputPassword4">Reference #1<span class="text-danger"> *</span></label>
+                                                    <input type="text"  class="form-control" formControlName="refNo1"  >
+                                                    <span class="text-danger" *ngIf="acceptcopayForm.hasError('required', ['refNo1']) && formDir.submitted">
+                                                        Reference #1 is required.
+                                                    </span>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputPassword4">Reference #2</label>
+                                                    <input type="text"  class="form-control" formControlName="refNo2"  >
+                                                  
+                                                </div>
+
+                                               
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputPassword4"><strong>Payment Date </strong><span class="text-danger"> *</span></label>
+                                                   
+                                                <input type="text" id="date" name="date"  name="dp1"   autocomplete="off"   [readonly]="true"
+                                                        formControlName="paydate" class="form-control datepicker" 
+                                                        data-format="MM/DD/YYYY" bsDatepicker [minDate]="minDate" 
+                                                        [bsConfig]="{containerClass:'theme-default', dateInputFormat: 'MM/DD/YYYY'}"  >
+                                                   
+                                                    <span class="text-danger" *ngIf="acceptcopayForm.hasError('required', ['paydate']) && formDir.submitted">
+                                                        Payment Date is required.
+                                                    </span>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputPassword4">Amount<span class="text-danger"> *</span></label>
+                                                    <input type="text"  class="form-control" formControlName="amount"  >
+                                                    <span class="text-danger" *ngIf="acceptcopayForm.hasError('required', ['amount']) && formDir.submitted">
+                                                       Amount is required.
+                                                    </span>
+                                                </div>
+                                            </div>                                            
+
+                                       
+                                    </div> 
+                                 </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-12 col-lg-12 col-xl-12">
+                                <table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+                                    <thead style="background: #678680;">
+                                        <tr>
+                                            <th style="display: none;">Appointment Id</th>
+                                            <th>Payment Type</th>
+                                            <th>Reference #1</th>
+                                            <th>Reference #2</th>
+                                            <th>Payment Date</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let Copay of coPayEntry">
+                                        <tr>
+                                            <td style="display: none;">{{Copay.appointmentId}}</td>
+                                            <td>{{Copay.paymentType}}</td>
+                                            <td>{{Copay.refNo1}}</td>
+                                            <td>{{Copay.refNo2}}</td>
+                                            <td>{{Copay.paymentDate}}</td>
+                                            <td>{{Copay.amount}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                </section>
+            </div>
+
+
+            <!-- MAIN CONTENT AREA ENDS -->
+        </section>
+    </section>
+    <!-- END CONTENT -->
+</div>

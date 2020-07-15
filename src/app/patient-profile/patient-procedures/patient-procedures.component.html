@@ -1,0 +1,96 @@
+<div class="tab-content primary" id="myTabContentProcedure">
+    <div class="tab-pane fade active show">
+        <div class="row margin-0">
+        <div class="col-xl-6">
+            <section class="box nobox ">
+                <div class="content-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="accordion" role="tablist" class="accordion-group">
+                                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                    <tr>
+                                        <td>
+                                            <h2>Procedures
+                                                <br>
+                                                <h6>VIEW BY:
+                                                    <select class="viewbyiddate" (click)="ChangeProcedureView($event.target.value)">
+                                                        <option>DATE</option>
+                                                        <option>DOCTOR</option>
+                                                    </select>
+                                                </h6>
+                                            </h2>
+                                        </td>
+                                        <td align="right">                                           
+                                            <button kendoButton  class="btn btn-success btn-corner" style="width:120px; font-size: 16px;"
+                                            (click)="openModelProcedure('ModelProcedure')" [disabled]="isPosCheckout"
+                                           >Upload</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                                <div style="height: 200px;overflow-y:scroll;overflow-x:hidden">
+                                <div class="card" *ngFor="let element of proceduresEntry" >
+                                    <div class="card-header" role="tab" id="headingTwo">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-row">
+                                                    <a *ngIf="isViewByDate" class="showSingle" target="3" (click)="LoadProcedureDocuments(element.id)">
+                                                        <h5> <span class="spancolor">{{element.performedDateTime}}</span> 
+                                                            - {{element.procedureName}}
+                                                        </h5>
+                                                    </a>
+                                                    <a  *ngIf="!isViewByDate" class="showSingle" target="3" (click)="LoadProcedureDocuments(element.id)">
+                                                        <h5> <span class="spancolor">
+                                                                {{element.doctorName}}
+                                                        </span>
+                                                        -  {{element.doctorProfile}}
+                                                        </h5>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-xl-6">
+            <section class="box nobox ">
+                <div class="content-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 >Documents</h2>
+                            <div class="form-group">
+                                <div class="controls">
+                                    <div id="div3" class="targetDiv">
+                                        <div class="card-body">
+                                            <div class="row ">
+                                                <div class="col-2" *ngFor="let element of procedureDocument">
+                                                    <a href="{{element.path}}" target='_blank' download #clickme><img src="../../../../assets/images/copy.png" class="img-fluid" alt=""></a>
+                                                    <button (click)="clickme.click()" hidden="true"> Download </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div id="ModelProcedure" class="modal">
+    <div class="modal-content">
+        <app-patient-procedure-upload (loadInit)='loadInit()'></app-patient-procedure-upload>
+        <!-- <app-patient-procedure-upload></app-patient-procedure-upload> -->
+    </div>
+</div>

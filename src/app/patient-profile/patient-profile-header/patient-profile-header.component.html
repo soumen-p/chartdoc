@@ -1,0 +1,333 @@
+<div class='col-12'>
+    <div class="page-title">
+        <div class="float-left">
+            <h1 class="title">{{patientName}}</h1>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-xs-12">
+            <ul class="row  tile_count">
+                <li class="col-xl-3 tile_stats_count">
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="{{patientImage}}" class="img-circle profile_img"
+                                alt="" />
+                        </div>
+                        <div class="profile_info">
+                            <span style="font-size: 26px;">{{patientGender}}</span>
+                            <h2 style="margin-top: -10px;">{{patientAge}} years old</h2>
+                            <button kendoButton class="btn btn-warning" (click)="viewDetails()">View History</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="col-sm-1 tile_stats_count">
+                    <span class="count_top"> Blood Pressure</span>
+                    <div class="count">
+                        <span>{{bpFirst}}</span>
+                        <span>/</span>
+                        <span>{{bpLast}}</span>
+                    </div>
+                    <div class="example-wrapper">
+                        <span class="count_bottom">
+                            <a class="gen" id="myBtn" (click)="openBp('modalBP')">Update</a>
+                        </span>
+                    </div>
+                </li>
+                <li class="col-sm-1 tile_stats_count">
+                    <span class="count_top"> Pulse</span>
+                    <div class="count">
+                        <span>{{pulse}}</span>
+                    </div>
+                    <div class="example-wrapper">
+                        <span class="count_bottom"><a class="gen" (click)="openPulse('modalPulse')"> Update </a></span>
+                    </div>
+                </li>
+                <li class="col-sm-1 tile_stats_count">
+                    <span class="count_top"> Height</span>
+                    <div class="count">
+                        <span>{{height1}} '{{height2}}''</span>
+                    </div>
+                    <div class="example-wrapper">
+                        <span class="count_bottom"><a class="gen" (click)="openHeight('modalHeight')"> Update
+                            </a></span>
+                    </div>
+                </li>
+                <li class="col-sm-1 tile_stats_count">
+                    <span class="count_top"> Weight</span>
+                    <div class="count">
+                        <span>{{weight}}</span>
+                    </div>
+                    <div class="example-wrapper">
+                        <span class="count_bottom"><a class="gen" (click)="openWeight('modalWeight')"> Update
+                            </a></span>
+                    </div>
+                </li>
+                <li class="col-sm-1 tile_stats_count">
+                    <span class="count_top"> Temperature</span>
+                    <div class="count">
+                        <span>{{temprature}}</span>
+                        <sup><span style="font-size: 18px;"><sup>0</sup>F</span></sup>
+                    </div>
+                    <div class="example-wrapper">
+                        <span class="count_bottom"><a class="gen" (click)="openTemp('modalTemp')"> Update </a></span>
+                    </div>
+                </li>
+                <li class="col-sm-1 tile_stats_count">
+                    <span class="count_top">Respiratory</span>
+                    <div class="count">
+                        <span>{{respiratory}}</span>
+                    </div>
+                    <div class="example-wrapper">
+                        <span class="count_bottom"><a class="gen" (click)="openResp('modalResp')"> Update </a></span>
+
+                    </div>
+                </li>
+                <li class="col-sm-3 tile_stats_count">
+                    <span class="count_top" style="font-size: 24px;">{{doctorName}}</span>
+                    <p>Change Provider</p>
+                    <button type="button" style="font-size: 24px;padding: 0px 42px;" [disabled]="isPosCheckOut"
+                        class="btn btn-warning" (click)="saveObservation()">Finish</button> <br><br>
+                    <button type="button" [disabled]="!isPosCheckOut" (click)="goToCheckOut()" class="btn">Back</button>
+                </li>
+            </ul>
+        </div>
+        <div style="color:green; text-align: center;">{{message}}</div>
+        <div *ngIf="!isView" class="col-12">
+            <div class="tabs">
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a href="#cc" class="active" data-toggle="tab">
+                            CC :<br> <span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#encounter" data-toggle="tab">
+                            Encounter<br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li [ngClass]="{'disabled': !isDoctor}">
+                        <a href="#prescriptions" data-toggle="tab">
+                            Prescriptions<br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li [ngClass]="{'disabled': !isDoctor}">
+                        <a href="#impression" data-toggle="tab">
+                            Impression/Plan<br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li [ngClass]="{'disabled': !isDoctor}">
+                        <a href="#icd" data-toggle="tab">
+                            ICD<br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li [ngClass]="{'disabled': !isDoctor}">
+                        <a href="#cpt" data-toggle="tab">
+                            CPT<br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li [ngClass]="{'disabled': !isDoctor}">
+                        <a href="#FU" data-toggle="tab">
+                            Follow Up<br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content primary" id="myTabContent1">
+                    <div class="tab-pane fade active show" id="cc">
+                        <app-patient-chief-complaint></app-patient-chief-complaint>
+                    </div>
+                    <div class="tab-pane fade" id="encounter">
+                        <app-patient-encounter></app-patient-encounter>
+                    </div>
+                    <div class="tab-pane fade" id="prescriptions">
+                        <app-patient-prescriptions></app-patient-prescriptions>
+                    </div>
+                    <div class="tab-pane fade" id="impression">
+                        <app-patient-impression-plan></app-patient-impression-plan>
+                    </div>
+                    <div class="tab-pane fade" id="icd">
+                        <app-patient-icd></app-patient-icd>
+                    </div>
+                    <div class="tab-pane fade" id="cpt">
+                        <app-patient-cpt></app-patient-cpt>
+                    </div>
+                    <div class="tab-pane fade" id="FU">
+                        <app-patient-follow-up></app-patient-follow-up>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isView" class="col-xl-12">
+            <div class="bacakground">
+                <div class="navbarr">
+                    <h4><i class="fa fa-times-circle fa-lg" aria-hidden="true" (click)="exit()"
+                            style="cursor: pointer"></i> Exit</h4>
+                    <h4 (click)="exit()" style="cursor: pointer">Patient History</h4>
+                    <h4><i class="fa fa-times-circle fa-lg" aria-hidden="true" (click)="exit()"
+                            style="cursor: pointer"></i> Exit</h4>
+                </div>
+            </div>
+            <div class="tabs berder">
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a href="#diagnosis" class="active" data-toggle="tab">
+                            Diagnosis <br> <span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#procedures" data-toggle="tab">
+                            Procedures <br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#allergies" data-toggle="tab">
+                            Allergies <br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#Prescriptions" data-toggle="tab">
+                            Prescriptions <br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#Immunizations" data-toggle="tab">
+                            Immunizations <br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#SocialOrFamily" data-toggle="tab">
+                            Social/Family <br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#insuranceInfo" data-toggle="tab">
+                            Insurance Info<br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content primary" id="myTabContent1">
+                    <div class="tab-pane fade show active" id="diagnosis">
+                        <app-patient-diagnosis></app-patient-diagnosis>
+                    </div>
+                    <div class="tab-pane fade" id="procedures">
+                        <app-patient-procedures></app-patient-procedures>
+                    </div>
+                    <div class="tab-pane fade" id="allergies">
+                        <app-patient-allergies></app-patient-allergies>
+                    </div>
+                    <div class="tab-pane fade" id="Prescriptions">
+                        <app-patient-prescriptions-view></app-patient-prescriptions-view>
+                    </div>
+                    <div class="tab-pane fade" id="Immunizations">
+                        <app-patient-immunizations></app-patient-immunizations>
+                    </div>
+                    <div class="tab-pane fade" id="SocialOrFamily">
+                        <app-patient-social-family></app-patient-social-family>
+                    </div>
+                    <div class="tab-pane fade" id="insuranceInfo">
+                        <app-patient-insurance-info></app-patient-insurance-info>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalTemp" class="modal">
+    <div class="example-wrapper">
+        <div class="modal-content">
+            <h3 class="selete">Enter New Temperature</h3>
+            <div class="row">
+                <div class="col"><input type="text" #txtTemp [(ngModel)]="modelTemprature" class="fontsiz-ct"
+                        (keypress)="tempNumberOnly($event);" (keyup)="validateTemp($event.target.value)" /></div>
+            </div>
+            <div class="svbutton"> <button type="button" [disabled]="!isModalTempValid" class="btn btn-primary"
+                    (click)="submitTemp(txtTemp.value)">Save</button></div>
+            <h3 class="selete"></h3> <span class="close" (click)="closeTemp('modalTemp')">Cancel</span>
+        </div>
+    </div>
+</div>
+
+<div id="modalBP" class="modal">
+    <div class="example-wrapper">
+        <div class="modal-content">
+            <h3 class="selete">Enter New Blood Pressure</h3>
+            <div class="row offset-sm-3">
+                <div class="col-4  p-sm-0"><input type="text" #txtBP1 maxlength="3" [(ngModel)]="modelBpFirst"
+                        class="fontsiz-rt" (keyup)="validateBp($event.target.value)"
+                        (keypress)="numberOnly($event); " /></div>
+                <div class="col-1 p-sm-0 fontsiztext" style="text-align: center; "> /</div>
+                <div class="col-4 p-sm-0"><input #txtBP2 type="text" maxlength="3" [(ngModel)]="modelBpLast"
+                        class="fontsiz-lt" (keyup)="validateBp($event.target.value)" (keypress)="numberOnly($event);" />
+                </div>
+            </div>
+            <div class="svbutton"> <button type="button" [disabled]="!isModalBPValid" class="btn btn-primary"
+                    (click)="submitBp(txtBP1.value,txtBP2.value)">Save</button></div>
+            <h3 class="selete"></h3> <span class="close" (click)="closeBp('modalBP')">Cancel</span>
+        </div>
+    </div>
+</div>
+
+<div id="modalPulse" class="modal">
+    <div class="example-wrapper">
+        <div class="modal-content">
+            <h3 class="selete">Enter New Pulse</h3>
+            <div class="row">
+                <div class="col"><input type="text" #txtPulse [(ngModel)]="modelPulse" class="fontsiz-ct"
+                        (keyup)="validatePulse($event.target.value)" (keypress)="numberOnly($event);" /></div>
+            </div>
+            <div class="svbutton"> <button type="button" [disabled]="!isModalPulseValid" class="btn btn-primary"
+                    (click)="submitPulse(txtPulse.value)">Save</button></div>
+            <h3 class="selete"></h3> <span class="close" (click)="closePulse('modalPulse')">Cancel</span>
+        </div>
+    </div>
+</div>
+
+<div id="modalHeight" class="modal">
+    <div class="example-wrapper">
+        <div class="modal-content">
+            <h3 class="selete">Enter New Height</h3>
+            <div class="row offset-sm-2">
+                <div class="col-3  p-sm-0">
+                    <input type="text" #txtHeight1 maxlength="2" [(ngModel)]="modelHeight1" class="fontsiz-rt"
+                        (keyup)="validateHeight($event.target.value)" (keypress)="heightNumberOnly($event,'H1');" />
+                </div>
+                <div class="col-1 p-sm-0 fontsiztext" style="text-align: center; ">&apos;</div>
+                <div class="col-3 p-sm-0" style="text-align: right">
+                    <input type="text" #txtHeight2 maxlength="2" [(ngModel)]="modelHeight2" class="fontsiz-ht-lt"
+                        (keyup)="ValidateHeight($event)" (keypress)="heightNumberOnly($event,'H2');" />
+                    <div class="col-1 p-sm-0 fontsiztext" style="text-align: left; ">&quot;</div>
+                </div>
+            </div>
+            <div class="svbutton"> <button type="button" [disabled]="!isModalHeightValid" class="btn btn-primary"
+                    (click)="submitHeight(txtHeight1.value,txtHeight2.value)">Save</button></div>
+            <h3 class="selete"></h3> <span class="close" (click)="closeHeight('modalHeight')">Cancel</span>
+        </div>
+    </div>
+</div>
+<div id="modalWeight" class="modal">
+    <div class="example-wrapper">
+        <div class="modal-content">
+            <h3 class="selete">Enter New Weight</h3>
+            <div class="row">
+                <div class="col"><input type="text" #txtWeight [(ngModel)]="modelWeight" class="fontsiz-ct"
+                        (keyup)="validateWeight($event.target.value)" (keypress)="numberOnly($event);" /></div>
+            </div>
+            <div class="svbutton"> <button type="button" [disabled]="!isModalWeightValid" class="btn btn-primary"
+                    (click)="submitWeight(txtWeight.value)">Save</button></div>
+            <h3 class="selete"></h3> <span class="close" (click)="closeWeight('modalWeight')">Cancel</span>
+        </div>
+    </div>
+</div>
+
+<div id="modalResp" class="modal">
+    <div class="example-wrapper">
+        <div class="modal-content">
+            <h3 class="selete">Enter New Respiratory</h3>
+            <div class="row">
+                <div class="col"><input type="text" #txtResp [(ngModel)]="modelRespiratory" class="fontsiz-ct"
+                        (keyup)="validateResp($event.target.value)" (keypress)="numberOnly($event);" /></div>
+            </div>
+            <div class="svbutton"> <button type="button" [disabled]="!isModalRespValid" class="btn btn-primary"
+                    (click)="submitResp(txtResp.value)">Save</button></div>
+            <h3 class="selete"></h3> <span class="close" (click)="closeResp('modalResp')">Cancel</span>
+        </div>
+    </div>
+</div>

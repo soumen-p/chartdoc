@@ -1,0 +1,333 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+
+    <section id="main-content" class="sidebar_shift">
+        <div class="wrapper main-wrapper row">
+            <div class='col-12'>
+                <div class="page-title">
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">Patient Information</h1><!-- PAGE HEADING TAG - END -->
+                    </div>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-primary" (click)="finish()"
+                            style="margin-right: 5px;">Finish</button>
+                        <button type="button"  (click)="cancel()"
+                            class="btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <form [formGroup]="patientFormGroup" #patientForm="ngForm">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2">
+                            <div class="uprofile-image">
+                                <img alt="" src="{{patientimage}}" class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-row">
+                                <div class="form-group col-md-5">
+                                    <label class="form-label">First Name</label>
+                                    <input class="form-control" formControlName="firstName" placeholder="First Name" type="text" />
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label class="form-label">M </label>
+                                    <input class="form-control" formControlName="middleName" type="text" />
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="form-label">Last Name</label>
+                                    <input class="form-control" formControlName="lastName" type="text" placeholder="Last Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-form-label">Gender:</label>
+                                <div class="col-sm-8" style="margin-top: 5px;margin-left: 15px;">
+                                    <div class="row">
+                                        <div class="form-check col-sm-3">
+                                            <input class="form-check-input" formControlName="gender" type="radio" name="gender" id="redioMale" value="Male" checked />
+                                            <label class="form-check-label" for="redioMale">Male</label>
+                                        </div>
+                                        <div class="form-check col-sm-4">
+                                            <input class="form-check-input" formControlName="gender" type="radio" name="gender" value="Female" id="redioFemale">
+                                            <label class="form-check-label" for="redioFemale">Female</label>
+                                        </div>
+                                        <div class="form-check col-sm-3">
+                                            <input class="form-check-input" formControlName="gender" type="radio" name="gender" value="Undisclosed" id="redioUndisclosed">
+                                            <label class="form-check-label" for="redioUndisclosed">Undisclosed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputDateOfBirth" class="col-form-label">Date of Birth:</label>
+                                <div class="col-sm-6">
+                                    <input type="date" formControlName="dob" value="MM/DD/YYYY" class="form-control" id="inputDateOfBirth" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+            <div class="col-lg-12">
+                <ul class="nav nav-tabs primary" id="myTab1" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" role="tab" href="#Allergies" data-toggle="tab">Allergies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" role="tab" href="#Immunizations" data-toggle="tab">Immunizations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" role="tab" href="#Social" data-toggle="tab">Social</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" role="tab" href="#Family" data-toggle="tab">Family</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" role="tab" href="#alert" data-toggle="tab">Alert</a>
+                    </li>
+                </ul>
+                <div class="tab-content primary" id="tcAllergies">
+                    <div class="tab-pane fade show active" id="Allergies">
+                        <section class="box ">
+                            <header class="panelheader"><h2 class="title float-left">Allergies</h2></header>
+                            <div class="content-body">
+                                <form [formGroup]="allergiesFormGroup" #allergiesForm="ngForm">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label class="form-label">Allergies: </label>
+                                                    <input class="form-control" id="allergiesDescription" formControlName="allergiesDescription" placeholder="Allergies" type="text">
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label class="form-label">Code: </label>
+                                                    <input class="form-control" id="allergiesCode" formControlName="allergiesCode" placeholder="Code" type="text"/>
+                                                </div>
+                                                <div class="form-group col-md-1" style="padding-top:33px">
+                                                    <button type="button" class="btn btn-primary rss" (click)="addAllergies()">
+                                                        <i class="fa fa-plus vimeo-square"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-striped table-bordered">    
+                                                <thead>    
+                                                    <tr><th>Allergies</th><th>Code</th><th></th>
+                                                    </tr>
+                                                </thead>    
+                                                <tbody>    
+                                                    <tr *ngFor="let allergy of allergyArray; let i = index;">
+                                                        <td>{{allergy.description}}</td>
+                                                        <td>{{allergy.code}}</td>
+                                                        <td (click)="deleteRow(i)"><i class="fa fa-trash fa-2x"></i></td>
+                                                    </tr>                                                   
+                                                </tbody>    
+                                            </table>    
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="tab-pane fade" id="Immunizations">
+                        <section class="box ">
+                            <header class="panelheader"><h2 class="title float-left">Immunizations</h2></header>
+                            <div class="content-body">
+                                <form [formGroup]="immunizationsFormGroup" #immunizationsForm="ngForm">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-3">
+                                                    <label class="form-label">Year: </label>
+                                                    <input class="form-control" type="date" id="immunizationsDate" formControlName="immunizationsDate" />
+                                                    <!-- <input type="text" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth" 
+                                                    class="form-control datepicker"  data-format="YYYY" 
+                                                    bsDatepicker [bsConfig]="{containerClass:'theme-default', dateInputFormat: 'YYYY'}" (onShown)="onOpenCalendar($event)"> -->
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label class="form-label">&nbsp; </label>
+                                                    <input type="text" class="form-control" id="immunizationsCode" formControlName="immunizationsCode" placeholder="Code">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label class="form-label">&nbsp; </label>
+                                                    <input type="text" class="form-control" id="immunizationsDescription" formControlName="immunizationsDescription" placeholder="Description">
+                                                </div>
+                                                <div class="form-group col-md-1" style="padding-top:33px;">
+                                                    <button type="button" class="btn btn-primary rss"  (click)="addImmunizations()">
+                                                        <i class="fa fa-plus vimeo-square"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-striped table-bordered">    
+                                                <thead>    
+                                                    <tr><th>Date</th><th>Code</th><th>Description</th><th></th>
+                                                    </tr>
+                                                </thead>    
+                                                <tbody>    
+                                                    <tr *ngFor="let immunization of immunizationArray; let i = index;">
+                                                        <td>{{immunization.date}}</td>
+                                                        <td>{{immunization.code}}</td>
+                                                        <td>{{immunization.description}}</td>
+                                                        <td (click)="deleteImmunizationRow(i)"><i class="fa fa-trash fa-2x"></i></td>
+                                                    </tr>                                                   
+                                                </tbody>    
+                                            </table>    
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="tab-pane fade" id="Social">
+                        <section class="box ">
+                            <header class="panelheader">
+                                <h2 class="title float-left">Social</h2>
+                            </header>
+                            <div class="content-body">
+                                <form [formGroup]="socialFormGroup" #socialForm="ngForm">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label class="form-label">Medicine: </label>
+                                                    <input class="form-control" id="socialAddiection" formControlName="socialAddiection" placeholder="Medicine" type="text">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label class="form-label">Dosage: </label>
+                                                    <input class="form-control" id="socialFrequency" formControlName="socialFrequency" placeholder="Dosage" type="text">
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label class="form-label">Year: </label>
+                                                    <input class="form-control" id="socialDuration" formControlName="socialDuration" placeholder="Year" type="text">
+                                                </div>
+                                                <div class="form-group col-md-1" style="padding-top:33px;">
+                                                    <button type="button" class="btn btn-primary rss"  (click)="addSocials()">
+                                                        <i class="fa fa-plus vimeo-square"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-striped table-bordered">    
+                                                <thead>    
+                                                    <tr><th>Medicine</th><th>Dosage</th><th>Year</th><th></th>
+                                                    </tr>
+                                                </thead>    
+                                                <tbody>    
+                                                    <tr *ngFor="let soicaldata of socailArray; let i = index;">
+                                                        <td>{{soicaldata.addiection}}</td>
+                                                        <td>{{soicaldata.frequency}}</td>
+                                                        <td>{{soicaldata.duration}}</td>
+                                                        <td (click)="deleteSocailRow(i)"><i class="fa fa-trash fa-2x"></i></td>
+                                                    </tr>                                                   
+                                                </tbody>    
+                                            </table>    
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="tab-pane fade" id="Family">
+                        <section class="box ">
+                            <header class="panelheader">
+                                <h2 class="title float-left">Family</h2>
+                            </header>
+                            <div class="content-body">
+                                <form [formGroup]="familyFormGroup" #familyForm="ngForm">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label class="form-label">Relation: </label>
+                                                    <input class="form-control" id="familyMember" formControlName="familyMember" placeholder="Relation" type="text">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label class="form-label">Diseases: </label>
+                                                    <input class="form-control" id="familyDiseases" formControlName="familyDiseases" placeholder="Diseases" type="text">
+                                                </div>
+                                                <div class="form-group col-md-1" style="padding-top:33px;">
+                                                    <button type="button" class="btn btn-primary rss"  (click)="addfamilys()">
+                                                        <i class="fa fa-plus vimeo-square"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-striped table-bordered">    
+                                                <thead>    
+                                                    <tr><th>Relation</th><th>Diseases</th><th></th>
+                                                    </tr>
+                                                </thead>    
+                                                <tbody>    
+                                                    <tr *ngFor="let family of familyArray; let i = index;">
+                                                        <td>{{family.member}}</td>
+                                                        <td>{{family.diseases}}</td>
+                                                        <td (click)="deleteFamilyRow(i)"><i class="fa fa-trash fa-2x"></i></td>
+                                                    </tr>                                                   
+                                                </tbody>    
+                                            </table>    
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="tab-pane fade" id="alert">
+                        <section class="box ">
+                            <header class="panelheader">
+                                <h2 class="title float-left">Alert</h2>
+                            </header>
+                            <div class="content-body">
+                                <form [formGroup]="alertFormGroup" #alertForm="ngForm">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label class="form-label">Alert Keyword: </label>
+                                                    <select class="form-control" id="alertCode" formControlName="alertCode" [(ngModel)]="alertId">
+                                                        <option value="">--Select--</option>
+                                                        <option value="{{item.id}}" *ngFor="let item of alertKeywordArray">{{item.name}}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-8">
+                                                    <label class="form-label">Alert Remark: </label>
+                                                    <textarea class="form-control" cols="5" id="field-6" id="alertDescription" 
+                                                    formControlName="alertDescription"  [(ngModel)]="alertDesc"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <!-- MAIN CONTENT AREA ENDS -->
+        </div>
+    </section>
+</div>

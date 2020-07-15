@@ -1,0 +1,163 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+
+
+<div>
+     <!-- START CONTENT -->
+     <section id="main-content" class="sidebar_shift">
+        <section class="wrapper main-wrapper row" style=''>
+
+            <div class='col-12'>
+                <div class="page-title">
+
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START --><h1 class="title">Master</h1><!-- PAGE HEADING TAG - END -->                            
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+
+            <div class="col-xl-12">
+                <section class="box ">
+                    <header class="panel_header">
+                        <div class="row">
+                            <div class="col-10"><h2 class="title float-left">Charge Master</h2></div>
+                             <div class="col-2" style="padding-top: 25px;">
+                                     <button type="button" class="btn btn-primary " (click) ="saveChargeDetails($event)">Finish</button>
+                                    <button type="button"  class="btn" onclick="window.location.href = '#';">Cancel</button>
+                             </div>
+                        </div>                               
+                    </header>
+
+                    <div class="content-body">
+                            <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                    
+                                        <div class="form-group row">                                                    
+                                                <label class="col-1 col-form-label">Charge Date </label>
+                                                <div class="col-4">
+                                                    <select class="form-control" (change)="selectChange($event)">
+                                                        <option value="">--Select--</option>
+                                                        <option *ngFor="let chargeDate of chargeDateRange" value="{{chargeDate.id}}"> {{chargeDate.description}} </option>
+                                                    </select>
+                                                   
+                                                 </div>                                                 
+                                            </div>
+                                        <div class="form-group row">
+                                            <label class="col-1 col-form-label">CPT Code</label>
+                                            <div class="col-11">                                                            
+                                               <div class="row">
+                                                <div class="col-xl-7">
+                                                    <section class="box nobox">
+                                                        <div class="content-body">  
+                                                             <div class="row">
+                                                                <div class="col-12">
+                                                                   <h2 >Select CPT Codes</h2>
+                                                                    <div class="form-group">
+                                                                        <div class="controls">
+                                                                            <div id="div3">
+                                                                            <table class="icd dt-responsive display" cellspacing="0" width="100%">
+                                                                              <tbody>
+                                                                                 <tr *ngFor="let cpt of cptDetails">
+                                                                                  <td width="15%" align="left">
+                                                                                      <!-- <input type="hidden" [(ngModel)] = "cpt.id">
+                                                                                      <input type="hidden" [(ngModel)] = "cpt.cptId">
+                                                                                      <input type="hidden" [(ngModel)] = "cpt.chargeYearId"> -->
+                                                                                      
+                                                                                    {{cpt.cptCode}}
+                                                                                   </td>
+                                                                                  <td width="35%">
+                                                                                    {{cpt.cptDescription}} 
+                                                                                   </td>
+                                                                                   <td><input class="form-control" name="amount" type="text"  [(ngModel)] = "cpt.amount" placeholder="Amount"></td>
+                                                                                   <td><input class="form-control" name="modified" type="text"  [(ngModel)] = "cpt.modifiedCode"  placeholder="Modified Code"></td>
+                                                                                  <td>
+                                                                                    <button type="button" (click)="deleteRow(cpt)" class="deletbutton">X</button>   
+                                                                                   </td>
+                                                                                </tr>                                                
+                                                                              </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                                                                                       
+                                                                        </div>
+                                                                    </div>
+                        
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-xl-5">
+                                                    <section class="box nobox ">
+                                                        <div class="content-body">  
+                                                          <div class="row">
+                                                           <div class="col-12">
+                                                            <div class="wid-notification">
+                                                              <div class="input-group mb-3">
+                                                                    <input style="border-radius: 10px; background: #fff; color: #000;" type="text" class="form-control" placeholder="Recipient's username" 
+                                                                    [(ngModel)]="searchTerm"                                       
+                                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                                                    <i class="fa fa-search icon"></i> 
+                                                                </div>
+                                                                <div style="height: 300px;overflow-y:scroll;">
+                                                                    <div class="accordion-group" *ngFor="let cptdetail of cptDetailss | PatientCPTSearchFilter:{Code: searchTerm, Desc:searchTerm}">
+                                                                        <div class="card">
+                                                                        <div class="card-header">
+                                                                            <div class="row">
+                                                                                <div class="col-12">
+                                                                                    <div class="form-row">
+                                                                                        <div class="col-5" style="display: none;">
+                                                                                            {{cptdetail.id}}
+                                                                                        </div>
+                                                                                        <div class="col-5">
+                                                                                            {{cptdetail.code}}
+                                                                                        </div>
+                                                                                        <div class="col-6">
+                                                                                            {{cptdetail.desc}}
+                                                                                        </div>                
+                                                                                        <div class="col-1">                                                                                 
+                                                                                            <button type="button" class="showSingle addbutton"  (click)="AddCPTCode(cptdetail.id, cptdetail.code, cptdetail.desc)" target="5">+</button> 
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>                                                   
+                                                                    </div>
+                                                                                                                                              
+                                                                </div>                                
+                                                               </div>
+                                                               </div>
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    </div>
+                                               </div> 
+                                            </div>
+                                         </div>
+                                    
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>                        
+                </div>
+
+
+            <!-- MAIN CONTENT AREA ENDS -->
+        </section>            
+    <!-- END CONTENT -->
+   
+</div>

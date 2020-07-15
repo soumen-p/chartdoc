@@ -1,0 +1,116 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+    <section  id="main-content" class="sidebar_shift">
+        <section class="wrapper main-wrapper row" styles=''>
+            <div class='col-12'>
+                <div class="page-title">
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">OFFICE CALENDAR</h1>
+                        <!-- PAGE HEADING TAG - END -->   
+                    </div>
+                </div>
+            </div>
+                <div class="clearfix"></div>
+                <!-- MAIN CONTENT AREA STARTS -->
+        
+                <div class="col-xl-12">
+                
+                        <section class="box nobox ">
+                            <div class="content-body">
+                                <div class="row">
+									
+											  
+                                    <div class="col-3 col-lg-3" style="padding-top:58px">
+                                        <form>
+                                        <div class="form-group">
+                                                  <!-- <label for="inputPassword4"><strong>Date</strong></label>
+                          <input type="date"   class="form-control" (change)="datechange($event)" > -->
+
+                          <ngb-datepicker #dp  [minDate]="minDate"  (dateSelect)="datechange($event)"
+                          style="background-color: white;" ></ngb-datepicker>
+                          
+                          
+                                              </div>
+                                              <div #external id="external-events">
+                                                  <div id="external-events-list">
+                                                    <div class="fc-event">&nbsp;Drag and Drop to office calendar</div>
+                                                  </div>
+
+                                                  <p style="display: none;">
+                                                    <input type='checkbox' id='drop-remove' placeholder="Enter text"/>
+                                                    <label for='drop-remove'>remove after drop</label>
+                                                  </p>
+                                                
+                                                </div>
+                                                <div class="form-group">
+                                                    <table style="padding: 1px; border-spacing: 6px; border-collapse: separate; border:0;">
+                                                        <tr>
+                                                            <td width="10" bgcolor="#ffffd8"></td>
+                                                            <td>Regular</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td width="15" bgcolor="#ffc4c4"></td>
+                                                            <td>Double Booking</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                              
+                                              </form>	
+                                          </div>
+											
+																							
+                               <div  class="col-9 col-lg-9">
+                                <div class='app-calendar' *ngIf="calendarVisible">
+                                    <full-calendar
+                                      #calendarComponent
+                                      [allDaySlot]= false
+                                      editable= true
+                                      droppable=true
+                                      schedulerLicenseKey= "GPL-My-Project-Is-Open-Source"
+                                      
+                                      defaultView="resourceTimeGridDay"
+                                      [header]="{
+                                        right: 'prev,next today',
+                                        center: '',
+                                        left: 'title'
+                                      }"
+                                      [defaultDate]= "defaultDate"
+                                      minTime="08:00:00"
+                                      maxTime="18:00:00"
+                                      slotDuration= "00:15:00"
+                                      slotLabelInterval= "00:15"
+                                      [resources]="calendarresources"
+                                      [plugins]="calendarPlugins"
+                                      [weekends]="calendarWeekends"
+                                      [events]="calendarEvents"
+                                      (eventClick)="rowclick($event)"
+                                      (eventDrop)="eventDrop($event)"
+                                      
+                                      (drop)="drop($event)"
+                                      
+                                    ></full-calendar>
+                                  </div>
+                               </div>												
+                                
+
+
+
+                                    </div> 
+
+                                </div>
+                            
+                       
+                    </section>
+                </div>
+        </section>
+    </section>
+

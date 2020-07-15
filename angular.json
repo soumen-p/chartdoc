@@ -1,0 +1,157 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ChartDoc-v05": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ChartDoc-v05",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              },
+              "src/assets/plugins/calendar/fullcalendar.css",
+              "src/assets/plugins/icheck/skins/minimal/minimal.css",
+              "src/assets/packages/core/main.css",
+              "src/assets/packages/daygrid/main.css",
+              "src/assets/packages/timegrid/main.css",
+              "src/assets/packages/list/main.css",
+              "src/styles.css",
+              "node_modules/font-awesome/css/font-awesome.min.css"
+              
+            ],
+            "scripts": [
+              "src/assets/js/jquery-3.2.1.min.js",
+              "src/assets/js/popper.min.js",
+              "src/assets/js/jquery.easing.min.js",
+              "src/assets/plugins/pace/pace.min.js",
+              "src/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js",
+              "src/assets/plugins/viewport/viewportchecker.js",
+              "src/assets/js/jquery-1.11.2.min.js",
+              "src/assets/js/scripts.js",
+              "src/assets/packages/core/main.js",
+              "src/assets/packages/daygrid/main.js",
+              "src/assets/packages/timegrid/main.js",
+              "src/assets/packages/list/main.js",
+              "src/assets/packages/resource-common/main.min.js",
+              "src/assets/packages/resource-daygrid/main.min.js",
+              "src/assets/packages/resource-timegrid/main.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ChartDoc-v05:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ChartDoc-v05:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ChartDoc-v05:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              },
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "ChartDoc-v05:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ChartDoc-v05:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ChartDoc-v05"
+}

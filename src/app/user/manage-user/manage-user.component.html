@@ -1,0 +1,112 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+
+    <section id="main-content" class=" ">
+        <section class="wrapper main-wrapper row">
+
+            <div class='col-12'>
+                <div class="page-title">
+
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">Create New user</h1>
+                        <!-- PAGE HEADING TAG - END -->
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+
+            <div class="row margin-0">
+                <div class="col-xl-12">
+                    <h5 class="float-right"><a [routerLink]="['/user']">Create New User &nbsp; <span> <i
+                                    class="fa fa-plus-circle text-28"></i></span></a></h5>
+                    <div id="comments">
+
+                        <h3>Providers</h3>
+
+                        <div class="card comment-block level-1 m-2" *ngFor="let providers of prviderUserList">
+                            <div class="row margin-0 p-2">
+                                <div class="col-lg-1 col-md-1 col-1 img-area">
+                                    <img src="{{providers.doctorImage}}" (error)="picNotLoading($event)" class="rounded" height="80" width="80">
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-8">
+                                    <h4>{{providers.doctorName}}</h4>
+
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-3 img-area">
+                                    <h5 class="float-right mt-3">
+                                        <span><a [routerLink]="" class="color-edit"(click)="editUser(providers)" >Edit</a></span> | <a
+                                        [routerLink]="" class="color-delete" (click)="disableUser(providers.id,providers.isActive)">{{providers.isActive==1?"Disable":"Enable"}}</a>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                       
+
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <div id="comments">
+
+                        <h3>Medical Staff</h3>
+
+                        <div class="card comment-block level-1 m-2" *ngFor="let medical of medicalUserList">
+                            <div class="row margin-0 p-2">
+                                <div class="col-lg-1 col-md-1 col-1 img-area">
+                                    <img src="{{medical.doctorImage}}" class="rounded" height="80" width="80">
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-8">
+                                    <h4>{{medical.doctorName}}</h4>
+
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-3 img-area">
+                                    <h5 class="float-right mt-3">
+                                        <span><a [routerLink]="" class="color-edit" (click)="editUser(medical)">Edit</a></span> | <a 
+                                        [routerLink]="" class="color-delete" (click)="disableUser(medical.id,medical.isActive)">{{medical.isActive==1?"Disable":"Enable"}}</a>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <div id="comments">
+
+                        <h3>Office Staff</h3>
+
+                        <div class="card comment-block level-1 m-2" *ngFor="let office of officeUserList">
+                            <div class="row margin-0 p-2" >
+                                <div class="col-lg-1 col-md-1 col-1 img-area">
+                                    <img src="{{office.doctorImage}}" class="rounded" height="80" width="80">
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-8">
+                                    <h4>{{office.doctorName}}</h4>
+
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-3 img-area">
+                                    <h5 class="float-right mt-3">
+                                        <span><a [routerLink]="" class="color-edit" (click)="editUser(office)">Edit</a></span> | <a
+                                        [routerLink]=""  class="color-delete" (click)="disableUser(office.id,office.isActive)">{{office.isActive==1?"Disable":"Enable"}}</a>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                   
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- MAIN CONTENT AREA ENDS -->
+        </section>
+    </section>
+</div>

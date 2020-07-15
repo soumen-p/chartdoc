@@ -1,0 +1,36 @@
+<div class="tab-content primary">
+    <div class="tab-pane fade active show" id="followup">
+        <div class="row margin-0">
+            <div class="col-xl-12">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td>
+                            <h2 class="title float-left">
+                                Impression/Plan
+                            </h2>
+                        </td>
+                        <td align="right">
+                            <button kendoButton class="btn btn-success btn-corner" (click)="saveImpressionPlan()"
+                                [disabled]="isPosCheckout" style="width:120px; font-size: 16px;">Save</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-xl-12">
+                <section class="box nobox ">
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <ckeditor [editor]="Editor" data="dataDefault" [(ngModel)]="ckEditorContent"
+                                        (ready)="onReady($event)" (change)="onChange($event)" class="form-control"
+                                        cols="12"></ckeditor>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

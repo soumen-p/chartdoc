@@ -1,0 +1,65 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+<div>
+    <section  id="main-content" class="sidebar_shift">
+        <section class="wrapper main-wrapper row" styles=''>
+            <div class='col-12'>
+                <div class="page-title">
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h2 class="title">{{doctorName}}</h2>
+                        <!-- PAGE HEADING TAG - END -->
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-12">
+                    <section class="box nobox">
+                        <div class="content-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class='app-calendar' *ngIf="calendarVisible">
+                                        <full-calendar
+                                      #calendarComponent
+                                      [allDaySlot]= false
+                                      [allDayDefault]=false
+                                      editable= true
+                                      [displayEventTime]= false
+                                      schedulerLicenseKey= "GPL-My-Project-Is-Open-Source"
+                                      droppable= true
+                                      defaultView="timeGridWeek"
+                                      [header]="{
+                                        right: 'prev,next today',
+                                        center: '',
+                                        left: 'title'
+                                      }"
+                                      minTime="08:00:00"
+                                      maxTime="18:00:00"
+                                    
+                                      [plugins]="calendarPlugins"
+                                      [resources]="calendarresources"
+                                      (datesRender)="dateRender($event)"
+                                      [events]="calendarEvents"
+                                      (eventClick)="rowclick($event)"
+                                      slotDuration= "00:15:00"
+                                      slotLabelInterval= "00:15"
+                                      
+                                    
+                                    ></full-calendar>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>

@@ -1,0 +1,124 @@
+<div class="tab-content primary" id="myTabContent1">
+        <div class="tab-pane fade active show" id="profile-1">
+            <div class="row margin-0">                   
+                <div class="col-xl-6">
+                    <section class="box nobox ">
+                        <div class="content-body">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                            <td>
+                                                <h2 class="title float-left">
+                                                    Encounter Note
+                                                </h2>
+                                            </td>
+                                            <td align="right">
+                                                <button kendoButton class="btn btn-success btn-corner" style="width:120px; font-size: 16px;" 
+                                                [disabled]="isPosCheckOut"
+                                                (click)="OpenEncounterSummary('modalEncounterSummary')">Save</button>
+                                            </td>
+                                        </tr>
+                                    </table>                    
+                                </div>                                
+                                <div class="col-12">                            
+                                    <form [formGroup]="formEncounter"> 
+                                        <div class="form-group"> 
+                                            <div class="controls">
+                                                <div id="div1" class="targetDiv">       
+                                                    <textarea class="form-control autogrow" style="height: 340px; padding: 25px 25px; " cols="5"
+                                                        formControlName="encounterNote"  placeholder="Type new note or addd previous note to reuse"
+                                                        (change)="UpdateEncounterNotes($event.target.value)" ></textarea>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div id="modalEncounterSummary" class="modal">
+                                            <div class="modal-content">
+                                                <h3 class="selete" align="center">Enter Summary</h3>
+                                                <!-- <h3 class="selete"></h3> -->
+                                                <div class="row">
+                                                    <div class="col"><input type="text"  #txtencounterSummary  [value]="encounterSummary" class="form-control ng-pristine ng-valid ng-touched"/></div>
+                                                </div>
+                                                <br/>
+                                                <div class="row">
+                                                    <div class="col-xl-6" align="right"> <button type="button" class="btn btn-primary" (click)="submitEncounterSummary(txtencounterSummary.value,'modalEncounterSummary')">Save</button></div>
+                                                    <div class="col-xl-6"><button type="button" class="btn btn-" (click)="closeEncounterSummary('modalEncounterSummary')">Cancel</button></div>
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-xl-6">
+                    <section class="box nobox ">
+                        <div class="content-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="wid-notification">
+                                        <div class="input-group mb-3">
+                                            <input style="border-radius: 10px; background: #fff; color: #000;" 
+                                            type="text" class="form-control" placeholder="Search previous encounters" 
+                                            aria-label="EncounterSearch" aria-describedby="basic-addon2"
+                                            [(ngModel)]="searchString">
+                                            <i class="fa fa-search icon"></i>
+                                        </div>
+                                        
+                                        <!-- list-unstyled notification-widget ps -->
+                                        <ul class="list-unstyled notification-widget" style="height: 315px;overflow-y:scroll">
+                                            <li class="unread status-available" *ngFor="let encounter of encModel | encounterFilter:searchString">                                                   
+                                                <div id="accordion" role="tablist" class="accordion-group">
+                                                    <div class="card">
+                                                        <div class="card-header" role="tab" id="headingTwo">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="form-row">
+                                                                        <div class="col-1">
+                                                                            <h5 class="mb-0">
+                                                                                    <a class="fa fa-chevron-down collapsed" 
+                                                                                        data-toggle="collapse" href="#collapse{{encounter.id}}" 
+                                                                                        role="button" aria-expanded="false" 
+                                                                                        >
+                                                                                    </a>
+                                                                            </h5>
+                                                                        </div>
+                                                                        <div class="col-4">
+                                                                            {{encounter.encounterDate}}
+                                                                            <p class="fonet"><small>{{encounter.summary}}</small></p>
+                                                                        </div>
+                                                                        <div class="col-4">
+                                                                            {{encounter.name}}
+                                                                        </div>
+                                                                        <div class="col-3">
+                                                                            <a class="showSingle addbutton" target="1" (click)="UsePreviousNote(encounter.encounterNote,encounter.summary)">
+                                                                                <!-- <i class="fa fa-plus pull-right icon-borderedd icon-primary"></i> -->
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="collapse{{encounter.id}}" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                                                            <div class="card-body">
+                                                                {{encounter.encounterNote}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+                                            </li>                                           
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+            </div>
+
+            
+
+        </div>
+    </div>

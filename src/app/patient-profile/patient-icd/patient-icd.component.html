@@ -1,0 +1,105 @@
+<div class="tab-content primary" id="myTabContent1">
+    <div class="tab-pane fade active show" id="profile-1">
+        <div class="row margin-0">
+            <div class="col-xl-6">
+                <section class="box nobox ">
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                    <tr>
+                                        <td colspan="2" style="color: green;">
+                                            {{message}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h2 class="title float-left">
+                                                Select ICD Codes
+                                            </h2>
+                                        </td>
+                                        <td style="text-align: right">
+                                            <button kendoButton class="btn btn-success btn-corner"
+                                                style="width:120px; font-size: 16px;" [disabled]="isPosCheckout"
+                                                (click)="saveIcdDetails($event)">Save</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div class="controls" style="height: 600px;overflow-y:scroll;">
+                                        <div *ngIf="tblVisibility" id="div5" class="targetDiv">
+                                            <table class="icd dt-responsive display" cellspacing="0" width="100%">
+                                                <tbody>
+                                                    <tr *ngFor="let icd of icdDetails">
+                                                        <td>
+                                                            {{icd.code}}
+                                                            {{icd.desc}}
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" (click)="deleteRow(icd)"
+                                                                class="deletbutton">X</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xl-6">
+                <section class="box nobox ">
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="wid-notification">
+                                    <div class="input-group mb-3">
+                                        <input style="border-radius: 10px; background: #fff; color: #000;" type="text"
+                                            class="form-control" placeholder="Search By ICD Code or Condition"
+                                            [(ngModel)]="searchTerm" aria-label="ICDSearch"
+                                            aria-describedby="basic-addon2">
+                                        <i class="fa fa-search icon"></i>
+                                    </div>
+                                    <div style="height: 620px;overflow-y:scroll;">
+                                        <div class="accordion-group"
+                                            *ngFor="let icddetails of icdDetailss | PatientICDSearchFilter: {Code: searchTerm, Desc:searchTerm}">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-row">
+                                                                <div class="col-5 hide-col">
+                                                                    {{icddetails.Id}}
+                                                                </div>
+                                                                <div class="col-5">
+                                                                    {{icddetails.code}}
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    {{icddetails.desc}}
+                                                                </div>
+                                                                <div class="col-1">
+                                                                    <button type="button" class="showSingle addbutton"
+                                                                        (click)="AddIcdDetails(icddetails.id, icddetails.code, icddetails.desc)"
+                                                                        target="3">+</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

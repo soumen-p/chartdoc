@@ -1,0 +1,189 @@
+<!-- SIDEBAR - START -->
+<div class="page-sidebar pagescroll collapseit">
+    <!-- MAIN MENU - START -->
+    <div class="page-sidebar-wrapper" id="main-menu-wrapper">
+        <!-- USER INFO - START -->
+        <div class="profile-info row">
+            <div class="profile-image col-4">
+                <a [routerLink]="">
+                    <img alt="" src="{{drImagePath}}" class="img-fluid rounded-circle">
+                </a>
+            </div>
+            <div class="profile-details col-8">
+                <h3>
+                    <a [routerLink]="">{{drName}}</a>
+                    <!-- Available statuses: online, idle, busy, away and offline -->
+                    <span class="profile-status online"></span>
+                </h3>
+                <p class="profile-title">Surgeon</p>
+            </div>
+        </div>
+        <!-- USER INFO - END -->
+        <ul class='wraplist'>
+            <!-- <li class="">
+                <a [routerLink]="">
+                    <i class="fa fa-dashboard"></i>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-user-md"></i>
+                    <span class="title">Doctors</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a class="" [routerLink]="">All Doctors</a>
+                    </li>
+                    <li>
+                        <a class="" [routerLink]="">Add Doctor</a>
+                    </li>
+                    <li>
+                        <a class="" [routerLink]="">Edit Doctor</a>
+                    </li>
+                    <li>
+                        <a class="" [routerLink]="">Doctor Profile</a>
+                    </li>
+                </ul>
+            </li> -->
+            <li class="open">
+                <a href="javascript:;">
+                    <i class="fa fa-users"></i>
+                    <span class="title">Patients</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <!-- <li>
+                        <a class="" [routerLink]="['/patient-search']">All Patients</a>
+                    </li> -->
+                    <li>
+                        <a class="" [routerLink]="['/patient-create']">Add Patient</a>
+                    </li>
+                    <li>
+                        <a class="" [routerLink]="['/patient-search']" [queryParams]="{mode: 'edit-patient'}">Edit
+                            Patient</a>
+                    </li>
+                    <!-- <li>
+                        <a class="" [routerLink]="['/patient-profile']">Patient Profile</a>
+                    </li> -->
+                </ul>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-calendar-o"></i>
+                    <span class="title">Appointment</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a class="" [routerLink]="['/appointment']">Doctor Schedule</a>
+                    </li>
+                    <li>
+                        <a class="" [routerLink]="['/patient-flow-sheet']">Flow Sheet</a>
+                    </li>
+                   
+                </ul>
+            </li>
+            <!-- <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-bar-chart"></i>
+                    <span class="title">Reports</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a class="" [routerLink]="">Patient</a>
+                    </li>
+                    <li>
+                        <a class="" [routerLink]="">Hospital</a>
+                    </li>
+                    <li>
+                        <a class="" [routerLink]="">Sales</a>
+                    </li>
+                </ul>
+            </li> -->
+            <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-user "></i>
+                    <span class="title">User</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a class="" [routerLink]="['/user']">New User</a>
+                    </li>
+                    <li>
+                        <a class="" [routerLink]="['/manage-user']">Manage user</a>
+                    </li>
+                </ul>
+            </li>
+           
+            <!-- <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-users"></i>
+                    <span class="title">Hospital Staff</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li> -->
+                        <!-- <a class="" href="hos-staffs.html" >All Staff Members</a> -->
+                    <!-- </li>
+                    <li> -->
+                        <!-- <a class="" href="hos-staff-add.html" >Add Staff Member</a> -->
+                    <!-- </li>
+                    <li> -->
+                        <!-- <a class="" href="hos-staff-edit.html" >Edit Staff Member</a> -->
+                    <!-- </li>
+                    <li> -->
+                        <!-- <a class="" href="hos-staff-profile.html" >Staff Member Profile</a> -->
+                    <!-- </li>
+                </ul>
+            </li> -->
+            <li class="">
+                <a href=""  [routerLink]="['/calendar-schedule']">
+                    <i class="fa fa-calendar"></i>
+                    <span class="title" >Office Calendar</span>
+                    
+                </a>
+            </li>
+            <li class="">
+                <a href=""  [routerLink]="['/doctor-calendar']">
+                    <i class="fa fa-calendar"></i>
+                    <span class="title" >Doctor Calendar</span>
+                    
+                </a>
+            </li>
+            <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-database"></i>
+                    <span class="title">Master</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a  [routerLink]="['/app-service']">Service</a>
+                    </li>
+                    <li>
+                        <a  [routerLink]="['/app-reason']">Reason</a>
+                    </li>
+                    <li>
+                        <a  [routerLink]="['/app-charge']">Charge Master</a>
+                    </li>
+                    <li>
+                        <a  [routerLink]="['/app-charge-date']">Charge Date Range</a>
+                    </li>
+                    
+                    <li>
+                        <a  [routerLink]="['/app-general']">Others</a>
+                    </li>
+                    
+                </ul>
+            </li>
+           
+           
+        </ul>
+       
+    </div>
+    <!-- MAIN MENU - END -->
+</div>

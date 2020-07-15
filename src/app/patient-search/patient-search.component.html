@@ -1,0 +1,154 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+<div>
+    <section  id="main-content" class="sidebar_shift">
+        <section class="wrapper main-wrapper row" styles=''>
+            <div class='col-12'>
+                <div class="page-title">
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">All Patients</h1>
+                        <!-- PAGE HEADING TAG - END -->   
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <!-- MAIN CONTENT AREA STARTS -->
+        
+                <div class="col-xl-12">
+                    <section class="box ">
+                        <header class="panel_header">
+                            <h2 class="title float-left">Patients Details</h2>
+                        </header>
+                        <div class="content-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12 col-xl-12">
+                                            <form>
+                                                <div class="form-row">
+                                                    <!-- <div class="form-group col-md-1">
+                                                        <label for="inputEmail4">ID</label>
+                                                        <input type="text" (input)="id = $event.target.value" class="form-control"  placeholder="ID">
+                                                    </div> -->
+                                                    <div class="form-group col-md-3">
+                                                        <label for="inputPassword4">First Name</label>
+                                                        <!-- <input type="text" (input)="firstName = $event.target.value" class="form-control"> -->
+                                                        <input type="text" #firstName class="form-control">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="inputPassword4">Last Name</label>
+                                                        <!-- <input type="text" (input)="lastName = $event.target.value" class="form-control" > -->
+                                                        <input type="text" #lastName class="form-control">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="inputPassword4">Email</label>
+                                                        <!-- <input [disabled]="true" type="text" (input)="address = $event.target.value" class="form-control"> -->
+                                                        <input type="text" #email class="form-control">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="inputPassword4">Date Of Birth</label>
+                                                        <!-- <input [disabled]="true" type="date" (input)="dob = $event.target.value" class="form-control" > -->
+                                                        <input type="date" #dob class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">                                                   
+                                                    <div class="form-group col-md-2">
+                                                        <label for="inputPassword4">Gender </label>
+                                                        <!-- <select [disabled]="true" class="form-control" (input)="gender = $event.target.value"> -->
+                                                            <select  class="form-control" (input)="gender = $event.target.value">
+                                                            <option>Choose...</option>
+                                                            <option>Male</option>
+                                                            <option>Female</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="inputPassword4">Telecom</label>
+                                                        <!-- <input type="text" (input)="telecom = $event.target.value" class="form-control" id="inputPassword4"> -->
+                                                        <input type="text" #telecom class="form-control">
+                                                    </div>
+                                                    <!-- <div class="form-group col-md-3">
+                                                        <label for="inputPassword4">Mobile No</label>
+                                                        <input type="tel" class="form-control" id="inputPassword4" placeholder="Phone">
+                                                    </div> -->
+                                                    <div class="form-group col-md-3">
+                                                        <label for="inputPassword4">Identifier</label>
+                                                        <input [disabled]="true" type="tel" (input)="identifier = $event.target.value" class="form-control" id="inputPassword4">
+                                                    </div>
+                                                    <div class="form-group col-md-3" style="padding-top: 30px;">
+                                                        <!-- <button kendoButton [iconClass]="'fa fa-search'" class="btn btn-success btn-icon bottom15 right15" 
+                                                            (click)="searchPatients($event)">Search</button> -->
+                                                        <button kendoButton [iconClass]="'fa fa-search'" class="btn btn-success btn-icon bottom15 right15" 
+                                                        (click)="PerformPatientsearch($event,firstName.value,lastName.value,email.value,dob.value,telecom.value)">Search</button>
+                                                        <button type="button" class="btn bottom15" (click)="back()" *ngIf="this.isbackButtonVisible" >Back</button>
+                                                    </div>                                                    
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-12 col-lg-12 col-xl-12" *ngIf="isRecordFound">
+                                            <table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+                                                <thead style="background: #678680;">
+                                                    <tr>
+                                                        <th style="display: none;">ID</th>
+                                                        <th>First Name</th>
+                                                        <th>Last Name</th>
+                                                        <th>Address</th>
+                                                        <th>Date Of Birth</th>
+                                                        <th>Gender</th>
+                                                        <th>Email</th>
+                                                        <th>Mobile No</th>
+                                                        <!-- <th>Identifier</th> -->
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody *ngFor="let patient of patientList">
+                                                    <tr>
+                                                        <td style="display: none;">{{patient.patientId}}</td>
+                                                        <td>
+                                                            {{patient.firstName}}
+                                                        </td>
+                                                        <td>
+                                                            {{patient.lastName}}
+                                                        </td>
+                                                        <td>                                                    
+                                                            {{patient.addressLine + ', ' + patient.addressCity + ', ' + patient.addressState + ', ' + patient.addressPostalCode + ', ' + patient.addressCountry}}
+                                                        </td>
+                                                        <td>{{patient.dob}}</td>
+                                                        <td>{{patient.gender}}</td>
+                                                        <td>
+                                                            {{patient.email}}
+                                                        </td>
+                                                        <td>
+                                                            {{patient.mobNo}}
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-success btn-corner btn-icon viwbtn" (click)="viewPatientDetails(patient.patientId, patient.flag, patient.firstName, patient.lastName,patient.middleName,patient.imagePath, patient.age, patient.gender, patient.recopiaId, patient.recopiaName,patient.email,patient.mobNo,patient.dob,patient.gender,patient.addressLine + ', ' + patient.addressCity + ', ' + patient.addressState + ', ' + patient.addressPostalCode + ', ' + patient.addressCountry)"><i class="fa fa-eye"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            
+                                        </div>
+                                        <div class="col-md-12 col-lg-12 col-xl-12" *ngIf="!isRecordFound">
+                                            <span>{{errMsg}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>
+
+
+

@@ -1,0 +1,112 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+<div>
+     <!-- START CONTENT -->
+     <section id="main-content" class="sidebar_shift">
+        <section class="wrapper main-wrapper row">
+
+            <div class='col-12'>
+                <div class="page-title">
+
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START --><h1 class="title">Master</h1><!-- PAGE HEADING TAG - END -->                            </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+
+            <div class="col-xl-12">
+                <section class="box ">
+                    <header class="panel_header">
+                        <h2 class="title float-left">Charge Date Range Master</h2>
+                        <h2 class="title float-right h5 pr-2"><button type="button" class="btn btn-success btn-corner" 
+                            [routerLink]="['/app-add-charge-date']"><span class="h5">Add</span></button></h2>
+                    </header>
+                    <div class="content-body">
+                        <form id="frmChargeDate" [formGroup]="chargeDateFormGroup"  >
+                                
+                         <div class="row">
+                            <div class="col-12">
+
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                  <table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+                                    <thead style="background: #678680;">
+                                        <tr>
+                                            <th>From Date </th>
+                                            <th>To date </th>
+                                            <th>Description</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody >
+                                        <ng-container formArrayName="chargeDateArray" *ngFor="let chargeDateItem of getChargeDateArray.controls; let i=index">
+                                        <tr [formGroupName]="i">
+                                                                                        
+                                            <td>
+                                               <input type="hidden" formControlName="id"/>
+                                                 <span [hidden]="chargeDateItem.value.isEdit">{{chargeDateItem.value.startDate | date: 'MM/dd/yyyy'}}</span>
+                                                 
+                                                <input  [hidden]="!chargeDateItem.value.isEdit" type="date" class="form-control" 
+                                                    formControlName="startDate"  data-format="MM/DD/YYYY"> 
+                                          
+                                            </td>
+                                            <td>
+                                                <span [hidden]="chargeDateItem.value.isEdit">{{chargeDateItem.value.endDate | date: 'MM/dd/yyyy'}}</span>
+                                                <input  [hidden]="!chargeDateItem.value.isEdit" type="date" class="form-control :" 
+                                                    formControlName="endDate"  data-format="MM/DD/YYYY">
+                                          
+                                            </td>
+											
+											
+											 <td>{{chargeDateItem.value.description}}</td>
+											 <td>
+                                                <button [hidden]="chargeDateItem.value.isEdit" type="button" class="btn btn-success" (click)="editChargeDate(chargeDateItem)"><i class="fa fa fa-pencil text-white"></i></button>
+                                                <button [hidden]="chargeDateItem.value.isEdit" type="button" class="btn btn-danger" (click)="deleteChargeDate(chargeDateItem)"><i class="fa fa-trash-o text-white"></i></button>
+                                                    
+
+                                                <button [hidden]="!chargeDateItem.value.isEdit" type="button" class="btn btn-success" (click)="saveChargeDate(chargeDateItem)"><i class="fa fa fa-save text-white"></i></button>
+                                                <button [hidden]="!chargeDateItem.value.isEdit" type="button" class="btn btn-danger" (click)="cancelChargeDate(chargeDateItem)"><i class="fa fa fa-close text-white"></i></button>
+
+                                            </td>
+                                                                                  
+                                        </tr>
+                                    </ng-container>
+                                    </tbody>
+                                </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    
+                </section></div>
+
+            <!-- MAIN CONTENT AREA ENDS -->
+        </section>
+    </section>
+</div>
+<div class="example-wrapper">
+    <div id="modalmarkDelete" class="modal">
+        <div class="modal-content1">
+            <h4 class="textcolor">Are you sure you want to delete?</h4>
+            <div class="row">
+                
+                <div class="svbutton"> <button type="button" class="btn btn-primary"
+                        (click)="openmodal('modalmarkDelete','')">Delete</button> &nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary " type="button"
+                        (click)="closePopuop('modalmarkDelete')">Close</button></div>
+            </div>
+        </div>
+    </div>

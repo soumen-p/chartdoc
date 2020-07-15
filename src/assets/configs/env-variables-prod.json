@@ -1,0 +1,8 @@
+{
+    "version": "1.0.0.0",
+    "authRedirectUrl": "http://probaldg-001-site18.atempurl.com/doctors-list",
+    "tokenEndPoint": "https://uscdi.epic.com/interconnect-uscdi-oauth/oauth2/token",
+    "loginUrl": "https://uscdi.epic.com/interconnect-uscdi-oauth/oauth2/authorize",
+    "issuer": "https://uscdi.epic.com",
+    "clientId": "51db4b01-fbf1-44c6-bb28-15b45029a381"
+}

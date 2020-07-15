@@ -1,0 +1,61 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+<div>
+    <section id="main-content">
+        <section class="wrapper main-wrapper row">
+            <div class='col-12'>
+                <div class="page-title">
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">Master</h1><!-- PAGE HEADING TAG - END -->
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+            <div class="col-xl-12">
+                <section class="box ">
+                    <header class="panel_header">
+                        <h2 class="title float-left">Add Service Master</h2>
+                    </header>
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputPassword4">Name</label>
+                                                    <textarea class="form-control" cols="5" rows="1" id="field-6"
+                                                        [(ngModel)]="serviceName"
+                                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputPassword4">&nbsp;</label>
+                                                    <br>
+                                                    <button type="button" class="btn btn-primary"
+                                                        (click)="saveService()">Finish</button> &nbsp;&nbsp;&nbsp;
+                                                    <button type="button" class="btn"
+                                                        [routerLink]="['/app-service']">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- MAIN CONTENT AREA ENDS -->
+        </section>
+    </section>

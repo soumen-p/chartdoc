@@ -1,0 +1,297 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+
+    <!-- START CONTENT -->
+    <section id="main-content" class="sidebar_shift">
+        <section class="wrapper main-wrapper row">
+
+            <div class="col-12">
+                <div class="page-title">
+
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">BOOK APPOINTMENT</h1><!-- PAGE HEADING TAG - END -->
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+
+            <div class="col-12">
+                <section class="box ">
+                    <header class="panel_header">
+                        <div class="row">
+                            <div class="col-10">
+                                <h2 class="title float-left">Basic Info</h2>
+                            </div>
+                            <div class="col-2" style="padding-top: 25px;">
+                                <button type="button" class="btn btn-primary" [disabled]="blnfinsh" (click)="finish()" style="margin-right: 10px;">Finish</button>
+                                <button type="button" (click)="cancel()" class="btn">{{strcancel}}</button>               
+                            </div>
+                        </div>
+                    </header>
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-7" style="border-right: 1px solid #6f6767;">
+
+                                <form  [formGroup]="bookAppointmentFormGroup" name="bookAppointment" #bookAppointmentForm="ngForm">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="first_name">First Name</label>
+                                            <input type="text" name="first_name" id="first_name"   value="First name" class="form-control" 
+                                            formControlName="firstName"/>
+                                            <input type="hidden" name="patient_id" id="patient_id"  formControlName="patientId"/>
+                                            <span class="text-danger" *ngIf="bookAppointmentFormGroup.hasError('required', ['firstName']) 
+                                            && bookAppointmentForm.submitted">
+                                            First name is required.
+                                            </span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="middle_name">M</label>
+                                            <input type="text" name="middle_name" id="middle_name"  class="form-control" 
+                                            formControlName="middleName"/>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="last_name">Last Name</label>
+                                            <input type="text" name="last_name" id="last_name"  value="Last name" class="form-control" 
+                                            formControlName="lastName"/>
+                                            <span class="text-danger" *ngIf="bookAppointmentFormGroup.hasError('required', ['lastName']) 
+                                            && bookAppointmentForm.submitted">
+                                            Last Name is required.
+                                            </span>
+                                        </div>
+
+                                        <div class="form-group col-md-1" style="margin-top: 32px;">
+                                            <button type="button" class="btn btn-primary vimeo" (click)="searchPatient()" [disabled]="blnsave">
+                                                <i class="fa fa-search vimeo-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="form-group col-md-1" style="margin-top: 32px;">
+                                            <button type="button" class="btn btn-primary rss" (click)="reset()" [disabled]="blnsave"> 
+                                                <i class="fa fa-plus vimeo-square"></i>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="phone" class="col-sm-3 col-form-label">Phone:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="phone" id="phone" 
+                                            formControlName="phone"  class="form-control" data-mask="phone"
+                                                placeholder="(xxx)-xxx-xxxx" OnlyNumber (change)="formatphone()" >
+                                                <span class="text-danger" *ngIf="bookAppointmentFormGroup.hasError('required', ['phone']) 
+                                            && bookAppointmentForm.submitted">
+                                            Phone is required.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="email" class="col-sm-3 col-form-label">Email:</label>
+                                        <div class="col-sm-8">
+                                            <input type="email" id="email" name="email"
+                                            formControlName="email"
+                                             placeholder="email@domain.com" value="abc@abc.com" class="form-control">
+                                             <span class="text-danger" *ngIf="bookAppointmentFormGroup.hasError('required', ['email']) 
+                                             && bookAppointmentForm.submitted">
+                                             Email is required.
+                                             </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="dateOfBirth" class="col-sm-3 col-form-label">Date of Birth:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" id="dateOfBirth" name="dateOfBirth"
+                                            formControlName="dateOfBirth" class="form-control datepicker" 
+                                            data-format="MM/DD/YYYY" bsDatepicker [bsConfig]="{containerClass:'theme-default', dateInputFormat: 'MM/DD/YYYY'}" >
+                                            <span class="text-danger" *ngIf="bookAppointmentFormGroup.hasError('required', ['dateOfBirth']) 
+                                            && bookAppointmentForm.submitted">
+                                            Date of Birth is required.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="gender" class="col-sm-3 col-form-label">Gender:</label>
+                                        <div class="col-sm-8" style="margin-left: 10px;">
+                                            <div class="row">
+                                                <div class="form-check col-sm-3">
+                                                    <input class="form-check-input" type="radio" name="gender"
+                                                        id="male" formControlName="gender"  value="Male" checked>
+                                                    <label class="form-check-label" for="male">
+                                                        Male
+                                                    </label>
+                                                </div>
+                                                <div class="form-check col-sm-3">
+                                                    <input class="form-check-input"  formControlName="gender" type="radio" name="gender"
+                                                        id="female" value="Female">
+                                                    <label class="form-check-label" for="female">
+                                                        Female
+                                                    </label>
+                                                </div>
+                                                <div class="form-check col-sm-3">
+                                                    <input class="form-check-input"  formControlName="gender" type="radio" name="gender"
+                                                        id="transgender" value="Transgender">
+                                                    <label class="form-check-label" for="transgender">
+                                                        Undisclosed
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Address:</label>
+                                        <div class="col-sm-8">
+                                            <textarea  formControlName="address" class="form-control autogrow" cols="5" id="address"
+                                                style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 86px;">Stree 1,Stree 2, City State Zip</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" *ngIf="isflowsheet==0?false:true">
+                                        <!-- <label class="col-sm-3 col-form-label"></label> -->
+                                        <div class="col-sm-3">
+                                            <button type="button" class="btn btn-primary"   style="margin-right: 10px;"  (click)="patietprofile()">Patient Profile</button>
+
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="button" class="btn btn-primary" [disabled]="(isflowsheet==1 )?false:true"   style="margin-right: 10px;"  >Validate Insurance</button>
+                                            
+                                          
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="button" class="btn btn-primary"  [disabled]="(isflowsheet==1 )?false:true"  style="margin-right: 10px;"  (click)="acceptcopay()">Accept Co Pay</button>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button type="button" class="btn btn-primary" [disabled]="isflowsheet==1 ?true:false"  style="margin-right: 10px;"  (click)="encounter()">Encounter</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <div class="col-5">
+                                <br>
+                                <form [formGroup]="appointmentFormGroup" name="appointment" #appointmentForm="ngForm">
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Date:</label>
+                                        <div class="col-sm-8"  [ngClass]="{'disabled': isReschdule}">
+                                            <!-- <input type="text" value="MM/DD/YYYY"  formControlName="date" class="form-control datepicker"
+                                                data-format="MM/DD/YYYY" disabled> -->
+                                                <input type="text" id="date" name="date"  name="dp1"   autocomplete="off"   
+                                                        formControlName="date" class="form-control datepicker" 
+                                                        data-format="MM/DD/YYYY" bsDatepicker [minDate]="minDate" 
+                                                        [bsConfig]="{containerClass:'theme-default', dateInputFormat: 'MM/DD/YYYY'}"  >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" >
+                                        <label class="col-sm-3 col-form-label" style="padding-top: 40px;">From Time:</label>
+                                        <div class="col-sm-8" [ngClass]="{'disabled': isReschdule}">
+                                            <!-- <ngb-timepicker  formControlName="fromTime"></ngb-timepicker> -->
+                                            <ngb-timepicker (ngModelChange)="changedfromtime()"  [minuteStep]="15" formControlName="fromTime"></ngb-timepicker>
+                                            <!-- <input type="text" class="form-control timepicker" value="HH:mm to HH:mm" disabled  formControlName="fromTime"> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" style="padding-top: 40px;">To Time:</label>
+                                        <div class="col-sm-8" [ngClass]="{'disabled': isReschdule}">
+                                            <!-- <ngb-timepicker  formControlName="toTime" ></ngb-timepicker> -->
+                                            <ngb-timepicker [minuteStep]="15" (ngModelChange)="changedtotime()"   formControlName="toTime"></ngb-timepicker>
+                                            <!-- <input type="text" class="form-control timepicker" disabled value="HH:mm to HH:mm"  formControlName="toTime"> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Provider:</label>
+                                        <div class="col-sm-8" [ngClass]="{'disabled': isReschdule}">
+                                            <input type="text" value="Marc D.Polimeni" class="form-control" disabled  formControlName="provider">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="service">Service:</label>
+                                        <div class="col-sm-8" [ngClass]="{'disabled': isFlowsheetDisable}">
+                                              <select class="form-control" name="" id="service" formControlName="service" selected (change)="selectChangeHandler($event)">
+                                                  <option value="">--Select--</option>
+                                                <option *ngFor="let item of services" value="{{item.serviceId}}"> {{item.serviceName}} </option>
+                                              </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="status">Action:</label>
+                                        <div class="col-sm-8" [ngClass]="{'disabled': isFlowsheetDisable||isPositionDisable}">
+                                              <select class="form-control" name="" id="status" formControlName="position" selected (change)="onPositionChange($event)" >
+                                                <option value="0">--Select--</option>
+                                                <option value="-1">Appointment</option>
+                                                <option value="-2">Reschedule</option>
+                                                <option value="1">Cancel By Doctor</option>
+                                                <option value="2">Cancel By Patient</option>
+                                                <option value="3">Remove</option>
+                                                <option value="4">Noshow</option>
+                                              </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="status">Reason:</label>
+                                        <div class="col-sm-8" [ngClass]="{'disabled': isFlowsheetDisable}">
+                                            <select class="form-control" name="" id="service" formControlName="reasonID" selected >
+                                                <option value="0">--Select--</option>
+                                            <option *ngFor="let reason of reasons" value="{{reason.reasonId}}"> {{reason.reasonDescription}} </option>
+                                            </select>
+                                       
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="status">Appointment Reason:</label>
+                                        <div class="col-sm-8">
+                                        <select class="form-control" name="" id="service" formControlName="reasonCode" selected >
+                                            <option value="0">--Select--</option>
+                                          <option *ngFor="let reason of appointmentreasons" value="{{reason.REASONID}}"> {{reason.REASONDESCRIPTOON}} </option>
+                                        </select>
+                                   
+                                    </div>
+                                </div> -->
+                                <div class="form-row">                                    
+                                    <div class="form-group col-md-12">
+                                        <label>Upload:</label>
+                                        <!-- <td align="right"> -->
+                                            <!-- <input #file type="file"  (change)="upload(file.files)"  /> -->
+                                            <!-- (change)="upload($event.target.files)" -->
+                                            <app-file-upload [files]="files" [style.width]="width + 'px'" [fileUrl]="fileUrl" [isEdit]="isEdit"></app-file-upload>
+                                        <!-- </td> -->
+                                    </div>
+                                </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label>Note:</label>
+                                            <textarea class="form-control autogrow" cols="5" id="note"
+                                                style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 156px;" [ngClass]="{'disabled': isFlowsheetDisable}"  formControlName="note"></textarea>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="form-group row">
+                                        <label class="col-sm-7 col-form-label" for="field-1">&nbsp;</label>
+                                        <div class="col-sm-5">
+                                            <!-- <button type="button" class="btn btn-primary" [disabled]="blnfinsh" (click)="finish()" style="margin-right: 10px;">Finish</button>
+                                            <button type="button" (click)="cancel()" class="btn">{{strcancel}}</button>
+                                             -->
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </section>
+            </div>
+
+
+            <!-- MAIN CONTENT AREA ENDS -->
+        </section>
+    </section>
+    <!-- END CONTENT -->
+</div>

@@ -1,0 +1,99 @@
+<div class="tab-content primary" id="myTabContentDiagnosis">
+    <div class="tab-pane fade show active">
+        <div class="row">
+            <div class="col-xl-6">
+                <section class="box nobox ">
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="accordion" role="tablist" class="accordion-group">
+                                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                            <td>
+                                                <h2> Diagnoses
+                                                    <br>
+                                                    <h6>VIEW BY:
+                                                        <select class="viewbyiddate">
+                                                            <option>DATE</option>
+                                                        </select>
+                                                    </h6>
+                                                </h2>
+                                            </td>
+                                            <td align="right">
+                                                <button kendoButton class="btn btn-success btn-corner"
+                                                    style="width:120px; font-size: 16px;"
+                                                    (click)="openModelDiagnosis('ModelDiagnosis')"
+                                                    [disabled]="isPosCheckout">Upload</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div style="height: 200px;overflow-y:scroll;overflow-x:hidden">
+                                        <div class="card" *ngFor="let element of diagnosisEntry">
+                                            <div class="card-header" role="tab" id="headingTwo">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-row">
+                                                            <a class="showSingle" target="3"
+                                                                (click)="LoadDiagnosisDocuments(element.id)">
+                                                                <h5>
+                                                                    <span
+                                                                        class="spancolor">{{element.diagnosisDate}}</span>
+                                                                    -
+                                                                    <span>{{element.diagnosisDesc}}</span>
+                                                                </h5>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xl-6">
+                <section class="box nobox ">
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>
+                                    Documents</h2>
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <div id="div1" class="targetDiv">
+                                            <div class="card-body">
+                                                <div class="row ">
+                                                    <div class="col-2" *ngFor="let element of diagnosisDocument">
+                                                        <a href="{{element.path}}" target='_blank' download
+                                                            #clickme><img src="../../../../assets/images/copy.png"
+                                                                class="img-fluid" alt=""></a>
+                                                        <button (click)="clickme.click()" hidden="true"> Download
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="ModelDiagnosis" class="modal">
+    <div class="modal-content">
+        <app-patientdiagnosticupload (LoadInit)='LoadInit()'></app-patientdiagnosticupload>
+    </div>
+</div>

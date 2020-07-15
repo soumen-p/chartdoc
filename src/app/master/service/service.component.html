@@ -1,0 +1,81 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+<div>
+    <section id="main-content" class="sidebar_shift">
+        <section class="wrapper main-wrapper row">
+            <div class='col-12'>
+                <div class="page-title">
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">Master</h1><!-- PAGE HEADING TAG - END -->
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+            <div class="col-xl-12">
+                <section class="box ">
+                    <header class="panel_header">
+                        <h2 class="title float-left">Service Master</h2>
+                        <h2 class="title float-right h5 pr-2">
+                            <button type="button" class="btn btn-success btn-corner" [routerLink]="['/new-service']"><span class="h5">Add</span></button>
+                        </h2>
+                    </header>
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                        <table class="table table-striped dt-responsive display" cellspacing="0"
+                                            width="100%">
+                                            <thead style="background: #678680;">
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <th>Name</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let serviceItem of service">
+                                                    <td>{{serviceItem.serviceId}}</td>
+                                                    <td>{{serviceItem.serviceName}}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary youtube" (click)="deleteService(serviceItem)">
+                                                            <i class="fa fa-trash-o text-white"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- MAIN CONTENT AREA ENDS -->
+        </section>
+    </section>
+</div>
+<div class="example-wrapper">
+    <div id="modalmarkDelete" class="modal">
+        <div class="modal-content1">
+            <h4 class="textcolor">Are you sure you want to delete?</h4>
+            <div class="row">
+                <div class="svbutton"> 
+                    <button type="button" class="btn btn-primary" (click)="openModal('modalmarkDelete','')">Delete</button> &nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary " type="button" (click)="closePopup('modalmarkDelete')">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

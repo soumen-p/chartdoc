@@ -1,0 +1,226 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+    <section id="main-content" class="sidebar_shift">
+        <section class="wrapper main-wrapper row">
+            <div class='col-12'>
+                <div class="page-title">
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">Create New user</h1>
+                        <!-- PAGE HEADING TAG - END -->
+                    </div>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-primary" (click)="save()" style="margin-right: 10px;"
+                            >Finish</button>
+                        <button type="button" class="btn" (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+            <div class="row margin-0">
+                <div class="col-xl-6">
+                    <section class="box ">
+                        <header class="panel_header">
+                            <h2 class="title float-left">Personal Information</h2>
+                        </header>
+                        <div class="content-body">
+                            <form id="msg_validate" [formGroup]="createNewUserFormGroup" name="userForm"
+                                #roleForm="ngForm">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label class="form-label">Full Name</label>
+
+                                                <input type="text" name="fullname" class="form-control" if="full_name"
+                                                    formControlName="fullName" placeholder="Enter your full name">
+                                                <span class="text-danger" *ngIf="createNewUserFormGroup.hasError('required', ['fullName']) 
+                                                && roleForm.submitted ">
+                                                    Full name is required.
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-4 col-form-label">Date of Birth: </label>
+                                            <div class="col-8">
+                                                <input type="date" class="form-control :" name="dateofbirth"
+                                                    formControlName="dateOfBirth" [value]="userdob1 | date:'yyyy-MM-dd'" data-format="MM/DD/YYYY">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-4 col-form-label">SSN: </label>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control" name="ssn" value="ssn"
+                                                    formControlName="ssn" placeholder="Enter ssn number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-4 col-form-label">Mobile Phone:</label>
+                                            <div class="col-8">
+                                                <input type="tel" class="form-control" name="phone" data-mask="phone"
+                                                    placeholder="(xxx)-xxx-xxxx" formControlName="phone"
+                                                    (change)="formatphone()">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-4 col-form-label">Email Address:</label>
+                                            <div class="col-8">
+                                                <input type="email" class="form-control :" formControlName="email"
+                                                    placeholder="email@domain.com" value="abc@abc.com"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label>Upload:</label>
+                                                <app-file-upload [files]="files" [fileUrl]="fileUrl" [isEdit]="isEdit"
+                                                    [style.width]="width + 'px'"></app-file-upload>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-xl-1">
+                    <table width="100%" border="0">
+                        <tr>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr class="timeline1">
+                            <td>
+                                <div style="min-height:650px;"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;padding-bottom: 3px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xl-5">
+                    <section class="box ">
+                        <header class="panel_header">
+                            <h2 class="title float-left">Access Information</h2>
+                        </header>
+                        <div class="content-body">
+                            <form id="icon_validate" [formGroup]="roleFormGroup" name="roleFrm" #roleForm="ngForm">
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group row">
+                                            <div class="col-auto">Role: </div>
+                                            <div class="form-check col-auto">
+                                                <input class="form-check-input" type="radio" name="gridRadios"
+                                                    id="gridRadios1" (click)="setradio(1)" value="option1" checked="" [checked]="selectedId==1">
+                                                <label class="form-check-label" for="gridRadios1">
+                                                    Provider
+                                                </label>
+                                            </div>
+                                            <div class="form-check col-auto">
+                                                <input class="form-check-input" type="radio" name="gridRadios"
+                                                    id="gridRadios2" (click)="setradio(2)" value="option2" [checked]="selectedId==2">
+                                                <label class="form-check-label" for="gridRadios2">
+                                                    Medical Staff
+                                                </label>
+                                            </div>
+                                            <div class="form-check col-auto">
+                                                <input class="form-check-input" type="radio" name="gridRadios"
+                                                    id="gridRadios3" (click)="setradio(3)" value="option3" [checked]="selectedId==3">
+                                                <label class="form-check-label" for="gridRadios3">
+                                                    Office Staff
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div id="Provider" style="display:ruby;" *ngIf="isProvider">
+                                            <div class="form-group row">
+                                                <label class="col-4 col-form-label">Provider Type: </label>
+                                                <div class="col-8">
+                                                    <select id="inputState" class="form-control"
+                                                        formControlName="roleType" selected
+                                                        (change)="selectChangeHandler($event)">
+                                                        <option value="">--Select--</option>
+                                                        <option *ngFor="let item of roleTypeArray" value="{{item.utCode}}">
+                                                            {{item.userDescription}} </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-4 col-form-label">Specialty: </label>
+                                                <div class="col-8">
+                                                    <select id="inputState" class="form-control"
+                                                        formControlName="specialityType" selcted
+                                                        (change)="selectProviderChangeHandler($event)">
+                                                        <option value="">--Select--</option>
+                                                        <option *ngFor="let item1 of speciality" value="{{item1.pId}}">
+                                                            {{item1.pCcDescription}} </option>
+                                                        <!-- <option>...</option> -->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        <div id="MedicalStaff" style="display:ruby;" *ngIf="isMedicalStaff">
+                                            <div class="form-group row">
+                                                <label class="col-4 col-form-label">Staff Type: </label>
+                                                <div class="col-8">
+                                                    <select id="inputState" class="form-control"
+                                                        formControlName="roleType" selected
+                                                        (change)="selectChangeHandler($event)">
+                                                        <option value="">--Select--</option>
+                                                        <option *ngFor="let item of medicalRoleType" value="{{item.utCode}}">
+                                                            {{item.userDescription}} </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="OfficeStaff" style="display:ruby;" *ngIf="isOfficeStaff">
+                                            <div class="form-group row">
+                                                <label class="col-4 col-form-label">Staff Type: </label>
+                                                <div class="col-8">
+                                                    <select id="inputState" class="form-control"
+                                                        formControlName="roleType" selected
+                                                        (change)="selectChangeHandler($event)">
+                                                        <option value="">--Select--</option>
+                                                        <option *ngFor="let item of officeRoleType" value="{{item.utCode}}">
+                                                            {{item.userDescription}} </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="title ">This role can :</h4>
+                                        <div class="form-group row" *ngFor="let roleItem of role ">
+                                            <label class="col-8 col-form-label">{{roleItem.pCcDescription}}:
+                                            </label>
+                                            <div class="col-4">
+                                                <input type="checkbox" data-toggle="toggle" [value]="roleItem.PId"
+                                                    [checked]="isSelected(roleItem.PId)"
+                                                    data-onstyle="outline-warning" data-offstyle="outline-info"
+                                                    (change)="Roles($event)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- MAIN CONTENT AREA ENDS -->
+        </section>
+    </section>
+</div>

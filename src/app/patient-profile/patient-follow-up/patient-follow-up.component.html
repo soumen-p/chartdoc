@@ -1,0 +1,64 @@
+<div class="tab-content primary">
+    <div class="tab-pane fade active show" id="profile-0">
+        <div class="row margin-0">
+            <div class="col-xl-12">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td></td>
+                        <td align="right">
+                            <button kendoButton class="btn btn-success btn-corner" 
+                            [disabled]="isPosCheckOut"
+                            style="width:120px; font-size: 16px;"
+                            (click)="saveFollowUp()">Save</button>
+                        </td>
+                    </tr>
+                </table>                    
+            </div>
+            <div class="col-xl-12">
+                <section class="box nobox">
+                    <div class="content-body">  
+                        <div class="row">
+                            <div class="col-12">
+                                <form [formGroup]="formFollowup">
+                                    <span class="title float-left" style="color: green;">{{message}}</span>
+                                    <h2 class="title float-left">I would like to see this patient again in: {{followUpDate}}</h2>
+                                    <input type="hidden" class="FollowupDate" formControlName="pFollowupDate" readonly style="border:0">                                              
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom:30px">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 0 5px;">
+                                        <a (click)="FollowupDay('1Day')"> <img src="../../../../assets/images/{{oneDayImageName}}" class="img-fluid"/></a>
+                                    </td >
+                                    <td  style="padding: 0 5px;">
+                                        <a (click)="FollowupDay('1Week')"> <img src="../../../../assets/images/{{oneWeekImageName}}" class="img-fluid"/></a>
+                                    </td >
+                                    <td  style="padding: 0 5px;">
+                                        <a (click)="FollowupDay('1Month')"> <img src="../../../../assets/images/{{oneMonthImageName}}" class="img-fluid"/></a>
+                                    </td>
+                                    <td  style="padding: 0 5px;">
+                                        <a (click)="FollowupDay('3Months')"> <img src="../../../../assets/images/{{threeMonthImageName}}" class="img-fluid"/></a>
+                                    </td>
+                                    <td  style="padding: 0 5px;">
+                                        <a (click)="FollowupDay('6Months')"> <img src="../../../../assets/images/{{sixMonthImageName}}" class="img-fluid"/></a>
+                                    </td >
+                                    <td  style="padding: 0 5px;">
+                                        <a (click)="FollowupDay('1Year')"> <img src="../../../../assets/images/{{oneYearImageName}}" class="img-fluid"/></a>
+                                    </td >
+                                    <td  style="padding: 0 5px;">
+                                        <a placeholder="Datepicker" bsDatepicker [minDate]="mindate" (bsValueChange)="FollowupSelectDate($event)" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY'}">
+                                            <img bsDatepicker src="../../../../assets/images/{{scheduleImageName}}" class="img-fluid"/>
+                                        </a> 
+                                    </td >
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+

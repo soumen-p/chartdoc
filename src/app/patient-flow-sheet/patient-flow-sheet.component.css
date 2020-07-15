@@ -1,0 +1,22 @@
+.fc-day-grid-event .fc-time{
+    display:none;
+}
+
+.textcolor{
+    color:black
+}
+.chekbox-container{
+    display: inline-block;
+    margin-left: 10px;
+}
+.error{
+    color: red;
+    text-align: center;
+}
+.modal-content1 {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 40px;
+    width: 25%;
+    border-radius: 5px;
+}

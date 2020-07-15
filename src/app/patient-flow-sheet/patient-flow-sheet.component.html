@@ -1,0 +1,137 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+<div>
+    <section  id="main-content" class="sidebar_shift">
+        <section class="wrapper main-wrapper row" styles=''>
+            <div class='col-12'>
+                <div class="page-title">
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">Flow Sheet</h1>
+                        <!-- PAGE HEADING TAG - END -->
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-12">
+                    <section class="box nobox">
+                        <div class="content-body">
+                            <div class="row">
+                                <div class="col-3" style="display: none;">
+                                    <form action ="#" method="post">
+                                        <div id="external-events">
+                                            <div id="external-events-list">
+                                                <div class="fc-event">Annual Checkup</div>
+                                                <div class="fc-event">ECG</div>
+                                                <div class="fc-event">Blood Test</div>
+                                                <div class="fc-event">OPD</div>
+                                                <div class="fc-event">USG</div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-12">
+                                    <div class='app-calendar' *ngIf="calendarVisible">
+                                        <full-calendar
+                                      #calendarComponent
+                                      [allDaySlot]= false
+                                      [allDayDefault]=false
+                                      editable= true
+                                      [displayEventTime]= false
+                                      schedulerLicenseKey= "GPL-My-Project-Is-Open-Source"
+                                      droppable= true
+                                      defaultView="resourceTimeGridDay"
+                                      [header]="{
+                                        right: 'prev,next today',
+                                        center: '',
+                                        left: 'title'
+                                      }"
+                                      minTime="08:00:00"
+                                      maxTime="18:00:00"
+                                      [defaultDate]= "defaultDate"
+                                      [plugins]="calendarPlugins"
+                                      [resources]="calendarResources"
+                                      [events]="calendarEvents"
+                                      (eventClick)="rowclick($event)"
+                                      (eventDrop)="dragdate($event)"
+                                      slotDuration= "00:15:00"
+                                      slotLabelInterval= "00:30"
+                                      
+                                    
+                                    ></full-calendar>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>
+<div class="example-wrapper">
+<div id="modalmarkInPatient" class="modal">
+    <div class="modal-content1">
+        <!-- [value]="weight" -->
+        
+            <!-- <h3 class="selete">Please update Mark Ready </h3>
+            <div class="row">
+            <div class="col"> <label >Mark Status</label><input type="checkbox"  #markStatusId  [value]="markStatus" class="fontsiz-ct" [(ngModel)]="markStatus" (change)="handleError()"/></div>
+            </div>
+            <div class="svbutton"> <button type="button" class="btn btn-primary" (click)="submitMarkIn(markStatus)">Save</button></div>
+            <h3 class="selete"></h3> <span class="close" (click)="closePopuop('modalmarkInPatient')">Cancel</span> -->
+
+         <h4 class="textcolor">Please update Mark Ready</h4> 
+        <div class="row">
+        <div class="col chekbox-container" >
+            <label class="textcolor">Mark Status</label>>
+            <input type="checkbox" #markStatusId  [value]="markStatus"  [(ngModel)]="markStatus" (change)="handleError()" value="Mark status"/></div>
+        </div>
+        <div class="svbutton"> <button type="button" class="btn btn-primary" (click)="submitMarkIn(markStatus)">Save</button> &nbsp;&nbsp;&nbsp; 
+            <button class="btn btn-primary "type="button" (click)="closePopupCancel('modalmarkInPatient')">Cancel</button></div>
+      
+        <p class="error" *ngIf="error">  Please check Mark Status option</p>
+    
+    </div>
+</div>
+</div>
+
+<div class="example-wrapper">
+    <div id="modaladdRoom" class="modal">
+            <div class="modal-content1">
+
+                <h3 class="selete">Enter Room Number</h3>
+                <div class="row">
+                <div class="col"><input type="text"  #roomNumberId   [(ngModel)]="roomNumber" class="fontsiz-ct" (keypress)="numberOnly($event)"/></div>
+                </div>
+                <div class="svbutton"> <button type="button" class="btn btn-primary" (click)="submitRoom(roomNumber)">Save</button>&nbsp;&nbsp;&nbsp; 
+                <!-- <span class="close" (click)="closePopuop('modaladdRoom',roomNumber)">Cancel</span> -->
+                <button class="btn btn-primary "type="button" (click)="closePopupCancel('modaladdRoom')">Cancel</button>
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="example-wrapper">
+        <div id="modalCheckOut" class="modal">
+            <div class="modal-content1">
+                 <h4 class="textcolor">Do you want to Finish</h4> 
+                <div class="row">
+                    <div class="col chekbox-container" >
+                        <label class="textcolor">Do you want to CheckOut</label>>
+                        <input type="checkbox" [(ngModel)]="isCheckinValid"  (change)="toggleVisibility($event)" class="fontsiz-ct"/>
+                    </div>
+                </div>
+                <div class="svbutton"> 
+                    <button type="button" class="btn btn-primary" [disabled]="!isCheckinValid" (click)="submitmodalCheckOut()">Save</button> &nbsp;&nbsp;&nbsp; 
+                    <button class="btn btn-primary "type="button" (click)="closePopupCancel('modalCheckOut')">Cancel</button>
+                </div>            
+            </div>
+        </div>
+    </div>

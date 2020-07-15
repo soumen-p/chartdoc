@@ -1,0 +1,58 @@
+<div class="tab-content primary" id="myTabContentPrescription">
+    <div class="tab-pane fade show active">
+        <div class="row">
+            <div class="col-xl-12">
+                <section class="box nobox ">
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="accordion" role="tablist" class="accordion-group">
+                                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                        <tr>
+                                            <td>
+                                                <h2> Prescription
+                                                    <br>
+                                                    <h6>VIEW BY:
+                                                        <select class="viewbyiddate">
+                                                            <option>DATE</option>
+                                                        </select>
+                                                    </h6>
+                                                </h2>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+
+                                    <div style="height: 200px;overflow-y:scroll;overflow-x:hidden">
+                                        <div class="card" *ngFor="let element of prescriptionData">
+                                            <div class="card-header" role="tab" id="headingFour">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-row">
+                                                            <a class="showSingle" target="3">
+                                                                <h5>
+                                                                    <span class="spancolor">{{element.date}}</span> -
+                                                                    <span>{{element.medicineName}}</span>-
+                                                                    <span>{{element.dosage}}</span>-
+                                                                    <span>{{element.frequency}}</span>
+                                                                </h5>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,573 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+
+    <section id="main-content" class="sidebar_shift">
+        <div class="wrapper main-wrapper row">
+            <div class='col-12'>
+                <div class="page-title">
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">Patient Information</h1><!-- PAGE HEADING TAG - END -->
+                    </div>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-primary" (click)="finish()" style="margin-right: 5px;">Finish</button>
+                        <button type="button"  (click)="cancel()" class="btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <form [formGroup]="patientFormGroup" #patientForm="ngForm">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2">
+                            <div class="uprofile-image">
+                                <!-- <img alt="" src="https://www.w3schools.com/howto/imgavatar.png" class="img-fluid" /> -->
+                                <label class="hoverable" for="fileInput">
+                                    <img [src]="url ? url : patientimage"> 
+                                    <div class="hover-text">Choose file</div>
+                                    <div class="background"></div>
+                                  </label>
+                                  <br/>
+                                  <input id="fileInput" type='file' (change)="onSelectFile($event)">
+                                  <!-- <button *ngIf="url" (click)="delete()" >delete</button> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-row">
+                                <div class="form-group col-md-5">
+                                    <label class="form-label">First Name<span class="text-danger"> *</span></label>
+                                    <input class="form-control" formControlName="firstName" placeholder="First Name" type="text" />
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label class="form-label">M </label>
+                                    <input class="form-control" formControlName="middleName" placeholder="M Name" type="text" />
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="form-label">Last Name<span class="text-danger"> *</span></label>
+                                    <input class="form-control" formControlName="lastName" type="text"
+                                        placeholder="Last Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-form-label">Gender:<span class="text-danger"> *</span></label>
+                                <div class="col-sm-8" style="margin-top: 5px;margin-left: 15px;">
+                                    <div class="row">
+                                        <div class="form-check col-sm-3">
+                                            <input class="form-check-input" formControlName="gender" type="radio" name="gender" id="redioMale" value="Male" checked/>
+                                            <label class="form-check-label" for="redioMale">Male</label>
+                                        </div>
+                                        <div class="form-check col-sm-4">
+                                            <input class="form-check-input" formControlName="gender" type="radio" name="gender" value="Female" id="redioFemale">
+                                            <label class="form-check-label" for="redioFemale">Female</label>
+                                        </div>
+                                        <div class="form-check col-sm-3">
+                                            <input class="form-check-input" formControlName="gender" type="radio" name="gender" value="Undisclosed" id="redioUndisclosed">
+                                            <label class="form-check-label" for="redioUndisclosed">Undisclosed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputDateOfBirth" class="col-form-label">Date of Birth:<span class="text-danger"> *</span></label>
+                                <div class="col-sm-7">
+                                    <input type="date" formControlName="dob" value="MM/DD/YYYY" class="form-control" id="inputDateOfBirth" [max]="getToday()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+            <div class="col-lg-12">
+                <ul class="nav nav-tabs primary" id="tabListPatientDetail" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#Contact" role="tab" data-toggle="tab">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" role="tab" href="#Social" data-toggle="tab">Social</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" role="tab" href="#Billing" data-toggle="tab">Billing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" role="tab" href="#Insurance" data-toggle="tab">Insurance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" role="tab" href="#Authorization" data-toggle="tab">Authorization</a>
+                    </li>
+                </ul>
+                <div class="tab-content primary" id="tabContentBody">
+                    <div class="tab-pane fade show active" id="Contact">
+                        <div class="box ">
+                            <div class="content-body">
+                                <div class="row">
+                                    <div class="col-7" style="border-right: 1px solid #6f6767;">
+                                        <form [formGroup]="patientContactFormGroup" #patientContactForm="ngForm">
+                                            <h4 style="margin-left: -22px;">PATIENT</h4>
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 col-form-label">Primary Phone:<span class="text-danger"> *</span></label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" formControlName="contactPrimaryPhone" id="primaryPhone" class="form-control" data-mask="phone" (change)="validateprimaryphone()" data-sign="+1" placeholder="(xxx)-xxx-xxxx" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 col-form-label">Secondary Phone:</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" formControlName="contactSecondaryPhone" id="secondaryPhone" class="form-control" data-mask="phone" (change)="validatesecondaryPhone()" placeholder="(xxx)-xxx-xxxx" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 col-form-label">Email:<span class="text-danger"> *</span></label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" formControlName="contactEmail" id="email" value="abc@abc.com"  class="form-control" (change)="validateEmail()" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Billing Address:<span class="text-danger"> *</span></label>
+                                                <div class="col-sm-7">
+                                                    <input id="billingAddressStreet1" formControlName="contactAddressLine" class="form-control :" placeholder="Street 1" type="text">
+                                                    <input id="billingAddressStreet2" formControlName="contactAddressLine1" class="form-control :" placeholder="Street 2" type="text">
+                                                    <input id="billingAddressCity" formControlName="contactAddressCity" class="form-control :" placeholder="City" type="text">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <select class="form-control" name="" id="billingAddressState" formControlName="contactAddressState" class="form-control">
+                                                                <option value="">--Select--</option>
+                                                                <option value="{{item.id}}" *ngFor="let item of state">{{item.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input id="billingAddressZip" formControlName="contactAddressPostalCode" class="form-control :" placeholder="Zip(xxxxxx-xxxx)" type="text" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 col-form-label">Status:</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control" name="" id="flag" formControlName="contactActive" class="form-control">
+                                                        <option value="Y">Active</option>
+                                                        <option value="D">Deactive</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-5">
+                                        <form [formGroup]="patientEmergencyFormGroup" #patientEmergency="ngForm">
+                                            <h4 style="margin-left: -8px;">EMERGENCY CONTACT</h4>
+                                            <div class="form-group row">
+                                                <label class="col-sm-6 col-form-label">Relationship with patient</label>
+                                                <div class="col-sm-6">
+                                                    <select class="form-control" name="" id="emergencyRelationshipWithPatient" formControlName="emergencyRelationship" class="form-control">
+                                                        <option value="">--Select--</option>
+                                                        <option value="{{item.id}}" *ngFor="let item of relationshipWithPatient">{{item.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Name:</label>
+                                                <div class="col-sm-9">
+                                                    <input id="emergencyFullName" formControlName="emergencyContactName" type="text" class="form-control" placeholder="Full Name" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Phone:</label>
+                                                <div class="col-sm-9">
+                                                    <input id="emergencyPhone"  (change)="validateemergencyphone()" formControlName="emergencyContactPhone" type="text" class="form-control" data-mask="phone" placeholder="(xxx)-xxx-xxxx" />
+                                                </div>
+                                            </div>
+                                            <h4 style="margin-left: -8px;">EMPLOYER CONTACT</h4>
+
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Name:</label>
+                                                <div class="col-sm-9">
+                                                    <input id="employerFullName"  formControlName="employerFullName" type="text" class="form-control" placeholder="Full Name" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Phone:</label>
+                                                <div class="col-sm-9">
+                                                    <input id="employerPhone" (change)="validateemployerphone()"  formControlName="employerPhone" type="text" class="form-control" data-mask="phone" placeholder="(xxx)-xxx-xxxx" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Address:</label>
+                                                <div class="col-sm-9">
+                                                    <textarea id="employerAddress" formControlName="employerAddress" class="form-control" cols="5"></textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Social">
+                        <div class="box">
+                            <div class="content-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form [formGroup]="patientSocial1FormGroup" #patientSocial1="ngForm">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-form-label">Marital Status:</label>
+                                            <div class="col-sm-10" style="margin-top: 5px;margin-left: 15px;">
+                                                <div class="row">
+                                                    <div class="form-check col-sm-2">
+                                                        <input class="form-check-input" formControlName="socialMaritalStatus" value="Married" type="radio" name="socialMaritalStatus" id="radioMarried" (change)="checkmartialstatus()" />
+                                                        <label class="form-check-label" for="radioMarried">Married</label>
+                                                    </div>
+                                                    <div class="form-check col-sm-2">
+                                                        <input class="form-check-input" formControlName="socialMaritalStatus" value="Divorced" type="radio" name="socialMaritalStatus" id="radioDivorced" (change)="checkmartialstatus()"/>
+                                                        <label class="form-check-label" for="radioDivorced">Divorced</label>
+                                                    </div>
+                                                    <div class="form-check col-sm-2">
+                                                        <input class="form-check-input" formControlName="socialMaritalStatus" value="Single" type="radio" name="socialMaritalStatus" id="radioSingle" (change)="checkmartialstatus()" />
+                                                        <label class="form-check-label" for="radioSingle">Single</label>
+                                                    </div>
+                                                    <div class="form-check col-sm-1">
+                                                        <input class="form-check-input" formControlName="socialMaritalStatus" value="Other" type="radio" name="socialMaritalStatus" id="radioSocialMaritalStatusOther" (change)="checkmartialstatus()" />
+                                                        <label class="form-check-label" for="radioOther">Other</label>
+                                                    </div>
+                                                    <div class="form-check col-sm-4">
+                                                        <input id="inputOther" formControlName="socialMaritalStatusOther" class="form-control" type="text" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-12">
+                                        <!-- [(ngModel)]="minorcheckBox" -->
+                                        <h4 style="margin-left: -22px;">Patient is minor(under the age of 18): <input type="checkbox"  [ngClass]="{'disabled': !minorchkStatus }" [(ngModel)]="minorStatus" (change)="checkMinor()"></h4>
+                                    </div>
+                                    <div class="col-7" [ngClass]="{'disabled': !minorStatus }" >
+                                        <form [formGroup]="patientSocial2FormGroup" #patientSocial2="ngForm" >
+                                            <div class="form-group row" >
+                                                <label for="inputEmail3" class="col-sm-3 col-form-label">Guardian Name:</label>
+                                                <div class="col-sm-9">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input class="form-control" formControlName="socialGuardianFirstName" placeholder="First Name" type="text" />
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input class="form-control" formControlName="socialGuardianLastName" type="text" placeholder="Last Name" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row" >
+                                                <label for="inputEmail3" class="col-sm-3 col-form-label">Mailing Address:</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control :" formControlName="socialAddressLine" placeholder="Street#,Apt#" type="text" />
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <input class="form-control :"  formControlName="socialAddressCity" placeholder="City" type="text" />
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select class="form-control" name="" id="socialAddressState" formControlName="socialAddressState" class="form-control">
+                                                                <option value="">--Select--</option>
+                                                                <option value="{{item.id}}" *ngFor="let item of state">{{item.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input class="form-control :" formControlName="socialAddressZip" placeholder="Zip" type="text" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-5" [ngClass]="{'disabled': !minorStatus }">
+                                        <form [formGroup]="patientSocial3FormGroup" #patientSocial3="ngForm">
+                                            <div class="form-group row">
+                                                <label class="col-sm-5 col-form-label">Date of Birth:</label>
+                                                <div class="col-sm-7">
+                                                    <input type="date" formControlName="socialDOB" placeholder="MM/DD/YYYY" class="form-control" [max]="getToday()" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-5 col-form-label">Social Seccurity#</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" formControlName="socialGuardianSSN" placeholder="xxx-xx-xxxx" data-mask="999-99-9999" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-5 col-form-label">Phone Number#:</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" (change)="validatesocailphone()" formControlName="socialPhoneNumber" class="form-control" data-mask="phone" placeholder="(xxx)-xxx-xxxx" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-12" [ngClass]="{'disabled': !minorStatus }">
+                                        <form [formGroup]="patientSocial4FormGroup" #patientSocial4="ngForm">
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Social Seccurity#</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" formControlName="socialPatientSSN" placeholder="xxx-xx-xxxx" data-mask="999-99-9999" class="form-control" />
+                                                </div>
+                                                <label class="col-sm-2 col-form-label">Drivers License#</label>
+                                                <div class="col-sm-4">
+                                                    <app-file-upload [files]="socialfiles" [style.width]="socialwidth + 'px'" [fileUrl]="socialfileUrl" [isEdit]="socialIsEdit"></app-file-upload>
+                                                </div>
+                                            </div>                                            
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Race:</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control" id="socialRace" formControlName="socialRace" class="form-control">
+                                                        <option value="">--Select--</option>
+                                                        <option value="{{item.id}}" *ngFor="let item of race">{{item.name}}</option>
+                                                    </select>
+                                                </div>
+                                                <label class="col-sm-2 col-form-label">Preferred Language:</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control" formControlName="socialLanguage">
+                                                        <option value="">--Select--</option>
+                                                        <option value="{{item.id}}" *ngFor="let item of preferredLanguage">{{item.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Ethicity:</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control" formControlName="socialEthicity">
+                                                        <option value="">--Select--</option>
+                                                        <option value="{{item.id}}" *ngFor="let item of ethicity">{{item.name}}</option>
+                                                    </select>
+                                                </div>
+                                                <label class="col-sm-4 col-form-label">Preferred mode of communication:</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" formControlName="socialCommMode">
+                                                        <option value="">--Select--</option>
+                                                        <option value="{{item.id}}" *ngFor="let item of preferredModeOfCommunication">{{item.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Billing">
+                        <section class="box ">
+                            <div class="content-body">
+                                <form [formGroup]="patientBillingFormGroup" #patientBilling="ngForm">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h4 style="margin-left: -22px;">Name of responsible party for billing (if other than patient):</h4>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group row">
+                                                <div class="col-sm-12" style="margin-top: 5px;margin-left: 15px;">
+                                                    <div class="row">
+                                                        <div class="form-check col-sm-1">
+                                                            <input class="form-check-input" formControlName="billingParty" type="radio" name="billingParty" id="radioSpouse" value="Spouse" checked="" />
+                                                            <label class="form-check-label" for="radioSpouse">Spouse</label>
+                                                        </div>
+                                                        <div class="form-check col-sm-1">
+                                                            <input class="form-check-input" formControlName="billingParty" type="radio" name="billingParty" id="radioParent" value="Parent" />
+                                                            <label class="form-check-label" for="radioParent">Parent</label>
+                                                        </div>
+                                                        <div class="form-check col-sm-2">
+                                                            <input class="form-check-input" formControlName="billingParty" type="radio" name="billingParty" id="radioAutoInsurance" value="Auto Insurance" />
+                                                            <label class="form-check-label" for="radioAutoInsurance">Auto Insurance</label>
+                                                        </div>
+                                                        <div class="form-check col-sm-3">
+                                                            <input class="form-check-input" formControlName="billingParty" type="radio" name="billingParty" id="radioWorkersCompInsurance" value="Workers Comp Insurance" />
+                                                            <label class="form-check-label" for="radioWorkersCompInsurance">Workers Comp Insurance</label>
+                                                        </div>
+                                                        <div class="form-check col-sm-2">
+                                                            <input class="form-check-input" formControlName="billingParty" type="radio" name="billingParty" id="radioHMOInsurance" value="HMO Insurance" />
+                                                            <label class="form-check-label" for="radioHMOInsurance">HMO Insurance</label>
+                                                        </div>
+                                                        <div class="form-check col-sm-1">
+                                                            <input class="form-check-input" formControlName="billingParty" type="radio" name="billingParty" id="radioBillingPartyOther" value="Other" />
+                                                            <label class="form-check-label" for="radioOther">Other</label>
+                                                        </div>
+                                                        <div class="form-check col-sm-2">
+                                                            <input class="form-control" formControlName="billingPartyOther" type="text" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <h4 style="margin-left: -22px;">Details of Parent or Spouse for billing (if different from patient):</h4>
+                                        </div>
+                                        <div class="col-6">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-5">
+                                                        <label class="form-label">First Name</label>
+                                                        <input class="form-control" formControlName="billingFirstName" placeholder="First Name" name="formfield1" type="text" />
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label class="form-label">M </label>
+                                                        <input class="form-control" formControlName="billingMiddleName" placeholder="Middle Name" name="formfield1" type="text" />
+                                                    </div>
+                                                    <div class="form-group col-md-5">
+                                                        <label class="form-label">Last Name</label>
+                                                        <input class="form-control" formControlName="billingLastName" name="billingLastName" type="text" placeholder="Last Name" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputEmail3" class="col-sm-3 col-form-label">Address:</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control :" formControlName="billingAddressLine" placeholder="Street 1" type="text" />
+                                                        <input class="form-control :" formControlName="billingAddressLine1" placeholder="Street 2" type="text" />
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <input class="form-control :" formControlName="billingAddressCity" placeholder="City" type="text" />
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <select class="form-control" name="" id="billingAddressState" formControlName="billingAddressState" class="form-control">
+                                                                    <option value="">--Select--</option>
+                                                                    <option value="{{item.id}}" *ngFor="let item of state">{{item.name}}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input class="form-control :" formControlName="billingAddressZip" placeholder="Zip" type="text" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="col-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Date of Birth:</label>
+                                                    <div class="col-sm-7">
+                                                        <input type="date" formControlName="billingDOB" value="MM/DD/YYYY" class="form-control" [max]="getToday()">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Social Seccurity#</label>
+                                                    <div class="col-sm-7">
+                                                        <input type="text" formControlName="billingSSN" placeholder="xxx-xx-xxxx" data-mask="999-99-9999" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Drivers License#</label>
+                                                    <div class="col-sm-7">
+                                                        <app-file-upload [files]="billingfiles" [style.width]="billingwidth + 'px'" [fileUrl]="billingfileUrl" [isEdit]="billingisEdit"></app-file-upload>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Primary Phone:</label>
+                                                    <div class="col-sm-7">
+                                                        <input type="text" class="form-control" formControlName="billingPrimaryPhone" (change)="validatebillingPrimary()"  data-mask="phone" placeholder="(xxx)-xxx-xxxx" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Secondary Phone:</label>
+                                                    <div class="col-sm-7">
+                                                        <input type="text" class="form-control" formControlName="billingSecondaryPhone" (change)="validatebillingSecondary()" data-mask="phone" placeholder="(xxx)-xxx-xxxx" />
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="tab-pane fade" id="Insurance">
+                        <div class="content-body">
+                            <form [formGroup]="patientInsuranceFormGroup" #patientInsurance="ngForm">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Provider Name:</label>
+                                                <select class="form-control" formControlName="insuranceProviderName" (change)="providerChangeHandler($event)">
+                                                    <option value="">--Select--</option>
+                                                    <option value="{{item.id}}" *ngFor="let item of providerName">{{item.name}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Insurance Policy :</label>
+                                                <input formControlName="insurancePolicy" class="form-control" placeholder="Insurance Policy" type="text" />
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Policy Type: </label>
+                                                <select formControlName="insurancePolicyType" class="form-control" (change)="policyTypeChangeHandler($event)">
+                                                    <option value="1" selected="">primary</option>
+                                                    <option value="2">secondary</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Card Image:</label>
+                                                <app-file-upload [files]="insurancefiles" [style.width]="billingwidth + 'px'"></app-file-upload>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Effective From :</label>
+                                                <input formControlName="insuranceEffectiveFrom" class="form-control" type="date">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Status: </label>
+                                                <select formControlName="insuranceStatus" class="form-control" (change)="statusChangeHandler($event)">
+                                                    <option value="1" selected="">active </option>
+                                                    <option value="2">inactive</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-1" style="padding-top:32px">
+                                                <label class="form-label" style="visibility: hidden;">none </label>
+                                                <button type="button" class="btn btn-primary rss" (click)="addPolicy()">
+                                                    <i class="fa fa-plus vimeo-square"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table class="table table-striped table-bordered">    
+                                            <thead>    
+                                                <tr><th>Provider Name</th><th>Insurance Policy</th><th>Policy Type</th><th>Card Image</th><th>Effective From</th><th>Status</th><th></th>
+                                                </tr>
+                                            </thead>    
+                                            <tbody>    
+                                                <tr *ngFor="let insurance of insuranceArray; let i = index;">
+                                                    <td>{{insurance.providerName}}</td>
+                                                    <td>{{insurance.insurancePolicy}}</td>
+                                                    <td>{{insurance.policyType}}</td>
+                                                    <td><a href="{{insurance.cardImageFilePath}}" target="_blank">Download Image </a></td>
+                                                    <td>{{insurance.effectiveFrom}}</td>
+                                                    <td>{{insurance.status}}</td>
+                                                    <td (click)="deleteRow(i)"><i class="fa fa-trash fa-2x"></i></td>
+                                                </tr>                                                   
+                                            </tbody>    
+                                        </table>    
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Authorization">
+                        <div class="content-body">
+                            <form [formGroup]="patientAuthorizationFormGroup" #patientAuthorization="ngForm">
+                                <div class="row">
+                                    <div class="col-3"></div>
+                                    <div class="col-6">
+                                        <app-file-upload [files]="authorizationfiles" [style.width]="billingwidth + 'px'" [fileUrl]="authorizationfileUrl" [isEdit]="authozationIsEdit"></app-file-upload>
+                                    </div>
+                                    <div class="col-3"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MAIN CONTENT AREA ENDS -->
+        </div>
+    </section>
+</div>

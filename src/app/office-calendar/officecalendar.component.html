@@ -1,0 +1,238 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+
+    <!-- START CONTENT -->
+    <section id="main-content" class="sidebar_shift">
+        <section class="wrapper main-wrapper row">
+
+            <div class="col-12">
+                <div class="page-title">
+
+                    <div class="float-left">
+                        <!-- PAGE HEADING TAG - START -->
+                        <h1 class="title">OFFICE CALENDAR</h1><!-- PAGE HEADING TAG - END -->
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- MAIN CONTENT AREA STARTS -->
+
+            <div class="col-xl-12">
+                <section class="box ">
+                <form [formGroup]="officecalendarForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+                    <header class="panel_header">
+                        <div class="row">
+                            <div class="col-10">
+                                <h2 class="title float-left">Office calendar</h2>
+                            </div>
+                            <div class="col-2" style="padding-top: 20px;">                                
+                                 <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Finish</button>
+                                 <button type="button" class="btn" (click)="reset()">Cancel</button>
+                                        <!-- <button type="submit" class="btn btn-success btn-icon bottom15 right15"><i class="fa fa-search"></i> &nbsp; <span>Search</span></button> -->                                   
+                                
+                            </div>
+                        </div>
+                    </header>
+                    <div class="content-body">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                       
+                                            <div class="form-row">
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputEmail4">Mode<span class="text-danger"> *</span></label>
+                                                    <select class="form-control"  formControlName="tag" (change)="doctorselect()">
+                                                        <option value="A" >All</option>
+                                                        <option value="D">Doctor Specific</option>
+                                                    </select>
+                                                    <span class="text-danger" *ngIf="officecalendarForm.hasError('required', ['tag']) && formDir.submitted">
+                                                        Mode is required.
+                                                    </span>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputPassword4">Doctor<span class="text-danger"> *</span></label>
+                                                    <select class="form-control" formControlName="doctorId">
+                                                        <option value="0">Select</option>
+                                                        <option *ngFor="let doctor of doctors" value={{doctor.id}}>
+                                                            {{doctor.name}}
+                                                        </option>
+                                                    </select>
+                                                    <span class="text-danger" *ngIf="officecalendarForm.hasError('required', ['doctorId']) && formDir.submitted">
+                                                        Doctor is required.
+                                                    </span>
+                                                </div>
+
+                                                <div class="form-group col-md-2">
+                                                    <label for="inputPassword4"><strong>Date </strong><span class="text-danger"> *</span></label>
+                                                    <!-- <input type="date"  class="form-control" formControlName="date"  > -->
+                                                    <!-- <input class="form-control" placeholder="mm-dd-yyyy" [minDate]="minDate" name="dp1" formControlName="date"   
+                                                    ngbDatepicker #d1="ngbDatepicker"   [readonly]="true">
+                                                    <div class="input-group-addon" (click)="d1.toggle()" >
+                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    </div> -->
+                                                <input type="text" id="date" name="date"  name="dp1"   autocomplete="off"   [readonly]="true"
+                                                        formControlName="calendardate" class="form-control datepicker" 
+                                                        data-format="MM/DD/YYYY" bsDatepicker [minDate]="minDate" 
+                                                        [bsConfig]="{containerClass:'theme-default', dateInputFormat: 'MM/DD/YYYY'}"  >
+                                                   
+                                                    <span class="text-danger" *ngIf="officecalendarForm.hasError('required', ['calendardate']) && formDir.submitted">
+                                                        Date is required.
+                                                    </span>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputPassword4">Type<span class="text-danger"> *</span></label>
+                                                    <select class="form-control"  formControlName="booingTag">
+                                                        <option value="1">Regular</option>
+                                                        <option value="3">Double booking</option>
+                                                    </select>
+                                                    <span class="text-danger" *ngIf="officecalendarForm.hasError('required', ['booingTag']) && formDir.submitted">
+                                                        Type is required.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-1" style="padding-top:38px;">
+                                                    <label for="inputPassword4"><strong>From Time </strong><span class="text-danger"> *</span></label>
+                                                    
+                                                </div>
+                                                <div class="form-group col-md-2" [ngClass]="{'disabled': true}">
+                                                    <!-- <input type="text" class="form-control timepicker" formControlName="fromTime"> -->
+                                                    <ngb-timepicker (ngModelChange)="changedfromtime()"  [minuteStep]="15" formControlName="fromTime"></ngb-timepicker>
+                                                    <span class="text-danger" *ngIf="officecalendarForm.hasError('required', ['fromTime']) && formDir.submitted">
+                                                        From Time is required.
+                                                    </span>
+                                                </div>
+                                                <div class="form-group col-md-1" style="padding-top:38px;" >
+                                                    <label for="inputPassword4"><strong>To Time </strong><span class="text-danger"> *</span></label>
+                                                   
+                                                </div>
+                                                <div class="form-group col-md-2" [ngClass]="{'disabled': true}">
+                                                     <!-- <input type="text" class="form-control timepicker" formControlName="toTime"> -->
+                                                     <ngb-timepicker [minuteStep]="15" (ngModelChange)="changedtotime()"   formControlName="toTime"></ngb-timepicker>
+                                                     <span class="text-danger" *ngIf="officecalendarForm.hasError('required', ['toTime']) && formDir.submitted">
+                                                         To Time is required.
+                                                     </span>
+                                                     
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputPassword4">Reason </label>
+                                                    <!-- <textarea class="form-control" formControlName="eventReason" cols="5" id="field-6"></textarea> -->
+                                                    <select class="form-control" name="" id="Reasons" formControlName="eventReason" >
+                                                        <option value="">--Select--</option>
+                                                      <option *ngFor="let item of Reasons" value="{{item.reasonId}}"> {{item.reasonCode}} </option>
+                                                    </select>
+                                                </div>
+                                            </div>                                                                                       
+
+                                        
+                                    </div>
+                                    
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                        <table class="table table-striped dt-responsive display" cellspacing="0"
+                                            width="100%">
+                                            <thead style="background: #678680;">
+                                                <tr>
+                                                    <th>Mode</th>
+                                                    <th>Doctor</th>
+                                                    <th>Date</th>
+                                                    <th>From Time</th>
+                                                    <th>To Time</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr *ngFor="let calendardata of calendardtl">
+                                                    <!-- <td>1mode</td>
+                                                    <td>jone</td>
+                                                    <td>21-02-2020</td>
+                                                    <td>03:10</td>
+                                                    <td>09:30</td> -->
+                                                    <td >
+                                                        {{calendardata.tagDesc}}
+                                                    </td>
+                                                    <td >
+                                                        {{calendardata.doctor}}
+                                                    </td>
+                                                    <td >
+                                                        {{calendardata.date | slice:0:10}}
+                                                    </td>
+                                                    <td >
+                                                        {{calendardata.fromTime | slice:0:5}}
+                                                    </td>
+                                                    <td >
+                                                        {{calendardata.toTime | slice:0:5}}
+                                                    </td>
+
+                                                    <td>
+                                                        <h6>
+                                                           <a  class="color-edit" (click)="rowclick(calendardata)" >
+                                                            <span class="fa fa-edit" ></span>
+                                                            </a>|
+                                                            <a class="color-delete">
+                                                                <span class="fa fa-trash" (click)="rowdelete(calendardata)" ></span>
+                                                            </a>
+                                                        </h6>
+                                                    </td>
+                                                </tr>
+                                                <!-- <tr>
+                                                    <td>1mode</td>
+                                                    <td>jone</td>
+                                                    <td>21-02-2020</td>
+                                                    <td>03:10</td>
+                                                    <td>09:30</td>
+                                                    <td>
+                                                        <h6>
+                                                            <span><a href="#" class="color-edit">Edit</a></span> | <a
+                                                                href="#" class="color-delete">Delete</a>
+                                                        </h6>
+                                                    </td>
+                                                </tr> -->
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                </section>
+            </div>
+
+
+            <!-- MAIN CONTENT AREA ENDS -->
+        </section>
+    </section>
+    <!-- END CONTENT -->
+</div>
+<div class="example-wrapper">
+    <div id="modalmarkDelete" class="modal">
+        <div class="modal-content1">
+           
+    
+             <h4 class="textcolor">Are you sure you want to delete?</h4> 
+            <div class="row">
+            <!-- <div class="col chekbox-container" >
+                <label class="textcolor">Are you sure you want to delete?</label>>
+                
+            </div> -->
+            <div class="svbutton"> <button type="button" class="btn btn-primary" (click)="openmodal('modalmarkDelete','')">Delete</button> &nbsp;&nbsp;&nbsp; 
+                <button class="btn btn-primary "type="button" (click)="closePopuop('modalmarkDelete','')">Close</button></div>
+          
+            <p class="error" *ngIf="error">  Please check Mark Status option</p>
+        
+        </div>
+    </div>
+    </div>
