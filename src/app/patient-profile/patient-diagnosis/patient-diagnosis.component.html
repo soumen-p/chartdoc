@@ -20,7 +20,7 @@
                                                 </h2>
                                             </td>
                                             <td align="right">
-                                                <button kendoButton class="btn btn-success btn-corner"
+                                                <button kendoButton *ngIf="patienthisttory" class="btn btn-success btn-corner"
                                                     style="width:120px; font-size: 16px;"
                                                     (click)="openModelDiagnosis('ModelDiagnosis')"
                                                     [disabled]="isPosCheckout">Upload</button>
@@ -29,7 +29,7 @@
                                     </table>
 
                                     <div style="height: 200px;overflow-y:scroll;overflow-x:hidden">
-                                        <div class="card" *ngFor="let element of diagnosisEntry">
+                                        <div class="card" *ngFor="let element of pageOfItems">
                                             <div class="card-header" role="tab" id="headingTwo">
                                                 <div class="row">
                                                     <div class="col-12">
@@ -48,6 +48,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="card-footer pb-0 pt-3">
+                                            <jw-pagination [items]="diagnosisEntry" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>
+                                        </div> 
                                     </div>
                                 </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { PatientCptService } from '../../services/patient-cpt.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PatientCPTModel } from '../../models/PatientCPT.model';
@@ -32,7 +32,8 @@ export class PatientCptComponent implements OnInit {
   frm: PatientCPTModel[] = [];
   public tblVisibilityOnLoad = false;
   isPosCheckOut = false;
-
+  pageOfItems: Array<any>;
+  @Input() patienthisttory : boolean =true ;
   constructor(private patientCptService: PatientCptService, public toastr: ToastrManager) { }
 
   ngOnInit() {
@@ -125,6 +126,10 @@ export class PatientCptComponent implements OnInit {
           }
         }
       );
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }
 

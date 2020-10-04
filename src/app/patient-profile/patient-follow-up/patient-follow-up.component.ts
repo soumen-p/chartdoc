@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CommonService } from 'src/app/core/common.service';
 import { DatePipe } from '@angular/common';
@@ -34,6 +34,7 @@ export class PatientFollowUpComponent implements OnInit, OnDestroy {
   flag: string;
   patientInfo: any;
   mindate: Date;
+  @Input() patienthisttory : boolean =true ;
   constructor(private FollowupService: PatientFollowupService, private commonService: CommonService, public toastr: ToastrManager) { }
   ngOnDestroy() {
   }

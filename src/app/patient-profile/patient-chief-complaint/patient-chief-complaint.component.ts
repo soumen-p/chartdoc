@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
@@ -27,7 +27,7 @@ export class PatientChiefComplaintComponent implements OnInit {
   flag: string;
   isPosCheckOut : boolean = false;
   message: string;
-
+  @Input() patienthisttory : boolean =true ;
   constructor(private cCService: PatientChiefComplaintService, public toastr: ToastrManager) {
   }
 
@@ -72,7 +72,7 @@ export class PatientChiefComplaintComponent implements OnInit {
 
   public onReady(editor: any) {
     editor.ui.getEditableElement().parentElement.insertBefore(
-      editor.ui.view.toolbar.element,
+     // editor.ui.view.toolbar.element,
       editor.ui.getEditableElement(),
     );
   }

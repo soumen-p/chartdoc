@@ -4,7 +4,8 @@ import { DoctorCalenderComponent } from './doctor-calender.component';
 
 
 const doctorcalendarRoutes: Routes = [
-    {path:'doctor-calendar', component: DoctorCalenderComponent}
+    {path:'doctor-calendar', component: DoctorCalenderComponent},
+    {path:'viewpatient-history', component: DoctorCalenderComponent}
 ];
 
 @NgModule({

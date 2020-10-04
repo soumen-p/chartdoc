@@ -1,0 +1,71 @@
+<div class="row margin-0">
+    <div class="col-xl-12">
+        <section class="box nobox ">
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="accordion" role="tablist" class="accordion-group">
+                            <h2>Vitals</h2>
+                            <div class="card">
+                                <table class="icd dt-responsive display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>
+                                                <strong>Date</strong>
+                                            </td>
+                                            <td>
+                                                <strong>Blood Pressure</strong>
+                                            </td>
+                                            <td>
+                                                <strong>Pulse</strong>
+                                            </td>
+                                            <td>
+                                                <strong>Height</strong>
+                                            </td>
+                                            <td>
+                                                <strong>Weight</strong>
+                                            </td>
+                                            <td>
+                                                <strong>Temperature</strong>
+                                            </td>
+                                            <td>
+                                                <strong>Respiratory</strong>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let vital of vitalHistory">
+                                            <!-- <tr>  -->
+                                            <td>
+                                                <strong>{{vital.AppointmentDate}}</strong>
+                                            </td>
+                                            <td>
+                                                <strong> {{vital.BloodPressure}}</strong>
+                                            </td>
+                                            <td>
+                                                <strong>{{vital.Pulse}}</strong>
+                                            </td>
+                                            <td>
+                                                <strong>{{vital.Height}}</strong>
+                                            </td>
+                                            <td>
+                                                <strong>{{vital.pWeight}}</strong>
+                                            </td>
+                                            
+                                            <td>
+                                                <strong>{{vital.Temperature}}</strong>
+                                            </td>
+                                            <td>
+                                                <strong>{{vital.Respiratory}}</strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

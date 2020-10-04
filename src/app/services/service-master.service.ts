@@ -54,4 +54,5 @@ export class ServiceMasterService {
     return this.http.post(environment.baseUrl + SAVECHARGEDETAILS, cptDetailsData, {responseType: 'text'});
 
   }
+  
 }

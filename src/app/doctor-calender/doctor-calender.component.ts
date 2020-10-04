@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
+import { Router, ActivatedRoute } from '@angular/router';
 import { EventInput } from '@fullcalendar/core';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction'; // for dateClick
@@ -24,9 +25,21 @@ export class DoctorCalenderComponent implements OnInit {
   endDate: string;
   finalDate: string;
   doctorID: string;
-  doctorName:string;
-  constructor(private datePipe: DatePipe, private doctorCalendarService: DoctorCalendarService) {
-  this.doctorName=this.doctorCalendarService.getLocalStorage('doctorInfo').doctorName
+  doctorName: string;
+  patientid: string = "";
+
+  encounterList: any;
+  patientInfo: any;
+  clickCount = 0;
+  singleClickTimer: any;
+  
+  constructor(private datePipe: DatePipe, private doctorCalendarService: DoctorCalendarService
+    , private router: Router, private _avRoute: ActivatedRoute,) {
+    this.doctorName = this.doctorCalendarService.getLocalStorage('doctorInfo').doctorName;
+    if (this._avRoute.snapshot.queryParams.pid) {
+      this.patientid = this._avRoute.snapshot.queryParams.pid
+    }
+    
   }
 
   ngOnInit() {
@@ -37,7 +50,24 @@ export class DoctorCalenderComponent implements OnInit {
     var lastday = new Date(curr.setDate(last)); // 12-Jul-2014
   }
   rowclick(event) {
-    console.log("event", event);
+    this.clickCount++;
+    const self = this;
+    if (this.clickCount === 1) {
+      // tslint:disable-next-line: only-arrow-functions
+      this.singleClickTimer = setTimeout(function () {
+        console.log('single click');
+        self.clickCount = 0;
+      }, 400);
+    } else if (this.clickCount === 2) {
+      console.log('double click');
+
+      this.clickCount = 0;
+      clearTimeout(this.singleClickTimer);
+      if (this.patientid != "") {
+        this.getEncounterDetails(this.patientid, event.event.extendedProps.appoinmentId);
+       
+      }
+    }
   }
   ngAfterViewInit() {
     // alert("data="+this.calendarComponent.getApi());
@@ -65,69 +95,115 @@ export class DoctorCalenderComponent implements OnInit {
       let tempdata = [];
       res.forEach((element: any) => {
         console.log("ddata", res)
-        if (element.schduleAppoinment.DoctorID != "") {
-          const mm = element.schduleAppoinment.Date.substr(3,2);
-          const dd = element.schduleAppoinment.Date.substr(0,2) //January is 0!
-          const yyyy =element.schduleAppoinment.Date.substr(6,4);
+        if (element.schduleAppoinment.doctorID != "") {
+          const mm = element.schduleAppoinment.date.substr(3, 2);
+          const dd = element.schduleAppoinment.date.substr(0, 2) //January is 0!
+          const yyyy = element.schduleAppoinment.date.substr(6, 4);
           let strdate1 = yyyy + '-' + mm + '-' + dd;
-          console.log("s date="+strdate1);
+          console.log("s date=" + strdate1);
           tempdata.push({
-            resourceId: 1, title: element.schduleAppoinment.PatientName.trim() , start: strdate1 + "T" + element.schduleAppoinment.FromTime.trim(),
-            end: strdate1 + "T" + element.schduleAppoinment.ToTime.trim(), IsReady: element.schduleAppoinment.IsReady, appoinmentId: element.schduleAppoinment.AppointmentId, patientID: element.schduleAppoinment.PatientID,
-            email: element.schduleAppoinment.Email, phone: element.schduleAppoinment.Phoneno, patientName: element.schduleAppoinment.PatientName, doctorName: element.schduleAppoinment.DoctorName
-            , dateOfBirth: element.schduleAppoinment.DateofBirth, gender: element.schduleAppoinment.Gender, address: element.schduleAppoinment.Address, serviceId: element.schduleAppoinment.ServiceID, note: element.schduleAppoinment.Note, reason: element.schduleAppoinment.Reason, positionID: element.schduleAppoinment.PositionID, reasonID: element.schduleAppoinment.ReasonID
-            , color: element.schduleAppoinment.IsReady == "True" ? 'yellow' : element.schduleAppoinment.ColorCode.trim(), HeaderId: 1, appointmentFromTime: strdate1 + "T" + element.schduleAppoinment.AppointmentFromTime.trim(), appointmentToTime: strdate1 + "T" + element.schduleAppoinment.AppointmentToTime.trim(), roomNo: element.schduleAppoinment.ROOMNO,
+            resourceId: 1, title: element.schduleAppoinment.patientName.trim(), start: strdate1 + "T" + element.schduleAppoinment.fromTime.trim(),
+            end: strdate1 + "T" + element.schduleAppoinment.toTime.trim(), IsReady: element.schduleAppoinment.isReady, appoinmentId: element.schduleAppoinment.appointmentId, patientID: element.schduleAppoinment.patientId,
+            email: element.schduleAppoinment.email, phone: element.schduleAppoinment.phoneno, patientName: element.schduleAppoinment.patientName, doctorName: element.schduleAppoinment.doctorName
+            , dateOfBirth: element.schduleAppoinment.dateofBirth, gender: element.schduleAppoinment.gender,
+            address: element.schduleAppoinment.address, serviceId: element.schduleAppoinment.serviceID,
+            note: element.schduleAppoinment.note, reason: element.schduleAppoinment.reason,
+            positionID: element.schduleAppoinment.positionID, reasonID: element.schduleAppoinment.reasonID
+            , color: element.schduleAppoinment.isReady == "True" ? 'yellow' :
+              element.schduleAppoinment.colorCode.trim(), HeaderId: 1, appointmentFromTime: strdate1 + "T" + element.schduleAppoinment.appointmentFromTime.trim(), appointmentToTime: strdate1 + "T" + element.schduleAppoinment.appointmentToTime.trim(),
+            roomNo: element.schduleAppoinment.rOOMNO,
             editable: false
           });
         }
-        else if (element.WaitingArea.DoctorID != "") {
-          const mm = element.WaitingArea.Date.substr(3,2);
-          const dd = element.WaitingArea.Date.substr(0,2) //January is 0!
-          const yyyy =element.WaitingArea.Date.substr(6,4);
+        else if (element.waitingArea.doctorID != "") {
+          const mm = element.waitingArea.date.substr(3, 2);
+          const dd = element.waitingArea.date.substr(0, 2) //January is 0!
+          const yyyy = element.waitingArea.date.substr(6, 4);
           let strdate1 = yyyy + '-' + mm + '-' + dd;
           tempdata.push({
-            resourceId: 2, title: element.WaitingArea.PatientName.trim(), start: strdate1 + "T" + element.WaitingArea.FromTime,
-            end: strdate1 + "T" + element.WaitingArea.ToTime, appoinmentId: element.WaitingArea.AppointmentId, patientID: element.WaitingArea.PatientID, HeaderId: 2, email: element.WaitingArea.Email, phone: element.WaitingArea.Phoneno
-            , dateOfBirth: element.WaitingArea.DateofBirth, gender: element.WaitingArea.Gender, address: element.WaitingArea.Address, patientName: element.WaitingArea.PatientName, doctorName: element.WaitingArea.DoctorName,
-            serviceId: element.WaitingArea.ServiceID, note: element.WaitingArea.Note, reason: element.WaitingArea.Reason, positionID: element.WaitingArea.PositionID, reasonID: element.WaitingArea.ReasonID, appointmentFromTime: strdate1 + "T" + element.WaitingArea.AppointmentFromTime.trim(), appointmentToTime: strdate1 + "T" + element.WaitingArea.AppointmentToTime.trim(), roomNo: element.WaitingArea.ROOMNO
-            ,editable: false
+            resourceId: 2, title: element.waitingArea.patientName.trim(), start: strdate1 + "T" + element.waitingArea.fromTime,
+            end: strdate1 + "T" + element.waitingArea.toTime, appoinmentId: element.waitingArea.appointmentId, patientID: element.waitingArea.patientId, HeaderId: 2, email: element.waitingArea.email, phone: element.waitingArea.phoneno
+            , dateOfBirth: element.waitingArea.dateOfBirth, gender: element.waitingArea.gender, address: element.waitingArea.address,
+            patientName: element.waitingArea.patientName, doctorName: element.waitingArea.doctorName,
+            serviceId: element.waitingArea.serviceId, note: element.waitingArea.note, reason: element.waitingArea.reason, positionID: element.waitingArea.positionID, reasonID: element.waitingArea.reasonID, appointmentFromTime: strdate1 + "T" + element.waitingArea.appointmentFromTime.trim(), appointmentToTime: strdate1 + "T" + element.waitingArea.AppointmentToTime.trim(), roomNo: element.waitingArea.rOOMNO
+            , editable: false
 
           });
         }
-        else if (element.ConsultationRoom.DoctorID != "") {
-          const mm = element.ConsultationRoom.Date.substr(3,2);
-          const dd = element.ConsultationRoom.Date.substr(0,2) //January is 0!
-          const yyyy =element.ConsultationRoom.Date.substr(6,4);
+        else if (element.consultationRoom.doctorID != "") {
+          const mm = element.consultationRoom.date.substr(3, 2);
+          const dd = element.consultationRoom.date.substr(0, 2) //January is 0!
+          const yyyy = element.consultationRoom.date.substr(6, 4);
           let strdate1 = yyyy + '-' + mm + '-' + dd;
 
           tempdata.push({
-            resourceId: 3, title: element.ConsultationRoom.PatientName ,
-            start: strdate1 + "T" + element.ConsultationRoom.FromTime,
-            end: strdate1 + "T" + element.ConsultationRoom.ToTime, appoinmentId: element.ConsultationRoom.AppointmentId, patientID: element.ConsultationRoom.PatientID, HeaderId: 3,
-            email: element.ConsultationRoom.Email, phone: element.ConsultationRoom.Phoneno, patientName: element.ConsultationRoom.PatientName, doctorName: element.ConsultationRoom.DoctorName,
-            dateOfBirth: element.ConsultationRoom.DateofBirth, gender: element.ConsultationRoom.Gender, address: element.ConsultationRoom.Address, roomNo: element.ConsultationRoom.ROOMNO,
-            serviceId: element.ConsultationRoom.ServiceID, note: element.ConsultationRoom.Note, reason: element.ConsultationRoom.Reason, positionID: element.ConsultationRoom.PositionID, reasonID: element.ConsultationRoom.ReasonID, appointmentFromTime: strdate1 + "T" + element.ConsultationRoom.AppointmentFromTime.trim(), appointmentToTime: strdate1 + "T" + element.ConsultationRoom.AppointmentToTime.trim()
-            ,editable: false
+            resourceId: 3, title: element.consultationRoom.patientName,
+            start: strdate1 + "T" + element.consultationRoom.fromTime,
+            end: strdate1 + "T" + element.consultationRoom.toTime, appoinmentId: element.consultationRoom.appointmentId,
+            patientID: element.consultationRoom.patientId, HeaderId: 3,
+            email: element.consultationRoom.email, phone: element.consultationRoom.phoneno,
+            patientName: element.consultationRoom.patientName, doctorName: element.consultationRoom.doctorName,
+            dateOfBirth: element.consultationRoom.dateOfBirth, gender: element.consultationRoom.gender,
+            address: element.consultationRoom.address, roomNo: element.consultationRoom.roomNo,
+            serviceId: element.consultationRoom.serviceId, note: element.consultationRoom.note,
+            reason: element.consultationRoom.reason, positionID: element.consultationRoom.positionID,
+            reasonID: element.consultationRoom.reasonID,
+            appointmentFromTime: strdate1 + "T" + element.consultationRoom.appointmentFromTime.trim(),
+            appointmentToTime: strdate1 + "T" + element.consultationRoom.appointmentToTime.trim()
+            , editable: false
           });
         }
-        else if (element.CheckingOut.DoctorID != "") {
-          const mm = element.CheckingOut.Date.substr(3,2);
-          const dd = element.CheckingOut.Date.substr(0,2) //January is 0!
-          const yyyy =element.CheckingOut.Date.substr(6,4);
+        else if (element.checkingOut.doctorID != "") {
+          const mm = element.checkingOut.date.substr(3, 2);
+          const dd = element.checkingOut.date.substr(0, 2) //January is 0!
+          const yyyy = element.checkingOut.date.substr(6, 4);
           let strdate1 = yyyy + '-' + mm + '-' + dd;
           tempdata.push({
-            resourceId: 4, title: element.CheckingOut.PatientName , start: strdate1 + "T" + element.CheckingOut.FromTime,
-            end: strdate1 + "T" + element.CheckingOut.ToTime, appoinmentId: element.CheckingOut.AppointmentId, patientID: element.CheckingOut.PatientID, HeaderId: 4,
-            email: element.CheckingOut.Email, phone: element.CheckingOut.Phoneno, patientName: element.CheckingOut.PatientName, doctorName: element.CheckingOut.DoctorName,
-            dateOfBirth: element.CheckingOut.DateofBirth, gender: element.CheckingOut.Gender, address: element.CheckingOut.Address,
-            serviceId: element.CheckingOut.ServiceID, note: element.CheckingOut.Note, reason: element.CheckingOut.Reason, positionID: element.CheckingOut.PositionID, reasonID: element.CheckingOut.ReasonID, appointmentFromTime: strdate1 + "T" + element.CheckingOut.AppointmentFromTime, appointmentToTime: strdate1 + "T" + element.CheckingOut.AppointmentToTime.trim(), roomNo: element.CheckingOut.ROOMNO
-            ,editable: false
+            resourceId: 4, title: element.checkingOut.patientName, start: strdate1 + "T" + element.checkingOut.fromTime,
+            end: strdate1 + "T" + element.checkingOut.toTime, appoinmentId: element.checkingOut.appointmentId,
+            patientID: element.checkingOut.this.patientid, HeaderId: 4,
+            email: element.checkingOut.email, phone: element.checkingOut.phoneno,
+            patientName: element.checkingOut.patientName, doctorName: element.checkingOut.doctorName,
+            dateOfBirth: element.checkingOut.dateOfBirth, gender: element.checkingOut.gender, address: element.checkingOut.address,
+            serviceId: element.checkingOut.serviceId, note: element.checkingOut.note, reason: element.checkingOut.reason,
+            positionID: element.checkingOut.positionID, reasonID: element.checkingOut.reasonID,
+            appointmentFromTime: strdate1 + "T" + element.checkingOut.appointmentFromTime,
+            appointmentToTime: strdate1 + "T" + element.checkingOut.appointmentToTime.trim(), roomNo: element.checkingOut.roomNo
+            , editable: false
           });
         }
       });
-      this.calendarEvents = tempdata;
+      if (this.patientid == "") {
+        this.calendarEvents = tempdata;
+      } else {
+        this.calendarEvents = tempdata.filter((x => x.patientID == this.patientid));
+
+      }
     })
 
+  }
+  getEncounterDetails(pID: string, aID: string) {
+
+    this.doctorCalendarService.getEncounterData(pID).subscribe((res) => {
+      this.encounterList = res;
+      this.patientInfo = {
+        patientId: this.encounterList.patientId,
+        appointmentId: aID,
+        flag: this.encounterList.flag,
+        patientFirstName: this.encounterList.firstName,
+        patientLastName: this.encounterList.lastName,
+        patientFullName: this.encounterList.firstName + ' ' + this.encounterList.lastName,
+        patientImagePath: this.encounterList.imagePath,
+        patientAge: this.encounterList.age,
+        patientGender: this.encounterList.gender,
+        rcopiaId: this.encounterList.recopiaId,
+        rcopiaName: this.encounterList.recopiaName,
+      };
+      this.doctorCalendarService.setPatientInfo('patientInfo', this.patientInfo);
+      this.router.navigate(['/patient-profile'], { queryParams: { mode:'history', id: aID } });
+    }, err => {
+      console.log(err);
+    });
   }
   getDaysArray(start, end) {
     for (var arr = [], dt = start; dt < end; dt.setDate(dt.getDate() + 1)) {

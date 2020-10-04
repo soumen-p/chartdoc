@@ -251,7 +251,8 @@ export class OfficeCalendarComponent implements OnInit {
                 this.officecalendarForm.controls['fromTime'].value.hour < 8 || this.officecalendarForm.controls['fromTime'].value.hour >= 18) {
                 this.toastr.errorToastr('Invalid From Time', 'Oops!', { showCloseButton: true });
                 this.officecalendarForm.patchValue({
-                    fromTime: { hour: 8, minute: 0, second: 0 }
+                    fromTime: { hour: 8, minute: 0, second: 0 },
+                    toTime: { hour: 8, minute:15, second: 0 }
                 });
                 return;
             } else if (this.officecalendarForm.controls['fromTime'].value.hour > this.officecalendarForm.controls['toTime'].value.hour) {
@@ -273,7 +274,7 @@ export class OfficeCalendarComponent implements OnInit {
                     } else {
                         this.officecalendarForm.patchValue({
                             toTime: {
-                                hour: this.officecalendarForm.controls['fromTime'].value.hour + 1,
+                                hour: this.officecalendarForm.controls['toTime'].value.hour + 1,
                                 minute: this.officecalendarForm.controls['toTime'].value.minute, second: 0
                             }
 
@@ -357,8 +358,22 @@ export class OfficeCalendarComponent implements OnInit {
         }
     }
     rowdelete(rowdata: any) {
-        this.deletedata=rowdata;
-        document.getElementById('modalmarkDelete').style.display = 'block';
+        let strtdate = rowdata.date.substring(6, 10) + '' + rowdata.date.substring(0, 2) + '' + rowdata.date.substring(3, 5);
+        let fromhr = rowdata.fromTime.split(':')[0];
+        let frommmin = rowdata.fromTime.split(':')[1];
+        let today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        let strdate1 = yyyy + '' + mm + '' + dd;
+        if (Number(strtdate) >= Number(strdate1)) {
+         this.deletedata=rowdata;
+            document.getElementById('modalmarkDelete').style.display = 'block';
+        }
+        else {
+            // tslint:disable-next-line: max-line-length
+            this.toastr.infoToastr('Creating & editing an event of previous date is not permitted' + ' , please contact system admin!', 'Info!');
+        }
     }
     public openmodal(myModal: string, value: any) {
         this.error = false;

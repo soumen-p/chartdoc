@@ -26,8 +26,7 @@
             "styles": [
               {
                 "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
-              },
-              "src/assets/plugins/calendar/fullcalendar.css",
+              },              
               "src/assets/plugins/icheck/skins/minimal/minimal.css",
               "src/assets/packages/core/main.css",
               "src/assets/packages/daygrid/main.css",

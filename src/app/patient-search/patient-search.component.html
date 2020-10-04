@@ -108,7 +108,7 @@
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody *ngFor="let patient of patientList">
+                                                <tbody *ngFor="let patient of pageOfItems">
                                                     <tr>
                                                         <td style="display: none;">{{patient.patientId}}</td>
                                                         <td>
@@ -134,12 +134,25 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            
+                                        </div>
+                                        <div class="card-footer pb-0 pt-3">
+                                            <jw-pagination [items]="patientList" (changePage)="onChangePage($event)"></jw-pagination>
                                         </div>
                                         <div class="col-md-12 col-lg-12 col-xl-12" *ngIf="!isRecordFound">
                                             <span>{{errMsg}}</span>
                                         </div>
+
                                     </div>
+                                    <!-- <div class="row">  
+                                        <div class="col-lg-8 col-md-10 ml-auto mr-auto">  
+                                            <span><strong>Current Active Page = </strong> {{activePage}}</span>  
+                                        </div>  
+                                    </div>  -->
+                                    <!-- <div class="row">  
+                                        <div class="col-lg-8 col-md-10 ml-auto mr-auto">  
+                                             <div class="float-right"> <app-table-pagination [totalRecords]="patientList.length" [recordsPerPage]="5" (onPageChange)="displayActivePage($event)"></app-table-pagination> </div>     
+                                        </div>  
+                                    </div>  -->
                                 </div>
                             </div>
                         </div>

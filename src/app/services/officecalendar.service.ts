@@ -40,7 +40,7 @@ export class OfficeCalendarService {
   }
   public deleteCalendar(val: string):Observable<any>{    
     const querystring = val;
-    return this.http.get(environment.baseUrl + VIEW_DELETECALENDAR + querystring, { responseType: 'text' });
+    return this.http.post(environment.baseUrl + VIEW_DELETECALENDAR + querystring, { responseType: 'text' });
   }
 
   public hourreturn(val:any){

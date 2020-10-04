@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { PatientdiagnosisService } from '../../services/patientdiagnosis.service';
@@ -22,7 +22,8 @@ export class PatientDiagnosisComponent implements OnInit, OnDestroy {
   flag: string;
   pipe = new DatePipe('en-US'); // Use your own locale
   isPosCheckout = false;
-
+  pageOfItems: Array<any>;
+  @Input() patienthisttory : boolean =true ;
   constructor(private diagnosisService: PatientdiagnosisService) { }
 
   ngOnDestroy() {
@@ -42,9 +43,10 @@ export class PatientDiagnosisComponent implements OnInit, OnDestroy {
     this.patientId = this.patientInfo.patientId;
     this.apiSubscription = this.diagnosisService.getPatientDiagnosis(this.patientId, this.flag)
       .subscribe((res) => {
+        this.diagnosisEntry = [];
+        this.diagnosisEntry.length = 0;
         if (this.flag === 'E') {
           res.entry.forEach(element => {
-
             this.diagnosisEntry.push(
               {
                 diagnosisDate: this.pipe.transform(new Date(element.resource.effectiveDateTime), 'MMM dd,yyyy'),
@@ -66,7 +68,7 @@ export class PatientDiagnosisComponent implements OnInit, OnDestroy {
           });
         }
         this.diagnosisService.setDiagnosisDetails('diagnosis' + this.patientId, this.diagnosisEntry);
-        if(this.diagnosisEntry.length>0){
+        if (this.diagnosisEntry.length > 0) {
           this.getDocuments(this.diagnosisEntry[0].id);
         }
       },
@@ -109,5 +111,9 @@ export class PatientDiagnosisComponent implements OnInit, OnDestroy {
   openModelDiagnosis(myModal: string) {
     document.getElementById(myModal).style.display = 'block';
 
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }

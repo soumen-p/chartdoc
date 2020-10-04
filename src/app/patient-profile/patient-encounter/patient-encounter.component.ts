@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,Input } from '@angular/core';
 import {PatientEncounterService} from '../../services/patient-encounter.service';
 import { Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
@@ -30,7 +30,7 @@ export class PatientEncounterComponent implements OnInit , OnDestroy {
   isPosCheckOut = false;
 
   encounterSummary = '';
-
+  @Input() patienthisttory : boolean =true ;
   ngOnInit() {
    }
    ngOnDestroy() {

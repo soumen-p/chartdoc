@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   errorCode: string;
   errorDesc: string;
   doctorInfo: FormGroup;
-
+  iconview:string="fa fa-fw fa-eye field-icon";
   constructor(private router: Router,
     private loginService: AuthenticationService,
     private formBuilder: FormBuilder) {
@@ -42,7 +42,12 @@ export class LoginComponent implements OnInit {
       this.isNew = false;
     }
   }
-
+  isTextFieldType: boolean=false;
+  togglePasswordFieldType(input: any){
+    input.type = input.type === 'password' ? 'text' : 'password';
+    this.iconview = input.type === 'password' ? 'fa fa-fw fa-eye field-icon' : 'fa fa-fw fa-eye-slash field-icon';
+    //this.isTextFieldType = !this.isTextFieldType;
+  }
   ngOnDestroy() {
     document.body.className = 'sidebar-collapse';
   }

@@ -64,6 +64,14 @@
                         <a class="" [routerLink]="['/patient-search']" [queryParams]="{mode: 'edit-patient'}">Edit
                             Patient</a>
                     </li>
+                    <li class="">
+                
+                        <a href=""  [routerLink]="['/patient-search']" [queryParams]="{mode: 'patient-history'}">
+                            <!-- <i class="fa fa-history"></i> -->
+                            <span class="title" >View Patient History</span>
+                            
+                        </a>
+                    </li>
                     <!-- <li>
                         <a class="" [routerLink]="['/patient-profile']">Patient Profile</a>
                     </li> -->
@@ -110,15 +118,15 @@
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
-                    <li>
+                    <!-- <li>
                         <a class="" [routerLink]="['/user']">New User</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a class="" [routerLink]="['/manage-user']">Manage user</a>
                     </li>
                 </ul>
             </li>
-           
+         
             <!-- <li class="">
                 <a href="javascript:;">
                     <i class="fa fa-users"></i>
@@ -141,6 +149,22 @@
                 </ul>
             </li> -->
             <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-calendar"></i>
+                    <span class="title">Calendar</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a  [routerLink]="['/calendar-schedule']">Office Calendar</a>
+                    </li>
+                    <li>
+                        <a  [routerLink]="['/doctor-calendar']">Doctor Calendar</a>
+                    </li>
+                </ul>
+                
+            </li>
+            <!-- <li class="">
                 <a href=""  [routerLink]="['/calendar-schedule']">
                     <i class="fa fa-calendar"></i>
                     <span class="title" >Office Calendar</span>
@@ -153,7 +177,8 @@
                     <span class="title" >Doctor Calendar</span>
                     
                 </a>
-            </li>
+            </li> -->
+           
             <li class="">
                 <a href="javascript:;">
                     <i class="fa fa-database"></i>
@@ -168,10 +193,19 @@
                         <a  [routerLink]="['/app-reason']">Reason</a>
                     </li>
                     <li>
+                        <a  [routerLink]="['/app-specialty']">Specialty</a>
+                    </li>
+                    <li>
+                        <a  [routerLink]="['/app-role']">Role</a>
+                    </li>
+                    <li>
                         <a  [routerLink]="['/app-charge']">Charge Master</a>
                     </li>
                     <li>
                         <a  [routerLink]="['/app-charge-date']">Charge Date Range</a>
+                    </li>
+                    <li>
+                        <a  [routerLink]="['/app-claim-field-master']">Claim Field Master</a>
                     </li>
                     
                     <li>
@@ -180,7 +214,42 @@
                     
                 </ul>
             </li>
-           
+            <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-dollar "></i>
+                    <span class="title">Billing</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a [routerLink]="['/create-charge']" [queryParams]=" {id:-1}">Create Charge</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/create-claim']" [queryParams]=" {id:1}">Create Claim</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/resubmit-claim']" [queryParams]=" {id:2}">Resubmit Claim</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/manage-claim']" [queryParams]=" {id:3}">Manage Claim</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/create-eob']" [queryParams]=" {id:9}">EOB</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/payment']" [queryParams]=" {id:10}">Payment</a>
+                    </li>
+                    <!-- <li>
+                        <a class="disabledmenu" [routerLink]="">Payments</a>
+                    </li>
+                    <li>
+                        <a class="disabledmenu" [routerLink]="">Add Payment</a>
+                    </li>
+                    <li>
+                        <a class="disabledmenu" [routerLink]="">Patient Invoice</a>
+                    </li> -->
+                </ul>
+            </li>
            
         </ul>
        

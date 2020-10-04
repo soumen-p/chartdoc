@@ -62,10 +62,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let reason of reasons">
+                                                <tr *ngFor="let reason of pageOfItems">
                                                     <td> {{reason.reasonCode}}</td>
                                                     <td> {{reason.reasonDescription}}</td>
                                                     <td>
+                                                        <button type="button" class="btn btn-success" (click)="editReason(reason)">
+                                                            <i class="fa fa fa-pencil text-white"></i></button>
+                                                            &nbsp;
                                                         <button type="button" class="btn btn-primary youtube ">
                                                             <i class="fa fa-trash-o text-white" (click)="delete(reason)"></i>
                                                         </button>
@@ -73,6 +76,9 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="card-footer pb-0 pt-3">
+                                        <jw-pagination [items]="reasons" (changePage)="onChangePage($event)"></jw-pagination>
                                     </div>
                                 </div>
                             </div>

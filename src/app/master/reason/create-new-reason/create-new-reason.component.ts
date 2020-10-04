@@ -13,9 +13,12 @@ export class CreateNewReasonComponent implements OnInit {
   reasonForm: FormGroup;
 
   constructor(private router: Router,
-              private formBuilder: FormBuilder,
-              private reasonmasterService: ReasonMasterService,
-              public toastr: ToastrManager) { }
+    private formBuilder: FormBuilder,
+    private reasonmasterService: ReasonMasterService,
+    private activatedRoute: ActivatedRoute,
+    public toastr: ToastrManager) {
+
+  }
 
   ngOnInit() {
     this.reasonForm = this.formBuilder.group({
@@ -26,6 +29,18 @@ export class CreateNewReasonComponent implements OnInit {
       type: ['', [Validators.required]]
 
     });
+    this.activatedRoute.queryParams.subscribe(params => {
+      if(this.reasonmasterService.getReasonbyid()!=undefined || this.reasonmasterService.getReasonbyid()!=null){
+      this.reasonForm.patchValue({
+        reasonId:params['id'],
+        reasonCode:this.reasonmasterService.getReasonbyid().reasonCode,
+        reasonDescription:this.reasonmasterService.getReasonbyid().reasonDescription,
+        type:params['type'],
+      })
+     
+    }
+    });
+  
   }
   save() {
     if (!this.reasonForm.valid) {
@@ -35,9 +50,12 @@ export class CreateNewReasonComponent implements OnInit {
         console.log('Response:%o', res);
         const result = res.split('|');
         if (result[0] === '1') {
-          this.toastr.successToastr(result[1]);
+          this.toastr.successToastr("Save Sucessfully..");
           this.router.navigateByUrl('/app-reason');
-        } else {
+        }else if (result[0] === '-1') {
+          this.toastr.errorToastr("Data already exists");
+        }
+         else {
           this.toastr.errorToastr(result[1]);
         }
       }, err => {

@@ -19,7 +19,7 @@
                                             </h2>
                                         </td>
                                         <td style="text-align: right">
-                                            <button kendoButton class="btn btn-success btn-corner"
+                                            <button kendoButton class="btn btn-success btn-corner" *ngIf="patienthisttory"
                                                 style="width:120px; font-size: 16px;" [disabled]="isPosCheckout"
                                                 (click)="saveIcdDetails($event)">Save</button>
                                         </td>
@@ -67,7 +67,7 @@
                                     </div>
                                     <div style="height: 620px;overflow-y:scroll;">
                                         <div class="accordion-group"
-                                            *ngFor="let icddetails of icdDetailss | PatientICDSearchFilter: {Code: searchTerm, Desc:searchTerm}">
+                                            *ngFor="let icddetails of pageOfItems | PatientICDSearchFilter: {code: searchTerm, desc:searchTerm}">
                                             <div class="card">
                                                 <div class="card-header">
                                                     <div class="row">
@@ -91,7 +91,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>                                           
+                                        </div>
+                                        <div class="card-footer pb-0 pt-3">
+                                            <jw-pagination [items]="icdDetailss" [pageSize]="10" (changePage)="onChangePage($event)"></jw-pagination>
                                         </div>
                                     </div>
                                 </div>

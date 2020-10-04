@@ -15,7 +15,7 @@
                                             </td>
                                             <td align="right">
                                                 <button kendoButton class="btn btn-success btn-corner" style="width:120px; font-size: 16px;" 
-                                                [disabled]="isPosCheckOut"
+                                                [disabled]="isPosCheckOut" *ngIf="patienthisttory"
                                                 (click)="OpenEncounterSummary('modalEncounterSummary')">Save</button>
                                             </td>
                                         </tr>

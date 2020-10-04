@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { PatientIcdService } from '../../services/patient-icd.service';
 import { PatientICDModelEmployee } from '../../models/PatientICD.model';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -36,7 +36,8 @@ export class PatientIcdComponent implements OnInit {
   data: string;
   message: string;
   isPosCheckout = false;
-
+  pageOfItems: Array<any>;
+  @Input() patienthisttory : boolean =true ;
   constructor(private patientIcdService: PatientIcdService, public toastr: ToastrManager) {
   }
 
@@ -87,17 +88,21 @@ export class PatientIcdComponent implements OnInit {
   }
 
   AddIcdDetails(icdId: string, icdCode: string, icdDesc: string) {
-    this.tblVisibility = true;
-    form.patchValue({ id: icdId, code: icdCode, desc: icdDesc });
-    this.isIdExist = false;
-    this.icdDetails.forEach(element => {
-      if (element.id === icdId) {
-        this.isIdExist = true;
-      }
-    });
+    if ( this.icdDetails.length < 4) {
+      this.tblVisibility = true;
+      form.patchValue({ id: icdId, code: icdCode, desc: icdDesc });
+      this.isIdExist = false;
+      this.icdDetails.forEach(element => {
+        if (element.id === icdId) {
+          this.isIdExist = true;
+        }
+      });
 
-    if (!this.isIdExist) {
-      this.icdDetails.push(form.value);
+      if (!this.isIdExist) {
+        this.icdDetails.push(form.value);
+      }
+    } else {
+      this.toastr.errorToastr('Maximum 4 ICD can be selected');
     }
   }
 
@@ -134,5 +139,9 @@ export class PatientIcdComponent implements OnInit {
           }
         }
       );
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }

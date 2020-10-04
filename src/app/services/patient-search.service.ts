@@ -28,7 +28,7 @@ export class PatientSearchService {
     return this._http.get(environment.baseUrl + base_url + querystring);
   }
 
-  PerformPatientsearch(firstName: string, lastName: string, email: string, dob: string, telecom: string, gender: string) {
+  PerformPatientsearch(firstName: string, lastName: string, email: string, dob: string, telecom: string, gender: string,isactivated:string) {
 
     if(gender === 'Choose...'){
       gender = '';
@@ -39,7 +39,7 @@ export class PatientSearchService {
     else
       this.tempDobVal = dob
 
-    const querystring = "/{" + firstName + "}" + "/{" + lastName + "}" + "/{" + this.tempDobVal + "}" + "/{" + telecom + "}" + "/{" + email + "}"+ "/{" + gender + "}";
+    const querystring = "/{" + firstName + "}" + "/{" + lastName + "}" + "/{" + this.tempDobVal + "}" + "/{" + telecom + "}" + "/{" + email + "}"+ "/{" + gender + "}"+ "/{" + isactivated + "}";
 
     //alert(querystring);
     return this._http.get(environment.baseUrl + PatientSearch_Url + querystring);

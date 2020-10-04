@@ -11,6 +11,7 @@ export class PatientInsuranceInfoComponent implements OnInit {
   isRecordFound: boolean;
   patientId: string;
   flag: string;
+  pageOfItems: Array<any>;
   constructor(private patientInsuranceInfoService: PatientInsuranceinfoService) { }
   ngOnInit() {
     this.flag = this.patientInsuranceInfoService.getPatientDetails('patientInfo').flag;
@@ -23,4 +24,9 @@ export class PatientInsuranceInfoComponent implements OnInit {
           console.log(err);
         });
       }
+      onChangePage(pageOfItems: Array<any>) {
+        // update current page of items
+        this.pageOfItems = pageOfItems;
+      }
     }
+    

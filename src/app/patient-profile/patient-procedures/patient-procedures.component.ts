@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,Input } from '@angular/core';
 import { PatientProceduresService } from '../../services/patient-procedures.service';
 import { Subscription } from 'rxjs';
 import { PatientProcedures } from 'src/app/models/patient-procedures';
@@ -22,6 +22,8 @@ export class PatientProceduresComponent implements OnInit, OnDestroy {
   value = 0;
   flag: string;
   isPosCheckout = false;
+  pageOfItems: Array<any>;
+  @Input() patienthisttory : boolean =true ;
   constructor(private ProcedureService: PatientProceduresService) { }
   ngOnDestroy() {
   }
@@ -41,6 +43,8 @@ export class PatientProceduresComponent implements OnInit, OnDestroy {
 
     this.apiSubscription = this.ProcedureService.GetPatientProcedures(this.patientId, this.flag)
       .subscribe((res) => {
+        this.proceduresEntry = [];
+        this.proceduresEntry.length = 0;
         // tslint:disable-next-line: triple-equals
         if (this.flag == 'E') {
           res.entry.forEach(element => {
@@ -70,7 +74,7 @@ export class PatientProceduresComponent implements OnInit, OnDestroy {
           });
         }
         this.ProcedureService.setProcedureDetails('procedures' + this.patientId, this.proceduresEntry);
-        if(this.proceduresEntry.length>0){
+        if (this.proceduresEntry.length > 0) {
         this.getDocuments(this.proceduresEntry[0].id);
         }
       },
@@ -117,5 +121,9 @@ export class PatientProceduresComponent implements OnInit, OnDestroy {
       link.click();
       link.remove();
     });
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }

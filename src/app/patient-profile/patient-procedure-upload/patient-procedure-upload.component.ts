@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter,Input } from '@angular/core';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { DatePipe } from '@angular/common';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -19,6 +19,7 @@ export class PatientProcedureUploadComponent implements OnInit {
   formData: FormData;
   pipe = new DatePipe('en-US');
   AppointmentId: string;
+  @Input() patienthisttory : boolean =true ;
   // tslint:disable-next-line: no-output-rename
   @Output('loadInit') loadInit: EventEmitter<any> = new EventEmitter();
   constructor(private ProcedureService: PatientProceduresService, public toastr: ToastrManager) { }
@@ -35,6 +36,8 @@ export class PatientProcedureUploadComponent implements OnInit {
     });
   }
   closeModelProcedure(myModal: string) {
+    this.procFormGroup.get('procedureDate') .reset( );
+    this.procFormGroup.get('procedureDesc') .reset( );
     document.getElementById(myModal).style.display = 'none';
   }
   SaveProcedureUpload(myModal: string) {
@@ -62,8 +65,10 @@ export class PatientProcedureUploadComponent implements OnInit {
       } else {
         this.toastr.errorToastr(restatus[1] + ' , please contact system admin!', 'Error!' + restatus[1]);
       }
-      this.loadInit.emit();
+      this.procFormGroup.get('procedureDate') .reset( );
+      this.procFormGroup.get('procedureDesc') .reset( );
       document.getElementById(myModal).style.display = 'none';
+      this.loadInit.emit();
     });
   }
 }

@@ -90,14 +90,16 @@
 
          <h4 class="textcolor">Please update Mark Ready</h4> 
         <div class="row">
-        <div class="col chekbox-container" >
+        <div class="col chekbox-container" [ngClass]="{'disabled': insuranceStatus}" >
             <label class="textcolor">Mark Status</label>>
             <input type="checkbox" #markStatusId  [value]="markStatus"  [(ngModel)]="markStatus" (change)="handleError()" value="Mark status"/></div>
         </div>
-        <div class="svbutton"> <button type="button" class="btn btn-primary" (click)="submitMarkIn(markStatus)">Save</button> &nbsp;&nbsp;&nbsp; 
+        <p *ngIf="insuranceStatus" class="error">Please update Insurance Details</p>
+        <div class="svbutton"> <button type="button" class="btn btn-primary" (click)="submitMarkIn(markStatus)" [disabled]="insuranceStatus">Save</button> &nbsp;&nbsp;&nbsp; 
             <button class="btn btn-primary "type="button" (click)="closePopupCancel('modalmarkInPatient')">Cancel</button></div>
       
         <p class="error" *ngIf="error">  Please check Mark Status option</p>
+       
     
     </div>
 </div>
@@ -108,12 +110,18 @@
             <div class="modal-content1">
 
                 <h3 class="selete">Enter Room Number</h3>
-                <div class="row">
+                <!-- <div class="row">
                 <div class="col"><input type="text"  #roomNumberId   [(ngModel)]="roomNumber" class="fontsiz-ct" (keypress)="numberOnly($event)"/></div>
+                </div> -->
+                <div class="row col-sm-5 col-form-label">
+                    <select [(ngModel)]="roomNumber" name="room"> 
+                        <option value="">--Select--</option>
+                        <option *ngFor="let room of roomNumberList">{{room.name}}</option>
+                    </select>
                 </div>
                 <div class="svbutton"> <button type="button" class="btn btn-primary" (click)="submitRoom(roomNumber)">Save</button>&nbsp;&nbsp;&nbsp; 
-                <!-- <span class="close" (click)="closePopuop('modaladdRoom',roomNumber)">Cancel</span> -->
-                <button class="btn btn-primary "type="button" (click)="closePopupCancel('modaladdRoom')">Cancel</button>
+                <button class="btn btn-primary "type="button" (click)="closePopuopRoom('modaladdRoom',roomNumber)">Cancel</button>
+               
                 </div>
         </div>
         </div>

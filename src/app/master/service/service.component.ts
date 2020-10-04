@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceMasterService } from 'src/app/services/service-master.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
-
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-service',
   templateUrl: './service.component.html',
@@ -10,7 +10,9 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 export class ServiceComponent implements OnInit {
   service: [];
   deletedata: any;
-  constructor(private serviceMasterService: ServiceMasterService, public toastr: ToastrManager) { }
+  pageOfItems: Array<any>;
+  constructor(private serviceMasterService: ServiceMasterService, public toastr: ToastrManager,
+    private router: Router) { }
 
   ngOnInit() {
     this.getAllService();
@@ -23,15 +25,20 @@ export class ServiceComponent implements OnInit {
         console.log(err);
       });
   }
+  editService(request){
+    this.router.navigateByUrl('/new-service?id=' + request.serviceId + '&name=' + request.serviceName );
+    console.log(request);
+  }
   deleteServiceData(request) {
     this.serviceMasterService.DeleteService(request).subscribe((res) => {
       const response = res.split('|');
       if (response[0] === '1') {
-        this.toastr.successToastr(response[1]);
+        this.toastr.successToastr("Record deleted sucessfully..");
         this.closePopup('modalmarkDelete');
         this.getAllService();
       } else {
-        this.toastr.errorToastr(response[1]);
+        this.toastr.errorToastr("Record cannot be deleted..");
+        this.closePopup('modalmarkDelete');
       }
     }, err => {
       console.log('error');
@@ -48,5 +55,9 @@ export class ServiceComponent implements OnInit {
   }
   public closePopup(myModal: string) {
     document.getElementById(myModal).style.display = 'none';
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }

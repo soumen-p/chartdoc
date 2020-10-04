@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output,Input } from '@angular/core';
 import { BookAppointmentService } from 'src/app/services/book-appointment.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PatientDiagnosis } from 'src/app/models/patient-diagnosis';
@@ -22,7 +22,7 @@ export class PatientdiagnosticuploadComponent implements OnInit {
   pipe = new DatePipe('en-US');
   // tslint:disable-next-line: no-output-rename
   @Output('LoadInit') LoadInit: EventEmitter<any> = new EventEmitter();
-
+  @Input() patienthisttory : boolean =true ;
   constructor(private bookAppointmentService: BookAppointmentService,
               private diagnosisService: PatientdiagnosisService,
               public toastr: ToastrManager) { }
@@ -64,8 +64,10 @@ export class PatientdiagnosticuploadComponent implements OnInit {
       } else {
         this.toastr.errorToastr(restatus[1] + ' , please contact system admin!', 'Error!');
       }
-      this.LoadInit.emit();
+      this.diagDate = '';
+      this.diagFormGroup.get('service') .reset( );
       document.getElementById(myModal).style.display = 'none';
+      this.LoadInit.emit();
     });
   }
 
@@ -80,6 +82,8 @@ export class PatientdiagnosticuploadComponent implements OnInit {
   }
 
   closeModelDiagnosis(myModal: string) {
+    this.diagDate = '';
+    this.diagFormGroup.get('service') .reset( );
     document.getElementById(myModal).style.display = 'none';
   }
 }

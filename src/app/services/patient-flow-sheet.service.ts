@@ -7,6 +7,7 @@ const baseUrl = 'api/chartdoc/GetFlowsheet/';
 const SaveFloesheetUrl = 'api/chartdoc/UpdateFloorArea/';
 const updateMarkinStatusUrl = 'api/chartdoc/UpdateMarkReady/';
 const saveCheckOutUrl = 'api/chartdoc/UpdateCheckOutStatus/';
+const insuranceStatus= 'api/chartdoc/GetInusranceStatus/'
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,8 @@ export class PatientFlowSheetService {
   public updateMarkStatus(AppointmentID: string, Status: boolean): Observable<any> {
 
     return this.http.get(environment.baseUrl + updateMarkinStatusUrl + AppointmentID + '/' + Status);
-
+  }
+  public getInsuranceStatus(patientId: string): Observable<any> {
+    return this.http.get(environment.baseUrl + insuranceStatus + patientId );
   }
 }

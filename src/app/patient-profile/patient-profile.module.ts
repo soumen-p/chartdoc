@@ -46,6 +46,8 @@ import { LazyForModule } from 'angular-lazy-for';
 import { SafePipe } from '../services/safe-html-pipe';
 import { PatientdiagnosticuploadComponent } from './patientdiagnosticupload/patientdiagnosticupload.component';
 import { PatientProcedureUploadComponent } from './patient-procedure-upload/patient-procedure-upload.component';
+import { PatientVitalsHistoryComponent } from './patient-vitals-history/patient-vitals-history.component';
+
 
 @NgModule({
   declarations: [PatientProfileComponent,
@@ -70,7 +72,8 @@ import { PatientProcedureUploadComponent } from './patient-procedure-upload/pati
     PrescriptionSearchFilter,
     SafePipe,
     PatientdiagnosticuploadComponent,
-    PatientProcedureUploadComponent
+    PatientProcedureUploadComponent,
+    PatientVitalsHistoryComponent
   ],
   imports: [
     CommonModule,

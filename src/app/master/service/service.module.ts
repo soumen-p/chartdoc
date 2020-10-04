@@ -14,6 +14,7 @@ import { ServiceComponent } from './service.component';
 import { ShellModule } from 'src/app/shell/shell.module';
 import { ServiceRoutingModule } from './service-routing.module';
 import { CreateNewServiceComponent } from './create-new-service/create-new-service.component';
+import { CoreModule } from 'src/app/core/core.module';
 @NgModule({
   declarations: [ServiceComponent, CreateNewServiceComponent],
   imports: [
@@ -24,6 +25,7 @@ import { CreateNewServiceComponent } from './create-new-service/create-new-servi
     ReactiveFormsModule,
     NgbModule,
     BrowserAnimationsModule,
+    CoreModule,
     BsDatepickerModule.forRoot()
   ],
   exports: [ServiceComponent]

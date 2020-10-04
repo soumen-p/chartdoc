@@ -1,0 +1,108 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+<!-- START CONTENT -->
+<section id="main-content" class="sidebar_shift">
+    <section class="wrapper main-wrapper row" >
+
+        <div class='col-12'>
+            <div class="page-title">
+
+                <div class="float-left">
+                    <!-- PAGE HEADING TAG - START --><h1 class="title">Insurance claim</h1><!-- PAGE HEADING TAG - END -->                            </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- MAIN CONTENT AREA STARTS -->
+
+        <div class="col-xl-12">
+            <form>
+            <section class="box ">
+                <header class="panel_header">
+                    <div class="row">
+                        <div class="col-9"><h2 class="title float-left">Proceed to Claim</h2></div>
+                         <div class="col-3" style="padding-top: 25px;">
+                                 <button type="button" class="btn btn-primary" style="margin-right: 10px;"  (click)="save()">Proceed to Submit Claim</button>
+                                <button type="button"  class="btn" (click)="reset()">Cancel</button>
+                         </div>
+                    </div>                               
+                </header>                           
+                <div class="content-body">
+                     <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 col-xl-12">
+                                    <div class="form-group row">                            
+                                            <label class="col-2 col-form-label">Patient name</label>
+                                        <div class="col-3">    
+                                            <input class="form-control" name="patientname" type="text" [value]="patientName" disabled>
+                                        </div>
+                                            <label class="col-2 col-form-label">Charge No</label>
+                                         <div class="col-3">   
+                                            <input class="form-control" name="chargeno" type="text" [value]="chargeId" disabled>
+                                        </div>                                                        
+                                    </div>
+                                   <div class="form-group row">
+                                           <label class="col-2 col-form-label">Mode of Transaction</label>
+                                         <div class="col-6">   
+                                            <label class="radio-inline">
+                                                <input type="radio" name="electronically" [(ngModel)]="flag" [value]="0" id="electronically">
+                                                Electronically
+                                         </label>                                                    	  
+                                          <label class="radio-inline">
+                                                <input type="radio" name="manually" [(ngModel)]="flag" [value]="1" id="manually">
+                                                Manually
+                                          </label>
+                                          
+                                        </div>
+                                   </div>                                                 
+                                </div>
+                                
+                                <div class="col-md-12 col-lg-12 col-xl-12">
+                                    <table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+                                <thead style="background: #678680;">
+                                    <tr>
+                                        <th colspan="4">Claim Fields</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody *ngFor="let item of claimFieldsHeaders">
+                                    <tr>
+                                        <td>{{item.name}}</td>
+                                        <td *ngIf="item.type=='D'?true:false">
+                                        <select id="inputState" class="form-control" (change)="onchange(item,$event)" [(value)]="item.value">
+                                                <option selected="">Select</option>
+                                                <option *ngFor="let fieldvalue of claimFieldsDetails | fieldfilter : 'id' : item.id" 
+                                                    value="{{fieldvalue.value}}"> 
+                                                    {{fieldvalue.value}} 
+                                                </option>
+                                         </select>
+                                        </td>
+                                        <td *ngIf="item.type=='T'?true:false">
+                                            <input class="form-control" name="type" type="text" (input)='item.value = $event.target.value' [value]="item.value">
+                                        </td>
+                                       
+                                </tr>
+                                </tbody>
+                            </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </form>
+        </div>
+
+
+        <!-- MAIN CONTENT AREA ENDS -->
+    </section>
+</section>

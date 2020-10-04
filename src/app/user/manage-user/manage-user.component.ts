@@ -16,6 +16,9 @@ export class ManageUserComponent implements OnInit {
   prviderUserList: [];
   medicalUserList: [];
   officeUserList: [];
+  pageOfItemsProvider: Array<any>;
+  pageOfItemsMedical: Array<any>;
+  pageOfItemsOffice: Array<any>;
   constructor(private user: UserService, private router: Router, private sharedService: SharedService, private toast: ToastrManager) { }
 
   ngOnInit() {
@@ -23,14 +26,9 @@ export class ManageUserComponent implements OnInit {
   }
   getUserList() {
     this.user.getUserList().subscribe((res) => {
-
       this.prviderUserList = res[0];
       this.medicalUserList = res[1];
       this.officeUserList = res[2];
-      console.log('provider List', this.prviderUserList);
-      console.log('medical list=', this.medicalUserList);
-      console.log('office list=', this.officeUserList);
-
     });
   }
   editUser(data: object) {
@@ -56,5 +54,18 @@ export class ManageUserComponent implements OnInit {
 
   picNotLoading(event) {
     event.target.src = 'assets/images/icons8-male-user-50.png';
+  }
+
+  onChangePageProvider(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItemsProvider = pageOfItems;
+  }
+  onChangePageMedical(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItemsMedical = pageOfItems;
+  }
+  onChangePageOffice(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItemsOffice = pageOfItems;
   }
 }

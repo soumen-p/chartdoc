@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,Input } from '@angular/core';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import { Subscription } from 'rxjs';
@@ -22,7 +22,7 @@ export class PatientImpressionPlanComponent implements OnInit, OnDestroy {
   patientId: string;
   formImpressionPlan: FormGroup;
   isPosCheckout = false;
-
+  @Input() patienthisttory : boolean =true ;
   constructor(private sharedService: SharedService,
               private patientImpressionPlanService: PatientImpressionPlanService, public toastr: ToastrManager) {
     this.ckEditorContent = '';
@@ -58,7 +58,7 @@ export class PatientImpressionPlanComponent implements OnInit, OnDestroy {
 
   public onReady(editor: any) {
     editor.ui.getEditableElement().parentElement.insertBefore(
-      editor.ui.view.toolbar.element,
+     // editor.ui.view.toolbar.element,
       editor.ui.getEditableElement(),
     );
   }

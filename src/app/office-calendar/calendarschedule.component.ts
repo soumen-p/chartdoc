@@ -15,7 +15,8 @@ import { OfficeCalendarService } from '../services/officecalendar.service';
 import { DatePipe } from '@angular/common';
 @Component({
     selector: 'calendar-schedule',
-    templateUrl: './calendarschedule.component.html'
+    templateUrl: './calendarschedule.component.html',
+    styleUrls: ['./officecalendar.component.css'],
 })
 export class CalendarScheduleComponent implements OnInit {
     isNew: boolean;
@@ -30,6 +31,7 @@ export class CalendarScheduleComponent implements OnInit {
     errorDesc: string;
     doctorInfo: FormGroup;
     defaultDate: any;
+    selectable: boolean = true;
     @ViewChild(FullCalendarComponent, { static: false }) calendarComponent: any; // the #calendar in the template
     @ViewChild('external', { static: false }) external: ElementRef;
    
@@ -231,12 +233,12 @@ private _officeCalendarService:OfficeCalendarService,
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
             let strdatenext = mm + '' + dd + '' + yyyy;
-            if(Number(strdate)<Number(strdatenext)){
-                this.external.nativeElement.style="display: none;";
-            }
-            else{
-                this.external.nativeElement.style="display: visible;";
-            }
+            // if(Number(strdate)<Number(strdatenext)){
+            //     this.external.nativeElement.style="display: none;";
+            // }
+            // else{
+            //     this.external.nativeElement.style="display: visible;";
+            // }
             let dateparam=(this.pipe.transform(new Date(date), 'MM-dd-yyyy')+","+
             this.pipe.transform(new Date(nextdaydate1), 'MM-dd-yyyy') +","+
             this.pipe.transform(new Date(nextdaydate2), 'MM-dd-yyyy')).split('-').join('');
@@ -296,10 +298,10 @@ private _officeCalendarService:OfficeCalendarService,
             var yyyy = today.getFullYear();
             let strdatepre = mm + '' + dd + '' + yyyy;
 
-            this.external.nativeElement.style="display: visible;";
-            if(Number(strdate)<Number(strdatepre)){
-                this.external.nativeElement.style="display: none;";
-            }
+            // this.external.nativeElement.style="display: visible;";
+            // if(Number(strdate)<Number(strdatepre)){
+            //     this.external.nativeElement.style="display: none;";
+            // }
             let dateparam=(this.pipe.transform(new Date(date), 'MM-dd-yyyy')+","+this.pipe.transform(new Date(prevdaydate1), 'MM-dd-yyyy')+","
             +this.pipe.transform(new Date(prevdaydate2), 'MM-dd-yyyy') ).split('-').join('');
             this.getOfficeCalenderList(dateparam);
@@ -348,7 +350,7 @@ private _officeCalendarService:OfficeCalendarService,
           
             this.calendarresources = tempdata;
             console.log("todayClick")
-            this.external.nativeElement.style="display: visible;";
+            //this.external.nativeElement.style="display: visible;";
             let dateparam=(this.pipe.transform(new Date(todaydate), 'MM-dd-yyyy') +","+
             this.pipe.transform(new Date(todaydate1), 'MM-dd-yyyy')+","+this.pipe.transform(new Date(todaydate2), 'MM-dd-yyyy')).split('-').join('');
             this.getOfficeCalenderList(dateparam);
@@ -365,7 +367,7 @@ private _officeCalendarService:OfficeCalendarService,
                
                 let index=0;
                 res.forEach((element: any) => {
-                    if (element.schduleAppoinment.DoctorID != "") {
+                    if (element.schduleAppoinment.doctorID != "") {
                         index++;
                          //let nextdaydate = new Date(element.schduleAppoinment.Date)
                         let calendarApi = self.calendarComponent.getApi();
@@ -375,13 +377,13 @@ private _officeCalendarService:OfficeCalendarService,
                         var yyyy = nextdaydate.getFullYear();
                         let strdate1 = yyyy + '-' + mm + '-' + dd;
                       tempdata.push({
-                        resourceId: Number(element.schduleAppoinment.AppointmentId),
+                        resourceId: Number(element.schduleAppoinment.appointmentId),
                         title: "", 
-                        start: strdate1 + "T" + element.schduleAppoinment.FromTime.trim(),
-                        end: strdate1 + "T" + element.schduleAppoinment.ToTime.trim(), 
+                        start: strdate1 + "T" + element.schduleAppoinment.fromTime.trim(),
+                        end: strdate1 + "T" + element.schduleAppoinment.toTime.trim(), 
                         
-                        calendardId: element.schduleAppoinment.PatientID,
-                        color: element.schduleAppoinment.ColorCode.trim()
+                        calendardId: element.schduleAppoinment.patientID,
+                        color: element.schduleAppoinment.colorCode.trim()
                         // editable:
                       });
                     }
@@ -395,7 +397,7 @@ private _officeCalendarService:OfficeCalendarService,
                 });
     }
      datechange(arg: any) {
-        this.external.nativeElement.style="display: visible;";
+        //this.external.nativeElement.style="display: visible;";
        
        // let strdate =  String(arg.month).padStart(2, '0')+""+ String(arg.day).padStart(2, '0')+""+arg.year;
         this.defaultDate = arg.year+"-"+String(arg.month).padStart(2, '0')+"-"+ String(arg.day).padStart(2, '0');
@@ -444,6 +446,58 @@ private _officeCalendarService:OfficeCalendarService,
 
     }
     
+    public closePopup(myModal: string) {
+        document.getElementById(myModal).style.display = 'none';
+    }
+    public openModal(myModal: string, value: any) {
 
+        document.getElementById(myModal).style.display = 'none';
+        this.router.navigateByUrl('/office-calendar');
+    }
+    timerange:string="";
+    select(data: any) {
+        //const startdate = new Date(data.resource.extendedProps.date);
+        const startdate = new Date(data.start);
+        let dd = String(startdate.getDate()).padStart(2, '0');
+        let mm = String(startdate.getMonth() + 1).padStart(2, '0'); // January is 0!
+        let yyyy = startdate.getFullYear();
+        const strdate = `${mm}-${dd}-${yyyy}`;
 
+        const checkstrdate = `${mm}${dd}${yyyy}`;
+        const today = new Date();
+        const dd1 = String(today.getDate()).padStart(2, '0');
+        const mm1 = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        const yyyy1 = today.getFullYear();
+        const strdate1 = `${mm1}${dd1}${yyyy1}`;
+        if (Number(checkstrdate) < Number(strdate1)) {
+            return;
+        }
+       // const starttime = String(startdate.getHours()) + ':' + String(startdate.getMinutes());
+       const starttime = String(startdate.getHours()) + ':' + String(startdate.getMinutes()).padStart(2, '0');
+        const enddate = new Date(data.end);
+
+        dd = String(enddate.getDate()).padStart(2, '0');
+        mm = String(enddate.getMonth() + 1).padStart(2, '0'); // January is 0!
+        yyyy = enddate.getFullYear();
+        const enddt = `${mm}-${dd}-${yyyy}`;
+       // const endtime = String(enddate.getHours()) + ':' + String(enddate.getMinutes());
+       const endtime = String(enddate.getHours()) + ':' + String(enddate.getMinutes()).padStart(2, '0');
+        let ampm=enddate.getHours()>=12?"pm":"am";
+        this.timerange=starttime+" - "+endtime +" "+ampm;
+        //this.timerange=starttime+" - "+endtime;
+            // let temp = arg.el.text.split("-")  
+            //     let starttime="";
+            //     let endtime="";
+            //     if(temp.length>1){
+            //         starttime=temp[0];
+            //         endtime=temp[1];
+            //     } 
+                
+                this._officeCalendarService.setCalendar("OfficeCalendar",{"Date":data.resource.extendedProps.date,
+                 "starttime":starttime.trim(),"endtime":endtime.trim(),"calendardId":0
+                })  ;
+        //document.getElementById('modalmarkDelete').style.display = 'block';
+        this.router.navigateByUrl('/office-calendar');
+
+    }
 }

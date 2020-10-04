@@ -41,4 +41,5 @@ export class BookAppointmentService {
   getEncounterData(id: string): Observable<any> {
     return this.http.get(environment.baseUrl + GETENOUNTER + id)
   }
+  
 }

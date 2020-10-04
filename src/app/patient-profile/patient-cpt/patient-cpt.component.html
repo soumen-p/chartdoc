@@ -14,7 +14,7 @@
                                             </h2>
                                         </td>
                                         <td style="text-align: right;">
-                                            <button kendoButton class="btn btn-success btn-corner"
+                                            <button *ngIf="patienthisttory" kendoButton class="btn btn-success btn-corner"
                                                 [disabled]="isPosCheckOut" style="width:120px; font-size: 16px;"
                                                 (click)="saveCptDetails($event)">Save</button>
                                         </td>
@@ -62,7 +62,7 @@
                                     </div>
                                     <div style="height: 620px;overflow-y:scroll;">
                                         <div class="accordion-group"
-                                            *ngFor="let cptdetail of cptDetailss | PatientCPTSearchFilter:{Code: searchTerm, Desc:searchTerm}">
+                                            *ngFor="let cptdetail of pageOfItems | PatientCPTSearchFilter:{code: searchTerm, desc:searchTerm}">
                                             <div class="card">
                                                 <div class="card-header">
                                                     <div class="row">
@@ -88,7 +88,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="card-footer pb-0 pt-3">
+                                            <jw-pagination [items]="cptDetailss" [pageSize]="10" (changePage)="onChangePage($event)"></jw-pagination>
+                                        </div>
+                                    </div>                                   
                                 </div>
                             </div>
                         </div>

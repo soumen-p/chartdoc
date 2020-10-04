@@ -17,8 +17,8 @@ body .fc {
 --------------------------------------------------------------------------------------------------*/
 .fc-highlight {
   /* when user is selecting cells */
-  background: #bce8f1;
-  opacity: 0.3;
+  background: #badbd4;
+  opacity: 1;
 }
 
 .fc-bgevent {
@@ -577,7 +577,7 @@ TODO: more distinction between this file and common.css
 }
 
 .fc-unthemed td.fc-today {
-  background: #fcf8e3;
+  background: #ffffff;
 }
 
 .fc-unthemed .fc-disabled-day {

@@ -19,7 +19,7 @@
                     <div class="float-right">
                         <button type="button" class="btn btn-primary" (click)="save()" style="margin-right: 10px;"
                             >Finish</button>
-                        <button type="button" class="btn" (click)="cancel()">Cancel</button>
+                        <button type="button" class="btn" [routerLink]="['/manage-user']">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -36,8 +36,17 @@
                                 #roleForm="ngForm">
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-4 col-form-label">First Name <span class="text-danger"> *</span></label>
+                                                <div class="col-8">
+                                                    <input type="text" name="fName" class="form-control" if="fName"
+                                                    formControlName="fName" placeholder="Enter your first name">
+                                                    <span class="text-danger" *ngIf="createNewUserFormGroup.hasError('required', ['fName']) 
+                                                    && roleForm.submitted ">
+                                                        First name is required.
+                                                    </span>
+                                                </div>
+                                            <!-- <div class="form-group col-md-12">
                                                 <label class="form-label">Full Name</label>
 
                                                 <input type="text" name="fullname" class="form-control" if="full_name"
@@ -46,37 +55,49 @@
                                                 && roleForm.submitted ">
                                                     Full name is required.
                                                 </span>
-                                            </div>
+                                            </div> -->
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-4 col-form-label">Last Name <span class="text-danger"> *</span></label>
+                                                <div class="col-8">
+                                                    <input type="text" name="lName" class="form-control" if="lName"
+                                                    formControlName="lName" placeholder="Enter your first name">
+                                                    <span class="text-danger" *ngIf="createNewUserFormGroup.hasError('required', ['lName']) 
+                                                    && roleForm.submitted ">
+                                                        Last name is required.
+                                                    </span>
+                                                </div>
+                                           
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-4 col-form-label">Date of Birth: </label>
+                                            <label class="col-4 col-form-label">Date of Birth: <span class="text-danger"> *</span></label>
                                             <div class="col-8">
                                                 <input type="date" class="form-control :" name="dateofbirth"
-                                                    formControlName="dateOfBirth" [value]="userdob1 | date:'yyyy-MM-dd'" data-format="MM/DD/YYYY">
+                                                    formControlName="dateOfBirth" [value]="userdob1 | date:'yyyy-MM-dd'" data-format="MM/DD/YYYY" [min]="minDate" [max]="maxDate">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-4 col-form-label">SSN: </label>
+                                            <label class="col-4 col-form-label">SSN: <span class="text-danger"> *</span></label>
                                             <div class="col-8">
                                                 <input type="text" class="form-control" name="ssn" value="ssn"
-                                                    formControlName="ssn" placeholder="Enter ssn number">
+                                                    formControlName="ssn" (keypress)="numberOnly($event)" (change)="ssnlencheck()" placeholder="Enter ssn number">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-4 col-form-label">Mobile Phone:</label>
+                                            <label class="col-4 col-form-label">Mobile Phone:<span class="text-danger"> *</span></label>
                                             <div class="col-8">
                                                 <input type="tel" class="form-control" name="phone" data-mask="phone"
                                                     placeholder="(xxx)-xxx-xxxx" formControlName="phone"
-                                                    (change)="formatphone()">
+                                                    (change)="validatemobilephone()">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-4 col-form-label">Email Address:</label>
+                                            <label class="col-4 col-form-label">Email Address:<span class="text-danger"> *</span></label>
                                             <div class="col-8">
                                                 <input type="email" class="form-control :" formControlName="email"
                                                     placeholder="email@domain.com" value="abc@abc.com"
-                                                    class="form-control">
+                                                    class="form-control"  (change)="validateEmail()">
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -127,21 +148,21 @@
                                             <div class="col-auto">Role: </div>
                                             <div class="form-check col-auto">
                                                 <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios1" (click)="setradio(1)" value="option1" checked="" [checked]="selectedId==1">
+                                                    id="gridRadios1" (click)="setradio('1')" value="option1" checked="" [checked]="selectedId==1">
                                                 <label class="form-check-label" for="gridRadios1">
                                                     Provider
                                                 </label>
                                             </div>
                                             <div class="form-check col-auto">
                                                 <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios2" (click)="setradio(2)" value="option2" [checked]="selectedId==2">
+                                                    id="gridRadios2" (click)="setradio('2')" value="option2" [checked]="selectedId==2">
                                                 <label class="form-check-label" for="gridRadios2">
                                                     Medical Staff
                                                 </label>
                                             </div>
                                             <div class="form-check col-auto">
                                                 <input class="form-check-input" type="radio" name="gridRadios"
-                                                    id="gridRadios3" (click)="setradio(3)" value="option3" [checked]="selectedId==3">
+                                                    id="gridRadios3" (click)="setradio('3')" value="option3" [checked]="selectedId==3">
                                                 <label class="form-check-label" for="gridRadios3">
                                                     Office Staff
                                                 </label>
@@ -207,8 +228,8 @@
                                             <label class="col-8 col-form-label">{{roleItem.pCcDescription}}:
                                             </label>
                                             <div class="col-4">
-                                                <input type="checkbox" data-toggle="toggle" [value]="roleItem.PId"
-                                                    [checked]="isSelected(roleItem.PId)"
+                                                <input type="checkbox" data-toggle="toggle" [value]="roleItem.pId"
+                                                    [checked]="isSelected(roleItem.pId)"
                                                     data-onstyle="outline-warning" data-offstyle="outline-info"
                                                     (change)="Roles($event)">
                                             </div>

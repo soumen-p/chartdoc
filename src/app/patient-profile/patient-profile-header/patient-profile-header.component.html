@@ -84,9 +84,10 @@
                 <li class="col-sm-3 tile_stats_count">
                     <span class="count_top" style="font-size: 24px;">{{doctorName}}</span>
                     <p>Change Provider</p>
-                    <button type="button" style="font-size: 24px;padding: 0px 42px;" [disabled]="isPosCheckOut"
+                    <button *ngIf="ispatienthisttory" type="button" style="font-size: 24px;padding: 0px 42px;" [disabled]="isPosCheckOut"
                         class="btn btn-warning" (click)="saveObservation()">Finish</button> <br><br>
-                    <button type="button" [disabled]="!isPosCheckOut" (click)="goToCheckOut()" class="btn">Back</button>
+                    <!-- <button type="button" [disabled]="!isPosCheckOut" (click)="goToCheckOut()" class="btn">Back</button> -->
+                    <button  type="button" (click)="goToCheckOut()" class="btn">Back</button>
                 </li>
             </ul>
         </div>
@@ -104,7 +105,7 @@
                             Encounter<br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
                         </a>
                     </li>
-                    <li [ngClass]="{'disabled': !isDoctor}">
+                    <li [ngClass]="{'disabled': !isDoctor}" *ngIf="ispatienthisttory"> 
                         <a href="#prescriptions" data-toggle="tab">
                             Prescriptions<br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
                         </a>
@@ -132,25 +133,25 @@
                 </ul>
                 <div class="tab-content primary" id="myTabContent1">
                     <div class="tab-pane fade active show" id="cc">
-                        <app-patient-chief-complaint></app-patient-chief-complaint>
+                        <app-patient-chief-complaint [patienthisttory]="ispatienthisttory"></app-patient-chief-complaint>
                     </div>
                     <div class="tab-pane fade" id="encounter">
-                        <app-patient-encounter></app-patient-encounter>
+                        <app-patient-encounter [patienthisttory]="ispatienthisttory"> </app-patient-encounter>
                     </div>
                     <div class="tab-pane fade" id="prescriptions">
                         <app-patient-prescriptions></app-patient-prescriptions>
                     </div>
                     <div class="tab-pane fade" id="impression">
-                        <app-patient-impression-plan></app-patient-impression-plan>
+                        <app-patient-impression-plan [patienthisttory]="ispatienthisttory"></app-patient-impression-plan>
                     </div>
                     <div class="tab-pane fade" id="icd">
-                        <app-patient-icd></app-patient-icd>
+                        <app-patient-icd [patienthisttory]="ispatienthisttory"></app-patient-icd>
                     </div>
                     <div class="tab-pane fade" id="cpt">
-                        <app-patient-cpt></app-patient-cpt>
+                        <app-patient-cpt [patienthisttory]="ispatienthisttory"></app-patient-cpt>
                     </div>
                     <div class="tab-pane fade" id="FU">
-                        <app-patient-follow-up></app-patient-follow-up>
+                        <app-patient-follow-up [patienthisttory]="ispatienthisttory"></app-patient-follow-up>
                     </div>
                 </div>
             </div>
@@ -168,7 +169,12 @@
             <div class="tabs berder">
                 <ul class="nav nav-tabs">
                     <li>
-                        <a href="#diagnosis" class="active" data-toggle="tab">
+                        <a href="#vitals" class="active" data-toggle="tab">
+                            Vitals <br> <span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#diagnosis"  data-toggle="tab">
                             Diagnosis <br> <span class="menu-active"><i class="fa fa-caret-down"></i></span>
                         </a>
                     </li>
@@ -202,13 +208,17 @@
                             Insurance Info<br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
                         </a>
                     </li>
+                   
                 </ul>
-                <div class="tab-content primary" id="myTabContent1">
-                    <div class="tab-pane fade show active" id="diagnosis">
-                        <app-patient-diagnosis></app-patient-diagnosis>
+                <div class="tab-content primary" id="myTabContent2">
+                    <div class="tab-pane fade show active"  id="vitals">
+                        <app-patient-vitals-history></app-patient-vitals-history>
+                    </div>
+                    <div class="tab-pane fade" id="diagnosis">
+                        <app-patient-diagnosis [patienthisttory]="ispatienthisttory"></app-patient-diagnosis>
                     </div>
                     <div class="tab-pane fade" id="procedures">
-                        <app-patient-procedures></app-patient-procedures>
+                        <app-patient-procedures [patienthisttory]="ispatienthisttory"></app-patient-procedures>
                     </div>
                     <div class="tab-pane fade" id="allergies">
                         <app-patient-allergies></app-patient-allergies>
@@ -225,6 +235,7 @@
                     <div class="tab-pane fade" id="insuranceInfo">
                         <app-patient-insurance-info></app-patient-insurance-info>
                     </div>
+                    
                 </div> 
             </div>
         </div>
@@ -236,9 +247,10 @@
             <h3 class="selete">Enter New Temperature</h3>
             <div class="row">
                 <div class="col"><input type="text" #txtTemp [(ngModel)]="modelTemprature" class="fontsiz-ct"
-                        (keypress)="tempNumberOnly($event);" (keyup)="validateTemp($event.target.value)" /></div>
+                    (paste)="paste($event)"  (blur)="tempChecking($event)"  maxlength="5"  (keypress)="tempNumberOnly($event);" (keyup)="validateTemp($event.target.value)" />
+                </div>
             </div>
-            <div class="svbutton"> <button type="button" [disabled]="!isModalTempValid" class="btn btn-primary"
+            <div class="svbutton"> <button *ngIf="ispatienthisttory" type="button" [disabled]="!isModalTempValid" class="btn btn-primary"
                     (click)="submitTemp(txtTemp.value)">Save</button></div>
             <h3 class="selete"></h3> <span class="close" (click)="closeTemp('modalTemp')">Cancel</span>
         </div>
@@ -251,14 +263,14 @@
             <h3 class="selete">Enter New Blood Pressure</h3>
             <div class="row offset-sm-3">
                 <div class="col-4  p-sm-0"><input type="text" #txtBP1 maxlength="3" [(ngModel)]="modelBpFirst"
-                        class="fontsiz-rt" (keyup)="validateBp($event.target.value)"
+                        class="fontsiz-rt" (paste)="paste($event)" (keyup)="validateBp($event.target.value)"
                         (keypress)="numberOnly($event); " /></div>
                 <div class="col-1 p-sm-0 fontsiztext" style="text-align: center; "> /</div>
                 <div class="col-4 p-sm-0"><input #txtBP2 type="text" maxlength="3" [(ngModel)]="modelBpLast"
-                        class="fontsiz-lt" (keyup)="validateBp($event.target.value)" (keypress)="numberOnly($event);" />
+                        class="fontsiz-lt"  (paste)="paste($event)"  (keyup)="validateBp($event.target.value)" (keypress)="numberOnly($event);" />
                 </div>
             </div>
-            <div class="svbutton"> <button type="button" [disabled]="!isModalBPValid" class="btn btn-primary"
+            <div class="svbutton"> <button type="button" *ngIf="ispatienthisttory" [disabled]="!isModalBPValid" class="btn btn-primary"
                     (click)="submitBp(txtBP1.value,txtBP2.value)">Save</button></div>
             <h3 class="selete"></h3> <span class="close" (click)="closeBp('modalBP')">Cancel</span>
         </div>
@@ -271,9 +283,9 @@
             <h3 class="selete">Enter New Pulse</h3>
             <div class="row">
                 <div class="col"><input type="text" #txtPulse [(ngModel)]="modelPulse" class="fontsiz-ct"
-                        (keyup)="validatePulse($event.target.value)" (keypress)="numberOnly($event);" /></div>
+                    (paste)="paste($event)"   (keyup)="validatePulse($event.target.value)" (keypress)="numberOnly($event);"  maxlength="3" /></div>
             </div>
-            <div class="svbutton"> <button type="button" [disabled]="!isModalPulseValid" class="btn btn-primary"
+            <div class="svbutton"> <button type="button" *ngIf="ispatienthisttory" [disabled]="!isModalPulseValid" class="btn btn-primary"
                     (click)="submitPulse(txtPulse.value)">Save</button></div>
             <h3 class="selete"></h3> <span class="close" (click)="closePulse('modalPulse')">Cancel</span>
         </div>
@@ -286,17 +298,17 @@
             <h3 class="selete">Enter New Height</h3>
             <div class="row offset-sm-2">
                 <div class="col-3  p-sm-0">
-                    <input type="text" #txtHeight1 maxlength="2" [(ngModel)]="modelHeight1" class="fontsiz-rt"
-                        (keyup)="validateHeight($event.target.value)" (keypress)="heightNumberOnly($event,'H1');" />
+                    <input type="text" #txtHeight1 maxlength="1" [(ngModel)]="modelHeight1" class="fontsiz-rt"
+                    (paste)="paste($event)"   (keyup)="validateHeight($event.target.value)" (keypress)="heightNumberOnly($event,'H1');" />
                 </div>
                 <div class="col-1 p-sm-0 fontsiztext" style="text-align: center; ">&apos;</div>
                 <div class="col-3 p-sm-0" style="text-align: right">
                     <input type="text" #txtHeight2 maxlength="2" [(ngModel)]="modelHeight2" class="fontsiz-ht-lt"
-                        (keyup)="ValidateHeight($event)" (keypress)="heightNumberOnly($event,'H2');" />
+                    (paste)="paste($event)"    (keyup)="ValidateHeight($event)" (keypress)="heightNumberOnly($event,'H2');" />
                     <div class="col-1 p-sm-0 fontsiztext" style="text-align: left; ">&quot;</div>
                 </div>
             </div>
-            <div class="svbutton"> <button type="button" [disabled]="!isModalHeightValid" class="btn btn-primary"
+            <div class="svbutton"> <button type="button" *ngIf="ispatienthisttory" [disabled]="!isModalHeightValid" class="btn btn-primary"
                     (click)="submitHeight(txtHeight1.value,txtHeight2.value)">Save</button></div>
             <h3 class="selete"></h3> <span class="close" (click)="closeHeight('modalHeight')">Cancel</span>
         </div>
@@ -308,9 +320,9 @@
             <h3 class="selete">Enter New Weight</h3>
             <div class="row">
                 <div class="col"><input type="text" #txtWeight [(ngModel)]="modelWeight" class="fontsiz-ct"
-                        (keyup)="validateWeight($event.target.value)" (keypress)="numberOnly($event);" /></div>
+                    (paste)="paste($event)" (blur)="weightChecking($event)"   (keyup)="validateWeight($event.target.value)" (keypress)="numberOnly($event);" maxlength="3"/></div>
             </div>
-            <div class="svbutton"> <button type="button" [disabled]="!isModalWeightValid" class="btn btn-primary"
+            <div class="svbutton"> <button type="button" *ngIf="ispatienthisttory" [disabled]="!isModalWeightValid" class="btn btn-primary"
                     (click)="submitWeight(txtWeight.value)">Save</button></div>
             <h3 class="selete"></h3> <span class="close" (click)="closeWeight('modalWeight')">Cancel</span>
         </div>
@@ -323,9 +335,9 @@
             <h3 class="selete">Enter New Respiratory</h3>
             <div class="row">
                 <div class="col"><input type="text" #txtResp [(ngModel)]="modelRespiratory" class="fontsiz-ct"
-                        (keyup)="validateResp($event.target.value)" (keypress)="numberOnly($event);" /></div>
+                    (paste)="paste($event)"  maxlength="2"  (keyup)="validateResp($event.target.value)" (keypress)="numberOnly($event);" /></div>
             </div>
-            <div class="svbutton"> <button type="button" [disabled]="!isModalRespValid" class="btn btn-primary"
+            <div class="svbutton"> <button type="button" *ngIf="ispatienthisttory" [disabled]="!isModalRespValid" class="btn btn-primary"
                     (click)="submitResp(txtResp.value)">Save</button></div>
             <h3 class="selete"></h3> <span class="close" (click)="closeResp('modalResp')">Cancel</span>
         </div>

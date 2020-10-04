@@ -10,6 +10,7 @@ import { parse } from 'querystring';
 import { AppointmentService } from '../services/appointment.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { AuthenticationService } from '../services/authentication.service';
+import { OthersServiceService } from '../services/others-service.service';
 
 @Component({
   selector: 'app-patient-flow-sheet',
@@ -19,7 +20,9 @@ import { AuthenticationService } from '../services/authentication.service';
 export class PatientFlowSheetComponent implements OnInit {
 
   constructor(private patientFlowSheetService: PatientFlowSheetService, private appointmentService: AppointmentService,
-              private router: Router, public toastr: ToastrManager, private loginService: AuthenticationService) {
+    private router: Router, public toastr: ToastrManager, private loginService: AuthenticationService,
+    private OthersService: OthersServiceService) {
+    this.getRoomNumber();
   }
   @ViewChild(FullCalendarComponent, { static: false }) calendarComponent: any; // the #calendar in the template
   // @ViewChild('external', { static: false }) external: ElementRef;
@@ -36,7 +39,7 @@ export class PatientFlowSheetComponent implements OnInit {
   markStatus: boolean;
   error: boolean;
   currentDate: string;
-
+  roomNumberList: [];
   // tempdata = [];
   calendarPlugins = [timeGrigPlugin, interactionPlugin, resourceTimeGridPlugin];
   patientData: [];
@@ -44,7 +47,7 @@ export class PatientFlowSheetComponent implements OnInit {
   isCurrentDateApp = true;
   clickCount = 0;
   singleClickTimer: any;
-
+  insuranceStatus: boolean;
   getAppointmentDetails(strDate: any, doctorId: string) {
     // alert("start date="+strDate);
     this.patientFlowSheetService.getAppointmentDetail(strDate, doctorId)
@@ -66,8 +69,8 @@ export class PatientFlowSheetComponent implements OnInit {
             tempdata.push({
               resourceId: 1,
               title: element.schduleAppoinment.patientName.trim() +
-              ' (' + element.schduleAppoinment.appointmentFromTime.trim() + '-'
-              + element.schduleAppoinment.appointmentToTime.trim() + ')',
+                ' (' + element.schduleAppoinment.appointmentFromTime.trim() + '-'
+                + element.schduleAppoinment.appointmentToTime.trim() + ')',
               start: strdate1 + 'T' + element.schduleAppoinment.fromTime.trim(),
               end: strdate1 + 'T' + element.schduleAppoinment.toTime.trim(),
               IsReady: element.schduleAppoinment.isReady,
@@ -97,7 +100,7 @@ export class PatientFlowSheetComponent implements OnInit {
             tempdata.push({
               resourceId: 2,
               title: element.waitingArea.patientName.trim() +
-              ' (' + element.waitingArea.appointmentFromTime.trim() + '-' + element.waitingArea.appointmentToTime.trim() + ')',
+                ' (' + element.waitingArea.appointmentFromTime.trim() + '-' + element.waitingArea.appointmentToTime.trim() + ')',
               start: strdate1 + 'T' + element.waitingArea.fromTime,
               end: strdate1 + 'T' + element.waitingArea.toTime,
               appoinmentId: element.waitingArea.appointmentId,
@@ -129,8 +132,8 @@ export class PatientFlowSheetComponent implements OnInit {
             tempdata.push({
               resourceId: 3,
               title: element.consultationRoom.patientName +
-              ' (' + element.consultationRoom.appointmentFromTime.trim() +
-              '-' + element.consultationRoom.appointmentToTime.trim() + ')' + '(Room:' + this.savedRoom + ')',
+                ' (' + element.consultationRoom.appointmentFromTime.trim() +
+                '-' + element.consultationRoom.appointmentToTime.trim() + ')' + '(Room:' + this.savedRoom + ')',
               start: strdate1 + 'T' + element.consultationRoom.fromTime,
               end: strdate1 + 'T' + element.consultationRoom.toTime,
               appoinmentId: element.consultationRoom.appointmentId,
@@ -157,8 +160,8 @@ export class PatientFlowSheetComponent implements OnInit {
             tempdata.push({
               resourceId: 4,
               title: element.checkingOut.patientName +
-              ' (' + element.checkingOut.appointmentFromTime.trim() +
-              '-' + element.checkingOut.appointmentToTime.trim() + ')',
+                ' (' + element.checkingOut.appointmentFromTime.trim() +
+                '-' + element.checkingOut.appointmentToTime.trim() + ')',
               start: strdate1 + 'T' + element.checkingOut.fromTime,
               end: strdate1 + 'T' + element.checkingOut.toTime,
               appoinmentId: element.checkingOut.appointmentId,
@@ -172,13 +175,13 @@ export class PatientFlowSheetComponent implements OnInit {
               gender: element.checkingOut.gender,
               address: element.checkingOut.address,
               serviceId: element.checkingOut.serviceId,
-               note: element.checkingOut.note,
-               reason: element.checkingOut.reason,
-               positionID: element.checkingOut.positionId,
-               reasonID: element.checkingOut.reasonId,
-               appointmentFromTime: strdate1 + 'T' + element.checkingOut.appointmentFromTime,
-               appointmentToTime: strdate1 + 'T' + element.checkingOut.appointmentToTime.trim(),
-               roomNo: element.checkingOut.roomNo,
+              note: element.checkingOut.note,
+              reason: element.checkingOut.reason,
+              positionID: element.checkingOut.positionId,
+              reasonID: element.checkingOut.reasonId,
+              appointmentFromTime: strdate1 + 'T' + element.checkingOut.appointmentFromTime,
+              appointmentToTime: strdate1 + 'T' + element.checkingOut.appointmentToTime.trim(),
+              roomNo: element.checkingOut.roomNo,
               imageUrl: element.checkingOut.filepath
             });
           }
@@ -233,13 +236,13 @@ export class PatientFlowSheetComponent implements OnInit {
     // tslint:disable-next-line: radix
     if (parseInt(arg.newResource._resource.id) === 1) {
       this.flowArea = 'Appointment';
-    // tslint:disable-next-line: radix
+      // tslint:disable-next-line: radix
     } else if (parseInt(arg.newResource._resource.id) === 2) {
       this.flowArea = 'Waiting';
-    // tslint:disable-next-line: radix
+      // tslint:disable-next-line: radix
     } else if (parseInt(arg.newResource._resource.id) === 3) {
       this.flowArea = 'Encounter';
-    // tslint:disable-next-line: radix
+      // tslint:disable-next-line: radix
     } else if (parseInt(arg.newResource._resource.id) === 4) {
       this.flowArea = 'Finish';
 
@@ -276,7 +279,7 @@ export class PatientFlowSheetComponent implements OnInit {
         } else {
           arg.revert();
         }
-      // tslint:disable-next-line: radix
+        // tslint:disable-next-line: radix
       } else if (parseInt(arg.newResource._resource.id) === 3) {
         this.roomNumber = arg.oldEvent._def.extendedProps.roomNo;
         this.openRoomDialog('modaladdRoom');
@@ -295,12 +298,25 @@ export class PatientFlowSheetComponent implements OnInit {
     if (this.clickCount === 1) {
       if (this.isCurrentDateApp) {
         const HeaderId = arg.event.extendedProps.HeaderId;
+        const patientId = arg.event.extendedProps.patientID;
         // tslint:disable-next-line: only-arrow-functions
-        this.singleClickTimer = setTimeout(function() {
+        this.singleClickTimer = setTimeout(function () {
           console.log('single click');
           if (HeaderId === 1) {
-            self.markStatus = arg.event.extendedProps.IsReady === 'True' ? true : false;
-            self.openMarkIn('modalmarkInPatient');
+            self.patientFlowSheetService.getInsuranceStatus(patientId).subscribe((res) => {
+              if (res == '1') {
+                self.insuranceStatus = false;
+              }
+              else {
+                self.insuranceStatus = true;
+              }
+              self.markStatus = arg.event.extendedProps.IsReady === 'True' ? true : false;
+              self.openMarkIn('modalmarkInPatient');
+
+            }, err => {
+              console.log('something went wrong please try again');
+            })
+
           }
           if (HeaderId === 4) {
             // self.markStatus = arg.event.extendedProps.IsReady === "True" ? true : false;
@@ -314,7 +330,7 @@ export class PatientFlowSheetComponent implements OnInit {
       } else {
         // this.toastr.warningToastr("MarkIn Patielnts allowed for Current date only.");
         // tslint:disable-next-line: only-arrow-functions
-        this.singleClickTimer = setTimeout(function() {
+        this.singleClickTimer = setTimeout(function () {
           self.clickCount = 0;
         }, 400);
       }
@@ -348,9 +364,9 @@ export class PatientFlowSheetComponent implements OnInit {
         'startdate': strdate, 'enddate': enddt,
         'starttime': starttime,
         'endtime': endtime,
-        'patientname': patientName,
+        'patientname': (arg.event.extendedProps != undefined) ? arg.event.extendedProps.patientName : '',
         'patientId': (arg.event.extendedProps !== undefined) ? arg.event.extendedProps.patientID : '',
-        'appointmentid': this.appoinmentId, 
+        'appointmentid': this.appoinmentId,
         'email': (arg.event.extendedProps !== undefined) ? arg.event.extendedProps.email : '',
         'phone': (arg.event.extendedProps.phone !== undefined) ? arg.event.extendedProps.phone : '',
         'dateOfBirth': (arg.event.extendedProps.dateOfBirth !== undefined) ? arg.event.extendedProps.dateOfBirth : '',
@@ -409,8 +425,13 @@ export class PatientFlowSheetComponent implements OnInit {
     if (myModal === 'modaladdRoom' && (roomNo || roomNo === '')) {
       if (this.savedRoom !== roomNo && roomNo === 'undefined') {
         roomNo = this.savedRoom;
+        this.updatePatientDetail(roomNo);
       }
-      this.updatePatientDetail(roomNo);
+      else {
+        document.getElementById(myModal).style.display = 'none';
+      }
+
+
     } else {
       document.getElementById(myModal).style.display = 'none';
       this.getAppointmentDetails(this.currentDate, this.doctorId);
@@ -441,10 +462,15 @@ export class PatientFlowSheetComponent implements OnInit {
   }
   public submitRoom(roomNo: string) {
     // this.SavedRoom=roomNo;
-    this.flowArea = 'Encounter';
-    this.appointmentService.setBookingInfo('SavedRoom' + this.appoinmentId, roomNo);
+    if (roomNo != '') {
+      this.flowArea = 'Encounter';
+      this.appointmentService.setBookingInfo('SavedRoom' + this.appoinmentId, roomNo);
 
-    this.updatePatientDetail(roomNo);
+      this.updatePatientDetail(roomNo);
+    }
+    else {
+      this.toastr.errorToastr("Please select Room Number", "Error");
+    }
   }
   numberOnly(event): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
@@ -452,6 +478,14 @@ export class PatientFlowSheetComponent implements OnInit {
       return false;
     }
     return true;
+  }
+  getRoomNumber() {
+    this.OthersService.getOthers('10')
+      .subscribe((res) => {
+        this.roomNumberList = res;
+      }, error => {
+        console.log('something went Wrong');
+      });
   }
   public openRoomDialog(myModel: string) {
     this.error = false;

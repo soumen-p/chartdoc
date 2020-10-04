@@ -31,10 +31,20 @@ import { ReasonModule } from './master/reason/reason.module';
 import { GeneralModule} from './master/general/general.module';
 import { ChargeModule } from './master/charge/charge.module';
 import { ChargeDateModule } from './master/charge-date/charge-date.module';
+import { SearchBillingInfoModule } from './billing/search-billing-info/search-billing-info.module';
+import { ClaimFieldMasterModule } from './master/claim-master/claim-field-master.module';
 
+import {CreateBillModule} from './billing/create-bill/create-bill.module'
+import  {EobModule} from './billing/eob/eob.module';
+import {SubmitClaimModule} from './billing/submit-claim/submit-claim.module'
+import {PaymentModule} from './billing/payment/payment.module'
+import {AddPaymentModule} from './billing/add-payment/add-payment.module'
+
+import { SpecialtyModule } from './master/specialty/specialty.module';
+import {  RoleModule} from './master/role/role.module';
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
     // ClaimFieldMasterComponent,
     // AddClaimFieldMasterComponent
   ],
@@ -68,7 +78,16 @@ import { ChargeDateModule } from './master/charge-date/charge-date.module';
     GeneralModule,
     ChargeModule,
     ChargeDateModule,
-    
+    PaymentModule,
+    ClaimFieldMasterModule,
+    SearchBillingInfoModule,
+    CreateBillModule,
+    EobModule,
+    SubmitClaimModule,
+    PaymentModule,
+    AddPaymentModule,
+    SpecialtyModule,
+    RoleModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
     ToastrModule.forRoot()

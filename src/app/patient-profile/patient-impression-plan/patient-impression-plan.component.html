@@ -10,7 +10,7 @@
                             </h2>
                         </td>
                         <td align="right">
-                            <button kendoButton class="btn btn-success btn-corner" (click)="saveImpressionPlan()"
+                            <button kendoButton *ngIf="patienthisttory" class="btn btn-success btn-corner" (click)="saveImpressionPlan()"
                                 [disabled]="isPosCheckout" style="width:120px; font-size: 16px;">Save</button>
                         </td>
                     </tr>

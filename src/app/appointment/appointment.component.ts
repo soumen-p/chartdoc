@@ -20,11 +20,11 @@ import { preserveWhitespacesDefault } from '@angular/compiler';
 })
 export class AppointmentComponent implements OnInit {
     constructor(private router: Router,
-                private loginService: AuthenticationService,
-                private formBuilder: FormBuilder,
-                private avRoute: ActivatedRoute,
-                private appointmentService: AppointmentService,
-                private config: NgbDatepickerConfig) {
+        private loginService: AuthenticationService,
+        private formBuilder: FormBuilder,
+        private avRoute: ActivatedRoute,
+        private appointmentService: AppointmentService,
+        private config: NgbDatepickerConfig) {
         const current = new Date();
         this.minDate = {
             year: current.getFullYear(),
@@ -39,6 +39,7 @@ export class AppointmentComponent implements OnInit {
         this.getDoctorList(strdate);
         this.defaultDate = yyyy + '-' + mm + '-' + dd;
     }
+    selectable: boolean = true;
     isNew: boolean;
     nextListener: any;
     prevListener: any;
@@ -65,6 +66,7 @@ export class AppointmentComponent implements OnInit {
     // tslint:disable-next-line: use-lifecycle-interface
     ngAfterViewInit() {
         console.log(this.external.nativeElement.innerHTML);
+        // this.calendarComponent.element.nativeElement.getElementsByClassName('fc-highlight')[0].style.background="red";
         // tslint:disable-next-line: no-unused-expression
         new Draggable(this.external.nativeElement, {
             itemSelector: '.fc-event',
@@ -89,8 +91,10 @@ export class AppointmentComponent implements OnInit {
         // tslint:disable-next-line: no-string-literal
         if (this.avRoute.snapshot.queryParams['id']) {
             const lastdate = this.appointmentService.getBookingInfo('lastdate');
-            this.defaultDate = lastdate.substring(6, 10) + '-' + lastdate.substring(0, 2) + '-' + lastdate.substring(3, 5);
-            strdate = lastdate.substring(0, 2) + '' + lastdate.substring(3, 5) + '' + lastdate.substring(6, 10);
+           // this.defaultDate = lastdate.substring(6, 10) + '-' + lastdate.substring(0, 2) + '-' + lastdate.substring(3, 5);
+           this.defaultDate = lastdate.substring(0, 4) + '-' + lastdate.substring(5,7) + '-' + lastdate.substring(8, 10);
+            //strdate = lastdate.substring(0, 2) + '' + lastdate.substring(3, 5) + '' + lastdate.substring(6, 10);
+            strdate = lastdate.substring(5,7) + '' + lastdate.substring(8, 10) + '' + lastdate.substring(0, 4);
         }
         this.getAppointment(strdate);
     }
@@ -103,7 +107,7 @@ export class AppointmentComponent implements OnInit {
         const self = this;
         if (this.clickCount === 1) {
             // tslint:disable-next-line: only-arrow-functions
-            this.singleClickTimer = setTimeout(function() {
+            this.singleClickTimer = setTimeout(function () {
                 console.log('single click');
                 self.clickCount = 0;
             }, 400);
@@ -148,27 +152,27 @@ export class AppointmentComponent implements OnInit {
                 const patientDetail = this.calendarEvents.filter(x => x.appointmentId === appointmentId && x.patientName === patientName)[0];
                 // if(patientDetail != null && patientDetail != undefined){
                 this.appointmentService.setBookingInfo('doctorBookingInfo', {
-                        doctorid,
-                        doctorname, startdate: strdate, enddate: enddt,
-                        starttime,
-                        endtime, patientname: patientName,
-                        patientId: (patientDetail != undefined || patientDetail != null) ? patientDetail.patientID : '',
-                        appointmentid: appointmentId,
-                        email: (patientDetail != undefined || patientDetail != null) ? patientDetail.email : '',
-                        phone: (patientDetail != undefined || patientDetail != null) ? patientDetail.phone : '',
-                        dateOfBirth: (patientDetail != undefined || patientDetail != null) ? patientDetail.dateOfBirth : '',
-                        gender: (patientDetail != undefined || patientDetail != null) ? patientDetail.gender : '',
-                        address: (patientDetail != undefined || patientDetail != null) ? patientDetail.address : '',
-                        serviceID: ((patientDetail != undefined || patientDetail != null)
+                    doctorid,
+                    doctorname, startdate: strdate, enddate: enddt,
+                    starttime,
+                    endtime, patientname: patientName,
+                    patientId: (patientDetail != undefined || patientDetail != null) ? patientDetail.patientID : '',
+                    appointmentid: appointmentId,
+                    email: (patientDetail != undefined || patientDetail != null) ? patientDetail.email : '',
+                    phone: (patientDetail != undefined || patientDetail != null) ? patientDetail.phone : '',
+                    dateOfBirth: (patientDetail != undefined || patientDetail != null) ? patientDetail.dateOfBirth : '',
+                    gender: (patientDetail != undefined || patientDetail != null) ? patientDetail.gender : '',
+                    address: (patientDetail != undefined || patientDetail != null) ? patientDetail.address : '',
+                    serviceID: ((patientDetail != undefined || patientDetail != null)
                         && patientDetail.serviceID != '') ? patientDetail.serviceID : '',
-                        positionID: ((patientDetail != undefined || patientDetail != null)
+                    positionID: ((patientDetail != undefined || patientDetail != null)
                         && patientDetail.positionID != '') ? patientDetail.positionID : '0',
-                        reasonID: ((patientDetail != undefined || patientDetail != null)
+                    reasonID: ((patientDetail != undefined || patientDetail != null)
                         && patientDetail.reasonID != '') ? patientDetail.reasonID : '0',
-                        reasonCode: '0',
-                        note: (patientDetail != undefined || patientDetail != null) ? patientDetail.note : '',
-                       imageUrl: (patientDetail != undefined || patientDetail != null) ? patientDetail.imageUrl : '',
-                    });
+                    reasonCode: '0',
+                    note: (patientDetail != undefined || patientDetail != null) ? patientDetail.note : '',
+                    imageUrl: (patientDetail != undefined || patientDetail != null) ? patientDetail.imageUrl : '',
+                });
                 this.router.navigateByUrl('/book-appointment');
             }
         }
@@ -181,7 +185,8 @@ export class AppointmentComponent implements OnInit {
         console.log(arg);
     }
     datechange(arg: any) {
-        this.external.nativeElement.style = 'display: visible;';
+        this.selectable = true;
+        // this.external.nativeElement.style = 'display: visible;';
         const strdate = String(arg.month).padStart(2, '0') + '' + String(arg.day).padStart(2, '0') + '' + arg.year;
         this.defaultDate = arg.year + '-' + String(arg.month).padStart(2, '0') + '-' + String(arg.day).padStart(2, '0');
         this.calendarComponent.calendar.gotoDate(this.defaultDate);
@@ -195,6 +200,8 @@ export class AppointmentComponent implements OnInit {
                 res.forEach(element => {
                     tempdata.push({ id: element.id, title: element.name });
                 });
+                var doctorInfo= this.appointmentService.getBookingInfo("doctorInfo");
+                //this.calendarreSources = tempdata.filter((x:any)=>x.id==doctorInfo.doctorId);
                 this.calendarreSources = tempdata;
             },
                 err => {
@@ -216,7 +223,7 @@ export class AppointmentComponent implements OnInit {
                 res.forEach((element: any) => {
                     if (element.schduleAppoinment.doctorId != '') {
                         const AppointmentId = String(element.schduleAppoinment.appointmentId) != '0' ? '/' +
-                        String(element.schduleAppoinment.appointmentId) : '';
+                            String(element.schduleAppoinment.appointmentId) : '';
                         tempdata.push({
                             resourceId: element.schduleAppoinment.doctorId,
                             title: element.schduleAppoinment.patientName + AppointmentId,
@@ -237,16 +244,16 @@ export class AppointmentComponent implements OnInit {
                             color: element.schduleAppoinment.colorCode.trim(),
                             imageUrl: element.schduleAppoinment.filePath,
                             editable:
-                                (element.schduleAppoinment.colorCode.trim() === '#ffc4c4'
+                                (element.schduleAppoinment.colorCode.trim() === '#ffc4c4' // holiday
                                     || element.schduleAppoinment.colorCode.trim() === '#ffffd8'
-                                    || element.schduleAppoinment.colorCode.trim() === '#d8d8ff')
+                                    || element.schduleAppoinment.colorCode.trim() === '#d8d8ff') //'Double Booking'
                                     ? false : true,
                             resourceEditable: (element.schduleAppoinment.colorCode.trim() === '#ffc4c4'
                                 || element.schduleAppoinment.colorCode.trim() === '#ffffd8'
-                                || element.schduleAppoinment.colorCode.trim() === '#d8d8ff')
+                                || element.schduleAppoinment.colorCode.trim() === '#d8d8ff') //'Double Booking'
                                 ? false : true,
                             overlap:
-                                (element.schduleAppoinment.colorCode.trim() === '#ffc4c4'
+                                (element.schduleAppoinment.colorCode.trim() === '#ffc4c4' // holiday
                                     || element.schduleAppoinment.colorCode.trim() === '#ffffd8')
                                     ? false : true,
                         });
@@ -259,6 +266,7 @@ export class AppointmentComponent implements OnInit {
                 });
     }
     bindEvents() {
+        //this.selectable=true;
         const prevButton = this.calendarComponent.element.nativeElement.getElementsByClassName('fc-prev-button');
         const nextButton = this.calendarComponent.element.nativeElement.getElementsByClassName('fc-next-button');
         const todayButton = this.calendarComponent.element.nativeElement.getElementsByClassName('fc-today-button');
@@ -277,11 +285,13 @@ export class AppointmentComponent implements OnInit {
             const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
             const yyyy = today.getFullYear();
             const strdate1 = `${mm}${dd}${yyyy}`;
-            if (Number(strdate) < Number(strdate1)) {
-                this.external.nativeElement.style = 'display: none;';
-            } else {
-                this.external.nativeElement.style = 'display: visible;';
-            }
+            // if (Number(strdate) < Number(strdate1)) {
+            //     this.selectable=false;
+            //     //this.external.nativeElement.style = 'display: none;';
+            // } else {
+            //    // this.external.nativeElement.style = 'display: visible;';
+            //    this.selectable=true;
+            // }
         });
         prevButton[0].addEventListener('click', () => {
             const calendarApi = this.calendarComponent.getApi();
@@ -298,10 +308,12 @@ export class AppointmentComponent implements OnInit {
             const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
             const yyyy = today.getFullYear();
             const strdate1 = `${mm}${dd}${yyyy}`;
-            this.external.nativeElement.style = 'display: visible;';
-            if (Number(strdate) < Number(strdate1)) {
-                this.external.nativeElement.style = 'display: none;';
-            }
+            this.selectable = true;
+            // this.external.nativeElement.style = 'display: visible;';
+            // if (Number(strdate) < Number(strdate1)) {
+            //    // this.external.nativeElement.style = 'display: none;';
+            //    this.selectable=false;
+            // }
         });
 
         todayButton[0].addEventListener('click', () => {
@@ -314,9 +326,100 @@ export class AppointmentComponent implements OnInit {
             this.getDoctorList(strdate);
             this.getAppointment(strdate);
             console.log('todayClick');
-            this.external.nativeElement.style = 'display: visible;';
+            // this.selectable=true;
+            // this.external.nativeElement.style = 'display: visible;';
         });
     }
 
+    public closePopup(myModal: string) {
+        document.getElementById(myModal).style.display = 'none';
+    }
+    timerange:string="";
+    select(data: any) {
+        let calendarApi = this.calendarComponent.getApi();
+        let checkEvents = calendarApi.getEvents();
+        let overlap=0;
+        // Overlap Checking for specefic color code
+        checkEvents.forEach(function(event){
+            // If it's not a background element, check whether the new element contains the existing, or vice versa.
+            if(event.rendering !== "inverse-background" && 
+                    (
+                        (event.start >= data.start && event.start <= data.end) ||
+                        (event.end >= data.start && event.end <= data.end) ||
+                        (data.start >= event.start && data.start <= event.end) ||
+                        (data.end >= event.start && data.end <= event.end)
+                    )
+                    &&
+                    (event.backgroundColor.trim() === '#ffc4c4' // // holiday
+                    || event.backgroundColor.trim() === '#ffffd8')
+                ){
+                    // It is an overlapping event, so we reject it.
+                    overlap++;
+                     calendarApi.unselect();
+                     return; 
+                    
+                }
+        });
+        if(overlap>0){
+            return;
+        }
+        //overlap
+        const doctorid = data.resource.id;
+        const doctorname = data.resource.title.trim();
+        const startdate = new Date(data.start);
+        let dd = String(startdate.getDate()).padStart(2, '0');
+        let mm = String(startdate.getMonth() + 1).padStart(2, '0'); // January is 0!
+        let yyyy = startdate.getFullYear();
+        const strdate = `${mm}/${dd}/${yyyy}`;
+        const checkstrdate = `${mm}${dd}${yyyy}`;
+        const today = new Date();
+        const dd1 = String(today.getDate()).padStart(2, '0');
+        const mm1 = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        const yyyy1 = today.getFullYear();
+        const strdate1 = `${mm1}${dd1}${yyyy1}`;
 
+        const starttime = String(startdate.getHours()) + ':' + String(startdate.getMinutes()).padStart(2, '0');
+        
+        const enddate = new Date(data.end);
+
+        dd = String(enddate.getDate()).padStart(2, '0');
+        mm = String(enddate.getMonth() + 1).padStart(2, '0'); // January is 0!
+        yyyy = enddate.getFullYear();
+        if (Number(checkstrdate) < Number(strdate1)) {
+            return;
+        }
+        const enddt = `${mm}${dd}${yyyy}`;
+        const endtime = String(enddate.getHours()) + ':' + String(enddate.getMinutes()).padStart(2, '0');
+        let ampm=enddate.getHours()>=12?"pm":"am";
+        this.timerange=starttime+" - "+endtime +" "+ampm;
+        let appointmentId = '0';
+        let patientName = '';
+        this.appointmentService.setBookingInfo('doctorBookingInfo', {
+            doctorid,
+            doctorname, startdate: strdate, enddate: enddt,
+            starttime,
+            endtime, patientname: patientName,
+            patientId: '',
+            appointmentid: appointmentId,
+            email: '',
+            phone: '',
+            dateOfBirth: '',
+            gender: '',
+            address: '',
+            serviceID: '',
+            positionID: '0',
+            reasonID: '0',
+            reasonCode: '0',
+            note: '',
+            imageUrl: '',
+        });
+        this.router.navigateByUrl('/book-appointment');
+       // document.getElementById('modalmarkDelete').style.display = 'block';
+
+    }
+    public openModal(myModal: string, value: any) {
+
+        document.getElementById(myModal).style.display = 'block';
+        this.router.navigateByUrl('/book-appointment');
+    }
 }

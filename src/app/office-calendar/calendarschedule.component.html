@@ -14,7 +14,7 @@
                 <div class="page-title">
                     <div class="float-left">
                         <!-- PAGE HEADING TAG - START -->
-                        <h1 class="title">OFFICE CALENDAR</h1>
+                        <h1 class="title">Office Calendar</h1>
                         <!-- PAGE HEADING TAG - END -->   
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                           
                           
                                               </div>
-                                              <div #external id="external-events">
+                                              <div #external id="external-events" style="display: none;"> 
                                                   <div id="external-events-list">
                                                     <div class="fc-event">&nbsp;Drag and Drop to office calendar</div>
                                                   </div>
@@ -54,13 +54,14 @@
                                                 <div class="form-group">
                                                     <table style="padding: 1px; border-spacing: 6px; border-collapse: separate; border:0;">
                                                         <tr>
-                                                            <td width="10" bgcolor="#ffffd8"></td>
+                                                            <td width="15" bgcolor="#ffc4c4"></td>
                                                             <td>Regular</td>
                                                         </tr>
                                                         <tr>
-                                                            <td width="15" bgcolor="#ffc4c4"></td>
+                                                            <td width="15" bgcolor="#d8d8ff"></td>
                                                             <td>Double Booking</td>
                                                         </tr>
+                                                        
                                                     </table>
                                                 </div>
                                               
@@ -96,7 +97,8 @@
                                       (eventDrop)="eventDrop($event)"
                                       
                                       (drop)="drop($event)"
-                                      
+                                      [selectable]="selectable"
+                                      (select) ="select($event)"
                                     ></full-calendar>
                                   </div>
                                </div>												
@@ -114,3 +116,20 @@
         </section>
     </section>
 
+
+    <div class="example-wrapper">
+        <div id="modalmarkDelete" class="modal">
+            <div class="modal-content1">
+               
+                <h4 class="textcolor">Scheduling an calendar between</h4>
+       
+                <h4 class="textcolor"> {{timerange}} ?</h4>
+                <div class="row">
+                    <div class="svbutton"> 
+                        <button type="button" class="btn btn-primary" (click)="openModal('modalmarkDelete','')">Yes</button> &nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-primary " type="button" (click)="closePopup('modalmarkDelete')">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

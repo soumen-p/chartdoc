@@ -5,6 +5,7 @@ import { ShellModule } from '../../shell/shell.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ManageUserComponent } from './manage-user.component';
 import { ManageUserRoutingModule } from './manage-user.routing.module';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 
@@ -16,7 +17,8 @@ import { ManageUserRoutingModule } from './manage-user.routing.module';
     ManageUserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    CoreModule
   ],
  
   exports: [ManageUserComponent]

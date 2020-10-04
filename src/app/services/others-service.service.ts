@@ -32,4 +32,13 @@ export class OthersServiceService {
   public deleteOther(sOthers: any): Observable<any> {
     return this.http.post(environment.baseUrl + DELETEOTHERSDETAILS, sOthers, { responseType: 'text' })
   }
+  obj:any
+  setOtherbyid(value:any){
+    this.obj=value;
+
+  }
+  getOtherbyid(){
+    return this.obj
+
+  }
 }

@@ -1,0 +1,122 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+<section id="main-content" class="sidebar_shift">
+    <section class="wrapper main-wrapper row">
+
+        <div class='col-12'>
+            <div class="page-title">
+
+                <div class="float-left">
+                    <!-- PAGE HEADING TAG - START -->
+                    <h1 class="title">{{this.mainTitle}}</h1><!-- PAGE HEADING TAG - END -->
+                </div>
+
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- MAIN CONTENT AREA STARTS -->
+
+        <div class="col-xl-12">
+            <section class="box ">
+                <header class="panel_header">
+                    <h2 class="title float-left">{{this.subTitle}}</h2>
+
+                </header>
+                <div class="content-body">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 col-xl-12">
+                                    <form  [formGroup]="billingFormGroup" name="searchBilling">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-2">
+                                                <label for="inputPassword4"><strong>From Date</strong></label>
+                                                <input type="date" class="form-control" formControlName="fromDate">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="inputPassword4"><strong>To Date</strong></label>
+                                                <input type="date" class="form-control" formControlName="toDate">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label class="form-label">Patient</label>
+                                                <input class="form-control" name="patient" type="text"
+                                                    placeholder="Jone"  formControlName="patientName">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label class="form-label">Fee Ticket</label>
+                                                <input class="form-control" name="feeticket" type="text"
+                                                    placeholder="Fee Ticket"  formControlName="feeTicket">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="inputPassword4">Provider </label>
+                                                <select class="form-control" (change)="changeProvider($event)" formControlName="providerName">
+                                                    <option value="">----Select----</option>
+                                                    <option *ngFor="let user of userList" value="{{user.id}}">
+                                                        {{user.doctorName}} </option>
+                                                    
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-1">
+                                                <label for="inputPassword4">&nbsp;</label>
+                                                <button type="button" class="btn btn-success btn-icon bottom15 right15"
+                                                    (click)="searchBill()"><i class="fa fa-search"></i> &nbsp;
+                                                    <span>Search</span></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-12 col-lg-12 col-xl-12">
+                                    <table class="table table-striped dt-responsive display" cellspacing="0"
+                                        width="100%">
+                                        <thead style="background: #678680;">
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Patient Name</th>
+                                                <th>Fee Ticket No</th>
+                                                <th>Appointment ID</th>
+                                                <th>Claim Balance</th>
+                                                <th>Patient Balance</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let searchItem of searchBillingResponse">
+                                            <tr>
+                                                <td>{{searchItem.date}}</td>
+                                                <td>{{searchItem.patientName}}</td>
+                                                <td>{{searchItem.feeTicketNo}}</td>
+                                                <td>{{searchItem.appointmentId}}</td>
+                                                <td>{{searchItem.claimBalance}}</td>
+                                                <td>{{searchItem.patientBalance}}</td>
+                                                <td>{{searchItem.status}}</td>
+                                                <td>
+                                                   
+<button type="button" class="btn btn-success"(click)='editSearchResult(searchItem)'><i
+    class="fa fa fa-pencil text-white"></i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- MAIN CONTENT AREA ENDS -->
+    </section>
+</section>

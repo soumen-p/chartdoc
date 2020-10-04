@@ -1,7 +1,6 @@
 import { HttpHandler, HttpRequest, HttpInterceptor, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import * as Sentry from '@sentry/browser';
 
 export class HttpIntercept implements HttpInterceptor{
     intercept(
@@ -11,10 +10,10 @@ export class HttpIntercept implements HttpInterceptor{
         return next.handle(request).pipe(
             catchError((error: HttpErrorResponse) => {
                 if(error instanceof HttpErrorResponse){
-                    Sentry.captureException(error);
+                    // Sentry.captureException(error);
                     return throwError(error)
                 } else{
-                    Sentry.captureException(error);
+                    // Sentry.captureException(error);
                     return throwError(error);
                 }
             })

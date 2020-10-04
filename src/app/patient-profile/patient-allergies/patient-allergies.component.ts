@@ -21,6 +21,7 @@ export class PatientAllergiesComponent implements OnInit {
   resource: any;
   patientId: string;
   flag: string;
+  pageOfItems: Array<any>;
   constructor(private allergies: PatientAllergiesService) { }
   ngOnInit() {
     this.patientInfo = this.allergies.getPatientDetails('patientInfo');
@@ -56,6 +57,10 @@ export class PatientAllergiesComponent implements OnInit {
         this.allergy.push({ allergiesDesc: element.allergiesDesc });
       });
     }
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }
 

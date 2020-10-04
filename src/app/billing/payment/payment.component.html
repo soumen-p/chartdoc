@@ -1,0 +1,78 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+       
+           <!-- START CONTENT -->
+           <section id="main-content" class="sidebar_shift">
+            <section class="wrapper main-wrapper row">
+
+                <div class='col-12'>
+                    <div class="page-title">
+
+                        <div class="float-left">
+                            <!-- PAGE HEADING TAG - START -->
+                            <h1 class="title">Master</h1><!-- PAGE HEADING TAG - END -->                            </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <!-- MAIN CONTENT AREA STARTS -->
+
+                <div class="col-xl-12">
+                    <section class="box ">
+                        <header class="panel_header">
+                            <h2 class="title float-left">Payment</h2>
+                            <h2 class="title float-right h5 pr-2">
+                            <button type="button" class="btn btn-success btn-corner" 
+                            (click)='addPayment()'>
+                            <span class="h5">Add</span></button></h2>
+                        </header>
+                        <div class="content-body">
+                             <div class="row">
+                                <div class="col-12">
+
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12 col-xl-12">
+                                            <table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+                                        <thead style="background: #678680;">
+                                            <tr>
+                                                <th>Patient Name </th>
+                                                <th>Date</th>
+                                                <th>Payment Type </th>
+                                                <th>Amount</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody *ngFor="let payment of paymentList">
+                                            <tr>
+                                                <td>{{payment.patientName}}</td>
+                                                <td>{{payment.paymentDate | date:'dd-MM-yyyy'}}</td>
+                                                <td>{{payment.typeOfTxnName}}</td>
+                                                <td>{{payment.amount}}</td>
+                                                <td>
+                                                <button type="button" class="btn btn-success" (click)='editPayment(payment)'><i class="fa fa fa-pencil text-white"></i></button>
+                                                 <button type="button" class="btn btn-danger" (click)='deletePayment(payment)'><i class="fa fa-trash-o text-white"></i></button>
+                                            </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section></div>
+
+
+                <!-- MAIN CONTENT AREA ENDS -->
+            </section>
+        </section>
+        <!-- END CONTENT -->

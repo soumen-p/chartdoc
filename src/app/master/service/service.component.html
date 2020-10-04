@@ -44,10 +44,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let serviceItem of service">
+                                                <tr *ngFor="let serviceItem of pageOfItems">
                                                     <td>{{serviceItem.serviceId}}</td>
                                                     <td>{{serviceItem.serviceName}}</td>
                                                     <td>
+                                                        <button type="button" class="btn btn-success" (click)="editService(serviceItem)">
+                                                            <i class="fa fa fa-pencil text-white"></i></button>
+                                                            &nbsp;
                                                         <button type="button" class="btn btn-primary youtube" (click)="deleteService(serviceItem)">
                                                             <i class="fa fa-trash-o text-white"></i>
                                                         </button>
@@ -56,6 +59,9 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                </div>
+                                <div class="card-footer pb-0 pt-3">
+                                    <jw-pagination [items]="service" (changePage)="onChangePage($event)"></jw-pagination>
                                 </div>
                             </div>
                         </div>

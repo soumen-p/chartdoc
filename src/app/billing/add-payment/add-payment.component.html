@@ -1,0 +1,244 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+<!-- START CONTENT -->
+<section id="main-content" class="sidebar_shift">
+<section class="wrapper main-wrapper row">
+    <div class='col-12'>
+        <div class="page-title">
+            <div class="float-left">
+                <!-- PAGE HEADING TAG - START -->
+                <h1 class="title">Bill Desk</h1>
+                <!-- PAGE HEADING TAG - END -->   
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- MAIN CONTENT AREA STARTS -->
+
+    <div class="col-xl-12">
+        <form [formGroup]="addPaymentForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+        <section class="box ">
+            <header class="panel_header">
+                <div class="row">
+                    <div class="col-9"><h2 class="title float-left">Payment</h2></div>
+                        <div class="col-3" style="padding-top: 25px;">
+                            <button type="button" class="btn btn-primary" (click)="searchPatient()">Search Patient</button>
+                            <button type="submit" class="btn btn-primary ">Finish</button>
+                            <button type="button"  class="btn" (click)="cancel()">Cancel</button>
+                        </div>
+                </div>                               
+            </header>
+            <div class="content-body">
+                    <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-xl-12">
+                               
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label class="form-label">Patient</label>
+                                        <input class="form-control" disabled formControlName="patientName" placeholder="Patient Name" name="patientName" type="text">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label class="form-label">Address</label>
+                                        <input class="form-control" disabled formControlName="address" placeholder="Address" name="address" type="text">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label class="form-label">Mobile</label>
+                                        <input class="form-control" disabled placeholder="mobile" formControlName="mobile" name="mobile" type="text">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label class="form-label">Email</label>
+                                        <input class="form-control" disabled placeholder="Email" formControlName="email" name="email" type="text">
+                                    </div>                                     
+                                </div> 
+                                <div class="form-row">
+                                    <div class="form-group col-md-5">                                                   	 
+                                        <label class="radio-inline">
+                                            <input type="radio" name="payment" (click)="setTransactionInfo(1)"  formControlName="payment" value="payment" id="ra-payment" [(ngModel)]="options">
+                                            Payment
+                                        </label>                                                    	  
+                                        <label class="radio-inline">
+                                            <input type="radio" name="refund" (click)="setTransactionInfo(2)" formControlName="refund" value="refund" id="ra-refund" [(ngModel)]="options">
+                                            Refund
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="transfer" (click)="setTransactionInfo(3)" formControlName="transfer"  value="transfer" id="ra-transfer" [(ngModel)]="options">
+                                            Transfer
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="writeoff" (click)="setTransactionInfo(4)" formControlName="writeoff"  value="writeoff"  id="ra-writeoff" [(ngModel)]="options">
+                                            Write off
+                                        </label>
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-2 col-form-label">Reason</label>
+                                        <div class="col-4">
+                                        <select id="reasonId" formControlName="reasonId" class="form-control" (change)="changeReason($event)">
+                                            <option value="0">--Select--</option>
+                                            <option *ngFor="let reason of reasons" 
+                                            value="{{reason.reasonId}}"> {{reason.reasonDescription}} </option>
+                                        </select>
+                                        </div>
+                                    </div> 
+                                    </div> 
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label class="form-label">TOTAL BILL VALUE</label>
+                                        <input class="form-control" disabled placeholder="100000" formControlName="totalBillValue" name="totalBillValue" type="text">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label class="form-label">ALREADY PAID</label>
+                                        <input class="form-control" disabled placeholder="80000"  formControlName="alreadyPaid" name="alreadyPaid" type="text">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label class="form-label">TOTAL OUTSTANDING</label>
+                                        <input class="form-control" disabled placeholder="20000" formControlName="totalOutstanding"  name="totalOutstanding" type="text">
+                                    </div>                                                                                         
+                                </div> 
+                                
+                                <div class="col-md-12 col-lg-12 col-xl-12" id="payment" *ngIf="(typeOfTxnId === 1 || typeOfTxnId === 2 || typeOfTxnId === 4)">
+                                    <header class="panel_header" style="margin-bottom:15px;">
+                                            <h2 class="title float-left">{{transactionType}}</h2>
+                                    </header>
+                                    <div  class="col-12">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-2">
+                                                    <label  class="form-label">Payment Type</label>
+                                                    <select id="paymenttype" formControlName="instrumentTypeId"  class="form-control">
+                                                        <option value="0">--Select--</option>
+                                                        <option *ngFor="let item of paymentTypes" value="{{item.id}}"> {{item.name}} </option>
+                                                    </select>
+                                                </div>
+                                                <div  class="form-group col-md-3">
+                                                    <label class="form-label">Ref#1</label>
+                                                    <input type="text" class="form-control" formControlName="ref1">
+                                                </div>
+                                                <div  class="form-group col-md-2">
+                                                    <label class="form-label">Ref#2</label>
+                                                    <input type="text" class="form-control" formControlName="ref2">
+                                                </div>
+                                                <div  class="form-group col-md-2">
+                                                    <label class="form-label">Payment Date </label>
+                                                    <input type="date" class="form-control" formControlName="paymentDate">
+                                                </div>
+                                                <div  class="form-group col-md-2">
+                                                    <label class="form-label">Amount</label>
+                                                    <input type="text" class="form-control" formControlName="amount">
+                                                </div>
+                                                <div  class="form-group col-md-1" style="padding-top:35px;">
+                                                <button type="button" class="btn btn-success btn-corner" (click)="addTransactionDetails();">Add</button>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div  class="col-12">
+                                            <table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+                                                    <thead style="background: #678680;">
+                                                        <tr>
+                                                            <th>Payment Type</th>
+                                                            <th>Ref#1</th>
+                                                            <th>Ref#2</th>
+                                                            <th>Payment Date</th>
+                                                            <th>Amount</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>                                            
+                                                    <tbody>
+                                                        <tr *ngFor="let pDet of paymentDetails; let i=index">
+                                                            <td>{{pDet.instrumentTypeName}}</td>
+                                                            <td>{{pDet.ref1}}</td>
+                                                            <td>{{pDet.ref2}}</td>
+                                                            <td>{{pDet.paymentDate | date:'dd-MM-yyyy'}}</td>
+                                                            <td>{{pDet.amount}}</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-danger" (click)="deletePaymentDetail(pDet)">
+                                                                    <i class="fa fa-trash-o text-white"></i></button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                    </div>     
+                                </div><!--End Payment--> 
+                                <div class="col-md-12 col-lg-12 col-xl-12" id="transfer" *ngIf="typeOfTxnId === 3">
+                                    <header class="panel_header" style="margin-bottom:15px;">
+                                            <h2 class="title float-left"> Transfer </h2>
+                                    </header>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label class="col-form-label">Transfer Patient Name  </label>
+                                            <input type="text" class="form-control" formControlName="transferName">
+                                        </div>
+                                        <div  class="form-group col-md-2" style="padding-top:35px;">
+                                            <button type="button" class="btn btn-success btn-corner" (click)="searchPatientForTransfer()">Search</button>
+                                            </div>
+                                      
+                                        <div  class="form-group col-md-2">
+                                            <label class="form-label">Payment Date </label>
+                                            <input type="date" class="form-control" formControlName="paymentDateForTranser">
+                                        </div>
+                                        <div  class="form-group col-md-2">
+                                            <label class="form-label">Amount</label>
+                                            <input type="text" class="form-control" formControlName="amountForTranser">
+                                        </div>
+                                       
+                                    </div>
+                                </div><!--End Transfer-->  
+                                <div class="form-row"><!--Free Ticket-->
+                                    <header class="panel_header" style="margin-bottom:15px;">
+                                            <h2 class="title float-left">Free Ticket</h2>
+                                    </header>
+                                    <div  class="col-12">
+                                            <table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+                                                    <thead style="background: #678680;">
+                                                        <tr>
+                                                            <th>Free Ticket No</th>
+                                                            <th>Appointment Date</th>
+                                                            <th>APPOINTMENT ID</th>
+                                                            <th>Due Amount</th>
+                                                            <th>Paid Amount</th>
+                                                        </tr>
+                                                    </thead>                                            
+                                                    <tbody>
+                                                        <tr *ngFor="let freeTicket of paymentBreakup; let i=index">
+                                                            <td>{{freeTicket.freeTicketNo}}</td>
+                                                            <td>{{freeTicket.appointmentDate | date:'dd-MM-yyyy'}}</td>
+                                                            <td>{{freeTicket.appointmentId}}</td>
+                                                            <td>{{freeTicket.amount}}</td>
+                                                            <td><input type="text" [value]="freeTicket.paidAmount" class="form-control"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                </div>
+                                                                                
+                            
+                            
+                        </div>
+
+                    </div>
+                </div>
+            </div>                        
+        </div>
+
+ 
+    <!-- MAIN CONTENT AREA ENDS -->
+</section>            
+    <!-- END CONTENT -->
+       </form>
+    </div>
+</section>
+</section>
+<!-- END CONTENT -->
+<!-- </div> -->

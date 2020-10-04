@@ -104,9 +104,9 @@
                                                     <label for="inputPassword4"><strong>From Time </strong><span class="text-danger"> *</span></label>
                                                     
                                                 </div>
-                                                <div class="form-group col-md-2" [ngClass]="{'disabled': true}">
+                                                <div class="form-group col-md-2" >
                                                     <!-- <input type="text" class="form-control timepicker" formControlName="fromTime"> -->
-                                                    <ngb-timepicker (ngModelChange)="changedfromtime()"  [minuteStep]="15" formControlName="fromTime"></ngb-timepicker>
+                                                    <ngb-timepicker (click)="changedfromtime()"  [readonlyInputs]="true" [minuteStep]="15" [meridian]="true"  formControlName="fromTime"></ngb-timepicker>
                                                     <span class="text-danger" *ngIf="officecalendarForm.hasError('required', ['fromTime']) && formDir.submitted">
                                                         From Time is required.
                                                     </span>
@@ -115,9 +115,9 @@
                                                     <label for="inputPassword4"><strong>To Time </strong><span class="text-danger"> *</span></label>
                                                    
                                                 </div>
-                                                <div class="form-group col-md-2" [ngClass]="{'disabled': true}">
+                                                <div class="form-group col-md-2" >
                                                      <!-- <input type="text" class="form-control timepicker" formControlName="toTime"> -->
-                                                     <ngb-timepicker [minuteStep]="15" (ngModelChange)="changedtotime()"   formControlName="toTime"></ngb-timepicker>
+                                                     <ngb-timepicker [minuteStep]="15" (click)="changedtotime()" [readonlyInputs]="true" [meridian]="true"   formControlName="toTime"></ngb-timepicker>
                                                      <span class="text-danger" *ngIf="officecalendarForm.hasError('required', ['toTime']) && formDir.submitted">
                                                          To Time is required.
                                                      </span>

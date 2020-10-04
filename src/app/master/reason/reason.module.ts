@@ -15,6 +15,7 @@ import { ShellModule } from 'src/app/shell/shell.module';
 import { ReasoncRoutingModule } from './reason-routing.module';
 import { CreateNewReasonComponent } from './create-new-reason/create-new-reason.component';
 import{ReasonMasterService} from './../../services/reason-master.service';
+import { CoreModule } from 'src/app/core/core.module';
 @NgModule({
   declarations: [ReasonComponent, CreateNewReasonComponent],
   imports: [
@@ -25,7 +26,8 @@ import{ReasonMasterService} from './../../services/reason-master.service';
     ReactiveFormsModule,
     NgbModule,
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    CoreModule
   ],
   providers:[ReasonMasterService],
   exports: [ReasonComponent]

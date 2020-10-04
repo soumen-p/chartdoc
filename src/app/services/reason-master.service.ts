@@ -19,4 +19,13 @@ export class ReasonMasterService {
   public deleteReason(request: object): Observable<any> {
     return this.http.post(environment.baseUrl + Delete, request, { responseType: 'text' });
   }
+  obj:any
+  setReasonbyid(value:any){
+    this.obj=value;
+
+  }
+  getReasonbyid(){
+    return this.obj
+
+  }
 }

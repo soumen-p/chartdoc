@@ -1,0 +1,255 @@
+<div class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>
+<!-- START CONTENT -->
+<section id="main-content" class="sidebar_shift">
+    <section class="wrapper main-wrapper row">
+
+        <div class='col-12'>
+            <div class="page-title">
+
+                <div class="float-left">
+                    <!-- PAGE HEADING TAG - START --><h1 class="title">{{heading}}</h1><!-- PAGE HEADING TAG - END -->                            </div>
+
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- MAIN CONTENT AREA STARTS -->
+
+        <div class="col-xl-12">
+            <section class="box ">
+                <form [formGroup]="createbillForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+                <header class="panel_header">
+                    <div class="row">
+                        <div class="col-10"><h2 class="title float-left">{{subtitle}}</h2></div>
+                         <div class="col-2" style="padding-top: 25px;">
+                            <button type="submit" class="btn btn-primary"  style="margin-right: 10px;">Finish</button>
+                                <button type="button" class="btn" (click)="reset()">Cancel</button>
+                         </div>
+                    </div>                               
+                </header>
+                <div class="content-body"> 
+                   <div class="row">
+                        <div class="col-12">
+
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 col-xl-12">
+                                
+                                    <div class="form-row">                                                	
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Doctor</label>
+                                            <input class="form-control"  type="text" formControlName="doctorName" disabled >
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Patient</label>
+                                            <input class="form-control" formControlName="patientName" type="text" disabled >
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Date</label>
+                                            <input class="form-control" formControlName="date1"  type="text" disabled >
+                                        </div> 
+                                    </div>
+                                    <div class="form-row"> 
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Insurance1</label>
+                                            <input class="form-control" formControlName="insuranceName1" type="text">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Insurance2</label>
+                                            <input class="form-control" formControlName="insuranceName2"  type="text">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Insurance3</label>
+                                            <input class="form-control" formControlName="insuranceName3" type="text">
+                                        </div> 
+                                    </div>
+                                    <div class="form-row"> 
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Location</label>
+                                            <input class="form-control" formControlName="locationName" type="text">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Place of </label>
+                                            <input class="form-control" formControlName="placeOfName" type="text">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Service</label>
+                                            <select class="form-control" name="" id="service" formControlName="serviceId" selected >
+                                                <option value="0">--Select--</option>
+                                              <option *ngFor="let item of services" value="{{item.serviceId}}"> {{item.serviceName}} </option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="createbillForm.hasError('required', ['serviceId']) && formDir.submitted">
+                                                Service is required.
+                                            </span>
+                                        </div> 
+                                    </div>
+                                    <div class="form-row"> 
+                                        <div  [ngClass]="divclass">
+                                            <label class="form-label">Reference by</label>
+                                            <select class="form-control" name="" id="reference" formControlName="referenceId" selected >
+                                                <option value="0">--Select--</option>
+                                              <option *ngFor="let item of references" value="{{item.id}}"> {{item.name}} </option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="createbillForm.hasError('required', ['referenceId']) && formDir.submitted">
+                                                Reference by is required.
+                                            </span>
+                                        </div>
+                                        <div [ngClass]="divclass">
+                                            <label class="form-label">File As  </label>
+                                            <select class="form-control" name="" id="reference" formControlName="fileAsId" selected >
+                                                <option value="0">--Select--</option>
+                                              <option *ngFor="let item of references" value="{{item.id}}"> {{item.name}} </option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="createbillForm.hasError('required', ['fileAsId']) && formDir.submitted">
+                                                File As  is required.
+                                            </span>
+                                        </div>
+                                        <div [ngClass]="divclass"  *ngIf="tableId==4?true:false">	
+                                            <label class="form-label">Changed Mode </label>
+                                            <select id="reference" class="form-control" formControlName="claimstatusId" selected>
+                                                <option  value='0'>Select</option>
+                                                <!-- <option>Reverse</option>
+                                                <option>Close</option>
+                                                <option>Close claims with Zero outstanding </option>
+                                                <option>Hold</option>
+                                                <option>Un hold </option> -->
+                                                <option *ngFor="let mode of changedModes" value="{{mode.id}}"> {{mode.name}} </option>
+                                            </select>
+                                        </div>  
+                                        <div class="form-group col-md-3" style="padding-top:30px;"  *ngIf="showcreatechage && tableId==1?true:false">														
+                                            <button type="button" class="btn btn-primary" (click)="acceptcopay()">Accept Co Pay</button>
+                                        </div> 
+                                        <div class="form-group col-md-3" *ngIf="tableId==3?true:false">	
+                                            <label class="form-label"> Rejection Reason</label>
+                                            <select class="form-control" name="" id="service" formControlName="reasonId" selected >
+                                                <option value='0'>--Select--</option>
+                                            <option *ngFor="let reason of reasons" value="{{reason.reasonId}}"> {{reason.reasonDescription}} </option>
+                                            </select>
+                                       
+                                        </div>
+                                        <div class="form-group col-md-3" *ngIf="tableId==3?true:false"> 	
+                                            <label class="form-label">Status</label>													
+                                            <input class="form-control" formControlName="status" type="text">
+                                        </div> 
+                                    </div>                                                
+                               
+                                </div>
+                                <div class="col-md-12 col-lg-12 col-xl-12">
+                                    <table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+                                <thead style="background: #678680;">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>CPT</th>
+                                        <th>Dx#1</th>
+                                        <th>Dx#2</th>
+                                        <th>Dx#3</th>
+                                        <th>Dx#4</th>
+                                        <th>Charge Amt</th>
+                                        <th>Co Pay</th>
+                                        <th>Allowed</th>
+                                        <th>Capitated</th>
+                                        <th>Modified Code</th>
+                                    </tr>
+                                </thead>  
+                                <ng-container *ngIf="showcreatechage">                                   
+                                <tbody  *ngFor="let item of chargePatientDetails">
+                                    <tr>
+                                       
+                                        <td><input class="form-control" type="text"  disabled [(value)]="item.date" ></td>
+                                        <td><input class="form-control" type="text" (keypress)="opencptsearch()" (input)='item.cptCode = $event.target.value' [value]="item.cptCode"></td>
+                                        
+                                        <td><input class="form-control" type="text" (keypress)="openicdsearch(1)" (input)='item.icdCode1 = $event.target.value' [value]="item.icdCode1"></td>
+                                        <td><input class="form-control" type="text" (keypress)="openicdsearch(2)" (input)='item.icdCode2 = $event.target.value' [value]="item.icdCode2"></td>
+                                        <td><input class="form-control" type="text" (keypress)="openicdsearch(3)" (input)='item.icdCode3 = $event.target.value' [value]="item.icdCode3"></td>
+                                        <td><input class="form-control" type="text" (keypress)="openicdsearch(4)" (input)='item.icdCode4 = $event.target.value' [value]="item.icdCode4"></td>
+                                        <td><input class="form-control" type="text" [(value)]="item.chargeAmount" disabled></td>
+                                        <td><input class="form-control" type="text" [(value)]="item.copay" disabled></td>
+                                       
+                                        <td><input class="form-control" name="modifiedcode" (input)='item.allowedAmount = $event.target.value' [value]="item.allowedAmount" type="text"></td>
+                                        <td align="center"><input class="form-check-input" type="checkbox" [checked]="item.capitated" (change)="item.capitated =  !item.capitated"></td>
+                                        <td><input class="form-control" name="modifiedcode" (input)='item.modifiedCode = $event.target.value' [value]="item.modifiedCode" type="text"></td>
+                                    </tr>
+                                    
+                                </tbody>
+                                 </ng-container>  
+                                 <ng-container *ngIf="showcreateclaim">                                   
+                                    <tbody  *ngFor="let item of chargePatientDetails">
+                                        <tr>
+                                           
+                                            <td>{{item.date}}</td>
+                                            <td> {{item.cptCode}}</td>
+                                            <td> {{item.icdCode1}}</td>
+                                            <td> {{item.icdCode2}}</td>
+                                            <td> {{item.icdCode3}}</td>
+                                            <td> {{item.icdCode4}}</td>
+                                            <td> {{item.chargeAmount}}</td>
+                                            <td> {{item.copay}}</td>
+                                            <td> {{item.allowedAmount}}</td>
+                                            <td align="center"><input class="form-check-input" type="checkbox" [checked]="item.capitated" disabled></td>
+                                            <td> {{item.modifiedCode}}</td>
+                                            
+                                        </tr>
+                                        
+                                         </tbody>
+                                     </ng-container>
+                                    
+                                    <tfoot style="background: #678680;">
+                                    <tr>                                                    
+                                        <td colspan="5" align="right">Total</td>
+                                        <td>&nbsp;</td>
+                                        <td colspan="5">{{grandtotal}}</td>                                                    
+                                    </tr>
+                                   </tfoot> 
+                               
+                            </table>
+                                </div>  
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </section>
+        </div>
+
+
+        <!-- MAIN CONTENT AREA ENDS -->
+    </section>
+</section>
+
+<div class="example-wrapper">
+    <div id="cptSearch" class="modal">
+        <div class="modal-content1">
+            <app-common-search [searchCriteria]="'cpt'" (arrayCriteria)="adddata($event)"></app-common-search> 
+            <div class="svbutton"> 
+                
+                <button class="btn btn-primary "type="button" (click)="closePopupCancel('cptSearch')">Cancel</button>
+            </div>    
+        </div>
+    </div>
+</div>
+
+ 
+
+<div class="example-wrapper">
+    <div id="icdSearch" class="modal">
+        <div class="modal-content1">
+            <app-common-search [searchCriteria]="'icd'" (arrayCriteria)="adddata($event)"></app-common-search> 
+            <div class="svbutton"> 
+                
+                <button class="btn btn-primary "type="button" (click)="closePopupCancel('icdSearch')">Cancel</button>
+            </div>    
+        </div>
+    </div>
+</div>
+
+
+<!-- END CONTENT -->

@@ -5,7 +5,7 @@ import { BookAppointmentService } from '../services/book-appointment.service';
 import { Appointment } from './book-appointment-model';
 import { SharedService } from '../core/shared.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
-
+import { DatePipe } from '@angular/common';
 import { AppointmentService } from '../services/appointment.service';
 import { PatientSearchService } from '../services/patient-search.service';
 @Component({
@@ -43,6 +43,7 @@ export class BookAppointmentComponent implements OnInit {
     gender: '',
     address: ''
   };
+  pipe = new DatePipe('en-US'); // Use your own locale
   reasons = [];
   appointmentReasons = [];
   blnsave = false;
@@ -52,6 +53,10 @@ export class BookAppointmentComponent implements OnInit {
   isReschdule = true;
   isFlowsheetDisable = true;
   isPositionDisable = false;
+  fromTimeHour: number;
+  fromTimeMinute: number;
+  toTimeHour: number;
+  toTimeMinute: number;
   bookAppointmentFormGroup = new FormGroup({
     // firstName: new FormControl('', [Validators.required]),
     patientId: new FormControl(''),
@@ -70,7 +75,7 @@ export class BookAppointmentComponent implements OnInit {
     fromTime: new FormControl(''),
     toTime: new FormControl(''),
     provider: new FormControl(''),
-    service: new FormControl(''),
+    service: new FormControl('', [Validators.required]),
     position: new FormControl('0'),
     reasonID: new FormControl('0', [Validators.required]),
     reasonCode: new FormControl('0'),
@@ -78,14 +83,23 @@ export class BookAppointmentComponent implements OnInit {
     note: new FormControl('')
   });
   isflowsheet: any = 0;
+  now = new Date();
+    year = this.now.getFullYear();
+    month = String(this.now.getMonth() + 1).padStart(2, '0');;
+    day = String(this.now.getDate()).padStart(2, '0');
+    //dobminDate = new Date(String(this.year - 100 + "-" + this.month + "-" + this.day));
+    dobminDate = String(this.year - 100 + "-" + this.month + "-" + this.day);
   constructor(private bookAppointmentService: BookAppointmentService, private patientSearchService: PatientSearchService,
-              private avRoute: ActivatedRoute,
-              private appointmentService: AppointmentService, private router: Router,
-              public toastr: ToastrManager
+    private avRoute: ActivatedRoute,
+    private appointmentService: AppointmentService, private router: Router,
+    public toastr: ToastrManager
   ) {
     this.formData = new FormData();
     const current = new Date();
     this.minDate = current;
+
+    
+   
 
     if (this.avRoute.snapshot.queryParams['id'] != undefined) {
       this.isflowsheet = Number(this.avRoute.snapshot.queryParams['id']);
@@ -110,25 +124,41 @@ export class BookAppointmentComponent implements OnInit {
       this.fileUrl = doctorBookingInfo.imageUrl;
     }
     if (doctorBookingInfo.dateOfBirth != '') {
-      const patientDob = new Date(doctorBookingInfo.dateOfBirth);
-      patientDob.setMinutes(patientDob.getMinutes() + patientDob.getTimezoneOffset());
-      patientDob.setDate(patientDob.getDate() + 1);
+      let patientDob = new Date(doctorBookingInfo.dateOfBirth);
+     
+    let pat_year = patientDob.getFullYear();
+    let pay_month = String(patientDob.getMonth() + 1).padStart(2, '0');;
+    let pay_day = String(patientDob.getDate()).padStart(2, '0');
+      patientDob = new Date(String(pat_year  + "-" + pay_month + "-" + pay_day));
+      // patientDob.setMinutes(patientDob.getMinutes() + patientDob.getTimezoneOffset());
+      // patientDob.setDate(patientDob.getDate() );
       this.bookAppointmentFormGroup.patchValue({
-        dateOfBirth: patientDob,
+        dateOfBirth: String(pat_year  + "-" + pay_month + "-" + pay_day),
         // doctorBookingInfo.dateOfBirth,
       });
     }
     // if(doctorBookingInfo.appointmentid!="0"){
     this.bookAppointmentFormGroup.patchValue({
-      firstName: name[0],
-      middleName: name[1],
-      lastName: name[2],
       patientId: doctorBookingInfo.patientId,
       phone: doctorBookingInfo.phone,
       email: doctorBookingInfo.email,
       gender: doctorBookingInfo.gender,
       address: doctorBookingInfo.address,
     });
+    if (name.length == 2) {
+      this.bookAppointmentFormGroup.patchValue({
+        firstName: name[0],
+        middleName: "",
+        lastName: name[1].replace('(New)',''),
+      });
+    }
+    else {
+      this.bookAppointmentFormGroup.patchValue({
+        firstName: name[0],
+        middleName: name[1],
+        lastName:name[2]!=undefined? name[2].replace('(New)',''):"",
+      });
+    }
     if (doctorBookingInfo.appointmentid != '0') {
       this.blnsave = true;
       this.bookAppointmentService.setCopayAppId('CopayAppId', this.appointmentId);
@@ -143,18 +173,26 @@ export class BookAppointmentComponent implements OnInit {
     this.bookAppointmentFormGroup.controls['dateOfBirth']!.disable();
     this.bookAppointmentFormGroup.controls['address']!.disable();
 
-    const appointmentDate = new Date(doctorBookingInfo.startdate);
-    appointmentDate.setMinutes(appointmentDate.getMinutes() + appointmentDate.getTimezoneOffset());
-    appointmentDate.setDate(appointmentDate.getDate() + 1);
+    let appointmentDate = new Date(doctorBookingInfo.startdate);
+    let app_year = appointmentDate.getFullYear();
+    let app_month = String(appointmentDate.getMonth() + 1).padStart(2, '0');;
+    let app_day = String(appointmentDate.getDate()).padStart(2, '0');
+    appointmentDate = new Date(String(app_year + "-" +app_month  + "-" + app_day ));
+    // appointmentDate.setMinutes(appointmentDate.getMinutes() + appointmentDate.getTimezoneOffset());
+    // appointmentDate.setDate(appointmentDate.getDate() );
 
     this.appointmentFormGroup.patchValue({
       provider: doctorBookingInfo.doctorname,
-      date: appointmentDate, // mm+"/"+dd+"/"+yyyy,
-      fromTime: { hour: Number(doctorBookingInfo.starttime.split(':')[0]),
-      minute: Number(doctorBookingInfo.starttime.split(':')[1]), second: 0 },
+      date: String(app_year + "-" +app_month  + "-" + app_day ), // mm+"/"+dd+"/"+yyyy,
+      fromTime: {
+        hour: Number(doctorBookingInfo.starttime.split(':')[0]),
+        minute: Number(doctorBookingInfo.starttime.split(':')[1]), second: 0
+      },
       // doctorBookingInfo.starttime,
-      toTime: { hour: Number(doctorBookingInfo.endtime.split(':')[0]),
-      minute: Number(doctorBookingInfo.endtime.split(':')[1]), second: 0 },
+      toTime: {
+        hour: Number(doctorBookingInfo.endtime.split(':')[0]),
+        minute: Number(doctorBookingInfo.endtime.split(':')[1]), second: 0
+      },
       // doctorBookingInfo.endtime,
       service: doctorBookingInfo.serviceID,
       position: doctorBookingInfo.positionID,
@@ -233,8 +271,11 @@ export class BookAppointmentComponent implements OnInit {
         console.log(err);
       });
   }
+  // tslint:disable-next-line: variable-name
   addAppointment(_patientId) {
     if (!this.bookAppointmentFormGroup.valid) {
+
+      this.toastr.errorToastr('Please fill all mendatory field.', 'oops!');
       return;
     }
     if (!this.validatePhoneno()) {
@@ -244,21 +285,24 @@ export class BookAppointmentComponent implements OnInit {
     if (!this.timeValidation()) {
       return;
     }
+    if (!this.validateActionService()) {
+      return;
+    }
     if (!this.validateActionReason()) {
       return;
     }
     if (this.validateImage(this.appointmentFormGroup.controls['position'].value)) {
       return;
     }
-    this.bookAppointmentFormGroup.patchValue({
-      dateOfBirth: String(this.bookAppointmentFormGroup.controls['dateOfBirth'].value.getMonth() + 1).padStart(2, '0') + '/' +
-        String(this.bookAppointmentFormGroup.controls['dateOfBirth'].value.getDate()).padStart(2, '0') + '/' +
-        this.bookAppointmentFormGroup.controls['dateOfBirth'].value.getFullYear(),
-    });
+    // this.bookAppointmentFormGroup.patchValue({
+    //   dateOfBirth: String(this.bookAppointmentFormGroup.controls['dateOfBirth'].value.getMonth() + 1).padStart(2, '0') + '/' +
+    //     String(this.bookAppointmentFormGroup.controls['dateOfBirth'].value.getDate()).padStart(2, '0') + '/' +
+    //     this.bookAppointmentFormGroup.controls['dateOfBirth'].value.getFullYear(),
+    // });
     this.appointmentFormGroup.patchValue({
-      date: String(this.appointmentFormGroup.value.date.getMonth() + 1).padStart(2, '0') + '/' +
-        String(this.appointmentFormGroup.value.date.getDate()).padStart(2, '0') + '/' +
-        this.appointmentFormGroup.value.date.getFullYear(),
+      // date: String(this.appointmentFormGroup.value.date.getMonth() + 1).padStart(2, '0') + '/' +
+      //   String(this.appointmentFormGroup.value.date.getDate()).padStart(2, '0') + '/' +
+      //   this.appointmentFormGroup.value.date.getFullYear(),
       fromTime: String(this.appointmentFormGroup.value.fromTime.hour).padStart(2, '0') + ':' +
         String(this.appointmentFormGroup.value.fromTime.minute).padStart(2, '0'),
       toTime: String(this.appointmentFormGroup.value.toTime.hour).padStart(2, '0') + ':' +
@@ -271,7 +315,7 @@ export class BookAppointmentComponent implements OnInit {
       AppointmentNo: this.getAppointmentNumber(),
       PatientId: this.patientId,
       PatientName: this.bookAppointmentFormGroup.controls['firstName'].value + ' '
-      + this.bookAppointmentFormGroup.controls['lastName'].value,
+        + this.bookAppointmentFormGroup.controls['lastName'].value,
       Address: this.bookAppointmentFormGroup.controls['address'].value,
       ContactNo: this.bookAppointmentFormGroup.controls['phone'].value,
       Email: this.bookAppointmentFormGroup.controls['email'].value,
@@ -294,7 +338,12 @@ export class BookAppointmentComponent implements OnInit {
       ServiceId: this.appointmentFormGroup.controls['service'].value,
       Note: this.appointmentFormGroup.controls['note'].value,
     };
-
+    let fromTimeData = this.appointmentFormGroup.controls['fromTime'].value.split(':');
+    let toTimeData = this.appointmentFormGroup.controls['toTime'].value.split(':');
+    this.fromTimeHour = Number(fromTimeData[0]);
+    this.fromTimeMinute = Number(fromTimeData[1]);
+    this.toTimeHour = Number(toTimeData[0]);
+    this.toTimeMinute = Number(toTimeData[1]);
     this.formData.append('appointmentDetails', JSON.stringify(param));
     this.formData.append('uploadFile', this.files[0]);
     console.log(this.formData.get('appointmentDetails'));
@@ -307,7 +356,17 @@ export class BookAppointmentComponent implements OnInit {
           this.appointmentService.setBookingInfo('lastdate', this.appointmentFormGroup.controls['date'].value);
           this.router.navigate(['/appointment-search'], { queryParams: { id: reStatus[0] } });
         } else {
-          this.toastr.errorToastr(reStatus[1] + ' , please contact system admin!', 'Error!');
+          this.appointmentFormGroup.patchValue({
+            fromTime: {
+              hour: this.fromTimeHour,
+              minute: this.fromTimeMinute, second: 0
+            },
+            toTime: {
+              hour: this.toTimeHour,
+              minute: this.toTimeMinute, second: 0
+            }
+          });
+          this.toastr.errorToastr(reStatus[1] + ' , Please book on different time slot', 'Error!');
         }
 
       }, err => {
@@ -334,7 +393,7 @@ export class BookAppointmentComponent implements OnInit {
       });
     }
 
-    if (this.appointmentFormGroup.value.position === -2) {
+    if (this.appointmentFormGroup.value.position === '-2') {
       this.isReschdule = false;
     } else {
       this.isReschdule = true;
@@ -343,7 +402,43 @@ export class BookAppointmentComponent implements OnInit {
   searchPatient() {
     this.router.navigate(['/patient-search-appointment'], { queryParams: { id: 1 } });
   }
+  getToday(): string {
+    return new Date().toISOString().split('T')[0]
+  }
+  dobValidation(): boolean {
+    let flgdate = true;
+    console.log(new Date(this.getToday()));
+    if (new Date(this.bookAppointmentFormGroup.value.dateOfBirth) < new Date(this.dobminDate)) {
+      this.toastr.errorToastr('Invalid DOB ', 'Oops!');
+      flgdate = false;
+    }
+    else if (new Date(this.bookAppointmentFormGroup.value.dateOfBirth) > new Date(this.getToday())) {
+      this.toastr.errorToastr('Invalid DOB ', 'Oops!');
+      flgdate = false;
+    }
+    return flgdate;
+  }
+  appdateValidation(): boolean {
+    let flgdate = true;
+   
+   
+   // if (new Date(this.appointmentFormGroup.value.date) <= new Date(this.minDate)) {
+    // if ( new Date(this.pipe.transform(new Date(this.appointmentFormGroup.value.date), 'MMM dd,yyyy')) <
+    // new Date(this.pipe.transform(new Date(this.minDate), 'MMM dd,yyyy'))) {
+      if (new Date(this.appointmentFormGroup.value.date) < new Date(this.getToday())) {
+      this.toastr.errorToastr('Invalid Appointment Date ', 'Oops!');
+      flgdate = false;
+    }
+   
+    return flgdate;
+  }
   finish() {
+    if (!this.dobValidation()) {
+      return;
+    }
+    if (!this.appdateValidation()) {
+      return;
+    }
     this.addAppointment(this.patientId);
   }
 
@@ -458,6 +553,13 @@ export class BookAppointmentComponent implements OnInit {
     }
     return true;
   }
+  validateActionService(): boolean {
+    if (this.appointmentFormGroup.value.service === '0' || this.appointmentFormGroup.value.service === '') {
+      this.toastr.errorToastr('Please select Service ', 'Oops!');
+      return false;
+    }
+    return true;
+  }
 
   patietprofile() {
     this.patientSearchService.setPatientSearchInfo('patientMode', this.isflowsheet);
@@ -494,13 +596,15 @@ export class BookAppointmentComponent implements OnInit {
     this.router.navigate(['/patient-profile'], { queryParams: { id: this.appointmentId } });
   }
   public changedfromtime(): void {
+
     if (this.appointmentFormGroup.controls['fromTime'].value == null) {
     } else {
       if (this.appointmentFormGroup.controls['fromTime'].value != null &&
         this.appointmentFormGroup.controls['fromTime'].value.hour < 8 || this.appointmentFormGroup.controls['fromTime'].value.hour >= 18) {
         this.toastr.errorToastr('Invalid From Time', 'Oops!', { showCloseButton: true });
         this.appointmentFormGroup.patchValue({
-          fromTime: { hour: 8, minute: 0, second: 0 }
+          fromTime: { hour: 8, minute: 0, second: 0 },
+          toTime: { hour: 8, minute:15, second: 0 }
         });
         return;
       } else if (this.appointmentFormGroup.controls['fromTime'].value.hour > this.appointmentFormGroup.controls['toTime'].value.hour) {
@@ -522,7 +626,7 @@ export class BookAppointmentComponent implements OnInit {
           } else {
             this.appointmentFormGroup.patchValue({
               toTime: {
-                hour: this.appointmentFormGroup.controls['fromTime'].value.hour + 1,
+                hour: this.appointmentFormGroup.controls['toTime'].value.hour + 1,
                 minute: this.appointmentFormGroup.controls['toTime'].value.minute, second: 0
               }
 
@@ -534,7 +638,7 @@ export class BookAppointmentComponent implements OnInit {
         && this.appointmentFormGroup.controls['fromTime'].value.minute >= this.appointmentFormGroup.controls['toTime'].value.minute) {
         // this.toastr.errorToastr("From time cannot be less than To time ", 'Oops!');
         if (this.appointmentFormGroup.controls['toTime'].value.hour === 8
-        && this.appointmentFormGroup.controls['toTime'].value.minute === 0) {
+          && this.appointmentFormGroup.controls['toTime'].value.minute === 0) {
           this.appointmentFormGroup.patchValue({
             toTime: { hour: 8, minute: 15, second: 0 },
             fromTime: { hour: 8, minute: 0, second: 0 },
@@ -559,6 +663,17 @@ export class BookAppointmentComponent implements OnInit {
       }
     }
   }
+  validateEmail() {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+   
+    if (re.test(this.bookAppointmentFormGroup.value.email)) {
+        return;
+    }
+    this.toastr.errorToastr("You have entered an invalid email address!", 'Error!');
+    this.bookAppointmentFormGroup.patchValue({
+      email:""
+    })
+  }
   public changedtotime(): void {
     if (this.appointmentFormGroup.controls['toTime'].value == null) {
     } else {
@@ -580,7 +695,7 @@ export class BookAppointmentComponent implements OnInit {
       } else if (this.appointmentFormGroup.controls['fromTime'].value.hour === this.appointmentFormGroup.controls['toTime'].value.hour
         && this.appointmentFormGroup.controls['fromTime'].value.minute >= this.appointmentFormGroup.controls['toTime'].value.minute) {
         if (this.appointmentFormGroup.controls['toTime'].value.hour === 8 &&
-        this.appointmentFormGroup.controls['toTime'].value.minute === 0) {
+          this.appointmentFormGroup.controls['toTime'].value.minute === 0) {
           this.appointmentFormGroup.patchValue({
             toTime: { hour: 8, minute: 15, second: 0 },
             fromTime: { hour: 8, minute: 0, second: 0 },

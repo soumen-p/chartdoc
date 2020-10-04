@@ -1,3 +1,26 @@
 .fc-time-grid .fc-slats td {
     height: 3.5em;
 }
+.textcolor{
+    color:black
+}
+.chekbox-container{
+    display: inline-block;
+    margin-left: 10px;
+}
+  .error{
+    color: red;
+    text-align: center;
+}
+.modal-content1 {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 40px;
+    width: 28%;
+    border-radius: 5px;
+}
+/* .fc-highlight {
+   
+    background:#badbd4 ! important ;
+   
+} */

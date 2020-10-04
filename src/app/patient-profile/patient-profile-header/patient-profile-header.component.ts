@@ -24,14 +24,14 @@ export class PatientProfileHeaderComponent implements OnInit {
   patientImage = '../../../assets/PatientImages/noimage.png';
   patientAge: string;
   patientGender: string;
-  bpFirst: string;
-  bpLast: string;
-  pulse: string;
-  height1: string;
-  height2: string;
-  weight: string;
-  temprature: string;
-  respiratory: string;
+  bpFirst: string="000";
+  bpLast: string="000";
+  pulse: string="00";
+  height1: string="0";
+  height2: string="0";
+  weight: string="00";
+  temprature: string="00.0";
+  respiratory: string="00";
   message: string;
   modelBpFirst: string;
   modelBpLast: string;
@@ -54,8 +54,13 @@ export class PatientProfileHeaderComponent implements OnInit {
   flag: string;
   observationEntry: any;
   formObservation: FormGroup;
-
-  constructor(private profileHeaderService: PatientProfileHeaderService, private router: Router) {
+  ispatienthisttory: boolean = true;
+  constructor(private profileHeaderService: PatientProfileHeaderService, private router: Router
+    , private _avRoute: ActivatedRoute) {
+    if (this._avRoute.snapshot.queryParams.mode == "history") {
+      this.ispatienthisttory = false;
+      this.isView = true;
+    }
   }
   ngOnInit() {
     this.formObservation = new FormGroup({
@@ -73,7 +78,7 @@ export class PatientProfileHeaderComponent implements OnInit {
     const doctorBookingInfo = this.profileHeaderService.getBookingInfo('doctorBookingInfo');
     // tslint:disable-next-line: triple-equals
     if (doctorBookingInfo != null && doctorBookingInfo.positionID != 'undefined' && doctorBookingInfo.positionID == '-3') {
-       this.isPosCheckOut = true;
+      this.isPosCheckOut = true;
     }
 
     this.patientInfo = this.profileHeaderService.getPatientDetails('patientInfo');
@@ -103,15 +108,15 @@ export class PatientProfileHeaderComponent implements OnInit {
     this.apiSubscription = this.profileHeaderService.GetPatientObservations(this.patientId, this.flag)
       .subscribe((res) => {
         _this.observationEntry = res;
-        if(res.length>0){
-        _this.modelBpFirst = _this.bpFirst = res[0].pBloodPressureL;
-        _this.modelBpLast = _this.bpLast = res[0].pBloodPressureR;
-        _this.modelPulse = _this.pulse = res[0].pPulse;
-        _this.modelHeight1 = _this.height1 = res[0].pHeightL;
-        _this.modelHeight2 = _this.height2 = res[0].pHeightR;
-        _this.modelWeight = _this.weight = res[0].pWeight;
-        _this.modelTemprature = _this.temprature = res[0].pTemperature;
-        _this.modelRespiratory = _this.respiratory = res[0].pRespiratory;
+        if (res.length > 0) {
+          _this.modelBpFirst = _this.bpFirst = res[0].pBloodPressureL;
+          _this.modelBpLast = _this.bpLast = res[0].pBloodPressureR;
+          _this.modelPulse = _this.pulse = res[0].pPulse;
+          _this.modelHeight1 = _this.height1 = res[0].pHeightL;
+          _this.modelHeight2 = _this.height2 = res[0].pHeightR;
+          _this.modelWeight = _this.weight = res[0].pWeight;
+          _this.modelTemprature = _this.temprature = res[0].pTemperature;
+          _this.modelRespiratory = _this.respiratory = res[0].pRespiratory;
         }
       },
         err => {
@@ -124,7 +129,11 @@ export class PatientProfileHeaderComponent implements OnInit {
   }
 
   goToCheckOut() {
-    this.router.navigateByUrl('/patient-flow-sheet');
+    if (this.ispatienthisttory) {
+      this.router.navigateByUrl('/patient-flow-sheet');
+    }else{
+      this.router.navigate(['/viewpatient-history'], { queryParams: { pid: this.patientInfo.patientId } });
+    }
   }
   // --BP Section --//
   public closeBp(myModal: string) {
@@ -273,10 +282,10 @@ export class PatientProfileHeaderComponent implements OnInit {
     // tslint:disable-next-line: triple-equals
     if (Height == 'H1') {
       this.height1 = event.target.value;
-    // tslint:disable-next-line: triple-equals
-    }    else if (Height == 'H2') {
+      // tslint:disable-next-line: triple-equals
+    } else if (Height == 'H2') {
       // this.Height2 = event.target.value;
- }
+    }
 
     const charCode = (event.which) ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -298,7 +307,7 @@ export class PatientProfileHeaderComponent implements OnInit {
     // alert(charCode);
     if (charCode === 46) {
       return true;
-    }    else if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    } else if (charCode > 31 && (charCode < 48 || charCode > 57)) {
       return false;
     }
 
@@ -312,17 +321,19 @@ export class PatientProfileHeaderComponent implements OnInit {
       this.modelHeight2 = this.height2;
       event.target.value = this.height2;
       this.validateHeight2(event.target.value);
-    }    else {
+    } else {
       this.validateHeight2(event.target.value);
       return true;
     }
   }
-
+  paste(e){
+    e.preventDefault();
+  }
   validateBp(BP: string) {
     // tslint:disable-next-line: triple-equals
     if ((BP != '' && Number(BP) >= 0)) {
       this.isModalBPValid = true;
-    }    else {
+    } else {
       this.isModalBPValid = false;
     }
   }
@@ -336,7 +347,7 @@ export class PatientProfileHeaderComponent implements OnInit {
     // tslint:disable-next-line: triple-equals
     if (height1 != '' && Number(height1) >= 0) {
       this.isModalHeightValid = true;
-    }    else {
+    } else {
       this.isModalHeightValid = false;
     }
   }
@@ -349,15 +360,26 @@ export class PatientProfileHeaderComponent implements OnInit {
     // tslint:disable-next-line: triple-equals
     if (height2 != '' && Number(height2) >= 0) {
       this.isModalHeightValid = true;
-    }    else {
+    } else {
       this.isModalHeightValid = false;
+    }
+  }
+  tempChecking(e){
+    if(e.target.value!="" && Number(e.target.value)>120){
+      e.target.value=120;
+    }
+  }
+  weightChecking(e){
+    console.log(e.target.value);
+    if(e.target.value!="" && Number(e.target.value)>200){
+      e.target.value=200;
     }
   }
   validateWeight(weight: string) {
     // tslint:disable-next-line: triple-equals
     if (weight != '' && Number(weight) >= 0) {
       this.isModalWeightValid = true;
-    }    else {
+    } else {
       this.isModalWeightValid = false;
     }
   }
@@ -366,7 +388,7 @@ export class PatientProfileHeaderComponent implements OnInit {
     // tslint:disable-next-line: triple-equals
     if (Pulse != '' && Number(Pulse) >= 0) {
       this.isModalPulseValid = true;
-    }    else {
+    } else {
       this.isModalPulseValid = false;
     }
   }
@@ -374,7 +396,7 @@ export class PatientProfileHeaderComponent implements OnInit {
     // tslint:disable-next-line: triple-equals
     if (Resp != '' && Number(Resp) >= 0) {
       this.isModalRespValid = true;
-    }    else {
+    } else {
       this.isModalRespValid = false;
     }
   }
@@ -382,7 +404,7 @@ export class PatientProfileHeaderComponent implements OnInit {
     // tslint:disable-next-line: triple-equals
     if (Temp != '' && Number(Temp) >= 0) {
       this.isModalTempValid = true;
-    }    else {
+    } else {
       this.isModalTempValid = false;
     }
   }

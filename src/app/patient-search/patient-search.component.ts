@@ -33,6 +33,9 @@ export class PatientSearchComponent implements OnInit {
   public isbackButtonVisible = false;
   public SearchDob: string;
   public Searchmode: string;
+  public Isactivated : string;
+  pageOfItems: Array<any>;
+
   constructor(private patientSearchService: PatientSearchService,
     private router: Router,
     private _avRoute: ActivatedRoute,
@@ -50,12 +53,15 @@ export class PatientSearchComponent implements OnInit {
       rcopiaId: '',
       rcopiaName: ''
     });
+    this.Isactivated="";
     if (this._avRoute.snapshot.queryParams.id) {
       this.urlflg = this._avRoute.snapshot.queryParams.id;
       this.isbackButtonVisible = true;
+      this.Isactivated="Y";
     }
     if (this._avRoute.snapshot.queryParams.mode) {
       this.Searchmode = this._avRoute.snapshot.queryParams.mode;
+      //this.Isactivated="Y";
       this.patientSearchService.setPatientSearchInfo('patientMode', this.Searchmode);
     }
   }
@@ -69,8 +75,7 @@ export class PatientSearchComponent implements OnInit {
     e.preventDefault();
     this.SearchDob = this.datePipe.transform(dob, 'yyyyMMdd');
     // alert(this.SearchDob);
-
-    this.patientSearchService.PerformPatientsearch(firstName, lastName, email, this.SearchDob, telecom, this.gender)
+    this.patientSearchService.PerformPatientsearch(firstName, lastName, email, this.SearchDob, telecom, this.gender,this.Isactivated)
       .subscribe((res) => {
         this.patientList = res as Patient[];
         if (this.patientList.length > 0) {
@@ -181,8 +186,12 @@ export class PatientSearchComponent implements OnInit {
       this.router.navigate(['/add-payment']);
       return;
     } 
-    else if (urlPatientQueryParam !== '') {
+    else if (urlPatientQueryParam == 'edit-patient') {
       this.router.navigate(['/patient-create'], { queryParams: { pid: patinetId } });
+      return;
+    }
+    else if (urlPatientQueryParam == 'patient-history') {
+      this.router.navigate(['/viewpatient-history'], { queryParams: { pid: patinetId } });
       return;
     }
     this.patientInfo.setValue({
@@ -211,5 +220,10 @@ export class PatientSearchComponent implements OnInit {
     if (this.urlflg > 0) {
       this.router.navigate(['/book-appointment']);
     }
+  }
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }

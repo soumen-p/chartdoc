@@ -14,7 +14,7 @@
             <div class="page-title">
                 <div class="float-left">
                     <!-- PAGE HEADING TAG - START -->
-                    <h1 class="title">DOCTOR SCHEDULE</h1>
+                    <h1 class="title">Doctor Schedule</h1>
                     <!-- PAGE HEADING TAG - END -->
                 </div>
             </div>
@@ -32,8 +32,8 @@
                                     <ngb-datepicker #dp [minDate]="minDate" (dateSelect)="datechange($event)"
                                         style="background-color: white;"></ngb-datepicker>
                                 </div>
-                                <div #external id="external-events">
-                                    <div id="external-events-list">
+                                <div #external id="external-events" style="display: none;"> 
+                                    <div  id="external-events-list">
                                         <div class="fc-event">&nbsp;Drag and Drop to book appointment</div>
                                     </div>
                                     <p style="display: none;">
@@ -54,8 +54,8 @@
                                       }" [defaultDate]="defaultDate" minTime="08:00:00" maxTime="18:00:00"
                                     slotDuration="00:15:00" slotLabelInterval="00:15" [resources]="calendarreSources"
                                     [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents"
-                                    (eventClick)="rowclick($event)" (eventDrop)="eventDrop($event)"
-                                    (drop)="drop($event)"></full-calendar>
+                                    (eventClick)="rowclick($event)" (eventDrop)="eventDrop($event)" [selectable]="selectable"
+                                    (drop)="drop($event)"(select) ="select($event)"></full-calendar>
                             </div>
                         </div>
                     </div>
@@ -64,3 +64,20 @@
         </div>
     </section>
 </section>
+
+<div class="example-wrapper">
+    <div id="modalmarkDelete" class="modal">
+        <div class="modal-content1">
+            <h4 class="textcolor">Scheduling an appointment between</h4>
+       
+        <h4 class="textcolor"> {{timerange}} ?</h4>
+       
+            <div class="row">
+                <div class="svbutton"> 
+                    <button type="button" class="btn btn-primary" (click)="openModal('modalmarkDelete','')">Yes</button> &nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary " type="button" (click)="closePopup('modalmarkDelete')">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

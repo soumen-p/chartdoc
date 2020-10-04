@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 
 const baseEndPointFamiles = 'api/ChartDoc/GetFamilies';
 const baseEndPointSocials = 'api/ChartDoc/GetSocials';
+const baseEndPointVitalsHistory = 'api/ChartDoc/PatientVitalsHistory?patientId=';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,5 +23,10 @@ export class PatientSocialFamilyService {
   }
   getPatientDetails(patientInfo: string) {
     return this.sharedService.getLocalItem(patientInfo);
+  }
+  getVitalsHistory(patientId: string, flag: string): Observable<any> {
+    //patientId = btoa(patientId);
+   // return this.httpClient.get(environment.baseUrl + baseEndPointVitalsHistory + `/${patientId}`);
+   return this.httpClient.get(environment.baseUrl + baseEndPointVitalsHistory +patientId);
   }
 }

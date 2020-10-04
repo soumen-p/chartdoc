@@ -10,7 +10,7 @@
 </div>
 <div>
     <!-- START CONTENT -->
-    <section id="main-content" class=" ">
+    <section id="main-content" class="sidebar_shift">
         <section class="wrapper main-wrapper row">
 
             <div class='col-12'>
@@ -43,7 +43,8 @@
                                                 <div class="form-group col-md-3">
                                                     <label for="inputEmail4">Type:</label>
                                                     <select class="form-control" name="" id="TypeId"
-                                                        formControlName="Type" selected
+                                                    [(ngModel)]="selectedTypeId"  [ngModelOptions]="{standalone: true}"
+                                                       selected
                                                         (change)="selectChangeHandler($event)">
                                                         <option value="">--Select--</option>
                                                         <option *ngFor="let item of Types" value="{{item.id}}">
@@ -51,14 +52,19 @@
                                                     </select>
                                                     <!-- <input type="text" class="form-control" > -->
                                                 </div>
-                                                <div class="form-group col-md-4">
+                                                <div [ngClass]="divclass1"  *ngIf="tableId==4?true:false">
+                                                    <label for="inputPassword4">Code</label>
+                                                    <input class="form-control"  id="field-5"  [(ngModel)]="code" [ngModelOptions]="{standalone: true}" cols="5" rows="1" (change)="updatecode($event)" >
+                                                </div>
+                                                <div [ngClass]="divclass" >
                                                     <label for="inputPassword4">Description</label>
-                                                    <textarea class="form-control" #Description cols="5" rows="1" id="field-6"></textarea>
+                                                    <textarea class="form-control" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"  cols="5" rows="1" id="field-6"></textarea>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label for="inputPassword4">&nbsp;</label>
                                                     <br>
-                                                    <button type="button" class="btn btn-primary" (click)="SaveOther(Description.value)">Finish</button>&nbsp;&nbsp;
+                                                
+                                                    <button type="button"  class="btn btn-primary" (click)="SaveOther()">Finish</button>&nbsp;&nbsp;
                                                     <button type="button" class="btn" [routerLink]="['/app-general']">Cancel</button>
                                                 </div>
                                             </div>

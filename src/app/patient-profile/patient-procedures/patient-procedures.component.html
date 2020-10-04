@@ -21,7 +21,7 @@
                                             </h2>
                                         </td>
                                         <td align="right">                                           
-                                            <button kendoButton  class="btn btn-success btn-corner" style="width:120px; font-size: 16px;"
+                                            <button kendoButton  *ngIf="patienthisttory" class="btn btn-success btn-corner" style="width:120px; font-size: 16px;"
                                             (click)="openModelProcedure('ModelProcedure')" [disabled]="isPosCheckout"
                                            >Upload</button>
                                         </td>
@@ -29,7 +29,7 @@
                                 </table>
                                 
                                 <div style="height: 200px;overflow-y:scroll;overflow-x:hidden">
-                                <div class="card" *ngFor="let element of proceduresEntry" >
+                                <div class="card" *ngFor="let element of pageOfItems" >
                                     <div class="card-header" role="tab" id="headingTwo">
                                         <div class="row">
                                             <div class="col-12">
@@ -46,11 +46,14 @@
                                                         -  {{element.doctorProfile}}
                                                         </h5>
                                                     </a>
-                                                </div>
+                                                </div>                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="card-footer pb-0 pt-3">
+                                    <jw-pagination [items]="proceduresEntry" [pageSize]="4" (changePage)="onChangePage($event)"></jw-pagination>
+                                </div> 
                             </div>
                             </div>
                         </div>

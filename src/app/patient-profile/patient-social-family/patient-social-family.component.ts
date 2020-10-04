@@ -15,6 +15,8 @@ export class PatientSocialFamilyComponent implements OnInit {
   patientFamilyss: PatientFamilyModel[] = [];
   flag: any;
   patientId: any;
+  pageOfItems: Array<any>;
+  pageOfItemsfamily: Array<any>;
   patientSocials: PatientSocialModel[] = [
     {
       addiection: 'Tobacco',
@@ -71,5 +73,13 @@ export class PatientSocialFamilyComponent implements OnInit {
         err => {
           console.log(err);
         });
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+  }
+  onChangePagefamily(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItemsfamily = pageOfItems;
   }
 }
