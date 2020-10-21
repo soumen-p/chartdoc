@@ -222,22 +222,22 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a [routerLink]="['/create-charge']" [queryParams]=" {id:-1}">Create Charge</a>
+                        <a [routerLink]="['/create-charge']" [queryParams]=" {id:-1}" (click)="deleteData()" >Create Charge</a>
                     </li>
                     <li>
-                        <a [routerLink]="['/create-claim']" [queryParams]=" {id:1}">Create Claim</a>
+                        <a [routerLink]="['/create-claim']" [queryParams]=" {id:1}" (click)="deleteData()">Create Claim</a>
                     </li>
                     <li>
-                        <a [routerLink]="['/resubmit-claim']" [queryParams]=" {id:2}">Resubmit Claim</a>
+                        <a [routerLink]="['/resubmit-claim']" [queryParams]=" {id:2}" (click)="deleteData()">Resubmit Claim</a>
                     </li>
                     <li>
-                        <a [routerLink]="['/manage-claim']" [queryParams]=" {id:3}">Manage Claim</a>
+                        <a [routerLink]="['/manage-claim']" [queryParams]=" {id:3}" (click)="deleteData()">Manage Claim</a>
                     </li>
                     <li>
-                        <a [routerLink]="['/create-eob']" [queryParams]=" {id:9}">EOB</a>
+                        <a [routerLink]="['/create-eob']" [queryParams]=" {id:9}" (click)="deleteData()">EOB</a>
                     </li>
                     <li>
-                        <a [routerLink]="['/payment']" [queryParams]=" {id:10}">Payment</a>
+                        <a [routerLink]="['/payment']" [queryParams]=" {id:10}" (click)="deleteData()">Payment</a>
                     </li>
                     <!-- <li>
                         <a class="disabledmenu" [routerLink]="">Payments</a>
@@ -250,7 +250,22 @@
                     </li> -->
                 </ul>
             </li>
-           
+            <li class="">
+                <a href="javascript:;">
+                    <i class="fa fa-file"></i>
+                    <span class="title">Report</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a  [routerLink]="['/party-ledger']"  (click)="deleteData()">Party Ledger</a>
+                    </li>
+                    <li>
+                        <a  [routerLink]="['/patient-balance']"  (click)="deleteData()">Patient Balance</a>
+                    </li>
+                    
+                </ul>
+            </li>
         </ul>
        
     </div>

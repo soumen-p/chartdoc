@@ -42,6 +42,8 @@ import {AddPaymentModule} from './billing/add-payment/add-payment.module'
 
 import { SpecialtyModule } from './master/specialty/specialty.module';
 import {  RoleModule} from './master/role/role.module';
+import {PartyLedgerModule} from './report/party-ledger/party-ledger.module';
+import {PatientBalanceModule} from './report/patient-balance/patient-balance.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -88,6 +90,8 @@ import {  RoleModule} from './master/role/role.module';
     AddPaymentModule,
     SpecialtyModule,
     RoleModule,
+    PartyLedgerModule,
+    PatientBalanceModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
     ToastrModule.forRoot()

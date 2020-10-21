@@ -9,8 +9,8 @@
     <app-side-menu></app-side-menu>
 </div>
  <!-- START CONTENT -->
- <section id="main-content" class=" ">
-    <section class="wrapper main-wrapper row" style=''>
+ <section id="main-content" class="sidebar_shift">
+    <section class="wrapper main-wrapper row" >
 
         <div class='col-12'>
             <div class="page-title">
@@ -31,7 +31,7 @@
                         <div class="col-10"><h2 class="title float-left">Claim Field Master</h2></div>
                          <div class="col-2" style="padding-top: 25px;">
                              <button type="button" class="btn btn-primary" (click) = "saveClaimFieldsDetails()">Finish</button>
-                             <button type="button" [routerLink]="['/app-claim-field-master']" class="btn">Cancel</button>
+                                &nbsp; <button type="button" [routerLink]="['/app-claim-field-master']" class="btn">Cancel</button>
                          </div>
                     </div>                               
                 </header>
@@ -45,7 +45,7 @@
                                     <div class="form-row">                                                	
                                         <div class="form-group col-md-4">
                                             <label class="form-label">Name</label>
-                                            <input class="form-control" name="doctor"  type="text" [(ngModel)]="claimName" >
+                                            <input class="form-control" name="doctor" maxlength="250"  type="text" [(ngModel)]="claimName" >
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label class="form-label">Type </label>
@@ -59,7 +59,7 @@
                                     <div class="form-row" id="typeshow"  [hidden]="drpType!='D'" > 
                                         <div class="form-group col-md-3">
                                             <label class="form-label">Value </label>
-                                            <input class="form-control" name="value " type="text" [(ngModel)] ="claimDetailValue" >
+                                            <input class="form-control" name="value "  maxlength="250"  type="text" [(ngModel)] ="claimDetailValue" >
                                         </div>                                                    
                                         <div class="form-group col-md-3" style="padding-top:30px;">														
                                             <button type="button" class="btn btn-primary" (click)="addClaimDetail()" >Add</button>

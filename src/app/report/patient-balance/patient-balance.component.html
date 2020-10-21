@@ -18,7 +18,7 @@
 
                         <div class="float-left">
                             <!-- PAGE HEADING TAG - START -->
-                            <h1 class="title">Master</h1><!-- PAGE HEADING TAG - END -->                            </div>
+                            <h1 class="title">Report</h1><!-- PAGE HEADING TAG - END -->                            </div>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -27,11 +27,8 @@
                 <div class="col-xl-12">
                     <section class="box ">
                         <header class="panel_header">
-                            <h2 class="title float-left">Payment</h2>
-                            <h2 class="title float-right h5 pr-2">
-                            <button type="button" class="btn btn-success btn-corner" 
-                            (click)='addPayment()'>
-                            <span class="h5">Add</span></button></h2>
+                            <h2 class="title float-left">Patient Balance</h2>
+                           
                         </header>
                         <div class="content-body">
                              <div class="row">
@@ -39,16 +36,9 @@
 
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12 col-xl-12">
-                                            <form  [formGroup]="paymentFormGroup" name="searchBilling">
+                                            <form  [formGroup]="partybalanceFormGroup" name="searchBilling">
                                                 <div class="form-row">
-                                                    <div class="col-md-2">
-                                                        <label for="inputPassword4"><strong>From Date</strong></label>
-                                                        <input type="date" class="form-control" formControlName="fromDate">
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label for="inputPassword4"><strong>To Date</strong></label>
-                                                        <input type="date" class="form-control" formControlName="toDate">
-                                                    </div>
+                                                    
                                                     <div class="col-md-2">
                                                         <label class="form-label">Patient</label>
                                                         <input class="form-control" name="patient" type="text"
@@ -56,42 +46,51 @@
                                                             
                                                     </div>
                                                     <div class="col-md-1">                                                
-                                                        <button type="button" style="margin:32px 10px 10px 10px;" class="btn btn-primary vimeo" (click)="searchPatient()" >
+                                                        <button type="button" style="margin:32px 10px 10px 10px;" class="btn btn-primary vimeo" 
+                                                        (click)="searchPatient()" >
                                                             <i class="fa fa-search vimeo-square"></i>
                                                         </button>
                                                     </div>
-                                                    <div class="col-md-4">     </div>
+                                                    <div class="col-md-4" *ngIf="show" > 
+                                                        <button type="button"   style="margin-top:32px;" class="btn btn-primary btn-icon bottom15 right15"
+                                                        (click)="ExportTOExcel()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> &nbsp;
+                                                        <span>Excel</span></button>   
+                                                    </div>
                                                     <div class="col-md-1">
                                                         
                                                         <button type="button"  style="margin-top:32px;" class="btn btn-success btn-icon bottom15 right15"
-                                                            (click)="searchBill()"><i class="fa fa-search"></i> &nbsp;
+                                                            (click)="search()"><i class="fa fa-search"></i> &nbsp;
                                                             <span>Search</span></button>
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="col-md-12 col-lg-12 col-xl-12">
+                                        <div class="col-md-12 col-lg-12 col-xl-12" #TABLE #table>
                                             <table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
                                         <thead style="background: #678680;">
                                             <tr>
-                                                <th>Patient Name </th>
-                                                <th>Date</th>
-                                                <th>Payment Type </th>
-                                                <th>Amount</th>
-                                                <th>Action</th>
+                                                
+                                                <th>Patient Name</th>
+                                                <th>Mobile </th>
+                                                <th>Email</th>
+                                                <th>Address</th>
+                                                <th>Total BillValue</th>
+                                                <th>Already Paid</th>
+                                                <th>Total Outstanding</th>
                                             </tr>
                                         </thead>
 
-                                        <tbody *ngFor="let payment of paymentList">
+                                        <tbody *ngFor="let patientbalance of patientbalancelist">
                                             <tr>
-                                                <td>{{payment.PatientName}}</td>
-                                                <td>{{payment.paymentDate | date:'dd-MM-yyyy'}}</td>
-                                                <td>{{payment.typeOfTxnName}}</td>
-                                                <td>{{payment.amount}}</td>
-                                                <td>
-                                                <button type="button" class="btn btn-success" (click)='editPayment(payment)'><i class="fa fa fa-pencil text-white"></i></button>
-                                                 <button type="button" class="btn btn-danger" (click)='deletePayment(payment)'><i class="fa fa-trash-o text-white"></i></button>
-                                            </td>
+                                                
+                                                <td>{{patientbalance.patientName}}</td>
+                                                <td>{{patientbalance.mobile}}</td>
+                                               
+                                                <td>{{patientbalance.email}}</td>
+                                                <td>{{patientbalance.address}}</td>
+                                                <td>{{patientbalance.totalBillValue}}</td>
+                                                <td>{{patientbalance.alreadyPaid}}</td>
+                                                <td>{{patientbalance.totalOutstanding}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

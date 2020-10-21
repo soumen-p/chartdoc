@@ -9,8 +9,8 @@
     <app-side-menu></app-side-menu>
 </div>
 <!-- START CONTENT -->
-<section id="main-content" class=" ">
-    <section class="wrapper main-wrapper row" style=''>
+<section id="main-content" class="sidebar_shift">
+    <section class="wrapper main-wrapper row" >
 
         <div class='col-12'>
             <div class="page-title">
@@ -59,7 +59,7 @@
                                         <td>{{claimItem.type}}</td>
                                        
                                         <td>
-                                            <button type="button" class="btn btn-success" (click)="editClaimMaster(claimItem)"><i class="fa fa fa-pencil text-white"></i></button>
+                                            <button type="button" class="btn btn-success" (click)="editClaimMaster(claimItem)"><i class="fa fa fa-pencil text-white"></i></button>&nbsp;
 
                                             <button type="button" class="btn btn-danger" (click)="deleteClaimMaster(claimItem)"><i class="fa fa-trash-o text-white"></i></button>
                                             

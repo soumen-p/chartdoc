@@ -33,7 +33,7 @@
                             <div class="col-10"><h2 class="title float-left">Charge Master</h2></div>
                              <div class="col-2" style="padding-top: 25px;">
                                      <button type="button" class="btn btn-primary " (click) ="saveChargeDetails($event)">Finish</button>
-                                    <button type="button"  class="btn" onclick="window.location.href = '#';">Cancel</button>
+                                    <button type="button"  class="btn" (click)="onCancel()">Cancel</button>
                              </div>
                         </div>                               
                     </header>
@@ -105,13 +105,13 @@
                                                            <div class="col-12">
                                                             <div class="wid-notification">
                                                               <div class="input-group mb-3">
-                                                                    <input style="border-radius: 10px; background: #fff; color: #000;" type="text" class="form-control" placeholder="Recipient's username" 
+                                                                    <input style="border-radius: 10px; background: #fff; color: #000;" type="text" class="form-control" placeholder="Type CPT Code or Description" 
                                                                     [(ngModel)]="searchTerm"                                       
-                                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                                                    aria-label="Type CPT Code or Description" aria-describedby="basic-addon2">
                                                                     <i class="fa fa-search icon"></i> 
                                                                 </div>
                                                                 <div style="height: 300px;overflow-y:scroll;">
-                                                                    <div class="accordion-group" *ngFor="let cptdetail of cptDetailss | PatientCPTSearchFilter:{Code: searchTerm, Desc:searchTerm}">
+                                                                    <div class="accordion-group" *ngFor="let cptdetail of cptDetailss | cptSearchFilter:{code: searchTerm, desc:searchTerm}">
                                                                         <div class="card">
                                                                         <div class="card-header">
                                                                             <div class="row">

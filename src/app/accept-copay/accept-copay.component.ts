@@ -111,6 +111,7 @@ export class AcceptcopayComponent implements OnInit {
                   String(this.acceptcopayForm.value.paydate.getDate()).padStart(2, '0') + "" +
                   this.acceptcopayForm.value.paydate.getFullYear()
             });
+            let coAmt=this.acceptcopayForm.value.amount;
             this._acceptcopayService.saveCopay(this.acceptcopayForm.value)
                 .subscribe((res) => {
                     console.log('Response:%o', res);
@@ -119,6 +120,7 @@ export class AcceptcopayComponent implements OnInit {
                     this.router.navigate(['/flowsheet-book-appointment'],{queryParams:{id:1}});
                     }else{
                         localStorage.setItem("acceptcopay", JSON.stringify("Yes"));
+                        localStorage.setItem("acceptcoamt", JSON.stringify(coAmt));
                         this.router.navigate(['/'+this.urlBack],{queryParams:{id:-1, appid:this.ApppointmentId}});
                         
                     }
@@ -140,11 +142,24 @@ export class AcceptcopayComponent implements OnInit {
         if(this.urlBack==""){
             this.router.navigate(['/flowsheet-book-appointment'],{queryParams:{id:1}});
             }else{
-                localStorage.setItem("acceptcopay", "Yes");
+                localStorage.setItem("acceptcopay", JSON.stringify("Yes"));
+                localStorage.setItem("acceptcoamt", JSON.stringify(0));
                 this.router.navigate(['/'+this.urlBack],{queryParams:{id:-1, appid:this.ApppointmentId}});
             }
     }
-
+    numberOnly(event: any): boolean {
+        const charCode = (event.which) ? event.which : event.keyCode;
+        if (charCode != 46 && charCode != 45 && charCode > 31
+          && (charCode < 48 || charCode > 57)) {
+          return false;
+        }
+        return true;
+    
+    
+      }
+      paste(e){
+        e.preventDefault();
+      }
 
 
 }

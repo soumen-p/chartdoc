@@ -2,7 +2,7 @@
     <section class="box nobox ">
         <div class="content-body">
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-12">
                     <div class="wid-notification">
                         <div class="input-group mb-3">
                             <input style="border-radius: 10px; background: #fff; color: #000;" type="text"
@@ -11,7 +11,7 @@
                                 aria-describedby="basic-addon2">
                             <i class="fa fa-search icon"></i>
                         </div>
-                        <div style="height: 620px;overflow-y:scroll;">
+                        <div style="height: 300px;overflow-y:scroll;">
                             <div class="accordion-group"
                                             *ngFor="let detail of details | commonSearchFilter: {code: searchTerm, desc:searchTerm}">
                                 <div class="card">

@@ -90,7 +90,7 @@
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="inputPassword4">Amount<span class="text-danger"> *</span></label>
-                                                    <input type="text"  class="form-control" formControlName="amount"  >
+                                                    <input type="text"  class="form-control" (paste)="paste($event)" (keypress)="numberOnly($event)" formControlName="amount"  >
                                                     <span class="text-danger" *ngIf="acceptcopayForm.hasError('required', ['amount']) && formDir.submitted">
                                                        Amount is required.
                                                     </span>

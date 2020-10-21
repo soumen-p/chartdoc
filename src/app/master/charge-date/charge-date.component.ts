@@ -104,6 +104,8 @@ export class ChargeDateComponent implements OnInit {
       }
       else{
         this.toastr.errorToastr(response[1]);
+        this.closePopuop('modalmarkDelete');
+        this.getAllChargeDates();
       }
       
     }, err => {

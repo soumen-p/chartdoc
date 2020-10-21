@@ -11,52 +11,54 @@ import { Router } from '@angular/router';
 })
 export class AddChargeDateComponent implements OnInit {
   formData: FormData;
-  
-  description : string;
+
+  description: string;
   chargeDate_FormGroup = new FormGroup({
-    
-    toDate: new FormControl(''),
-    fromDate: new FormControl(''),
+
+    toDate: new FormControl('', [Validators.required]),
+    fromDate: new FormControl('', [Validators.required]),
 
   });
 
-  constructor(private serviceMasterService: ServiceMasterService, 
-    public toastr: ToastrManager,private datePipe: DatePipe, private router: Router) {
+  constructor(private serviceMasterService: ServiceMasterService,
+    public toastr: ToastrManager, private datePipe: DatePipe, private router: Router) {
     this.formData = new FormData();
-   }
-  
+  }
+
   ngOnInit() {
   }
 
   saveChargeDate() {
     let fromDateValue = this.chargeDate_FormGroup.value["fromDate"];
     let toDateValue = this.chargeDate_FormGroup.value["toDate"];
-    this.description = this.datePipe.transform(fromDateValue, 'MMddyyyy') + "-" + this.datePipe.transform(toDateValue, 'MMddyyyy'); 
-    
+    this.description = this.datePipe.transform(fromDateValue, 'MMddyyyy') + "-" + this.datePipe.transform(toDateValue, 'MMddyyyy');
+
     var data = {
-      id:0, 
+      id: 0,
       startDate: this.datePipe.transform(fromDateValue, 'MM/dd/yyyy'),
-      endDate: this.datePipe.transform(toDateValue, 'MM/dd/yyyy') , 
-      description: this.description ,
-      status : 'A'
-                };
+      endDate: this.datePipe.transform(toDateValue, 'MM/dd/yyyy'),
+      description: this.description,
+      status: 'A'
+    };
+    if (this.chargeDate_FormGroup.valid) {
+      this.serviceMasterService.saveChargeDate(data).subscribe((res) => {
+        let response = res.split('|');
+        if (response[0] == '1') {
+          this.toastr.successToastr(response[1]);
+          //Redirect to Master page
+        this.router.navigate(['/app-charge-date']);
+        }
+        else {
+          this.toastr.errorToastr(response[1]);
+        }
+      }, err => {
+        console.log("error");
+      });
 
-    this.serviceMasterService.saveChargeDate(data).subscribe((res) => {
-      let response = res.split('|');
-      if(response[0] == '1'){
-        this.toastr.successToastr(response[1]);
-      }
-      else{
-        this.toastr.errorToastr(response[1]);
-      }
-      
-//Redirect to Master page
-this.router.navigate(['/app-charge-date']);
-
-    }, err => {
-      console.log("error");
-    });
-
+    }
+    else {
+     this.toastr.errorToastr("Please fill all the mendatory fields","Error");
+    }
   }
 
 }

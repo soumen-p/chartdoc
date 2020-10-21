@@ -33,7 +33,7 @@ export class PatientSearchComponent implements OnInit {
   public isbackButtonVisible = false;
   public SearchDob: string;
   public Searchmode: string;
-  public Isactivated : string;
+  public Isactivated: string;
   pageOfItems: Array<any>;
 
   constructor(private patientSearchService: PatientSearchService,
@@ -53,11 +53,11 @@ export class PatientSearchComponent implements OnInit {
       rcopiaId: '',
       rcopiaName: ''
     });
-    this.Isactivated="";
+    this.Isactivated = "";
     if (this._avRoute.snapshot.queryParams.id) {
       this.urlflg = this._avRoute.snapshot.queryParams.id;
       this.isbackButtonVisible = true;
-      this.Isactivated="Y";
+      this.Isactivated = "Y";
     }
     if (this._avRoute.snapshot.queryParams.mode) {
       this.Searchmode = this._avRoute.snapshot.queryParams.mode;
@@ -75,7 +75,7 @@ export class PatientSearchComponent implements OnInit {
     e.preventDefault();
     this.SearchDob = this.datePipe.transform(dob, 'yyyyMMdd');
     // alert(this.SearchDob);
-    this.patientSearchService.PerformPatientsearch(firstName, lastName, email, this.SearchDob, telecom, this.gender,this.Isactivated)
+    this.patientSearchService.PerformPatientsearch(firstName, lastName, email, this.SearchDob, telecom, this.gender, this.Isactivated)
       .subscribe((res) => {
         this.patientList = res as Patient[];
         if (this.patientList.length > 0) {
@@ -124,19 +124,19 @@ export class PatientSearchComponent implements OnInit {
         (this.telecom === '' ?
           (this.firstName === '' ?
             (this.lastName === '' ?
-			        (this.middleName === '' ? this.getAllPatients()
-			    : result.middleName.trim().toLowerCase().match(this.middleName.toLowerCase()))	
-          : result.middleName.trim().toLowerCase().match(this.middleName.toLowerCase()) && result.LastName.trim().toLowerCase().match(this.lastName.toLowerCase()))			
-          : result.middleName.trim().toLowerCase().match(this.middleName.toLowerCase()) && result.LastName.trim().toLowerCase().match(this.lastName.toLowerCase()) && result.FirstName.trim().toLowerCase().match(this.firstName.toLowerCase())) 
-			    : result.middleName.trim().toLowerCase().match(this.middleName.toLowerCase()) && result.LastName.trim().toLowerCase().match(this.lastName.toLowerCase()) && result.FirstName.trim().toLowerCase().match(this.firstName.toLowerCase()) && result.MobNo.trim().toLowerCase().match(this.telecom.toLowerCase())) 
-		      : result.middleName.trim().toLowerCase().match(this.middleName.toLowerCase()) && result.LastName.trim().toLowerCase().match(this.lastName.toLowerCase()) && result.FirstName.trim().toLowerCase().match(this.firstName.toLowerCase()) && result.MobNo.trim().toLowerCase().match(this.telecom.toLowerCase()) && result.Gender.trim().toLowerCase() === this.gender.toLowerCase()) {
+              (this.middleName === '' ? this.getAllPatients()
+                : result.middleName.trim().toLowerCase().match(this.middleName.toLowerCase()))
+              : result.middleName.trim().toLowerCase().match(this.middleName.toLowerCase()) && result.LastName.trim().toLowerCase().match(this.lastName.toLowerCase()))
+            : result.middleName.trim().toLowerCase().match(this.middleName.toLowerCase()) && result.LastName.trim().toLowerCase().match(this.lastName.toLowerCase()) && result.FirstName.trim().toLowerCase().match(this.firstName.toLowerCase()))
+          : result.middleName.trim().toLowerCase().match(this.middleName.toLowerCase()) && result.LastName.trim().toLowerCase().match(this.lastName.toLowerCase()) && result.FirstName.trim().toLowerCase().match(this.firstName.toLowerCase()) && result.MobNo.trim().toLowerCase().match(this.telecom.toLowerCase()))
+        : result.middleName.trim().toLowerCase().match(this.middleName.toLowerCase()) && result.LastName.trim().toLowerCase().match(this.lastName.toLowerCase()) && result.FirstName.trim().toLowerCase().match(this.firstName.toLowerCase()) && result.MobNo.trim().toLowerCase().match(this.telecom.toLowerCase()) && result.Gender.trim().toLowerCase() === this.gender.toLowerCase()) {
         this.patientList.push(result);
       }
     });
   }
 
-  viewPatientDetails(patinetId: string, flag: string, patientFirstName: string, patientLastName: string,patientMiddleName: string, patientImagePath: string,
-                     patientAge: string, patientGender: string, rcopiaId: string, rcopiaName: string, email: string, mobNo: string
+  viewPatientDetails(patinetId: string, flag: string, patientFirstName: string, patientLastName: string, patientMiddleName: string, patientImagePath: string,
+    patientAge: string, patientGender: string, rcopiaId: string, rcopiaName: string, email: string, mobNo: string
     , dob: string, gender: string, address: string) {
     let urlPatientQueryParam = '';
     if (this._avRoute.snapshot.queryParams.mode) {
@@ -170,8 +170,8 @@ export class PatientSearchComponent implements OnInit {
 
       this.router.navigate(['/book-appointment']);
       return;
-    } 
-    else if (this.urlflg ==2) {
+    }
+    else if (this.urlflg == 2) {
       this.patientSearchService.setPatientSearchInfo('addPaymentInfo', {
         'patientname': patientFirstName.trim() + ' ' + patientLastName.trim(),
         'patientId': patinetId,
@@ -185,7 +185,7 @@ export class PatientSearchComponent implements OnInit {
       });
       this.router.navigate(['/add-payment']);
       return;
-    } 
+    }
     else if (urlPatientQueryParam == 'edit-patient') {
       this.router.navigate(['/patient-create'], { queryParams: { pid: patinetId } });
       return;
@@ -193,6 +193,45 @@ export class PatientSearchComponent implements OnInit {
     else if (urlPatientQueryParam == 'patient-history') {
       this.router.navigate(['/viewpatient-history'], { queryParams: { pid: patinetId } });
       return;
+    }
+    else if (urlPatientQueryParam == '-1' || urlPatientQueryParam == '1' || urlPatientQueryParam == '2' || urlPatientQueryParam == '3'  || urlPatientQueryParam == '9'  
+    || urlPatientQueryParam == '10' || urlPatientQueryParam == '11' ||  urlPatientQueryParam == '12') {
+      this.patientSearchService.setPatientSearchInfo('patientInfo', {
+        'patientname': patientFirstName.trim() + ' ' + patientLastName.trim(),
+        'patientId': patinetId
+      });
+      if (urlPatientQueryParam == '-1') {
+        this.router.navigate(['/create-charge'], { queryParams: { id: urlPatientQueryParam } });
+        return;
+      }
+      else if (urlPatientQueryParam == '1') {
+        this.router.navigate(['/create-claim'], { queryParams: { id: urlPatientQueryParam } });
+        return;
+      }
+      else if (urlPatientQueryParam == '2') {
+        this.router.navigate(['/resubmit-claim'], { queryParams: { id: urlPatientQueryParam } });
+        return;
+      }
+      else if (urlPatientQueryParam == '3') {
+        this.router.navigate(['/manage-claim'], { queryParams: { id: urlPatientQueryParam } });
+        return;
+      }
+      else if (urlPatientQueryParam == '9') {
+        this.router.navigate(['/create-eob'], { queryParams: { id: urlPatientQueryParam } });
+        return;
+      }
+      else if (urlPatientQueryParam == '10') {
+        this.router.navigate(['/payment'], { queryParams: { id: urlPatientQueryParam } });
+        return;
+      }
+      else if (urlPatientQueryParam == '11') {
+        this.router.navigate(['/party-ledger'], { queryParams: { id: urlPatientQueryParam } });
+        return;
+      }
+      else if (urlPatientQueryParam == '12') {
+        this.router.navigate(['/patient-balance'], { queryParams: { id: urlPatientQueryParam } });
+        return;
+      }
     }
     this.patientInfo.setValue({
       patientId: patinetId,

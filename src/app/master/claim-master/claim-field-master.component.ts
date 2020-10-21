@@ -54,11 +54,11 @@ public openmodal(myModal: string, value: any) {
   this.claimFieldMasterService.saveClaimFieldsDetails(claimFieldData)
     .subscribe(
       data => {
-        if (data == null) {
-          this.toastr.successToastr('Operation Successful');
+        if (data == "1") {
+          this.toastr.successToastr("Record deleted sucessfully..");
           this.getClaimFieldsHeader();
         }  else {
-          this.toastr.successToastr('Operation Unsuccessful');
+          this.toastr.errorToastr("Record cannot be deleted..");
         }
       }
     );

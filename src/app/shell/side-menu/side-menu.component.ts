@@ -18,5 +18,8 @@ export class SideMenuComponent implements OnInit {
     this.drName = this.sharedService.getLocalItem('doctorInfo').doctorName;
     this.drImagePath = this.sharedService.getLocalItem('doctorInfo').doctorImage;
   }
-
+  deleteData() {
+    this.sharedService.removeLocalStorage('patientInfo');
+    this.sharedService.removeLocalStorage('dateInfo'); 
+  }
 }

@@ -50,7 +50,7 @@ export class ServiceMasterService {
     return this.http.get(environment.baseUrl + CHARGEDETAILS + "/" + chargeYearId );
   }
 
-  saveChargeDetails(cptDetailsData: ChargeCPTModel): Observable<any> {
+  saveChargeDetails(cptDetailsData: ChargeCPTModel[]): Observable<any> {
     return this.http.post(environment.baseUrl + SAVECHARGEDETAILS, cptDetailsData, {responseType: 'text'});
 
   }

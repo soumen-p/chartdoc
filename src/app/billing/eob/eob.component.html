@@ -55,7 +55,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Date</label>
-                                                <input class="form-control" disabled formControlName="date" name="date" type="text" placeholder="04/04/2020">
+                                                <input class="form-control" disabled formControlName="date1" name="date" type="text" placeholder="04/04/2020">
                                             </div> 
                                         </div>
                                         <div class="form-row"> 
@@ -73,11 +73,11 @@
                                             </div> 
                                         </div>
                                         <div class="form-row"> 
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Reference by</label>
                                                 <input class="form-control" disabled formControlName="referenceName" name="referenceName" type="text">
                                             </div>
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">File As  </label>
                                                 <input class="form-control"  disabled formControlName="fileAsName" name="fileAsName" type="text">
                                             </div>
@@ -86,9 +86,10 @@
                                                 <input class="form-control" disabled formControlName="insuranceName1" name="insuranceName1" type="text">
                                             </div>
                                             
-                                            <label class="col-1 col-form-label" style="padding-top:35px;">Denied</label>
-                                            <div class="form-group col-md-2" style="padding-top:35px;">                                                   														
-                                                <input class="form-check-input" disabled formControlName="denied" type="checkbox">
+                                            
+                                            <div class="form-group col-md-1" style="padding-top:35px; padding-left: 0px; padding-right: 0px;">   
+                                                <label class="form-label" style="margin-right: 30px; font-weight: bold;">Denied</label>                                                														
+                                                <input class="form-check-input"  formControlName="denied" type="checkbox">
                                             </div>
                                             
                                         </div>  
@@ -109,7 +110,7 @@
                                         <th>Insurance Adjustment (D)</th>
                                         <th>Misc Adjustment (E)</th>
                                         <th>Reason</th>
-                                        <th>Insurance Balance</th>
+                                        <th>Insurance Balance(F)</th>
                                         <th>Balance(A-B-C-D-E-F)
 </th>
                                     </tr>
@@ -117,22 +118,23 @@
                                 <tbody>
                                     
                                     <tr *ngFor="let detail of chargePatientDetails; let i=index">
-                                        <td><input class="form-control" type="text" [value]="detail.date" placeholder="04/04/2020" disabled></td>
-                                        <td><input class="form-control" type="text" [value]="detail.cptCode" placeholder="3344" disabled></td>
+                                        <td><input style="width: 102px;" class="form-control" type="text" [value]="detail.date" placeholder="04/04/2020" disabled></td>
+                                        <td><input style="width: 100px;" class="form-control" type="text" [value]="detail.cptCode" placeholder="3344" disabled></td>
                                         <td><input class="form-control" type="text" [value]="detail.chargeAmount" placeholder="80000" disabled></td>
                                         <td><input class="form-control" type="text" [value]="detail.copay" placeholder="10000" disabled></td>
                                         <td><input class="form-control" type="text" [value]="detail.allowedAmount" placeholder="60000" disabled></td>
                                         <td><input class="form-control" type="number"  [value]="detail.deduction" (blur)="calculateBalance(detail)" (input)='detail.deduction = $event.target.value' placeholder="10000"></td>
-                                        <td><input class="form-control" type="number" [value]="detail.paymentReceived" (blur)="calculateBalance(detail)" (input)='detail.paymentReceived = $event.target.value' placeholder="50000"></td>
+                                        <td><input class="form-control" type="number" [value]="detail.paymentReceived" disabled (blur)="calculateBalance(detail)" (input)='detail.paymentReceived = $event.target.value' placeholder="50000"></td>
                                         <td><input class="form-control" type="number" [value]="detail.insAdjustment" (input)='detail.insAdjustment = $event.target.value' placeholder="50000" disabled></td>
                                         <td><input class="form-control" type="number" [value]="detail.miscAdjustment" (blur)="calculateBalance(detail)" (input)='detail.miscAdjustment = $event.target.value' placeholder="5000"></td>
-                                        <td>
-                                            <select id="location" [value]="detail.reasonId" class="form-control" (change)="changeReason($event)">
+                                        <td> 
+                                            <select style="width: 100px;" id="location" [value]="detail.reasonId" class="form-control" (change)="changeReason($event)">
                                                 <option value="0">--Select--</option>
                                                 <option *ngFor="let reason of reasons" value="{{reason.reasonId}}"> {{reason.reasonDescription}} </option>
                                             </select>
                                         </td>
-                                        <td><input class="form-control" type="number" (blur)="calculateBalance(detail)" [value]="detail.insuranceBalance" (input)='detail.InsuranceBalance = $event.target.value' placeholder="5000"></td>
+                                        <td><input class="form-control" type="number" [value]="detail.insuranceBalance" (blur)="calculateBalance(detail)" 
+                                            (input)='detail.insuranceBalance = $event.target.value' placeholder="5000"></td>
                                         <td><input class="form-control" type="text" [value]="detail.balance" placeholder="48000" disabled></td>
                                     </tr>                                              
                                 </tbody>
@@ -143,7 +145,7 @@
                                     <div class="form-row">
                                       <div  class="form-group col-md-3">
                                           <label class="form-label">Adjustment Amount </label>
-                                          <input type="text" formControlName="amount" class="form-control">
+                                          <input type="text" formControlName="amount" class="form-control" (paste)="paste($event)" (keypress)="numberOnly($event)">
                                       </div>
                                       <div  class="form-group col-md-3">
                                           <label class="form-label">Group </label>
@@ -151,10 +153,16 @@
                                       </div>
                                        <div  class="form-group col-md-3">
                                           <label class="form-label">Reason</label>
-                                          <input type="text" formControlName="reason" class="form-control">
+                                          <select id="location" formControlName="adjreason"  class="form-control" 
+                                          >
+                                            <option value="0">--Select--</option>
+                                            <option *ngFor="let reason of adjreasons" value="{{reason.reasonId}}"> 
+                                                {{reason.reasonDescription}} </option>
+                                        </select>
+                                          <!-- <input type="text" formControlName="reason" class="form-control"> -->
                                       </div>
                                       <div  class="form-group col-md-3" style="padding-top:35px;">
-                                        <button type="button" (click)="addAdjustment()" class="btn btn-success btn-corner">Add</button>
+                                        <button type="button" (click)="addAdjustment()" class="btn btn-primary rss"> <i class="fa fa-plus vimeo-square"></i></button>
                                       </div>
                                   </div>
                                 </div>
@@ -173,7 +181,7 @@
                                             <tr *ngFor="let adj of claimAdjustments; let i=index">
                                                 <td>{{adj.amount}}</td>
                                                 <td>{{adj.groupName}}</td>
-                                                <td>{{adj.reasonId}}</td>
+                                                <td>{{adj.reason}}</td>
                                                 <td>
                                                  <button type="button" class="btn btn-danger" (click)="deleteAdjustment(adj)">
                                                      <i class="fa fa-trash-o text-white"></i></button>

@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-9"><h2 class="title float-left">Payment</h2></div>
                         <div class="col-3" style="padding-top: 25px;">
-                            <button type="button" class="btn btn-primary" (click)="searchPatient()">Search Patient</button>
+                            <!-- <button type="button" class="btn btn-primary" (click)="searchPatient()">Search Patient</button> -->
                             <button type="submit" class="btn btn-primary ">Finish</button>
                             <button type="button"  class="btn" (click)="cancel()">Cancel</button>
                         </div>
@@ -41,70 +41,81 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-md-12 col-lg-12 col-xl-12">
-                               
-                                <div class="form-row">
-                                    <div class="form-group col-md-3">
-                                        <label class="form-label">Patient</label>
-                                        <input class="form-control" disabled formControlName="patientName" placeholder="Patient Name" name="patientName" type="text">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label class="form-label">Address</label>
-                                        <input class="form-control" disabled formControlName="address" placeholder="Address" name="address" type="text">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label class="form-label">Mobile</label>
-                                        <input class="form-control" disabled placeholder="mobile" formControlName="mobile" name="mobile" type="text">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label class="form-label">Email</label>
-                                        <input class="form-control" disabled placeholder="Email" formControlName="email" name="email" type="text">
-                                    </div>                                     
-                                </div> 
                                 <div class="form-row">
                                     <div class="form-group col-md-5">                                                   	 
                                         <label class="radio-inline">
-                                            <input type="radio" name="payment" (click)="setTransactionInfo(1)"  formControlName="payment" value="payment" id="ra-payment" [(ngModel)]="options">
+                                            <input type="radio" name="payment" (click)="selectTransactionType(1)"  formControlName="payment" value="payment" id="ra-payment" [(ngModel)]="options">
                                             Payment
                                         </label>                                                    	  
                                         <label class="radio-inline">
-                                            <input type="radio" name="refund" (click)="setTransactionInfo(2)" formControlName="refund" value="refund" id="ra-refund" [(ngModel)]="options">
+                                            <input type="radio" name="refund" (click)="selectTransactionType(2)" formControlName="refund" value="refund" id="ra-refund" [(ngModel)]="options">
                                             Refund
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="transfer" (click)="setTransactionInfo(3)" formControlName="transfer"  value="transfer" id="ra-transfer" [(ngModel)]="options">
+                                            <input type="radio" name="transfer"  (click)="selectTransactionType(3)" formControlName="transfer"  value="transfer" id="ra-transfer" [(ngModel)]="options">
                                             Transfer
                                         </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="writeoff" (click)="setTransactionInfo(4)" formControlName="writeoff"  value="writeoff"  id="ra-writeoff" [(ngModel)]="options">
+                                        <label class="radio-inline" style="visibility: hidden;">
+                                            <input type="radio" name="writeoff" (click)="selectTransactionType(4)" formControlName="writeoff"  value="writeoff"  id="ra-writeoff" [(ngModel)]="options">
                                             Write off
                                         </label>
                                         
                                     </div>
-                                    <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="col-2 col-form-label">Reason</label>
-                                        <div class="col-4">
-                                        <select id="reasonId" formControlName="reasonId" class="form-control" (change)="changeReason($event)">
-                                            <option value="0">--Select--</option>
-                                            <option *ngFor="let reason of reasons" 
-                                            value="{{reason.reasonId}}"> {{reason.reasonDescription}} </option>
-                                        </select>
-                                        </div>
-                                    </div> 
-                                    </div> 
+                                   
                                 </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label">Patient</label>
+                                        <input class="form-control" disabled formControlName="patientName" placeholder="Patient Name" name="patientName" type="text">
+                                    </div>
+                                    <div class="col-md-1">                                                
+                                        <button type="button" style="margin:32px 10px 10px 10px;" class="btn btn-primary vimeo" (click)="searchPatient()" >
+                                            <i class="fa fa-search vimeo-square"></i>
+                                        </button>
+                                    </div>
+                                   
+                                    <div class="form-group col-md-3">
+                                        <label class="form-label">Mobile</label>
+                                        <input class="form-control" disabled placeholder="mobile" formControlName="mobile" name="mobile" type="text">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="form-label">Email</label>
+                                        <input class="form-control" disabled placeholder="Email" formControlName="email" name="email" type="text">
+                                    </div>                                     
+                                </div>   
+                                <div class="form-row">
+                                    
+                                       
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-5">
+                                        <label class="form-label">Address</label>
+                                        <input class="form-control" disabled formControlName="address" placeholder="Address" name="address" type="text">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="col-2 col-form-label">Reason</label>
+                                        <div class="col-6">
+                                            <select id="reasonId" formControlName="reasonId" class="form-control" (change)="changeReason($event)">
+                                                <option value="0">--Select--</option>
+                                                <option *ngFor="let reason of reasons" 
+                                                value="{{reason.reasonId}}"> {{reason.reasonDescription}} </option>
+                                            </select>
+                                        </div>
+                                    </div> <div class="col-md-1"></div>
+                                </div>
+                                
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <label class="form-label">TOTAL BILL VALUE</label>
-                                        <input class="form-control" disabled placeholder="100000" formControlName="totalBillValue" name="totalBillValue" type="text">
+                                        <input class="form-control" disabled placeholder="0" formControlName="totalBillValue" name="totalBillValue" type="text">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label class="form-label">ALREADY PAID</label>
-                                        <input class="form-control" disabled placeholder="80000"  formControlName="alreadyPaid" name="alreadyPaid" type="text">
+                                        <input class="form-control" disabled placeholder="0"  formControlName="alreadyPaid" name="alreadyPaid" type="text">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label class="form-label">TOTAL OUTSTANDING</label>
-                                        <input class="form-control" disabled placeholder="20000" formControlName="totalOutstanding"  name="totalOutstanding" type="text">
+                                        <input class="form-control" disabled placeholder="0" formControlName="totalOutstanding"  name="totalOutstanding" type="text">
                                     </div>                                                                                         
                                 </div> 
                                 
@@ -131,11 +142,11 @@
                                                 </div>
                                                 <div  class="form-group col-md-2">
                                                     <label class="form-label">Payment Date </label>
-                                                    <input type="date" class="form-control" formControlName="paymentDate">
+                                                    <input type="date" [max]="getToday()" class="form-control" formControlName="paymentDate">
                                                 </div>
                                                 <div  class="form-group col-md-2">
                                                     <label class="form-label">Amount</label>
-                                                    <input type="text" class="form-control" formControlName="amount">
+                                                    <input type="text" (paste)="paste($event)" (keypress)="numberOnly($event)" class="form-control" formControlName="amount">
                                                 </div>
                                                 <div  class="form-group col-md-1" style="padding-top:35px;">
                                                 <button type="button" class="btn btn-success btn-corner" (click)="addTransactionDetails();">Add</button>
@@ -167,6 +178,16 @@
                                                             </td>
                                                         </tr>
                                                     </tbody>
+                                                    <thead style="background: #678680;"  *ngIf="paymentDetails?.length > 0">
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>Amount</td>
+                                                            <td>{{totalPaymentAmount}}</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </thead> 
                                                 </table>
                                     </div>     
                                 </div><!--End Payment--> 
@@ -178,7 +199,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label class="col-form-label">Transfer Patient Name  </label>
-                                            <input type="text" class="form-control" formControlName="transferName">
+                                            <input type="text" disabled class="form-control" formControlName="transferName">
                                         </div>
                                         <div  class="form-group col-md-2" style="padding-top:35px;">
                                             <button type="button" class="btn btn-success btn-corner" (click)="searchPatientForTransfer()">Search</button>
@@ -186,20 +207,20 @@
                                       
                                         <div  class="form-group col-md-2">
                                             <label class="form-label">Payment Date </label>
-                                            <input type="date" class="form-control" formControlName="paymentDateForTranser">
+                                            <input type="date" [max]="getToday()"  class="form-control" formControlName="paymentDateForTranser">
                                         </div>
                                         <div  class="form-group col-md-2">
                                             <label class="form-label">Amount</label>
-                                            <input type="text" class="form-control" formControlName="amountForTranser">
+                                            <input type="text" class="form-control" (blur)="onAmountForTranser()" formControlName="amountForTranser">
                                         </div>
                                        
                                     </div>
                                 </div><!--End Transfer-->  
-                                <div class="form-row"><!--Free Ticket-->
+                                <div class="form-row" *ngIf="(typeOfTxnId === 1 || typeOfTxnId === 3)"><!--Free Ticket-->
                                     <header class="panel_header" style="margin-bottom:15px;">
                                             <h2 class="title float-left">Free Ticket</h2>
                                     </header>
-                                    <div  class="col-12">
+                                    <div  class="col-12" >
                                             <table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
                                                     <thead style="background: #678680;">
                                                         <tr>
@@ -216,9 +237,18 @@
                                                             <td>{{freeTicket.appointmentDate | date:'dd-MM-yyyy'}}</td>
                                                             <td>{{freeTicket.appointmentId}}</td>
                                                             <td>{{freeTicket.amount}}</td>
-                                                            <td><input type="text" [value]="freeTicket.paidAmount" class="form-control"></td>
+                                                            <td><input type="text" (blur)="onSumOfPaidAmount(freeTicket)" (paste)="paste($event)" (keypress)="numberOnly($event)" [value]="freeTicket.paidAmount" (input)='freeTicket.paidAmount = $event.target.value' class="form-control"></td>
                                                         </tr>
                                                     </tbody>
+                                                    <tfoot style="background: #678680;"  *ngIf="paymentBreakup?.length > 0">
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <th>Total</th>
+                                                            <th>{{totalPaidAmount}}</th>
+                                                        </tr>
+                                                    </tfoot>  
                                                 </table>
                                             </div>
                                 </div>

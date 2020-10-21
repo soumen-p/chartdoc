@@ -60,25 +60,53 @@
                                     <div class="form-row"> 
                                         <div class="form-group col-md-4">
                                             <label class="form-label">Insurance1</label>
-                                            <input class="form-control" formControlName="insuranceName1" type="text">
+                                            <input class="form-control" formControlName="insuranceName1" type="text" disabled>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label class="form-label">Insurance2</label>
-                                            <input class="form-control" formControlName="insuranceName2"  type="text">
+                                            <input class="form-control" formControlName="insuranceName2"  type="text" disabled>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label class="form-label">Insurance3</label>
-                                            <input class="form-control" formControlName="insuranceName3" type="text">
+                                            <input class="form-control" formControlName="insuranceName3" type="text" disabled>
+                                        </div> 
+                                    </div>
+                                    <div class="form-row"> 
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Policy No1</label>
+                                            <input class="form-control" formControlName="policy1" type="text" disabled>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Policy No2</label>
+                                            <input class="form-control" formControlName="policy2"  type="text" disabled>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Policy No3</label>
+                                            <input class="form-control" formControlName="policy3" type="text" disabled>
                                         </div> 
                                     </div>
                                     <div class="form-row"> 
                                         <div class="form-group col-md-4">
                                             <label class="form-label">Location</label>
-                                            <input class="form-control" formControlName="locationName" type="text">
+                                            <!-- <input class="form-control" formControlName="locationName" type="text"> -->
+                                            <select class="form-control" name="" id="reference" formControlName="locationId" selected >
+                                                <option value="0">--Select--</option>
+                                              <option *ngFor="let item of locations" value="{{item.id}}"> {{item.name}} </option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="createbillForm.hasError('required', ['locationId']) && formDir.submitted">
+                                                Location is required.
+                                            </span>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label class="form-label">Place of </label>
-                                            <input class="form-control" formControlName="placeOfName" type="text">
+                                            <!-- <input class="form-control" formControlName="placeOfName" type="text"> -->
+                                            <select class="form-control" name="" id="reference" formControlName="placeOfId" selected >
+                                                <option value="0">--Select--</option>
+                                              <option *ngFor="let item of places" value="{{item.id}}"> {{item.name}} </option>
+                                            </select>
+                                            <span class="text-danger" *ngIf="createbillForm.hasError('required', ['placeOfId']) && formDir.submitted">
+                                                Place of  is required.
+                                            </span>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label class="form-label">Service</label>
@@ -136,7 +164,7 @@
                                        
                                         </div>
                                         <div class="form-group col-md-3" *ngIf="tableId==3?true:false"> 	
-                                            <label class="form-label">Status</label>													
+                                            <label class="form-label">Remarks Status</label>													
                                             <input class="form-control" formControlName="status" type="text">
                                         </div> 
                                     </div>                                                
@@ -173,7 +201,7 @@
                                         <td><input class="form-control" type="text" [(value)]="item.chargeAmount" disabled></td>
                                         <td><input class="form-control" type="text" [(value)]="item.copay" disabled></td>
                                        
-                                        <td><input class="form-control" name="modifiedcode" (input)='item.allowedAmount = $event.target.value' [value]="item.allowedAmount" type="text"></td>
+                                        <td><input class="form-control" name="modifiedcode" (paste)="paste($event)" (keypress)="numberOnly($event)" (input)='item.allowedAmount = $event.target.value' [value]="item.allowedAmount" type="text"></td>
                                         <td align="center"><input class="form-check-input" type="checkbox" [checked]="item.capitated" (change)="item.capitated =  !item.capitated"></td>
                                         <td><input class="form-control" name="modifiedcode" (input)='item.modifiedCode = $event.target.value' [value]="item.modifiedCode" type="text"></td>
                                     </tr>
@@ -228,11 +256,19 @@
 <div class="example-wrapper">
     <div id="cptSearch" class="modal">
         <div class="modal-content1">
-            <app-common-search [searchCriteria]="'cpt'" (arrayCriteria)="adddata($event)"></app-common-search> 
-            <div class="svbutton"> 
+           <div class="modaltop">  
+               <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                   <tr>
+                       <td></td>
+                       <td align="right"><button class="btn btn-primary"  type="button" (click)="closePopupCancel('cptSearch')"><i class="fa fa-close"></i></button></td>
+                   </tr>
+               </table> 
+             </div>
+           <div class="modalbottom"><app-common-search [searchCriteria]="'cpt'" (arrayCriteria)="adddata($event)"></app-common-search></div>
+            <!-- <div class="svbutton"> 
                 
-                <button class="btn btn-primary "type="button" (click)="closePopupCancel('cptSearch')">Cancel</button>
-            </div>    
+                
+            </div>     -->
         </div>
     </div>
 </div>
@@ -242,11 +278,23 @@
 <div class="example-wrapper">
     <div id="icdSearch" class="modal">
         <div class="modal-content1">
-            <app-common-search [searchCriteria]="'icd'" (arrayCriteria)="adddata($event)"></app-common-search> 
+            <!-- <app-common-search [searchCriteria]="'icd'" (arrayCriteria)="adddata($event)"></app-common-search> 
             <div class="svbutton"> 
                 
                 <button class="btn btn-primary "type="button" (click)="closePopupCancel('icdSearch')">Cancel</button>
-            </div>    
+            </div>     -->
+            <div class="modaltop">  
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td></td>
+                        <td align="right">  <button class="btn btn-primary "type="button" (click)="closePopupCancel('icdSearch')">
+                            <i class="fa fa-close"></i></button></td>
+                    </tr>
+                </table> 
+              </div>
+            <div class="modalbottom">
+                <app-common-search [searchCriteria]="'icd'" (arrayCriteria)="adddata($event)"></app-common-search> 
+            </div>
         </div>
     </div>
 </div>

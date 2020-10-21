@@ -73,9 +73,15 @@ export class SubmitClaimComponent implements OnInit {
       let obj: any = {};
       obj.chargeId = element.chargeId;
       obj.fieldid = element.id;
-      obj.value = element.value;
+      obj.value = element.value=="Select"?"":element.value;
       patientChargeClaimFieldsdata.push(obj);
     });
+    let fieldscount=patientChargeClaimFieldsdata.length;
+    let datacount=patientChargeClaimFieldsdata.filter((x:any)=>x.value!="");
+    if(datacount<=0){
+      this.toastr.errorToastr('Claim fields requried', 'Error!');
+      return ;
+    }
     let self=this;
     this.formData.append('patientChargeClaimFields', JSON.stringify(patientChargeClaimFieldsdata));
     this.createBillService.savePatientChargeClaimFields(this.formData)

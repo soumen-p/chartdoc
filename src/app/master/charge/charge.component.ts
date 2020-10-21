@@ -5,6 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ChargeCPTModel } from '../../models/ChargeCPT.model';
 import { isNullOrUndefined } from 'util';
 import { Toastr, ToastrManager } from 'ng6-toastr-notifications';
+import { Router } from '@angular/router';
 
 
 const form = new FormGroup({
@@ -41,7 +42,9 @@ export class ChargeComponent implements OnInit {
   IsPosCheckOut = false;
   chargeDateRange: [];
   selectedChargeYearId : any;
-  constructor(private patientCptService: PatientCptService, private serviceMasterService: ServiceMasterService, public toastr: ToastrManager) { }
+  constructor(private patientCptService: PatientCptService, 
+    private serviceMasterService: ServiceMasterService, 
+    public toastr: ToastrManager, private router: Router) { }
 
   ngOnInit() {
     const doctorBookingInfo = this.patientCptService.getBookingInfo('doctorBookingInfo');
@@ -139,12 +142,10 @@ AddCPTDetails(id: number,cptId: number, cptCode: string, cptDesc: string, charge
   });
 
   if (!this.isIdExist) {
-    this.cptDetails.pop();
+    //this.cptDetails.pop();
     this.cptDetails.push(form.value);
    // this.patientCptService.setCptDetailsByPatientId('cpt' + this.PatientId, this.cptDetails);
   }
-  console.log("this.cptDetails");
-  console.log(this.cptDetails);
 }
 
 deleteRow(cpt: ChargeCPTModel) {
@@ -177,7 +178,7 @@ public saveChargeDetails(e: Event) {
  
   console.log(this.frm);
 
-  this.serviceMasterService.saveChargeDetails(this.cptDetails[0])
+  this.serviceMasterService.saveChargeDetails(this.cptDetails)
     .subscribe(
       data => {
         if (data > 0) {
@@ -188,5 +189,9 @@ public saveChargeDetails(e: Event) {
         }
       }
     );
-}
+  }
+
+  onCancel(){
+    this.router.navigateByUrl('/patient-flow-sheet');
+  }
 }

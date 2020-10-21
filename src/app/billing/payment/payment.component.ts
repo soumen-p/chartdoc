@@ -4,6 +4,8 @@ import { LandingPageService } from 'src/app/services/landing-page.service';
 import {PaymentService} from './../../services/payment.service';
 import { PatientSearchService } from './../../services/patient-search.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DatePipe, JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -13,15 +15,40 @@ export class PaymentComponent implements OnInit {
   formData = new FormData();
   routeId: number;
   paymentList:any=[];
+  patientId: string;
+  patientName: string;
+  fromDate: string;
+  toDate: string;
+  
+  paymentFormGroup = new FormGroup({
+    fromDate: new FormControl('', [Validators.required]),
+    toDate: new FormControl('', [Validators.required]),
+    patientName: new FormControl('')
+
+  })
+
   constructor(private _avRoute: ActivatedRoute
     , private router: Router
     , public toastr: ToastrManager
     , private landingPageService: LandingPageService
     ,public _patientSearchService:PatientSearchService
-    ,private _paymentService:PaymentService) { }
+    ,private _paymentService:PaymentService
+    , private datePipe: DatePipe) { 
+
+      let data = this._paymentService.getPatinetData();
+      if (data != undefined) {
+        let dateData = this._paymentService.getDateInfo();
+        this.paymentFormGroup.patchValue({
+          patientName: data.patientname,
+          fromDate: dateData.fromDate,
+          toDate: dateData.toDate
+        })
+        this.patientId = data.patientId;
+      }
+    }
 
   ngOnInit() {
-    this.getPaymentList();
+    //this.getPaymentList();
     this.clearLocalStorage();
   }
   getPaymentList() {
@@ -41,6 +68,8 @@ export class PaymentComponent implements OnInit {
     this.formData = new FormData();
     this.formData.append('paymentId', payment.paymentId);
     this.formData.append('isDeleted', JSON.stringify('Y'));
+    this.formData.append('paymentDetails', null);
+    this.formData.append('paymentBreakup', null);
 
     this._paymentService.savePayment(this.formData)
       .subscribe
@@ -62,5 +91,30 @@ export class PaymentComponent implements OnInit {
     this._paymentService.setHeaderPatientSearchId("headerPatientId",null)
     this._paymentService.setTxnTypeInfo("TxnTypeInfo",null);
     this._paymentService.setReasonInfo("reasonInfo",null);
+  }
+  searchBill() {
+      if (this.paymentFormGroup.valid) {
+        this.fromDate = this.datePipe.transform(this.paymentFormGroup.controls['fromDate'].value, "MMddyyyy")
+        this.toDate = this.datePipe.transform(this.paymentFormGroup.controls['toDate'].value, "MMddyyyy")
+        this.patientId = this.patientId
+        
+        this._paymentService.searchPayment(this.fromDate, this.toDate, this.patientId)
+        .subscribe(res => {
+          this.paymentList = res;
+        }, error => {
+          console.log("error while search billing Info");
+        })
+      } else {
+        this.toastr.errorToastr("Please select From Date and To Date");
+      }
+    
+  }
+  searchPatient() {
+    this._paymentService.setDateInfo('dateInfo', {
+      'fromDate':this.paymentFormGroup.controls['fromDate'].value,
+      'toDate': this.paymentFormGroup.controls['toDate'].value
+    });
+
+    this.router.navigate(['/patient-search-appointment'], { queryParams: { mode: 10 } });
   }
 }

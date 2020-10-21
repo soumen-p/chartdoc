@@ -32,6 +32,13 @@ export class AddPaymentComponent implements OnInit {
   selectedPatientId:any;
   transferId:any;
   transactionType:any;
+  totalPaymentAmount:number=0;
+  totalPaidAmount:number=0;
+
+  isDisabledPayment:boolean=true;
+  isDisabledRefund:boolean=true;
+  isDisabledTransfer:boolean=true;
+  isDisabledWriteoff:boolean=true;
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
@@ -48,6 +55,7 @@ export class AddPaymentComponent implements OnInit {
       }
       if (this._avRoute.snapshot.queryParams["patientId"]) {
         this.patientId = this._avRoute.snapshot.queryParams["patientId"];
+        this.getPaymentDetails(this.patientId,null);
       }
       this.options.payment=true;
       this.addPaymentForm = this.formBuilder.group({
@@ -83,8 +91,8 @@ export class AddPaymentComponent implements OnInit {
     const tranType=this._paymentService.getTxnTypeInfo("TxnTypeInfo");
     if(tranType!=null)
       this.setTransactionInfo(tranType);
-    else
-      this.setTransactionInfo(1);
+    // else
+    //   this.setTransactionInfo(1);
 
     const searchPatientType= this._paymentService.getPatientSearchTypeInfo("searchType")
     if(searchPatientType!=null)
@@ -98,8 +106,9 @@ export class AddPaymentComponent implements OnInit {
     // this.setReasonType();
     // this.clearLocalStorage();
     if(this.patientId!=null && this.paymentId>0){
-      this.getPaymentDetails(this.patientId);
+      this.getPaymentDetails(this.patientId,null);
     }
+    this.onSumOfPaidAmount(null);
   }
   getReason() {
     this._bookAppointmentService.getReason('-1')
@@ -116,6 +125,10 @@ export class AddPaymentComponent implements OnInit {
         .subscribe((res) => {
             this.paymentTypes = res;
         })
+  }
+  selectTransactionType(tranType:any){
+    this.clearForm();
+    this.setTransactionInfo(tranType);
   }
   setTransactionInfo(tranType:any){
     if(tranType==1){
@@ -134,10 +147,7 @@ export class AddPaymentComponent implements OnInit {
       this.options="writeoff";
       this.transactionType="writeoff" ;
     }
-  else{
-    this.options="payment";
-    this.transactionType="Payment" ;
-  }
+  
     this.typeOfTxnId=tranType;
     this.paymentDetails=[];
     this._paymentService.setTxnTypeInfo("TxnTypeInfo",tranType)
@@ -161,23 +171,44 @@ export class AddPaymentComponent implements OnInit {
     this._paymentService.setReasonInfo("reasonInfo",this.selectedReasonId)
   }
  searchPatient() {
+  if(typeof this.typeOfTxnId == "undefined" || this.typeOfTxnId == null) {
+    this.toastr.errorToastr('Transaction type can not be blank', 'Error!');
+    return;
+  }
+ else
     this._paymentService.setPatientSearchTypeInfo("searchType",1)
     this.router.navigate(['/patient-search-appointment'], { queryParams: { id: 2 } });
+
   }
   searchPatientForTransfer() {
+    if(typeof this.typeOfTxnId == "undefined" || this.typeOfTxnId == null) {
+      this.toastr.errorToastr('Transaction type can not be blank', 'Error!');
+      return;
+    }
+   else if(typeof this.selectedPatientId == "undefined" || this.selectedPatientId == null) {
+      this.toastr.errorToastr('Patient can not be blank', 'Error!');
+      return;
+    }
+    else if(typeof this.selectedReasonId == "undefined" || this.selectedReasonId == null) {
+      this.toastr.errorToastr('Reason can not be blank', 'Error!');
+      return;
+    }
+    else{
     this._paymentService.setPatientSearchTypeInfo("searchType",2)
-    this.router.navigate(['/patient-search-appointment'], { queryParams: { id: 2 } });
+    this.router.navigate(['/patient-search-appointment'], { queryParams:{ id: 2 }  });
+    }
   }
   setPaymentInfo(searchPatientType:any){
      const patientSearchInfo = this._patientSearchService.getPatientSearchInfo('addPaymentInfo');
       if(searchPatientType==1 && patientSearchInfo!=null){
         this.clearForm();
-       this.getPaymentDetails(patientSearchInfo.patientId);
+       this.getPaymentDetails(patientSearchInfo.patientId,null);
        this._paymentService.setHeaderPatientSearchId("headerPatientId",patientSearchInfo.patientId)
       }
       else if(searchPatientType==2 && patientSearchInfo!=null){
         const headerPatientId= this._paymentService.getHeaderPatientSearchId("headerPatientId")
-        this.getPaymentDetails(headerPatientId);
+        this.getPaymentDetails(headerPatientId,this.typeOfTxnId);
+        this.getPaymentBreakup(patientSearchInfo.patientId);
          this.transferId=patientSearchInfo.patientId;
          this.addPaymentForm.patchValue({
           transferId:patientSearchInfo.patientId,
@@ -185,7 +216,13 @@ export class AddPaymentComponent implements OnInit {
          });
         }
   }
-getPaymentDetails(patientId:any){
+  getPaymentBreakup(patientId:any){
+  this._paymentService.getPaymentBreakup(patientId,this.paymentId)
+    .subscribe((res) => {
+      this.paymentBreakup = res;
+    });
+  }
+getPaymentDetails(patientId:any,typeOfTxnId:any){
     this._paymentService.getPaymentDetails(patientId,this.paymentId)
     .subscribe((res) => {
       if(res.paymentHeader!=null ){
@@ -195,31 +232,52 @@ getPaymentDetails(patientId:any){
           address:res.paymentHeader.address,
           email:res.paymentHeader.email,
           mobile:res.paymentHeader.mobile,
-          totalbillvalue:res.paymentHeader.totalBillValue,
+          totalBillValue:res.paymentHeader.totalBillValue,
           alreadyPaid:res.paymentHeader.alreadyPaid,
           totalOutstanding:res.paymentHeader.totalOutstanding
         });
        }
-      if(res.paymentDetails!=null){
-          this.setTransactionInfo(res.paymentDetails[0].typeOfTxnId);
+       if(res.paymentDetails!=null){
+        if(typeOfTxnId!=null)
+          {
+            this.setTransactionInfo(typeOfTxnId);
+            
+          }
+          else{
+            this._paymentService.setPaymentId("paymentId",this.paymentId)
+            this.setTransactionInfo(res.paymentDetails[0].typeOfTxnId);
+
+          }
+          if (res.paymentDetails[0].paymentDate != '') {
+            let paymentDate = new Date(res.paymentDetails[0].paymentDate);
+           
+          let pat_year = paymentDate.getFullYear();
+          let pay_month = String(paymentDate.getMonth() + 1).padStart(2, '0');;
+          let pay_day = String(paymentDate.getDate()).padStart(2, '0');
+
           this.addPaymentForm.patchValue({
             reasonId:res.paymentDetails[0].reasonId,
             transferId:res.paymentDetails[0].transferId,
             transferName:res.paymentDetails[0].transferName,
-            paymentDateForTranser:res.paymentDetails[0].paymentDate,
+            paymentDateForTranser:String(pat_year  + "-" + pay_month + "-" + pay_day),
             amountForTranser:res.paymentDetails[0].amount
           });
+        }
           this.selectedReasonId=res.paymentDetails[0].reasonId
       }
       if(res.paymentHeader!=null)
-         this.paymentHeader=res.paymentHeader;
+         {this.paymentHeader=res.paymentHeader;
+          this._paymentService.setHeaderPatientSearchId("headerPatientId",res.paymentHeader.patientId);
+          this.selectedPatientId=res.paymentHeader.patientId;
+         }
       if(res.paymentDetails!=null)
-         this.paymentDetails=res.paymentDetails;      
-      if(res.paymentBreakup!=null)
-        this.paymentBreakup = res.paymentBreakup;
-        
-      this._paymentService.setHeaderPatientSearchId("headerPatientId",res.paymentHeader.patientId)
-      this.selectedPatientId=res.paymentHeader.patientId;
+         this.paymentDetails=res.paymentDetails;  
+        if(typeOfTxnId !=3){// only for transfer    
+            if(res.paymentBreakup!=null)
+            this.paymentBreakup = res.paymentBreakup;
+            this.onSumOfPaidAmount(0);
+     }
+     this.calculateTotalDetailAmount();
     }); 
    
   }
@@ -227,11 +285,50 @@ getPaymentDetails(patientId:any){
     var instrumentTypeId=this.addPaymentForm.value.instrumentTypeId;
     var instrumentTypeName=    this.paymentTypes.filter((x:any)=>x.id ===instrumentTypeId);
     var ref1=this.addPaymentForm.value.ref1;
-    var ref2=this.addPaymentForm.value.ref1;
+    var ref2=this.addPaymentForm.value.ref2;
     var paymentDate=this.addPaymentForm.value.paymentDate;
     var amount=this.addPaymentForm.value.amount;
+
+    if(typeof this.typeOfTxnId == "undefined" || this.typeOfTxnId == null) {
+      this.toastr.errorToastr('Transaction type can not be blank', 'Error!');
+      return;
+    }
+   else if(typeof this.selectedPatientId == "undefined" || this.selectedPatientId == null) {
+      this.toastr.errorToastr('Patient can not be blank', 'Error!');
+      return;
+    }
+    else if(typeof this.selectedReasonId == "undefined" || this.selectedReasonId == null) {
+      this.toastr.errorToastr('Reason can not be blank', 'Error!');
+      return;
+    }
+    else if(instrumentTypeId==""){
+      this.toastr.errorToastr('Payment Type can not be blank', 'Error!');
+      return;
+    }
+    else if(ref1==""){
+      this.toastr.errorToastr('Ref 1 can not be blank', 'Error!');
+      return;
+    }
+    else if(ref2==""){
+      this.toastr.errorToastr('Ref 2 can not be blank', 'Error!');
+      return;
+    }
+    else if(paymentDate==""){
+      this.toastr.errorToastr('Payment date can not be blank', 'Error!');
+      return;
+    }
+    else if(amount==undefined || amount==""){
+      this.toastr.errorToastr('Amount can not be blank', 'Error!');
+      return;
+    }
+    else{
+      var paymentDetailId=-100;
+      if(this.paymentDetails!=null && this.paymentDetails.length>0){
+        paymentDetailId=this.paymentDetails.length-100;
+      }
     this.paymentDetails.push(
-      { patientId:this.selectedPatientId
+      { paymentDetailId:paymentDetailId
+        ,patientId:this.selectedPatientId
         ,reasonId:this.selectedReasonId
         ,typeOfTxnId:this.typeOfTxnId
         ,instrumentTypeId:instrumentTypeId
@@ -241,7 +338,17 @@ getPaymentDetails(patientId:any){
         ,paymentDate:paymentDate
         ,amount:amount
       })
+      this.calculateTotalDetailAmount();
     this.clearAdjustment();
+    }
+  }
+  calculateTotalDetailAmount(){
+    if(this.paymentDetails.length>0){
+      this.totalPaymentAmount = this.paymentDetails.map(a => a.amount).reduce(function(a, b)
+        {
+          return parseFloat(a) + parseFloat(b);
+        });
+      }
   }
  clearAdjustment(){
     this.addPaymentForm.patchValue({
@@ -255,11 +362,32 @@ getPaymentDetails(patientId:any){
 
 save() {
     this.formData = new FormData();
-   
+    if(typeof this.typeOfTxnId == "undefined" || this.typeOfTxnId == null) {
+      this.toastr.errorToastr('Transaction type can not be blank', 'Error!');
+      return;
+    }
+   else if(typeof this.selectedPatientId == "undefined" || this.selectedPatientId == null) {
+      this.toastr.errorToastr('Patient can not be blank', 'Error!');
+      return;
+    }
+    else if(typeof this.selectedReasonId == "undefined" || this.selectedReasonId == null) {
+      this.toastr.errorToastr('Reason can not be blank', 'Error!');
+      return;
+    }
+    if(this.totalPaidAmount>this.totalPaymentAmount){
+      this.toastr.errorToastr('Total Paid amount can not be greater than paid amount', 'Error!');
+      return;
+    }
     if(this.typeOfTxnId==3){
+      if(parseFloat(this.addPaymentForm.value.totalOutstanding) < parseFloat(this.addPaymentForm.value.amountForTranser)){
+        this.toastr.errorToastr('You not have sufficient amount !', 'Error!');
+        return;
+      }
         var paymentDateForTranser=this.addPaymentForm.value.paymentDateForTranser;
         var amountForTranser=this.addPaymentForm.value.amountForTranser;
         var transferId=this.addPaymentForm.value.transferId;
+        this.paymentId=this._paymentService.getPaymentId("paymentId");
+
         this.paymentDetails=[];
           this.paymentDetails.push(
             { patientId:this.selectedPatientId
@@ -269,12 +397,16 @@ save() {
               ,paymentDate:paymentDateForTranser
               ,amount:amountForTranser
             })
-    } 
+    }
+    if(this.paymentBreakup.length>0)
+      var paymentBrkup=this.paymentBreakup.filter((x => x.paidAmount >0 ))
+   if(this.paymentId==null)
+      this.paymentId=0;
+
     this.formData.append('paymentId', this.paymentId);
-    this.formData.append('isDeleted', JSON.stringify('N'));
-    this.formData.append('paymentHeader', JSON.stringify(this.paymentHeader));
+     this.formData.append('isDeleted', JSON.stringify('N'));
     this.formData.append('paymentDetails', JSON.stringify(this.paymentDetails));
-    this.formData.append('paymentBreakup', JSON.stringify(this.paymentBreakup));
+    this.formData.append('paymentBreakup', JSON.stringify(paymentBrkup));
     this._paymentService.savePayment(this.formData)
       .subscribe
       (
@@ -288,6 +420,7 @@ save() {
           console.log(err);
         }
       );
+    
   }
 clearForm(){
   this.paymentDetails=[];
@@ -327,10 +460,56 @@ clearForm(){
     this._patientSearchService.setPatientSearchInfo('addPaymentInfo',null);
     this._paymentService.setPatientSearchTypeInfo("searchType",null)
     this._paymentService.setHeaderPatientSearchId("headerPatientId",null)
+    this._paymentService.setHeaderPatientSearchId("paymentId",null)
     this._paymentService.setTxnTypeInfo("TxnTypeInfo",null);
     this._paymentService.setReasonInfo("reasonInfo",null);
+    this._paymentService.setPatientSearchTypeInfo("searchType",null);
   }
   deletePaymentDetail(data:any){
-
+    this.paymentDetails=this.paymentDetails.filter((x:any)=>x.paymentDetailId !=data.paymentDetailId)
+    this.calculateTotalDetailAmount();
   }
+
+  numberOnly(event: any): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode != 46 && charCode != 45 && charCode > 31
+      && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+  paste(e){
+    e.preventDefault();
+  }
+  onSumOfPaidAmount(freeTicket){
+    if(freeTicket!=null){
+    if(freeTicket.paidAmount > freeTicket.amount)
+    {
+      this.toastr.errorToastr('Paid amount can not be greater than due amoount for ticket '+ freeTicket.freeTicketNo, 'Error!');
+      freeTicket.paidAmount=0;
+    }
+  }
+    if(this.paymentBreakup.length>0){
+    this.totalPaidAmount = this.paymentBreakup.map(a => a.paidAmount).reduce(function(a, b)
+    {
+      return parseFloat(a) + parseFloat(b);
+    });
+  }
+}
+
+onAmountForTranser(){
+  var amountForTranser=this.addPaymentForm.value.amountForTranser;
+  this.totalPaymentAmount=amountForTranser;
+  if(parseFloat(amountForTranser) > this.addPaymentForm.value.totalOutstanding){
+    this.toastr.errorToastr('You not have sufficient amount !', 'Error!');
+
+    this.addPaymentForm.patchValue({
+      amountForTranser:0
+    });
+  }
+}
+
+getToday(): string {
+  return new Date().toISOString().split('T')[0]
+}
 }

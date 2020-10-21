@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { SharedService } from '../core/shared.service';
 import { environment } from 'src/environments/environment';
 
-
+const GET_MASTERDATA = 'api/ChartDoc/OtherPopulate';
 const getDoctorListUrl = 'api/ChartDoc/GetDoctorList/';
 const getServiceDetailsUrl = 'api/ChartDoc/GetServiceDetails/';
 const getReasonsUrl = 'api/ChartDoc/GetReason/';
@@ -89,5 +89,10 @@ export class CreateBillService {
   }
   public getClaimStatus(): Observable<any> {
     return this.http.get(environment.baseUrl + getClaimStatus);
+  }
+  public getMasterData(key: string): Observable<any> {
+    const apiURL = environment.baseUrl + GET_MASTERDATA;
+    // var apiURL="http://localhost:14403/" + GET_PATIENTINFO;
+    return this.http.get(apiURL + `/${key}`);
   }
 }

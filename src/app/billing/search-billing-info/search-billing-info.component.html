@@ -39,25 +39,31 @@
                                 <div class="col-md-12 col-lg-12 col-xl-12">
                                     <form  [formGroup]="billingFormGroup" name="searchBilling">
                                         <div class="form-row">
-                                            <div class="form-group col-md-2">
+                                            <div class="col-md-2">
                                                 <label for="inputPassword4"><strong>From Date</strong></label>
                                                 <input type="date" class="form-control" formControlName="fromDate">
                                             </div>
-                                            <div class="form-group col-md-2">
+                                            <div class="col-md-2">
                                                 <label for="inputPassword4"><strong>To Date</strong></label>
                                                 <input type="date" class="form-control" formControlName="toDate">
                                             </div>
-                                            <div class="form-group col-md-2">
+                                            <div class="col-md-2">
                                                 <label class="form-label">Patient</label>
                                                 <input class="form-control" name="patient" type="text"
-                                                    placeholder="Jone"  formControlName="patientName">
+                                                    placeholder="Jone"  formControlName="patientName" readonly>
+                                                    
                                             </div>
-                                            <div class="form-group col-md-2">
+                                            <div class="col-md-1">                                                
+                                                <button type="button" style="margin:32px 10px 10px 10px;" class="btn btn-primary vimeo" (click)="searchPatient()" >
+                                                    <i class="fa fa-search vimeo-square"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-2">
                                                 <label class="form-label">Fee Ticket</label>
                                                 <input class="form-control" name="feeticket" type="text"
                                                     placeholder="Fee Ticket"  formControlName="feeTicket">
                                             </div>
-                                            <div class="form-group col-md-2">
+                                            <div class="col-md-2">
                                                 <label for="inputPassword4">Provider </label>
                                                 <select class="form-control" (change)="changeProvider($event)" formControlName="providerName">
                                                     <option value="">----Select----</option>
@@ -66,9 +72,9 @@
                                                     
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-1">
-                                                <label for="inputPassword4">&nbsp;</label>
-                                                <button type="button" class="btn btn-success btn-icon bottom15 right15"
+                                            <div class="col-md-1">
+                                                
+                                                <button type="button"  style="margin-top:32px;" class="btn btn-success btn-icon bottom15 right15"
                                                     (click)="searchBill()"><i class="fa fa-search"></i> &nbsp;
                                                     <span>Search</span></button>
                                             </div>

@@ -42,10 +42,18 @@
                                             <div class="form-group col-md-3">
                                                 <label for="inputFromDate">From Date</label>
                                                 <input type="date" formControlName="fromDate" value="MM/DD/YYYY" class="form-control" id="inputFromDate" />
+                                                <span class="text-danger" *ngIf="chargeDate_FormGroup.hasError('required', ['fromDate'] )
+                                                && chargeDateForm.submitted">
+                                               From Date is Reqired
+                                                </span>
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label for="inputToDate">To Date</label>
                                                 <input type="date" formControlName="toDate" value="MM/DD/YYYY" class="form-control" id="inputToDate" />
+                                                <span class="text-danger" *ngIf="chargeDate_FormGroup.hasError('required', ['toDate'])
+                                                && chargeDateForm.submitted">
+                                               To Date is Reqired
+                                                </span>
                                             </div>   
                                                                                         
                                             <div class="form-group col-md-3" style="padding-top:35px;">

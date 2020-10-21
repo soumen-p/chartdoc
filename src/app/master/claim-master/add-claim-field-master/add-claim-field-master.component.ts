@@ -17,7 +17,8 @@ export class AddClaimFieldMasterComponent implements OnInit {
 
   claimFieldDetailList : any;
 
-  constructor(private claimFieldMasterService: ClaimFieldMasterService, private route: ActivatedRoute,public toastr: ToastrManager) { }
+  constructor(private claimFieldMasterService: ClaimFieldMasterService, private route: ActivatedRoute
+    ,public toastr: ToastrManager,private router: Router) { }
 
   ngOnInit() {
     this.claimFieldDetailList = [];
@@ -51,10 +52,18 @@ export class AddClaimFieldMasterComponent implements OnInit {
   }
 
   addClaimDetail(){
-    
+    if(this.claimDetailValue==""){
+      this.toastr.errorToastr('Value requried');
+      return;
+    }
     if(this.claimFieldDetailList == undefined)
      this.claimFieldDetailList = [];
 
+      if(this.claimFieldDetailList.length>0 && this.claimFieldDetailList.filter(x=>x.value==this.claimDetailValue).length>0) {
+        this.toastr.errorToastr('Duplicate value');
+        return;
+      }
+     
     this.claimFieldDetailList.push({id:this.claimId, value: this.claimDetailValue});
 
     this.claimDetailValue = '';
@@ -66,6 +75,19 @@ export class AddClaimFieldMasterComponent implements OnInit {
   }
 
   saveClaimFieldsDetails() {
+    if(this.claimName=="" || this.claimName==undefined){
+      this.toastr.errorToastr('Name requried');
+      return;
+    }
+    if(this.drpType==""){
+      this.toastr.errorToastr('Type requried');
+      return;
+    }
+    if(this.drpType == 'D' && this.claimFieldDetailList.length<=0 )
+    {
+      this.toastr.errorToastr('Claim detail requried');
+      return;
+    }
     var claimFieldData = new FormData();
     if(this.claimId != null)
     claimFieldData.append('id', JSON.stringify(this.claimId));
@@ -74,7 +96,7 @@ export class AddClaimFieldMasterComponent implements OnInit {
     claimFieldData.append('name', JSON.stringify(this.claimName));
     claimFieldData.append('type', JSON.stringify(this.drpType));
 
-    if(this.drpType == 'D')
+    if(this.drpType == 'D' && this.claimFieldDetailList.length>0 )
     {
       claimFieldData.append('claimFieldDetails', JSON.stringify(this.claimFieldDetailList));
     }
@@ -82,13 +104,18 @@ export class AddClaimFieldMasterComponent implements OnInit {
      this.claimFieldMasterService.saveClaimFieldsDetails(claimFieldData)
     .subscribe(
       data => {
-        if (data == null) {
-          this.toastr.successToastr('Operation Successful');
-        }  else {
-          this.toastr.successToastr('Operation Unsuccessful');
+        if (data == "1") {
+          this.toastr.successToastr('Save Sucessfully..');
+          this.router.navigate(['/app-claim-field-master']);
+        }  else if (data == '-1')  {
+          this.toastr.errorToastr("Data already exists");
+        }else {
+          this.toastr.errorToastr(data);
         }
       }
-    );
+      , err => {
+        this.toastr.errorToastr(err);
+      });
   }
 
 

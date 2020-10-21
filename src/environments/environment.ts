@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   epicApiUrl:"https://open-ic.epic.com/FHIR/",
-   baseUrl: "http://182.18.157.229:8085/"
-  //baseUrl: "http://localhost:10270/"
+//   baseUrl: "http://182.18.157.229:8080/"
+  baseUrl: "http://localhost:10270/"
 };
 
 /*
