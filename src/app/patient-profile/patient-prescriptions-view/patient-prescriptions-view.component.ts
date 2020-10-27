@@ -20,7 +20,7 @@ export class PatientPrescriptionsViewComponent implements OnInit {
         this.prescriptionData = res;
       },
       err => {
-        console.log(err);
+      
       });
 
   }

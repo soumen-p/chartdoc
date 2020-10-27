@@ -62,20 +62,7 @@ export class ChargeComponent implements OnInit {
         this.cptDetailss = this.patientCptService.getAllCpt('AllCpt');
       }
 
-     // this.cptDetailss = this.patientCptService.getAllCpt('AllCpt');
- // this.PatientId = this.patientCptService.getPatientDetails('patientInfo').appointmentId;
-  // if (isNullOrUndefined(this.patientCptService.getAllCpt('AllCpt'))) {
-  //   this.patientCptService.getPatientCptDetails()
-  //     .subscribe((res) => {
-  //       this.cptDetailss = res;
-  //       this.patientCptService.setAllCpt('AllCpt', this.cptDetailss);
-  //     },
-  //       err => {
-  //         console.log(err);
-  //       });
-  // }  else {
-  //   this.cptDetailss = this.patientCptService.getAllCpt('AllCpt');
-  // }
+    
   this.tblvisibility = true;
 
 
@@ -101,11 +88,11 @@ getAllChargeDates() {
   
   this.serviceMasterService.getAllChargeDates(" "," ")
    .subscribe((res) => {
-     console.log(res);
+     
      this.chargeDateRange = res;
         
    }, err => {
-     console.log(err);
+     
    });
 }
 
@@ -119,7 +106,7 @@ getChargeDetails(yearId: number){
    
   },
     err => {
-      console.log(err);
+      
     });
   
   }
@@ -157,13 +144,13 @@ deleteRow(cpt: ChargeCPTModel) {
 }
 
 public saveChargeDetails(e: Event) {
- // console.log(this.frm);
+ 
   e.preventDefault();
   while (this.frm.length) {
     this.frm.pop();
   }
   this.cptDetails.forEach(item => {
-    console.log(item);
+    
 
     this.formCPT.patchValue({
       cptCode: item.cptCode,
@@ -176,7 +163,7 @@ public saveChargeDetails(e: Event) {
     this.frm.push(this.formCPT.value);
   });
  
-  console.log(this.frm);
+  
 
   this.serviceMasterService.saveChargeDetails(this.cptDetails)
     .subscribe(

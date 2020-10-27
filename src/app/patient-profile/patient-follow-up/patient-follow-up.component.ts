@@ -72,7 +72,7 @@ export class PatientFollowUpComponent implements OnInit, OnDestroy {
         }
         },
           err => {
-            console.log(err);
+            
           });
     }
     if (this.latestFollowup === 'SD') {

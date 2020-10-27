@@ -56,10 +56,10 @@ export class PatientSocialFamilyComponent implements OnInit {
     this.patientSocialFamilyService.getSocialDetails(this.patientId, this.flag)
       .subscribe((res) => {
         this.patientSocialss = res;
-        console.log(this.patientSocialss);
+        
       },
         err => {
-          console.log(err);
+          
         });
     this.patientSocialFamilyService.getFamilyDetails(this.patientId, this.flag)
       .subscribe((res) => {
@@ -67,11 +67,11 @@ export class PatientSocialFamilyComponent implements OnInit {
           this.patientFamilyss = this.patientFamilys;
         } else {
           this.patientFamilyss = res;
-          console.log(this.patientFamilyss);
+          
         }
       },
         err => {
-          console.log(err);
+          
         });
   }
   onChangePage(pageOfItems: Array<any>) {

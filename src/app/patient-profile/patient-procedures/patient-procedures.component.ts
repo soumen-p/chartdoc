@@ -79,7 +79,7 @@ export class PatientProceduresComponent implements OnInit, OnDestroy {
         }
       },
         err => {
-          console.log(err);
+          
         });
   }
   getDocuments(id: number) {

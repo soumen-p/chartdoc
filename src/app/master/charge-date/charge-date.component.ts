@@ -60,7 +60,7 @@ export class ChargeDateComponent implements OnInit {
        });
        
       }, err => {
-        console.log(err);
+        
       });
   }
 
@@ -109,7 +109,7 @@ export class ChargeDateComponent implements OnInit {
       }
       
     }, err => {
-      console.log("error");
+      
     })
   }
 

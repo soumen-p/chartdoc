@@ -52,7 +52,7 @@ export class AddChargeDateComponent implements OnInit {
           this.toastr.errorToastr(response[1]);
         }
       }, err => {
-        console.log("error");
+        
       });
 
     }

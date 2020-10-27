@@ -80,7 +80,7 @@ export class PaymentComponent implements OnInit {
         },
         err => {
           this.toastr.errorToastr('please contact system admin!', 'Error!');
-          console.log(err);
+   
         }
       );
   }
@@ -102,7 +102,6 @@ export class PaymentComponent implements OnInit {
         .subscribe(res => {
           this.paymentList = res;
         }, error => {
-          console.log("error while search billing Info");
         })
       } else {
         this.toastr.errorToastr("Please select From Date and To Date");

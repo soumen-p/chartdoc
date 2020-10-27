@@ -47,7 +47,7 @@ export class CreateNewReasonComponent implements OnInit {
       return;
     } else {
       this.reasonmasterService.saveReason(this.reasonForm.value).subscribe((res) => {
-        console.log('Response:%o', res);
+        
         const result = res.split('|');
         if (result[0] === '1') {
           this.toastr.successToastr("Save Sucessfully..");
@@ -59,7 +59,7 @@ export class CreateNewReasonComponent implements OnInit {
           this.toastr.errorToastr(result[1]);
         }
       }, err => {
-        console.log(err);
+        
       });
     }
   }

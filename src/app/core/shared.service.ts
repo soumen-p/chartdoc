@@ -1,19 +1,43 @@
 import { Injectable } from '@angular/core';
 import { DoctorInformation } from '../models/doctor-information';
-
+import * as CryptoJS from 'crypto-js';
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
   html: string = '';
+  encryptSecretKey="9432227709"
   constructor() { }
 
   setLocalItem(key: string, value: any){
-    localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(this.encryptData(value)));
   }
 
   getLocalItem(key: string){
-    return JSON.parse(localStorage.getItem(key));
+    let data=JSON.parse(localStorage.getItem(key));
+    let data1=this.decryptData(data);
+    return data1
+  }
+  
+  encryptData(data) {
+
+    try {
+      return CryptoJS.AES.encrypt(JSON.stringify(data), this.encryptSecretKey).toString();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  decryptData(data) {
+
+    try {
+      const bytes = CryptoJS.AES.decrypt(data,  this.encryptSecretKey);
+      if (bytes.toString()) {
+        return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      }
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
   }
   getBookingInfo(bookinginfo: string){
     return this.getLocalItem(bookinginfo);

@@ -42,7 +42,7 @@ export class CreateNewServiceComponent implements OnInit {
         this.toastr.errorToastr(result[1]);
       }
     }, err => {
-      console.log(err);
+      
     });
   }
 

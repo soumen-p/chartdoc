@@ -7,7 +7,7 @@ import { SearchBillingInfoService } from 'src/app/services/search-billing-info.s
 import { SearchBillingResponse } from '../model/searchBillingResponse.model';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { Toastr, ToastrManager } from 'ng6-toastr-notifications';
-
+import { SharedService } from 'src/app/core/shared.service';
 
 @Component({
   selector: 'app-search-billing-info',
@@ -35,7 +35,12 @@ export class SearchBillingInfoComponent implements OnInit {
     providerName: new FormControl('')
 
   })
-  constructor(private _avRoute: ActivatedRoute, private router: Router, private landingPageService: LandingPageService, private searchBillingInfoService: SearchBillingInfoService, private datePipe: DatePipe, private toastr: ToastrManager) {
+  constructor(private _avRoute: ActivatedRoute, private router: Router
+    , private landingPageService: LandingPageService
+    , private searchBillingInfoService: SearchBillingInfoService
+    , private datePipe: DatePipe
+    , private toastr: ToastrManager
+    ,private sharedService: SharedService) {
     if (this._avRoute.snapshot.queryParams["id"] != undefined) {
       this.routeId = this._avRoute.snapshot.queryParams["id"];
       this.mainTitle = 'Billing';
@@ -90,7 +95,7 @@ export class SearchBillingInfoComponent implements OnInit {
         this.toDate = this.datePipe.transform(this.billingFormGroup.controls['toDate'].value, "MMddyyyy")
         this.patientId = this.patientId
         this.feeTicket = this.billingFormGroup.controls['feeTicket'].value
-        console.log('fromDate=' + this.fromDate + 'To Date=' + this.toDate + 'patientId=' + this.patientId + 'feeTicket=' + this.billingFormGroup.controls['feeTicket'].value + 'routeId=' + this.routeId + 'provider Id=' + this.doctorId);
+      
         let claimstatusid: string = String(this.routeId)
         if (this.routeId == 2) {
           claimstatusid = "2,3,4";
@@ -101,7 +106,7 @@ export class SearchBillingInfoComponent implements OnInit {
         this.searchBillingInfoService.searchBillingInfo(this.fromDate, this.toDate, this.patientId, this.feeTicket, this.doctorId, claimstatusid).subscribe(res => {
           this.searchBillingResponse = res;
         }, error => {
-          console.log("error while search billing Info");
+          
         })
       } else {
         this.toastr.errorToastr("Please select From Date and To Date");
@@ -116,7 +121,7 @@ export class SearchBillingInfoComponent implements OnInit {
     this.landingPageService.getUserList().subscribe((res) => {
       this.userList = res;
     }, err => {
-      console.log(err);
+      
     });
   }
 
@@ -125,7 +130,7 @@ export class SearchBillingInfoComponent implements OnInit {
 
 
   editSearchResult(searchItem: any) {
-    localStorage.removeItem("acceptcopay");
+    this.sharedService.removeLocalStorage("acceptcopay");
     if (this.subTitle == 'CREATE CHARGE') {
       this.router.navigate(['/create-bill'], { queryParams: { id: -1, appid: searchItem.appointmentId } });
     }

@@ -22,12 +22,12 @@ export class SpecialtyComponent implements OnInit {
       .subscribe((res) => {
         this.specialty = res;
       }, err => {
-        console.log(err);
+        
       });
   }
   editSpecialty(request){
     this.router.navigateByUrl('/new-specialty?id=' + request.pId + '&name=' + request.pCcDescription );
-    console.log(request);
+    
   }
   deleteSpecialtyData(request) {
     this.specialtyMasterService.DeleteSpecialty(request).subscribe((res) => {
@@ -41,7 +41,7 @@ export class SpecialtyComponent implements OnInit {
         this.closePopup('modalmarkDelete');
       }
     }, err => {
-      console.log('error');
+      
     });
   }
 

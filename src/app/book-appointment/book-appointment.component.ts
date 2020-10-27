@@ -111,7 +111,6 @@ export class BookAppointmentComponent implements OnInit {
     if (doctorBookingInfo != null && doctorBookingInfo != undefined && Number(this.isflowsheet) > 1) {
       this.getEncounterDetails(doctorBookingInfo.patientId, doctorBookingInfo.appointmentid);
     }
-    console.log(doctorBookingInfo);
     const name = doctorBookingInfo.patientname.split(' ');
     this.doctorId = doctorBookingInfo.doctorid;
     this.patientId = doctorBookingInfo.patientId;
@@ -242,7 +241,6 @@ export class BookAppointmentComponent implements OnInit {
         rcopiaName: this.encounterList.recopiaName,
       };
     }, err => {
-      console.log(err);
     });
   }
   ngOnInit() {
@@ -251,7 +249,6 @@ export class BookAppointmentComponent implements OnInit {
   }
 
   onDateChange(newDate: Date) {
-    console.log(newDate);
   }
 
   addPatient() {
@@ -264,11 +261,11 @@ export class BookAppointmentComponent implements OnInit {
 
     this.bookAppointmentService.addPatient(this.patientDetails)
       .subscribe((res) => {
-        console.log('Response:%o', res);
+        
         this.patientId = res.PatientId;
         this.addAppointment(this.patientId);
       }, err => {
-        console.log(err);
+        
       });
   }
   // tslint:disable-next-line: variable-name
@@ -309,7 +306,6 @@ export class BookAppointmentComponent implements OnInit {
         String(this.appointmentFormGroup.value.toTime.minute).padStart(2, '0')
     });
 
-    console.log(this.appointmentFormGroup.value);
     const param: Appointment = {
       AppointmentId: this.appointmentId,
       AppointmentNo: this.getAppointmentNumber(),
@@ -337,6 +333,9 @@ export class BookAppointmentComponent implements OnInit {
       Flowarea: '',
       ServiceId: this.appointmentFormGroup.controls['service'].value,
       Note: this.appointmentFormGroup.controls['note'].value,
+      FName :this.bookAppointmentFormGroup.controls['firstName'].value,
+      LName: this.bookAppointmentFormGroup.controls['lastName'].value,
+      MName :this.bookAppointmentFormGroup.controls['middleName'].value,
     };
     let fromTimeData = this.appointmentFormGroup.controls['fromTime'].value.split(':');
     let toTimeData = this.appointmentFormGroup.controls['toTime'].value.split(':');
@@ -346,11 +345,10 @@ export class BookAppointmentComponent implements OnInit {
     this.toTimeMinute = Number(toTimeData[1]);
     this.formData.append('appointmentDetails', JSON.stringify(param));
     this.formData.append('uploadFile', this.files[0]);
-    console.log(this.formData.get('appointmentDetails'));
-    console.log(this.formData.get('uploadFile'));
+  
     this.bookAppointmentService.saveAppointment(this.formData)
       .subscribe((res) => {
-        console.log('Response:%o', res);
+        
         const reStatus = res.split('|');
         if (reStatus[0] == '1') {
           this.appointmentService.setBookingInfo('lastdate', this.appointmentFormGroup.controls['date'].value);
@@ -371,7 +369,7 @@ export class BookAppointmentComponent implements OnInit {
 
       }, err => {
         this.toastr.errorToastr('please contact system admin!', 'Error!');
-        console.log(err);
+        
       });
   }
 
@@ -407,7 +405,7 @@ export class BookAppointmentComponent implements OnInit {
   }
   dobValidation(): boolean {
     let flgdate = true;
-    console.log(new Date(this.getToday()));
+    
     if (new Date(this.bookAppointmentFormGroup.value.dateOfBirth) < new Date(this.dobminDate)) {
       this.toastr.errorToastr('Invalid DOB ', 'Oops!');
       flgdate = false;
@@ -446,9 +444,8 @@ export class BookAppointmentComponent implements OnInit {
     this.bookAppointmentService.getAllServices()
       .subscribe((res) => {
         this.services = res;
-        console.log('Service%o', this.services);
+       
       }, err => {
-        console.log(err);
       });
   }
   getReason(param: any) {
@@ -457,7 +454,6 @@ export class BookAppointmentComponent implements OnInit {
         this.reasons = res;
 
       }, err => {
-        console.log(err);
       });
   }
   validateImage(position: string) {

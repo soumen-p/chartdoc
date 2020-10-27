@@ -47,7 +47,7 @@ export class CreateNewRoleComponent implements OnInit {
       return;
     } else {
       this.rolemasterService.saveRole(this.reasonForm.value).subscribe((res) => {
-        console.log('Response:%o', res);
+        
         const result = res.split('|');
         if (result[0] === '1') {
           this.toastr.successToastr("Save Sucessfully..");
@@ -59,7 +59,7 @@ export class CreateNewRoleComponent implements OnInit {
           this.toastr.errorToastr(result[1]);
         }
       }, err => {
-        console.log(err);
+        
       });
     }
   }

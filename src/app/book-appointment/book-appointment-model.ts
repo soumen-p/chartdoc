@@ -26,4 +26,7 @@ export class Appointment {
     Flowarea: string;
     ServiceId: number;
     Note: string;
+    FName :string;
+    MName:string;
+    LName:string;
 }

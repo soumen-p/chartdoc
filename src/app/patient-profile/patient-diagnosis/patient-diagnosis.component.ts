@@ -73,7 +73,7 @@ export class PatientDiagnosisComponent implements OnInit, OnDestroy {
         }
       },
       err => {
-        console.log(err);
+        
       });
   }
 

@@ -98,7 +98,7 @@ private _officeCalendarService:OfficeCalendarService,
 
     }
     ngAfterViewInit() {
-        console.log(this.external.nativeElement.innerHTML);
+        
         new Draggable(this.external.nativeElement, {
             itemSelector: '.fc-event',
             eventData: function (eventEl) {
@@ -134,11 +134,11 @@ private _officeCalendarService:OfficeCalendarService,
         let self=this;
         if (this.clickCount === 1) {
             this.singleClickTimer = setTimeout(function () {
-                console.log('single click');
+                
                 self.clickCount = 0;
             }, 400);
         } else if (this.clickCount === 2) {
-            console.log('double click');
+            
 
             this.clickCount = 0;
             clearTimeout(this.singleClickTimer);
@@ -171,12 +171,12 @@ private _officeCalendarService:OfficeCalendarService,
     
     eventDrop(arg:any){
         
-       console.log(arg)
+       
     }
     
     drop(arg:any){
        
-       console.log(arg)
+       
     }
     bindEvents() {
 
@@ -227,7 +227,7 @@ private _officeCalendarService:OfficeCalendarService,
             tempdata.push({ id: 2, title: strdate2,date:this.pipe.transform(new Date(nextdaydate1), 'MM-dd-yyyy') })
             tempdata.push({ id: 3, title: strdate3,date:this.pipe.transform(new Date(nextdaydate2), 'MM-dd-yyyy') })
             this.calendarresources = tempdata;
-            console.log("nextClick")
+            
             let today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -287,7 +287,7 @@ private _officeCalendarService:OfficeCalendarService,
             tempdata.push({ id: 2, title: strdate2 ,date:this.pipe.transform(new Date(prevdaydate1), 'MM-dd-yyyy')})
             tempdata.push({ id: 3, title: strdate3,date:this.pipe.transform(new Date(prevdaydate2), 'MM-dd-yyyy') })
             this.calendarresources = tempdata;
-            console.log("prevClick");
+            
 
 
 
@@ -349,7 +349,7 @@ private _officeCalendarService:OfficeCalendarService,
             tempdata.push({ id: 3, title: strdate2,date:this.pipe.transform(new Date(todaydate2), 'MM-dd-yyyy') })
           
             this.calendarresources = tempdata;
-            console.log("todayClick")
+            
             //this.external.nativeElement.style="display: visible;";
             let dateparam=(this.pipe.transform(new Date(todaydate), 'MM-dd-yyyy') +","+
             this.pipe.transform(new Date(todaydate1), 'MM-dd-yyyy')+","+this.pipe.transform(new Date(todaydate2), 'MM-dd-yyyy')).split('-').join('');
@@ -393,7 +393,7 @@ private _officeCalendarService:OfficeCalendarService,
                   this.calendarEvents = tempdata;
             },
                 err => {
-                    console.log(err);
+                    
                 });
     }
      datechange(arg: any) {

@@ -55,11 +55,10 @@ export class DoctorCalenderComponent implements OnInit {
     if (this.clickCount === 1) {
       // tslint:disable-next-line: only-arrow-functions
       this.singleClickTimer = setTimeout(function () {
-        console.log('single click');
+        
         self.clickCount = 0;
       }, 400);
     } else if (this.clickCount === 2) {
-      console.log('double click');
 
       this.clickCount = 0;
       clearTimeout(this.singleClickTimer);
@@ -79,7 +78,6 @@ export class DoctorCalenderComponent implements OnInit {
 
   dateRender($event: any) {
     // alert("date rendrer")
-    console.log("dateRender....", $event);
 
     this.startDate = $event.view.activeStart;
     this.endDate = $event.view.activeEnd;
@@ -94,13 +92,13 @@ export class DoctorCalenderComponent implements OnInit {
     this.doctorCalendarService.getAllCalendar(date, doctorId).subscribe((res) => {
       let tempdata = [];
       res.forEach((element: any) => {
-        console.log("ddata", res)
+        
         if (element.schduleAppoinment.doctorID != "") {
           const mm = element.schduleAppoinment.date.substr(3, 2);
           const dd = element.schduleAppoinment.date.substr(0, 2) //January is 0!
           const yyyy = element.schduleAppoinment.date.substr(6, 4);
           let strdate1 = yyyy + '-' + mm + '-' + dd;
-          console.log("s date=" + strdate1);
+          
           tempdata.push({
             resourceId: 1, title: element.schduleAppoinment.patientName.trim(), start: strdate1 + "T" + element.schduleAppoinment.fromTime.trim(),
             end: strdate1 + "T" + element.schduleAppoinment.toTime.trim(), IsReady: element.schduleAppoinment.isReady, appoinmentId: element.schduleAppoinment.appointmentId, patientID: element.schduleAppoinment.patientId,
@@ -202,7 +200,7 @@ export class DoctorCalenderComponent implements OnInit {
       this.doctorCalendarService.setPatientInfo('patientInfo', this.patientInfo);
       this.router.navigate(['/patient-profile'], { queryParams: { mode:'history', id: aID } });
     }, err => {
-      console.log(err);
+      
     });
   }
   getDaysArray(start, end) {

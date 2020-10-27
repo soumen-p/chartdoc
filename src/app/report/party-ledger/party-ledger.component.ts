@@ -74,7 +74,7 @@ export class PartyLedgerComponent implements OnInit {
           this.partyledgerList = res;
           this.show = true;
         }, error => {
-          console.log("error while search party ledger Info");
+          
         })
     } else {
       this.toastr.errorToastr("Please select From Date and To Date");

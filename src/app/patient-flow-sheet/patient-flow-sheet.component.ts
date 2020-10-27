@@ -53,7 +53,6 @@ export class PatientFlowSheetComponent implements OnInit {
     this.patientFlowSheetService.getAppointmentDetail(strDate, doctorId)
       .subscribe((res) => {
         this.patientData = res;
-        console.log('data=' + JSON.stringify(this.patientData));
         const tempdata = [];
 
         const calendarApi = this.calendarComponent.getApi();
@@ -189,7 +188,6 @@ export class PatientFlowSheetComponent implements OnInit {
         this.calendarEvents = tempdata;
       },
         err => {
-          console.log(err);
         });
   }
 
@@ -301,7 +299,6 @@ export class PatientFlowSheetComponent implements OnInit {
         const patientId = arg.event.extendedProps.patientID;
         // tslint:disable-next-line: only-arrow-functions
         this.singleClickTimer = setTimeout(function () {
-          console.log('single click');
           if (HeaderId === 1) {
             self.patientFlowSheetService.getInsuranceStatus(patientId).subscribe((res) => {
               if (res == '1') {
@@ -314,7 +311,7 @@ export class PatientFlowSheetComponent implements OnInit {
               self.openMarkIn('modalmarkInPatient');
 
             }, err => {
-              console.log('something went wrong please try again');
+              
             })
 
           }
@@ -335,7 +332,7 @@ export class PatientFlowSheetComponent implements OnInit {
         }, 400);
       }
     } else if (this.clickCount === 2) {
-      console.log('double click');
+      
       this.clickCount = 0;
       clearTimeout(this.singleClickTimer);
       this.clickCount++;
@@ -449,14 +446,11 @@ export class PatientFlowSheetComponent implements OnInit {
     }
     this.patientFlowSheetService.updateMarkStatus(this.appoinmentId, status).subscribe((res) => {
       if (res === 1) {
-        console.log('success');
+        
         this.getAppointmentDetails(this.currentDate, this.doctorId);
-      } else {
-        console.log('Fail');
-      }
+      } 
     }, err => {
       this.closePopuop('modalmarkInPatient', '');
-      console.log(err);
     });
     this.closePopuop('modalmarkInPatient', '');
   }
@@ -484,7 +478,6 @@ export class PatientFlowSheetComponent implements OnInit {
       .subscribe((res) => {
         this.roomNumberList = res;
       }, error => {
-        console.log('something went Wrong');
       });
   }
   public openRoomDialog(myModel: string) {
@@ -498,13 +491,11 @@ export class PatientFlowSheetComponent implements OnInit {
       roomNo = '0';
     }
     this.patientFlowSheetService.updateAppoinmentDetail(this.appoinmentId, roomNo, this.flowArea).subscribe((res) => {
-      console.log('status=' + JSON.stringify(res));
       this.getAppointmentDetails(this.currentDate, this.doctorId);
       // this.closePopuop('modaladdRoom','');
       this.closeRoomPopuop('modaladdRoom');
     }, err => {
       this.closeRoomPopuop('modaladdRoom');
-      console.log(err);
     });
   }
   toggleVisibility(e) {
@@ -517,7 +508,7 @@ export class PatientFlowSheetComponent implements OnInit {
       this.closePopuop('modalCheckOut', '');
       this.isCheckinValid = false;
     }, err => {
-      console.log(err);
+      
     });
   }
 
@@ -536,7 +527,7 @@ export class PatientFlowSheetComponent implements OnInit {
       const strdate = mm + '' + dd + '' + yyyy;
       this.currentDate = strdate;
       this.getAppointmentDetails(strdate, this.doctorId);
-      console.log('nextClick');
+      
       this.IsCurrentAppointment();
     });
     prevButton[0].addEventListener('click', () => {
@@ -549,7 +540,7 @@ export class PatientFlowSheetComponent implements OnInit {
       const strdate = mm + '' + dd + '' + yyyy;
       this.currentDate = strdate;
       this.getAppointmentDetails(strdate, this.doctorId);
-      console.log('prevClick');
+      
       this.IsCurrentAppointment();
     });
 
@@ -563,7 +554,7 @@ export class PatientFlowSheetComponent implements OnInit {
       const strdate = mm + '' + dd + '' + yyyy;
       this.currentDate = strdate;
       this.getAppointmentDetails(strdate, this.doctorId);
-      console.log('todayClick');
+      
     });
   }
 

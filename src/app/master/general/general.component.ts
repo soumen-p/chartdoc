@@ -65,7 +65,7 @@ export class GeneralComponent implements OnInit {
         this.toastr.errorToastr("Record cannot be deleted..");
       }
     }, err => {
-      console.log('error');
+      
     });
   }
 
@@ -78,7 +78,7 @@ export class GeneralComponent implements OnInit {
     this.pageOfItems = pageOfItems;
   }
   editdata(value:any){
-    console.log(value);
+    
     this.OthersService.setOtherbyid(value);
     this.router.navigateByUrl('/app-add-general?id=' + value.id+'&typeid='+this.selectedTypeId );
   }

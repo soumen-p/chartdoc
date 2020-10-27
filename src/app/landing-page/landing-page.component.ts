@@ -46,7 +46,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.landingPageService.getUserList().subscribe((res) => {
       this.userList = res;
     }, err => {
-      console.log(err);
+      
     });
   }
 

@@ -9,6 +9,8 @@ import {BookAppointmentService} from './../../services/book-appointment.service'
 import { AppointmentService } from './../../services/appointment.service';
 import { PatientSearchService } from './../../services/patient-search.service';
 import { AcceptcopayService } from '../../services/accept-copay.service';
+import { SharedService } from 'src/app/core/shared.service';
+
 @Component({
   selector: 'app-payment',
   templateUrl: './add-payment.component.html',
@@ -49,6 +51,7 @@ export class AddPaymentComponent implements OnInit {
     public _patientSearchService:PatientSearchService,
     public _paymentService:PaymentService,
     private _acceptcopayService: AcceptcopayService,
+    private sharedService: SharedService
     ) {
       if (this._avRoute.snapshot.queryParams["paymentId"]) {
         this.paymentId = this._avRoute.snapshot.queryParams["paymentId"];
@@ -116,7 +119,7 @@ export class AddPaymentComponent implements OnInit {
         this.reasons = res;
 
       }, err => {
-        console.log(err);
+
       });
   }
   getPaymentType(id: any) {
@@ -417,7 +420,7 @@ save() {
         },
         err => {
           this.toastr.errorToastr('please contact system admin!', 'Error!');
-          console.log(err);
+          
         }
       );
     

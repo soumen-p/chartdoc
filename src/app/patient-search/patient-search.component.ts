@@ -80,7 +80,7 @@ export class PatientSearchComponent implements OnInit {
         this.patientList = res as Patient[];
         if (this.patientList.length > 0) {
           this.patientSearchService.setPatientSearchInfo('patientSearch', this.patientList);
-          console.log('patient Data', this.patientList)
+          
           this.isRecordFound = true;
         } else {
           this.isRecordFound = false;
@@ -88,7 +88,6 @@ export class PatientSearchComponent implements OnInit {
         }
       },
         err => {
-          console.log(err);
         });
   }
 
@@ -106,7 +105,7 @@ export class PatientSearchComponent implements OnInit {
         }
       },
         err => {
-          console.log(err);
+          
         });
   }
 

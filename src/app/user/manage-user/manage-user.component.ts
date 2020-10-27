@@ -47,7 +47,7 @@ export class ManageUserComponent implements OnInit {
 
     }, err => {
       this.toast.errorToastr('Something went wrong', 'Error');
-      console.log(err);
+      
     });
 
   }

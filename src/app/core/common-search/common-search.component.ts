@@ -10,7 +10,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./common-search.component.css']
 })
 export class CommonSearchComponent implements OnInit {
-
+  pageOfItems: Array<any>;
   @Input() searchCriteria: string;
   //@Output() arrayCriteria: [] = [];
   @Output() arrayCriteria = new EventEmitter();
@@ -51,5 +51,9 @@ export class CommonSearchComponent implements OnInit {
       chargeAmount:chargeAmount
     });
     this.arrayCriteria.emit(this.formGroup);
+  }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }

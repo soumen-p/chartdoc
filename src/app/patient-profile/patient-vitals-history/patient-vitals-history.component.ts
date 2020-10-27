@@ -28,11 +28,9 @@ export class PatientVitalsHistoryComponent implements OnInit {
     this.patientSocialFamilyService.getVitalsHistory(this.patientId, this.flag)
       .subscribe((res) => {
         this.vitalHistory= res;
-        //this.patientSocialss = res;
-       // console.log(this.patientSocialss);
       },
         err => {
-          console.log(err);
+          
         });
     
   }

@@ -47,7 +47,7 @@ export class AddClaimFieldMasterComponent implements OnInit {
     
       this.claimFieldDetailList = res;
      }, err => {
-       console.log(err);
+       
      });
   }
 
@@ -67,7 +67,7 @@ export class AddClaimFieldMasterComponent implements OnInit {
     this.claimFieldDetailList.push({id:this.claimId, value: this.claimDetailValue});
 
     this.claimDetailValue = '';
-    //console.log(this.claimFieldDetailList);
+    
   }
 
   deleteClaimDetail(claimDetail:any,index:number ){

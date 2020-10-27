@@ -24,7 +24,7 @@ export class PatientImmunizationsComponent implements OnInit {
     this.patientId = this.immunizationService.getPatientDetails('patientInfo').patientId;
     this.immunizationService.getImmunizations(this.patientId, this.flag)
       .subscribe((res) => {
-        console.log(res);
+        
         if (this.flag === 'E') {
           this.immunizationsList = res.entry;
           if (this.immunizationsList.length > 0) {
@@ -47,7 +47,7 @@ export class PatientImmunizationsComponent implements OnInit {
         }
       },
         err => {
-          console.log(err);
+          
         });
   }
 

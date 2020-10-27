@@ -122,10 +122,10 @@ loadEncounters() {
 
   },
   err => {
-    console.log(err);
+    
   });
 
-    console.log(this.encModel);
+    
 }
 
 }

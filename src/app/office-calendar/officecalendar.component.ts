@@ -69,9 +69,9 @@ export class OfficeCalendarComponent implements OnInit {
                     data = res[i] as OfficeCalendarReasons;
                     this.Reasons.push(data);
                 }
-                console.log('Reasons%o', this.Reasons);
+                
             }, err => {
-                console.log(err);
+                
             });
     }
 
@@ -136,12 +136,12 @@ export class OfficeCalendarComponent implements OnInit {
                     String(this.officecalendarForm.value.fromTime.minute).padStart(2, '0');
                 this.officecalendarForm.value.toTime = String(this.officecalendarForm.value.toTime.hour).padStart(2, '0') + ':' +
                     String(this.officecalendarForm.value.toTime.minute).padStart(2, '0');
-                console.log(this.officecalendarForm.value);
+                
 
 
                 this.officeCalendarService.saveCalendar(this.officecalendarForm.value)
                     .subscribe((res) => {
-                        console.log('Response:%o', res);
+                        
                         this.formDirective.resetForm();
                         // this.officecalendarForm.reset();
                         this.officecalendarForm.patchValue({
@@ -160,7 +160,7 @@ export class OfficeCalendarComponent implements OnInit {
                         this.getAllServices(0);
 
                     }, err => {
-                        console.log(err);
+                        
                         this.toastr.errorToastr(String(err) + ' , please contact system admin!', 'Oops!', { showCloseButton: true });
                         this.officecalendarForm.value.fromTime = fromtime;
                         this.officecalendarForm.value.fromTime = toTime;
@@ -175,7 +175,7 @@ export class OfficeCalendarComponent implements OnInit {
 
             },
                 err => {
-                    console.log(err);
+                    
                 });
     }
     getAllServices(value: any) {
@@ -188,7 +188,7 @@ export class OfficeCalendarComponent implements OnInit {
                 }
 
             }, err => {
-                console.log(err);
+                
             });
     }
     reset(): void {
@@ -383,7 +383,7 @@ export class OfficeCalendarComponent implements OnInit {
                 this.toastr.successToastr('Delete Sucessfully...', '', { showCloseButton: true });
                 this.getAllServices(0);
             }, err => {
-                console.log(err);
+                
             });
         document.getElementById(myModal).style.display = 'block';
     }

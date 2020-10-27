@@ -50,7 +50,7 @@ export class SubmitClaimComponent implements OnInit {
               this.claimFieldsHeaders.forEach(element => {
                 element.value =res.filter((x:any)=>x.fieldid==element.id)[0]["value"];
               });
-              console.log(this.claimFieldsHeaders);
+              
             })
           }
 
@@ -96,7 +96,7 @@ export class SubmitClaimComponent implements OnInit {
         },
         err => {
           this.toastr.errorToastr('please contact system admin!', 'Error!');
-          console.log(err);
+          
         }
       );
   }

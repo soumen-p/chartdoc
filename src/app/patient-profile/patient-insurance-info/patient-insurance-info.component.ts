@@ -21,7 +21,7 @@ export class PatientInsuranceInfoComponent implements OnInit {
         this.insuranceinfosList = res;
       },
         err => {
-          console.log(err);
+          
         });
       }
       onChangePage(pageOfItems: Array<any>) {

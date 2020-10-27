@@ -55,7 +55,7 @@ export class PatientIcdComponent implements OnInit {
           this.patientIcdService.setIcdDetails('icd' + this.patientId, this.icdDetailss);
         },
           err => {
-            console.log(err);
+            
           });
     } else {
       this.icdDetailss = this.patientIcdService.getIcdDetails('icd' + this.patientId);
@@ -75,7 +75,7 @@ export class PatientIcdComponent implements OnInit {
         this.icdDetails = data;
       },
         err => {
-          console.log(err);
+          
         });
   }
 

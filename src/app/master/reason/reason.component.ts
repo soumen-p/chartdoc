@@ -34,9 +34,8 @@ export class ReasonComponent implements OnInit {
     this.bookAppointmentService.getReason(param.target.value)
       .subscribe((res) => {
         this.reasons = res;
-        console.log('Reasons : %o', res);
+       
       }, err => {
-        console.log(err);
       });
   }
 
@@ -61,12 +60,10 @@ export class ReasonComponent implements OnInit {
           this.toastr.errorToastr("Record cannot be deleted..");
         }
       }, err => {
-        console.log(err);
       });
     document.getElementById(myModal).style.display = 'block';
   }
   editReason(value: any) {
-    console.log(value);
     this.reasonmasterService.setReasonbyid(value);
     this.router.navigateByUrl('/new-reason?id=' + value.reasonId+'&type='+ this.type );
    

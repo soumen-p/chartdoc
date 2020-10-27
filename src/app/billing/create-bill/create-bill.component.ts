@@ -5,6 +5,7 @@ import { NgForm, FormBuilder, FormGroup, Validators, FormControl, FormGroupDirec
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { CreateBillService } from '../../services/create-bill.service';
 import { DatePipe } from '@angular/common';
+import { SharedService } from 'src/app/core/shared.service';
 @Component({
   selector: 'app-create-bill',
   templateUrl: './create-bill.component.html',
@@ -43,7 +44,8 @@ export class CreateBillComponent implements OnInit {
     private router: Router,
     private _avRoute: ActivatedRoute,
     public toastr: ToastrManager,
-    public createBillService: CreateBillService
+    public createBillService: CreateBillService,
+    private sharedService: SharedService
   ) {
     const current = new Date();
     this.minDate = current;
@@ -172,7 +174,7 @@ export class CreateBillComponent implements OnInit {
         this.reasons = res;
 
       }, err => {
-        console.log(err);
+     
       });
   }
   getClaimStatus() {
@@ -181,7 +183,7 @@ export class CreateBillComponent implements OnInit {
         this.changedModes = res;
 
       }, err => {
-        console.log(err);
+        
       });
   }
   getDoctorList() {
@@ -198,13 +200,13 @@ export class CreateBillComponent implements OnInit {
   };
   getChargePatientDetails() {
     if("claimDetails" in localStorage && "acceptcopay" in localStorage){
-      if(JSON.parse(localStorage.getItem("acceptcopay"))=="Yes"){
-        this.chargePatientDetails =JSON.parse(localStorage.getItem("claimDetails"));
-        let coPayAmt=JSON.parse(localStorage.getItem("acceptcoamt"));
+      if(JSON.parse(this.sharedService.getLocalItem("acceptcopay"))=="Yes"){
+        this.chargePatientDetails =JSON.parse(this.sharedService.getLocalItem("claimDetails"));
+        let coPayAmt=JSON.parse(this.sharedService.getLocalItem("acceptcoamt"));
         if(Number(coPayAmt)>0){
           this.chargePatientDetails[0].copay=coPayAmt;
         }
-        localStorage.removeItem("claimDetails");
+        this.sharedService.removeLocalStorage("claimDetails")
       }
    } 
     else{
@@ -268,8 +270,8 @@ export class CreateBillComponent implements OnInit {
 
         })
         if("claimHeader" in localStorage){
-          claimHeader= JSON.parse(localStorage.getItem("claimHeader"));
-          localStorage.removeItem("claimHeader");
+          claimHeader= JSON.parse(this.sharedService.getLocalItem("claimHeader"));
+          this.sharedService.removeLocalStorage("claimHeader");
           this.createbillForm.patchValue({
             insuranceId1: claimHeader.insuranceId1,
             insuranceName1: claimHeader.insuranceName1,
@@ -298,10 +300,10 @@ export class CreateBillComponent implements OnInit {
       })
   }
   acceptcopay() {
-    localStorage.removeItem("acceptcopay");
-    localStorage.removeItem("acceptcoamt");
-    localStorage.setItem("claimHeader",  JSON.stringify(this.createbillForm.value));
-    localStorage.setItem("claimDetails", JSON.stringify(this.chargePatientDetails));
+    this.sharedService.removeLocalStorage("acceptcopay");
+    this.sharedService.removeLocalStorage("acceptcoamt");
+    this.sharedService.setLocalItem("claimHeader",  JSON.stringify(this.createbillForm.value));
+    this.sharedService.setLocalItem("claimDetails", JSON.stringify(this.chargePatientDetails));
     this.createBillService.setBookingInfo("CopayAppId", this.createbillForm.value.appointmentId);
     this.router.navigate(['/accept-copay'], { queryParams: { pid: this.createbillForm.value.patientId, back: "create-bill" } });
   }
@@ -321,7 +323,6 @@ export class CreateBillComponent implements OnInit {
     
   }
   modechange(data:any){
-    console.log(data);
     this.createbillForm.patchValue({
       claimstatusId:2
     })
@@ -414,16 +415,17 @@ export class CreateBillComponent implements OnInit {
       this.formData.append('isDelete', JSON.stringify('N'));
       this.formData.append('claimHeader', JSON.stringify(this.createbillForm.value));
       this.formData.append('claimDetails', JSON.stringify(this.chargePatientDetails[0]));
-      //this.formData.append('claimAdjustment', JSON.stringify(''));
-      //console.log(this.formData);
+  
       this.createBillService.saveClaim(this.formData)
         .subscribe
         (
           res => {
-            localStorage.removeItem("claimHeader");
-            localStorage.removeItem("claimDetails");
-            localStorage.removeItem("acceptcopay");
-            localStorage.removeItem("acceptcoamt");
+            this.sharedService.removeLocalStorage("claimHeader");
+            this.sharedService.removeLocalStorage("claimDetails");
+            this.sharedService.removeLocalStorage("acceptcopay");
+            this.sharedService.removeLocalStorage("acceptcoamt");
+            this.sharedService.removeLocalStorage("dateInfo");
+            this.sharedService.removeLocalStorage('patientInfo');
             if (this.tableId == 3) {
               this.createBillService.setsubmitclaimInfo('submitclaimInfo', {
                 chargeId: this.createbillForm.value.chargeId,
@@ -441,7 +443,7 @@ export class CreateBillComponent implements OnInit {
           },
           err => {
             this.toastr.errorToastr('please contact system admin!', 'Error!');
-            console.log(err);
+          
           }
         );
     } else {
@@ -555,7 +557,6 @@ export class CreateBillComponent implements OnInit {
       .subscribe
       (
         res => {
-          console.log('[getMasterData]-Response:%o', res);
           switch (key) {
             case '13':
               this.locations = res;
@@ -568,7 +569,7 @@ export class CreateBillComponent implements OnInit {
         },
         err => {
           this.toastr.errorToastr('please contact system admin!', 'Error!');
-          console.log(err);
+        
         }
       );
   }

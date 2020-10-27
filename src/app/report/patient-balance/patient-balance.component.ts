@@ -65,7 +65,7 @@ export class PatientBalanceComponent implements OnInit {
           this.patientbalancelist = res;
           this.show = true;
         }, error => {
-          console.log("error while search Patient Balance Info");
+          
         })
    
 

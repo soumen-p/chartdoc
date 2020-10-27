@@ -45,7 +45,7 @@ export class PatientImpressionPlanService {
   }
 
   saveImpressionPlan(impressionPlanInfo: any): Observable<any> {
-    console.log('HI Save Method from service');
+    
     return this.http.post(environment.baseUrl + LocalBaseUrl + 'SaveImpressionPlan', impressionPlanInfo, { responseType: 'text' });
 
   }

@@ -75,9 +75,9 @@ export class PatientdiagnosticuploadComponent implements OnInit {
     this.bookAppointmentService.getAllServices()
       .subscribe((res) => {
         this.services = res;
-        console.log('Service%o', this.services);
+        
       }, err => {
-        console.log(err);
+        
       });
   }
 

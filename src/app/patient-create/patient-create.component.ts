@@ -224,7 +224,7 @@ export class PatientCreateComponent implements OnInit {
     , public toastr: ToastrManager) {
     this.formData = new FormData();
     
-    console.log(this.getToday());
+    
   }
 
   ngOnInit() {
@@ -246,10 +246,10 @@ export class PatientCreateComponent implements OnInit {
                 id: element.id
               });
           });
-          // console.log(this.immunizationArray);
+          
         },
           err => {
-            console.log(err);
+            
           });
 
       this.patientCreateService.getAllergies(this.patientId)
@@ -263,10 +263,10 @@ export class PatientCreateComponent implements OnInit {
                 id: element.id
               });
           });
-          //  console.log(this.allergyArray);
+          
         },
           err => {
-            console.log(err);
+            
           });
 
       this.patientCreateService.getSocials(this.patientId)
@@ -281,10 +281,10 @@ export class PatientCreateComponent implements OnInit {
                 id: element.id
               });
           });
-          //  console.log(this.allergyArray);
+          
         },
           err => {
-            console.log(err);
+            
           });
 
       this.patientCreateService.getFamilies(this.patientId)
@@ -298,10 +298,10 @@ export class PatientCreateComponent implements OnInit {
                 id: element.id
               });
           });
-          //  console.log(this.allergyArray);
+          
         },
           err => {
-            console.log(err);
+            
           });
 
       this.patientCreateService.getPatientAlert(this.patientId)
@@ -317,10 +317,10 @@ export class PatientCreateComponent implements OnInit {
             this.alertDesc = element.description;
             this.alertId = element.code;
           });
-          //  console.log(this.allergyArray);
+          
         },
           err => {
-            console.log(err);
+            
           });
       ///Other Info
     }
@@ -345,18 +345,18 @@ export class PatientCreateComponent implements OnInit {
     formDataAuthorization.append(this.authorizationSelectedFile.name, this.authorizationSelectedFile, this.authorizationSelectedFile.name);
     this.patientCreateService.fileUpload(formDataAuthorization).subscribe(
       res => {
-        console.log(res);
+        
       },
       err => {
         this.toastr.errorToastr('please contact system admin!', 'Error!');
-        console.log(err);
+        
       }
     );
-    console.log('this.insuranceSelectedFile:%o', this.authorizationSelectedFile);
+    
   }
   effetivedateValidation(): boolean {
     let flgdate = true;
-    console.log(new Date(this.getToday()));
+    
     if (new Date(this.patientInsuranceFormGroup.value.insuranceEffectiveFrom) < new Date(this.minDate)) {
       this.toastr.errorToastr('Invalid Effective From Date ' + this.patientInsuranceFormGroup.value.insuranceEffectiveFrom + '', 'Oops!');
       flgdate = false;
@@ -825,7 +825,7 @@ export class PatientCreateComponent implements OnInit {
       this.ClsCreateUpdatePatient.sPatientDetails = this.getPatient();
       this.ClsCreateUpdatePatient.sPatientEmpContact = this.getEmployerContact();
       this.ClsCreateUpdatePatient.sPatientEmergency = this.getPatientEmergency();
-      console.log(this.ClsCreateUpdatePatient.sPatientEmergency);
+      
       this.ClsCreateUpdatePatient.sPatientSocial = this.getPatientSocial();
       this.ClsCreateUpdatePatient.sPatientBilling = this.getPatientBilling();
       this.ClsCreateUpdatePatient.sPatientInsurance = this.getPatientInsurance();
@@ -875,7 +875,7 @@ export class PatientCreateComponent implements OnInit {
         this.formData.append('insurances_' + String(index), element.files);
       });
       this.formData.append('authorization', this.authorizationfiles[0]);
-      console.log(this.formData.get('createUpdatePatient'));
+      
       //other Info
       this.formData.append('allergyImmunization', JSON.stringify(this.ClsAllergyImmunization));
       //other Info
@@ -883,7 +883,7 @@ export class PatientCreateComponent implements OnInit {
         .subscribe
         (
           res => {
-            // console.log('Response:%o', res);
+            
             const patientTemp = {
               PatientId: res.split('~')[0],
               FirstName: this.patientFormGroup.value.firstName,
@@ -900,7 +900,7 @@ export class PatientCreateComponent implements OnInit {
           err => {
             this.toastr.errorToastr('please contact system admin!', 'Error!');
             this.formData = new FormData();
-            console.log(err);
+            
           }
         );
     }
@@ -1021,7 +1021,7 @@ export class PatientCreateComponent implements OnInit {
       .subscribe
       (
         res => {
-          // console.log('Response:%o', res);
+          
           this.patientId = res.sPatientDetails.patientId;
           if (res.sPatientDetails.imagePath !== '') {
             this.patientimage = res.sPatientDetails.imagePath;
@@ -1048,7 +1048,7 @@ export class PatientCreateComponent implements OnInit {
         },
         err => {
           this.toastr.errorToastr('please contact system admin!', 'Error!');
-          console.log(err);
+          
         }
       );
   }
@@ -1198,7 +1198,7 @@ export class PatientCreateComponent implements OnInit {
       .subscribe
       (
         res => {
-          console.log('[getMasterData]-Response:%o', res);
+          
           switch (key) {
             case '1':
               this.relationshipWithPatient = res;
@@ -1234,7 +1234,7 @@ export class PatientCreateComponent implements OnInit {
         },
         err => {
           this.toastr.errorToastr('please contact system admin!', 'Error!');
-          console.log(err);
+          
         }
       );
   }
@@ -1316,7 +1316,7 @@ export class PatientCreateComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]); // read file as data url
       const self = this;
       reader.onload = (event: any) => { // called once readAsDataURL is completed
-        console.log(event);
+        
         self.url = event.target.result;
       };
     }
@@ -1325,7 +1325,7 @@ export class PatientCreateComponent implements OnInit {
 
   dobValidation(): boolean {
     let flgdate = true;
-    console.log(new Date(this.getToday()));
+    
     if (new Date(this.patientFormGroup.value.dob) < new Date(this.minDate)) {
       this.toastr.errorToastr('Invalid DOB ' + this.patientFormGroup.value.dob + '', 'Oops!');
       flgdate = false;

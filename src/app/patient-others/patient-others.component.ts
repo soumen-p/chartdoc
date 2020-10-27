@@ -95,10 +95,10 @@ export class PatientOthersComponent implements OnInit {
                 id: element.id
               });
           });
-          // console.log(this.immunizationArray);
+          
         },
           err => {
-            console.log(err);
+            
           });
 
       this.patientCreateService.getAllergies(this.patientId)
@@ -112,10 +112,10 @@ export class PatientOthersComponent implements OnInit {
                 id: element.id
               });
           });
-          //  console.log(this.allergyArray);
+          
         },
           err => {
-            console.log(err);
+          
           });
 
       this.patientCreateService.getSocials(this.patientId)
@@ -130,10 +130,10 @@ export class PatientOthersComponent implements OnInit {
                 id: element.id
               });
           });
-          //  console.log(this.allergyArray);
+          
         },
           err => {
-            console.log(err);
+            
           });
 
       this.patientCreateService.getFamilies(this.patientId)
@@ -147,10 +147,10 @@ export class PatientOthersComponent implements OnInit {
                 id: element.id
               });
           });
-          //  console.log(this.allergyArray);
+          
         },
           err => {
-            console.log(err);
+            
           });
 
       this.patientCreateService.getPatientAlert(this.patientId)
@@ -166,10 +166,10 @@ export class PatientOthersComponent implements OnInit {
               this.alertDesc = element.description ;
               this.alertId = element.code;
             });
-            //  console.log(this.allergyArray);
+            
           },
             err => {
-              console.log(err);
+              
             });
 
     }
@@ -213,7 +213,7 @@ export class PatientOthersComponent implements OnInit {
         },
         err => {
           this.toastr.errorToastr('please contact system admin!', 'Error!');
-          console.log(err);
+          
         }
       );
   }
@@ -289,7 +289,7 @@ export class PatientOthersComponent implements OnInit {
       .subscribe
       (
         res => { this.alertKeywordArray = res; },
-        err => { console.log(err); }
+        err => {  }
       );
   }
   onOpenCalendar(container) {

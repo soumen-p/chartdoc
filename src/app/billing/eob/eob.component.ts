@@ -100,7 +100,6 @@ export class EobComponent implements OnInit {
         this.reasons = res;
 
       }, err => {
-        console.log(err);
       });
   }
   adjgetReason() {
@@ -109,7 +108,6 @@ export class EobComponent implements OnInit {
         this.adjreasons = res;
 
       }, err => {
-        console.log(err);
       });
   }
   changeReason(event:any){
@@ -244,7 +242,7 @@ export class EobComponent implements OnInit {
     this.formData.append('claimHeader', JSON.stringify(this.eobForm.value));
     this.formData.append('claimDetails', JSON.stringify(this.chargePatientDetails[0]));
     this.formData.append('claimAdjustment', JSON.stringify(this.claimAdjustments));
-    //console.log(this.formData);
+
     this._eobService.saveClaim(this.formData)
       .subscribe
       (
@@ -254,7 +252,7 @@ export class EobComponent implements OnInit {
         },
         err => {
           this.toastr.errorToastr('please contact system admin!', 'Error!');
-          console.log(err);
+  
         }
       );
   }

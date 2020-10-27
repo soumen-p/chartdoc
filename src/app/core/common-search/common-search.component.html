@@ -13,7 +13,7 @@
                         </div>
                         <div style="height: 300px;overflow-y:scroll;">
                             <div class="accordion-group"
-                                            *ngFor="let detail of details | commonSearchFilter: {code: searchTerm, desc:searchTerm}">
+                                            *ngFor="let detail of pageOfItems | commonSearchFilter: {code: searchTerm, desc:searchTerm}">
                                 <div class="card">
                                     <div class="card-header">
                                         <div class="row">
@@ -49,6 +49,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="card-footer pb-0 pt-3">
+                                <jw-pagination [items]="details" [pageSize]="10" (changePage)="onChangePage($event)"></jw-pagination>
                             </div>
                         </div>
                     </div>

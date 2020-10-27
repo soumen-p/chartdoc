@@ -65,9 +65,7 @@ export class AppointmentComponent implements OnInit {
     singleClickTimer: any;
     // tslint:disable-next-line: use-lifecycle-interface
     ngAfterViewInit() {
-        console.log(this.external.nativeElement.innerHTML);
-        // this.calendarComponent.element.nativeElement.getElementsByClassName('fc-highlight')[0].style.background="red";
-        // tslint:disable-next-line: no-unused-expression
+       
         new Draggable(this.external.nativeElement, {
             itemSelector: '.fc-event',
             eventData(eventEl) {
@@ -108,16 +106,12 @@ export class AppointmentComponent implements OnInit {
         if (this.clickCount === 1) {
             // tslint:disable-next-line: only-arrow-functions
             this.singleClickTimer = setTimeout(function () {
-                console.log('single click');
                 self.clickCount = 0;
             }, 400);
         } else if (this.clickCount === 2) {
-            console.log('double click');
-
             this.clickCount = 0;
             clearTimeout(this.singleClickTimer);
             if (arg.event.backgroundColor === '#ffc4c4' || arg.event.backgroundColor === '#ffffd8') {
-                console.log(arg.event.backgroundColor);
             } else {
                 this.clickCount++;
                 const doctorid = arg.event.getResources()[0].id;
@@ -178,11 +172,9 @@ export class AppointmentComponent implements OnInit {
         }
     }
     eventDrop(arg: any) {
-        console.log(arg);
     }
 
     drop(arg: any) {
-        console.log(arg);
     }
     datechange(arg: any) {
         this.selectable = true;
@@ -205,7 +197,7 @@ export class AppointmentComponent implements OnInit {
                 this.calendarreSources = tempdata;
             },
                 err => {
-                    console.log(err);
+                   
                 });
     }
     getAppointment(strdate: any) {
@@ -262,7 +254,7 @@ export class AppointmentComponent implements OnInit {
                 this.calendarEvents = tempdata;
             },
                 err => {
-                    console.log(err);
+                
                 });
     }
     bindEvents() {
@@ -279,7 +271,7 @@ export class AppointmentComponent implements OnInit {
             const strdate = `${mmnextdaydate}${ddnextdaydate}${yyyynextdaydate}`;
             this.getDoctorList(strdate);
             this.getAppointment(strdate);
-            console.log('nextClick');
+            
             const today = new Date();
             const dd = String(today.getDate()).padStart(2, '0');
             const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
@@ -302,7 +294,7 @@ export class AppointmentComponent implements OnInit {
             const strdate = `${mmprevdaydate}${ddprevdaydate}${yyyyprevdaydate}`;
             this.getDoctorList(strdate);
             this.getAppointment(strdate);
-            console.log('prevClick');
+        
             const today = new Date();
             const dd = String(today.getDate()).padStart(2, '0');
             const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
@@ -325,7 +317,7 @@ export class AppointmentComponent implements OnInit {
             const strdate = `${mm}${dd}${yyyy}`;
             this.getDoctorList(strdate);
             this.getAppointment(strdate);
-            console.log('todayClick');
+        
             // this.selectable=true;
             // this.external.nativeElement.style = 'display: visible;';
         });

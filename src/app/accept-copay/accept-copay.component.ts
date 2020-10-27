@@ -11,6 +11,7 @@ import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import {CoPay} from '../models/co-pay'
 import { entry } from '../models/patient-allergies-entry.model';
+import { SharedService } from 'src/app/core/shared.service';
 
 @Component({
     selector: 'app-accept-copay',
@@ -38,7 +39,9 @@ export class AcceptcopayComponent implements OnInit {
         private _avRoute: ActivatedRoute,
         private _acceptcopayService: AcceptcopayService,
         private config: NgbDatepickerConfig,
-        public toastr: ToastrManager) {
+        public toastr: ToastrManager,
+        private sharedService: SharedService
+        ) {
 
         const current = new Date();
         // this.minDate = {
@@ -114,18 +117,17 @@ export class AcceptcopayComponent implements OnInit {
             let coAmt=this.acceptcopayForm.value.amount;
             this._acceptcopayService.saveCopay(this.acceptcopayForm.value)
                 .subscribe((res) => {
-                    console.log('Response:%o', res);
                     this.toastr.successToastr(" Save sucessfully..!", 'Success!');
                     if(this.urlBack==""){
                     this.router.navigate(['/flowsheet-book-appointment'],{queryParams:{id:1}});
                     }else{
-                        localStorage.setItem("acceptcopay", JSON.stringify("Yes"));
-                        localStorage.setItem("acceptcoamt", JSON.stringify(coAmt));
+                        this.sharedService.setLocalItem('acceptcopay', JSON.stringify("Yes"));
+                        this.sharedService.setLocalItem('acceptcoamt',  JSON.stringify(coAmt));
+
                         this.router.navigate(['/'+this.urlBack],{queryParams:{id:-1, appid:this.ApppointmentId}});
                         
                     }
                 }, err => {
-                    console.log(err);
                     this.toastr.errorToastr(String(err) + " , please contact system admin!", 'Oops!');
                    // this.acceptcopayForm.value.fromTime = fromtime;
                    // this.acceptcopayForm.value.fromTime = toTime;
@@ -142,8 +144,8 @@ export class AcceptcopayComponent implements OnInit {
         if(this.urlBack==""){
             this.router.navigate(['/flowsheet-book-appointment'],{queryParams:{id:1}});
             }else{
-                localStorage.setItem("acceptcopay", JSON.stringify("Yes"));
-                localStorage.setItem("acceptcoamt", JSON.stringify(0));
+                this.sharedService.setLocalItem('acceptcopay', JSON.stringify("Yes"));
+                this.sharedService.setLocalItem('acceptcoamt', JSON.stringify(0));
                 this.router.navigate(['/'+this.urlBack],{queryParams:{id:-1, appid:this.ApppointmentId}});
             }
     }

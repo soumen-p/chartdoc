@@ -83,8 +83,6 @@ export class UserComponent implements OnInit {
           lastName=element.trim();
         }
        });
-       console.log(lastName.trim())
-      // console.log(name);
         this.createNewUserFormGroup.patchValue({
           fullName: this.editUserData.doctorName.trim(),
           fName:this.editUserData.doctorName.trim().split(' ')[0],
@@ -102,7 +100,7 @@ export class UserComponent implements OnInit {
         this.specialityType = this.editUserData.specialtyType;
       }
       this.tempArray = this.editUserData.roleList.split(',').map((item: string) => item.trim());
-      console.log('after conversion=', this.tempArray);
+      
     } else {
       this.setradio('1');
     }
@@ -276,10 +274,10 @@ export class UserComponent implements OnInit {
     this.userService.getRoleType(id).subscribe((res) => {
       if (id === '1') {
         this.roleTypeArray = res;
-        console.log('provider Data=', this.roleTypeArray);
+        
       } else if (id === '2') {
         this.medicalRoleType = res;
-        console.log('data=' + JSON.stringify(res));
+        
       } else if (id === '3') {
         this.officeRoleType = res;
       }
@@ -295,7 +293,7 @@ export class UserComponent implements OnInit {
   getRole() {
     this.userService.getRole().subscribe((res) => {
       this.role = res;
-      console.log('role=', this.role);
+      
     });
   }
 
@@ -306,7 +304,7 @@ export class UserComponent implements OnInit {
 
   save() {
     this.addUserDetails();
-    console.log('form value' + this.createNewUserFormGroup);
+    
 
   }
   addUserDetails() {
@@ -318,7 +316,7 @@ export class UserComponent implements OnInit {
   }
   dobValidation(): boolean {
     let flgdate = true;
-    console.log(new Date(this.getToday()));
+    
     if (new Date(this.createNewUserFormGroup.value.dateOfBirth) < new Date(this.minDate)) {
       this.toastr.errorToastr('Invalid DOB ', 'Oops!');
       flgdate = false;
@@ -350,21 +348,20 @@ export class UserComponent implements OnInit {
         RoleList: roleList,
         RoleSubType: this.roleFormGroup.controls['roleType'].value,
       };
-      console.log('data=' + JSON.stringify(requestInfo));
+      
       this.formData.append('userDetails', JSON.stringify(requestInfo));
       this.formData.append('uploadFile', this.files[0]);
       this.userService.addUser(this.formData).subscribe((res) => {
         if(res=="-1"){
           this.toastr.errorToastr("Data already exists");
         }else{
-        console.log('response=' + JSON.stringify(res));
+        
         this.router.navigate(['/manage-user']);
         this.toastr.successToastr('New user created successfully ', 'success!');
         this.createNewUserFormGroup.reset();
         this.roleForm.reset();
         }
       }, err => {
-        console.log(err);
       });
     } else {
       this.toastr.errorToastr('Please fill all the fields ', 'Oops!');
@@ -390,7 +387,7 @@ export class UserComponent implements OnInit {
         roleSubType: this.roleFormGroup.controls['roleType'].value,
         imagePath:this.fileUrl ,
       };
-      console.log('data=' + JSON.stringify(requestInfo));  
+      
       this.formData.append('userDetails', JSON.stringify(requestInfo));
       this.formData.append('uploadFile', this.files[0]);
       this.userService.addUser(this.formData).subscribe((res) => {
@@ -398,7 +395,7 @@ export class UserComponent implements OnInit {
           this.toastr.errorToastr("Data already exists");
         }else{
                   
-        console.log('response=' + JSON.stringify(res));
+        
         this.router.navigate(['/manage-user']);
         this.toastr.successToastr(' user updated successfully ', 'success!');
         this.createNewUserFormGroup.reset();
@@ -407,7 +404,6 @@ export class UserComponent implements OnInit {
 
       }, err => {
 
-        console.log(err);
       });
     } else {
       this.toastr.errorToastr('Please fill all the fields ', 'Oops!');

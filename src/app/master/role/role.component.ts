@@ -34,9 +34,8 @@ export class RoleComponent implements OnInit {
     this.rolemasterService.getRole(param.target.value)
       .subscribe((res) => {
         this.roles = res;
-        console.log('roles : %o', res);
+        
       }, err => {
-        console.log(err);
       });
   }
 
@@ -62,12 +61,10 @@ export class RoleComponent implements OnInit {
           this.toastr.errorToastr("Record cannot be deleted..");
         }
       }, err => {
-        console.log(err);
       });
     document.getElementById(myModal).style.display = 'block';
   }
   editRole(value: any) {
-    console.log(value);
     this.rolemasterService.setRolebyid(value);
     this.router.navigateByUrl('/new-role?id=' + value.utCode+'&role='+ this.type );
    

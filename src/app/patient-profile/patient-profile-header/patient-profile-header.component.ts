@@ -120,7 +120,7 @@ export class PatientProfileHeaderComponent implements OnInit {
         }
       },
         err => {
-          console.log(err);
+          
         });
   }
 
@@ -370,7 +370,7 @@ export class PatientProfileHeaderComponent implements OnInit {
     }
   }
   weightChecking(e){
-    console.log(e.target.value);
+    
     if(e.target.value!="" && Number(e.target.value)>200){
       e.target.value=200;
     }

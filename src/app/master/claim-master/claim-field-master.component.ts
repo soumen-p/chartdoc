@@ -24,9 +24,9 @@ export class ClaimFieldMasterComponent implements OnInit {
     this.claimFieldMasterService.getClaimFieldsHeader()
      .subscribe((res) => {
       this.claimFieldHeaderList = res;
-      console.log(res);
+      
      }, err => {
-       console.log(err);
+       
      });
  }
 
@@ -35,7 +35,7 @@ export class ClaimFieldMasterComponent implements OnInit {
 editClaimMaster(claim: any){
 
   this.router.navigateByUrl('/app-add-claim-field-master?id=' + claim.id + '&claimName=' + claim.name + '&claimType=' + claim.type );
-  console.log(claim);
+  
 
 }
 

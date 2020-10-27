@@ -22,12 +22,12 @@ export class ServiceComponent implements OnInit {
       .subscribe((res) => {
         this.service = res;
       }, err => {
-        console.log(err);
+        
       });
   }
   editService(request){
     this.router.navigateByUrl('/new-service?id=' + request.serviceId + '&name=' + request.serviceName );
-    console.log(request);
+    
   }
   deleteServiceData(request) {
     this.serviceMasterService.DeleteService(request).subscribe((res) => {
@@ -41,7 +41,7 @@ export class ServiceComponent implements OnInit {
         this.closePopup('modalmarkDelete');
       }
     }, err => {
-      console.log('error');
+      
     });
   }
 
