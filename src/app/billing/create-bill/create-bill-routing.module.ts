@@ -4,11 +4,11 @@ import { CreateBillComponent } from './create-bill.component';
 
 
 const createbillRoutes: Routes = [
-  { path: 'create-bill', component: CreateBillComponent },
+  { path: '', component: CreateBillComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(createbillRoutes)],
+  imports: [RouterModule.forChild(createbillRoutes)],
   exports: [RouterModule]
 })
 export class CreateBillRoutingModule { }

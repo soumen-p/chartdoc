@@ -11,7 +11,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { SpecialtyComponent } from './specialty.component';
-import { ShellModule } from 'src/app/shell/shell.module';
 import { SpecialtyRoutingModule } from './specialty-routing.module';
 import { CreateNewSpecialtyComponent } from './create-new-specialty/create-new-specialty.component';
 import { CoreModule } from 'src/app/core/core.module';
@@ -19,12 +18,11 @@ import { CoreModule } from 'src/app/core/core.module';
   declarations: [SpecialtyComponent, CreateNewSpecialtyComponent],
   imports: [
     CommonModule,
-    ShellModule,
     FormsModule,
     SpecialtyRoutingModule,
     ReactiveFormsModule,
     NgbModule,
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
     CoreModule,
     BsDatepickerModule.forRoot()
   ],

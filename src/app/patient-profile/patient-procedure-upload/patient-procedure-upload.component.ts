@@ -24,10 +24,13 @@ export class PatientProcedureUploadComponent implements OnInit {
   @Output('loadInit') loadInit: EventEmitter<any> = new EventEmitter();
   constructor(private ProcedureService: PatientProceduresService, public toastr: ToastrManager) { }
   ngOnInit() {
+    debugger;
     const doctorBookingInfo = this.ProcedureService.getBookingInfo('doctorBookingInfo');
-    this.patientId = doctorBookingInfo.patientId;
-    this.AppointmentId = doctorBookingInfo.appointmentid;
-    this.doctorName = doctorBookingInfo.doctorname.substring(0, doctorBookingInfo.doctorname.indexOf('(') - 1);
+    if(doctorBookingInfo!==undefined){
+      this.patientId = doctorBookingInfo.patientId;
+      this.AppointmentId = doctorBookingInfo.appointmentid;
+      this.doctorName = doctorBookingInfo.doctorname.substring(0, doctorBookingInfo.doctorname.indexOf('(') - 1);
+    }
 
     this.procFormGroup = new FormGroup({
       doctorName: new FormControl(''),

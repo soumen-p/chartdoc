@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PatientProfileComponent } from './patient-profile.component';
 import { CoreModule } from '../core/core.module';
 import { PatientProfileRoutingModule } from './patient-profile-routing.module';
-import { ShellModule } from '../shell/shell.module';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -79,7 +78,6 @@ import { PatientVitalsHistoryComponent } from './patient-vitals-history/patient-
     CommonModule,
     CoreModule,
     PatientProfileRoutingModule,
-    ShellModule,
     CKEditorModule,
     FormsModule,
     GridModule,

@@ -4,11 +4,11 @@ import { AcceptcopayComponent } from './accept-copay.component';
 
 
 const acceptcopayRoutes: Routes = [
-    {path:'accept-copay', component: AcceptcopayComponent}
+    {path:'', component: AcceptcopayComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(acceptcopayRoutes)],
+  imports: [RouterModule.forChild(acceptcopayRoutes)],
   exports: [RouterModule]
 })
 export class AcceptcopayRoutingModule { }

@@ -4,7 +4,7 @@ import { ChargeDateComponent } from './charge-date.component';
 import { AddChargeDateComponent } from './add-charge-date/add-charge-date.component';
 
 const routes: Routes = [
-  {path:'app-charge-date', component: ChargeDateComponent},
+  {path:'', component: ChargeDateComponent},
   {path:'app-add-charge-date', component: AddChargeDateComponent}
 ];
 

@@ -19,7 +19,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     document.body.className = "login_page";
     this.doctorInfo = formBuilder.group({
       doctorName: '',
-      doctorImage: ''
+      doctorImage: '',
+      roleType:''
     })
   }
 
@@ -31,13 +32,15 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     document.body.className = "";
   }
 
-  onClick(doctorName: string, doctorImg: string) {
+  onClick(doctorName: string, doctorImg: string,roleType:string) {
     this.doctorInfo.setValue({
       doctorName: doctorName,
-      doctorImage: doctorImg
+      doctorImage: doctorImg,
+      roleType:roleType
     });
 
     this.landingPageService.setDoctorInfo('doctorInfo', this.doctorInfo.value);
+    
     this.router.navigateByUrl('/login');
     //this.router.navigateByUrl('/test');
   }
@@ -45,6 +48,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   getUserList() {
     this.landingPageService.getUserList().subscribe((res) => {
       this.userList = res;
+      
     }, err => {
       
     });

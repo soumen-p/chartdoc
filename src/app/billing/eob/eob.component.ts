@@ -212,7 +212,7 @@ export class EobComponent implements OnInit {
     detail.balance=detail.allowedAmount-detail.deduction-detail.paymentReceived-detail.insAdjustment-detail.miscAdjustment-detail.insuranceBalance;
   }
   save() {
-    if(this.chargePatientDetails[0].miscAdjustment!="" && this.claimAdjustments.length<=0){
+    if((this.chargePatientDetails[0].miscAdjustment!="0" && this.chargePatientDetails[0].miscAdjustment!="") && this.claimAdjustments.length<=0){
       this.toastr.errorToastr('Adjustment requried', 'Error!');
       return;
     }
@@ -223,7 +223,7 @@ export class EobComponent implements OnInit {
         adjustmentAmt =adjustmentAmt+Number(obj.amount);
 
        });
-      if(miscAdjustment!=adjustmentAmt){
+      if( miscAdjustment!=adjustmentAmt){
         this.toastr.errorToastr('Misc and Adjustment amount mismatch', 'Error!');
         return;
       }

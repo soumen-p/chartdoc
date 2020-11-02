@@ -4,7 +4,6 @@ import { CoreModule } from '../core/core.module';
 
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppointmentService } from '../services/appointment.service';
-import { ShellModule } from '../shell/shell.module';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { OfficeCalendarService} from '../services/officecalendar.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,12 +15,11 @@ import { FullCalendarModule } from '@fullcalendar/angular';
   declarations: [DoctorCalenderComponent],
   imports: [
     CommonModule,
-    ShellModule,
     DoctorCalendarRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
     FullCalendarModule,
     BsDatepickerModule.forRoot()
   ],

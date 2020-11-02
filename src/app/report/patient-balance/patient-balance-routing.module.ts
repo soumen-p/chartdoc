@@ -5,11 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 import {PatientBalanceComponent} from './patient-balance.component';
 import {ReportService} from '../../services/report.service';
 const patientbalanceRoutes: Routes = [
-  {path:'patient-balance', component: PatientBalanceComponent},
+  {path:'', component: PatientBalanceComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(patientbalanceRoutes)],
+  imports: [RouterModule.forChild(patientbalanceRoutes)],
   exports: [RouterModule],
   providers: [ReportService]
 })

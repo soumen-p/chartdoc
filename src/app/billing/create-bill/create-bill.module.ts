@@ -3,7 +3,6 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CreateBillComponent } from './create-bill.component';
 import {CreateBillRoutingModule } from './create-bill-routing.module'
-import { ShellModule } from 'src/app/shell/shell.module';
 import { CreateBillService } from '../../services/create-bill.service';
 import { CoreModule } from 'src/app/core/core.module';
 
@@ -13,7 +12,6 @@ import { CoreModule } from 'src/app/core/core.module';
     CommonModule,
     CoreModule,
     CreateBillRoutingModule,
-    ShellModule,
     FormsModule,
     ReactiveFormsModule,
   ],

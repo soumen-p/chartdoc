@@ -4,11 +4,11 @@ import { SubmitClaimComponent } from './submit-claim.component';
 
 
 const submitclaimRoutes: Routes = [
-  { path: 'submit-claim', component: SubmitClaimComponent },
+  { path: '', component: SubmitClaimComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(submitclaimRoutes)],
+  imports: [RouterModule.forChild(submitclaimRoutes)],
   exports: [RouterModule]
 })
 export class SubmitClaimRoutesRoutingModule { }

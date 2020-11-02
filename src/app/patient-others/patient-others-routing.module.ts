@@ -4,11 +4,11 @@ import { PatientOthersComponent } from './patient-others.component';
 
 
 const patientOthersRoutes: Routes = [
-  {path:'patient-others', component: PatientOthersComponent}
+  {path:'', component: PatientOthersComponent}
 ];
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(patientOthersRoutes)],
+  imports: [RouterModule.forChild(patientOthersRoutes)],
   exports: [RouterModule]
 })
 export class PatientOthersRoutingModule { }

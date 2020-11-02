@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+//import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,7 +24,6 @@ import { OfficeCalendarModule } from './office-calendar/officecalendar.module';
 import {PatientOthersModule} from './patient-others/patient-others.module'
 import { ToastrModule } from 'ng6-toastr-notifications';
 import { UserModule } from './user/new-user/user.module';
-import { ManageUserModule } from './user/manage-user/manage-user.module';
 import { DoctorCalendarModule } from './doctor-calender/doctor-calendar.module';
 import { ServiceModule } from './master/service/service.module';
 import { ReasonModule } from './master/reason/reason.module';
@@ -44,6 +43,7 @@ import { SpecialtyModule } from './master/specialty/specialty.module';
 import {  RoleModule} from './master/role/role.module';
 import {PartyLedgerModule} from './report/party-ledger/party-ledger.module';
 import {PatientBalanceModule} from './report/patient-balance/patient-balance.module';
+import { ShellModule } from './shell/shell.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -51,15 +51,15 @@ import {PatientBalanceModule} from './report/patient-balance/patient-balance.mod
     // AddClaimFieldMasterComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    //BrowserModule,
     LandingPageModule,
-    PatientSearchModule,
-    PatientProfileModule,
-    AppointmentModule,
-    PatientFlowSheetModule,
-    LoginModule,
-    PatientCreateModule,
+    //PatientSearchModule,
+    //PatientProfileModule,
+   // AppointmentModule,
+   // PatientFlowSheetModule,
+   // LoginModule,
+   // PatientCreateModule,
     HttpClientModule,
     CoreModule,
     ButtonsModule,
@@ -68,30 +68,30 @@ import {PatientBalanceModule} from './report/patient-balance/patient-balance.mod
     FormsModule,
     ReactiveFormsModule,
     CKEditorModule,
-    BookAppointmentModule,
-    OfficeCalendarModule,
-    DoctorCalendarModule,
-    ServiceModule,
-    AcceptcopayModule,
-    PatientOthersModule,
-    UserModule,
-    ManageUserModule,
-    ReasonModule,
-    GeneralModule,
-    ChargeModule,
-    ChargeDateModule,
-    PaymentModule,
-    ClaimFieldMasterModule,
-    SearchBillingInfoModule,
-    CreateBillModule,
-    EobModule,
-    SubmitClaimModule,
-    PaymentModule,
-    AddPaymentModule,
-    SpecialtyModule,
-    RoleModule,
-    PartyLedgerModule,
-    PatientBalanceModule,
+    //BookAppointmentModule,
+    //OfficeCalendarModule,
+   // DoctorCalendarModule,
+   // ServiceModule,
+    //AcceptcopayModule,
+   // PatientOthersModule,
+    //UserModule,
+    //ReasonModule,
+    //GeneralModule,
+    //ChargeModule,
+    //ChargeDateModule,
+    //PaymentModule,
+    //ClaimFieldMasterModule,
+    //SearchBillingInfoModule,
+    //CreateBillModule,
+    //EobModule,
+    //SubmitClaimModule,
+    //PaymentModule,
+    //AddPaymentModule,
+    //SpecialtyModule,
+    //RoleModule,
+    //PartyLedgerModule,
+    //PatientBalanceModule,
+    ShellModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
     ToastrModule.forRoot()

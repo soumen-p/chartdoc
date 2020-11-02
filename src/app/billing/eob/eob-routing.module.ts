@@ -4,11 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import {EobComponent} from './eob.component';
 import {EobService} from '../../services/eob.service';
 const eobRoutes: Routes = [
-  {path:'eob-edit', component: EobComponent},
+  {path:'', component: EobComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(eobRoutes)],
+  imports: [RouterModule.forChild(eobRoutes)],
   exports: [RouterModule],
   providers: [EobService]
 })

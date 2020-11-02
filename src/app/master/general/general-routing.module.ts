@@ -5,7 +5,7 @@ import { AddGeneralComponent } from './add-general/add-general.component';
 
 
 const routes: Routes = [
-  {path:'app-general', component: GeneralComponent},
+  {path:'', component: GeneralComponent},
   {path:'app-add-general', component: AddGeneralComponent}
 ];
 

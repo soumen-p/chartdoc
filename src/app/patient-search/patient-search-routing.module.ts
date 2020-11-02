@@ -4,12 +4,12 @@ import { PatientSearchComponent } from './patient-search.component';
 
 
 const patientSearchRoutes: Routes = [
-    {path:'patient-search', component: PatientSearchComponent},
+    {path:'', component: PatientSearchComponent},
     {path:'patient-search-appointment', component: PatientSearchComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(patientSearchRoutes)],
+  imports: [RouterModule.forChild(patientSearchRoutes)],
   exports: [RouterModule]
 })
 export class PatientSearchRoutingModule { }

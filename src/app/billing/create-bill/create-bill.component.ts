@@ -434,11 +434,12 @@ export class CreateBillComponent implements OnInit {
               });
               this.router.navigate(['/submit-claim']);
             }else{
-              if(this.tableId ==1){
-              this.router.navigate(['/create-claim'], { queryParams: { id: this.tableId } });
-              }else if(this.tableId ==4){
-                this.router.navigate(['/create-eob'], { queryParams: { id: 9} });
-              }
+              this.router.navigate(['/create-claim'], { queryParams: { id: this._avRoute.snapshot.queryParams["id"]} });
+            //   if(this.tableId ==1){
+            //   this.router.navigate(['/create-claim'], { queryParams: { id: this.tableId } });
+            //   }else if(this.tableId ==4){
+            //     this.router.navigate(['/create-eob'], { queryParams: { id: 9} });
+            //   }
             }
           },
           err => {

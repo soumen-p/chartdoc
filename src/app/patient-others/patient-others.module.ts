@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PatientOthersComponent } from './patient-others.component';
 import { CoreModule } from '../core/core.module';
 import { PatientOthersRoutingModule } from './patient-others-routing.module';
-import { ShellModule } from '../shell/shell.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
@@ -13,7 +12,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     CommonModule,
     CoreModule,
     PatientOthersRoutingModule,
-    ShellModule,
     ReactiveFormsModule,
     BsDatepickerModule
   ],

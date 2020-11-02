@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PatientBalanceComponent } from './patient-balance.component'
 import {PatientBalanceRoutingModule} from './patient-balance-routing.module'
-import { ShellModule } from 'src/app/shell/shell.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -11,8 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     PatientBalanceRoutingModule,
-    ReactiveFormsModule,
-    ShellModule
+    ReactiveFormsModule
   ]
 })
 export class PatientBalanceModule { }

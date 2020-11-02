@@ -11,7 +11,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ServiceComponent } from './service.component';
-import { ShellModule } from 'src/app/shell/shell.module';
 import { ServiceRoutingModule } from './service-routing.module';
 import { CreateNewServiceComponent } from './create-new-service/create-new-service.component';
 import { CoreModule } from 'src/app/core/core.module';
@@ -19,12 +18,11 @@ import { CoreModule } from 'src/app/core/core.module';
   declarations: [ServiceComponent, CreateNewServiceComponent],
   imports: [
     CommonModule,
-    ShellModule,
     FormsModule,
     ServiceRoutingModule,
     ReactiveFormsModule,
     NgbModule,
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
     CoreModule,
     BsDatepickerModule.forRoot()
   ],

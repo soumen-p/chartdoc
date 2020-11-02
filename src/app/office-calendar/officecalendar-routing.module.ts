@@ -4,12 +4,12 @@ import { OfficeCalendarComponent } from './officecalendar.component';
 import {CalendarScheduleComponent} from './calendarschedule.component';
 
 const officecalendarRoutes: Routes = [
-    {path:'office-calendar', component: OfficeCalendarComponent},
+    {path:'', component: OfficeCalendarComponent},
     {path:'calendar-schedule', component: CalendarScheduleComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(officecalendarRoutes)],
+  imports: [RouterModule.forChild(officecalendarRoutes)],
   exports: [RouterModule]
 })
 export class OfficeCalendarRoutingModule { }

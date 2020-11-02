@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ChargeDateComponent } from './charge-date.component';
 import { AddChargeDateComponent } from './add-charge-date/add-charge-date.component';
 import { ChargeDateRoutingModule } from './charge-date-routing.module';
-import { ShellModule } from 'src/app/shell/shell.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CoreModule } from '../../core/core.module';
 @NgModule({
@@ -11,7 +10,6 @@ import { CoreModule } from '../../core/core.module';
   imports: [
     CommonModule,
     ChargeDateRoutingModule,
-    ShellModule ,
     FormsModule,
     CoreModule,
     ReactiveFormsModule,

@@ -6,7 +6,6 @@ import { OfficeCalendarComponent } from './officecalendar.component';
 import {CalendarScheduleComponent} from './calendarschedule.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppointmentService } from '../services/appointment.service';
-import { ShellModule } from '../shell/shell.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {OfficeCalendarService} from '../services/officecalendar.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,12 +15,11 @@ import { FullCalendarModule } from '@fullcalendar/angular';
   declarations: [OfficeCalendarComponent,CalendarScheduleComponent],
   imports: [
     CommonModule,
-    ShellModule,
     OfficeCalendarRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
     FullCalendarModule,
     BsDatepickerModule.forRoot()
   ],
