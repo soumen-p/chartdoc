@@ -12,10 +12,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ServiceComponent } from './service.component';
 import { ServiceRoutingModule } from './service-routing.module';
-import { CreateNewServiceComponent } from './create-new-service/create-new-service.component';
+//import { CreateNewServiceComponent } from './create-new-service/create-new-service.component';
 import { CoreModule } from 'src/app/core/core.module';
 @NgModule({
-  declarations: [ServiceComponent, CreateNewServiceComponent],
+  declarations: [ServiceComponent],
   imports: [
     CommonModule,
     FormsModule,

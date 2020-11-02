@@ -12,11 +12,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ReasonComponent } from './reason.component';
 import { ReasoncRoutingModule } from './reason-routing.module';
-import { CreateNewReasonComponent } from './create-new-reason/create-new-reason.component';
 import{ReasonMasterService} from './../../services/reason-master.service';
 import { CoreModule } from 'src/app/core/core.module';
 @NgModule({
-  declarations: [ReasonComponent, CreateNewReasonComponent],
+  declarations: [ReasonComponent],
   imports: [
     CommonModule,
     FormsModule,

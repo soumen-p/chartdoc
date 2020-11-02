@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ServiceComponent } from './service.component';
-//import { CreateNewServiceComponent } from './create-new-service/create-new-service.component';
+
+import { CreateNewSpecialtyComponent } from './create-new-specialty.component';
 const servicecalendarRoutes: Routes = [
-  { path: '', component: ServiceComponent }
+  
+  { path: '', component: CreateNewSpecialtyComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(servicecalendarRoutes)],
   exports: [RouterModule]
 })
-export class ServiceRoutingModule { }
+export class NewSpecialtyRoutingModule { }

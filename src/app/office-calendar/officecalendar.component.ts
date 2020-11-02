@@ -41,7 +41,7 @@ export class OfficeCalendarComponent implements OnInit {
             date: ['']
         });
         let OfficeCalendar = this.officeCalendarService.getCalendar('OfficeCalendar');
-        if (OfficeCalendar.calendardId == 0) {
+        if (OfficeCalendar==undefined ||  OfficeCalendar.calendardId == 0) {
             this.officecalendarForm.patchValue({
                 calendardate: new Date(OfficeCalendar.Date.substring(6, 10) + '-' + OfficeCalendar.Date.substring(0, 2) + '-' + OfficeCalendar.Date.substring(3, 5)),
                 date: OfficeCalendar.Date,

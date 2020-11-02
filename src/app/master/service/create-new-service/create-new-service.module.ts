@@ -10,25 +10,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { RoleComponent } from './role.component';
-import { RoleRoutingModule } from './role-routing.module';
-
-import{RoleMasterService} from './../../services/role-master.service';
+import{NewServiceRoutingModule} from './create-new-service.routing'
+import { CreateNewServiceComponent } from './create-new-service.component';
 import { CoreModule } from 'src/app/core/core.module';
 @NgModule({
-  declarations: [RoleComponent],
+  declarations: [ CreateNewServiceComponent],
   imports: [
     CommonModule,
     FormsModule,
-  
+    NewServiceRoutingModule,
     ReactiveFormsModule,
-    RoleRoutingModule,
     NgbModule,
     //BrowserAnimationsModule,
-    BsDatepickerModule.forRoot(),
-    CoreModule
+    CoreModule,
+    BsDatepickerModule.forRoot()
   ],
-  providers:[RoleMasterService],
-  exports: [RoleComponent]
+  exports: [CreateNewServiceComponent]
 })
-export class RoleModule { }
+export class NewServiceModule { }

@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GeneralComponent } from './general.component';
 
+import { AddChargeDateComponent } from './add-charge-date.component';
 
 const routes: Routes = [
-  {path:'', component: GeneralComponent}
+  
+  {path:'', component: AddChargeDateComponent}
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class GeneralRoutingModule { }
+export class NewChargeDateRoutingModule { }
