@@ -10,7 +10,7 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AppComponent } from './app.component';
-import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap';
+import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PatientSearchModule } from './patient-search/patient-search.module';
 import { LoginModule } from './login/login.module';
 import { PatientProfileModule } from './patient-profile/patient-profile.module';

@@ -7,7 +7,7 @@ import { ShellModule } from '../shell/shell.module';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { PatientChiefComplaintService } from '../services/patient-chief-complaint.service';
 import { PatientCptService } from '../services/patient-cpt.service';

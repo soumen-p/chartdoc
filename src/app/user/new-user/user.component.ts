@@ -4,7 +4,7 @@ import { UserService } from '../../services/user.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/core/shared.service';
-import { TimeGrid } from '@fullcalendar/timegrid';
+//import { TimeGrid } from '@fullcalendar/timegrid';
 
 @Component({
   selector: 'app-user',

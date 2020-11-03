@@ -3,7 +3,7 @@ import { Component, OnInit ,ViewChild, ElementRef,
 import { OthersServiceService } from '../../../services/others-service.service'
 import { Toastr, ToastrManager } from 'ng6-toastr-notifications';
 import { OtherSave } from '../../../models/other-save';
-import { TabHeadingDirective } from 'ngx-bootstrap';
+//import { TabHeadingDirective } from 'ngx-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
