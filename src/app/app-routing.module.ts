@@ -16,7 +16,7 @@ const appRoutes: Routes = [
       .then(mod => mod.AcceptcopayModule)
   },
   {
-    path: 'appointment',
+    path: 'appointment-search',
     loadChildren: () => import('./appointment/appointment.module')
       .then(mod => mod.AppointmentModule)
   },
@@ -61,9 +61,24 @@ const appRoutes: Routes = [
       .then(mod => mod.SearchBillingInfoModule)
   },
   {
+    path: 'submit-claim',
+    loadChildren: () => import('./billing/submit-claim/submit-claim.module')
+      .then(mod => mod.SubmitClaimModule)
+  },
+  {
     path: 'create-eob',
     loadChildren: () => import('./billing/search-billing-info/search-billing-info.module')
       .then(mod => mod.SearchBillingInfoModule)
+  },
+  {
+    path: 'eob-edit',
+    loadChildren: () => import('./billing/eob/eob.module')
+      .then(mod => mod.EobModule)
+  },
+  {
+    path: 'appointment',
+    loadChildren: () => import('./appointment/appointment.module')
+      .then(mod => mod.AppointmentModule)
   },
   {
     path: 'book-appointment',
@@ -71,7 +86,17 @@ const appRoutes: Routes = [
       .then(mod => mod.BookAppointmentModule)
   },
   {
-    path: 'doctor-calender',
+    path: 'flowsheet-book-appointment',
+    loadChildren: () => import('./book-appointment/book-appointment.module')
+      .then(mod => mod.BookAppointmentModule)
+  },
+  {
+    path: 'doctor-calendar',
+    loadChildren: () => import('./doctor-calender/doctor-calendar.module')
+      .then(mod => mod.DoctorCalendarModule)
+  },
+  {
+    path: 'viewpatient-history',
     loadChildren: () => import('./doctor-calender/doctor-calendar.module')
       .then(mod => mod.DoctorCalendarModule)
   },
@@ -91,9 +116,19 @@ const appRoutes: Routes = [
       .then(mod => mod.ChargeDateModule)
   },
   {
+    path: 'app-add-charge-date',
+    loadChildren: () => import('./master/charge-date/add-charge-date/app-add-charge-date.module')
+      .then(mod => mod.NewhargeDateModule)
+  },
+  {
     path: 'app-claim-field-master',
     loadChildren: () => import('./master/claim-master/claim-field-master.module')
       .then(mod => mod.ClaimFieldMasterModule)
+  },
+  {
+    path: 'app-add-claim-field-master',
+    loadChildren: () => import('./master/claim-master/add-claim-field-master/add-claim-field-master.module')
+      .then(mod => mod.NewClaimFieldMasterModule)
   },
   {
     path: 'app-general',
@@ -101,9 +136,20 @@ const appRoutes: Routes = [
       .then(mod => mod.GeneralModule)
   },
   {
+    path: 'app-add-general',
+    loadChildren: () => import('./master/general/add-general/add-general.component.module')
+      .then(mod => mod.NewGeneralModule)
+  },
+  
+  {
     path: 'app-reason',
     loadChildren: () => import('./master/reason/reason.module')
       .then(mod => mod.ReasonModule)
+  },
+  {
+    path: 'new-reason',
+    loadChildren: () => import('./master/reason/create-new-reason/create-new-reason.module')
+      .then(mod => mod.NewReasonModule)
   },
   {
     path: 'app-role',
@@ -111,14 +157,34 @@ const appRoutes: Routes = [
       .then(mod => mod.RoleModule)
   },
   {
+    path: 'new-role',
+    loadChildren: () => import('./master/role/create-new-role/create-new-role.module')
+      .then(mod => mod.NewRoleModule)
+  },
+  {
     path: 'app-service',
     loadChildren: () => import('./master/service/service.module')
       .then(mod => mod.ServiceModule)
   },
   {
+    path: 'new-service',
+    loadChildren: () => import('./master/service/create-new-service/create-new-service.module')
+      .then(mod => mod.NewServiceModule)
+  },
+  {
     path: 'app-specialty',
     loadChildren: () => import('./master/specialty/specialty.module')
       .then(mod => mod.SpecialtyModule)
+  },
+  {
+    path: 'new-specialty',
+    loadChildren: () => import('./master/specialty/create-new-specialty/create-new-specialty.module')
+      .then(mod => mod.NewSpecialtyModule)
+  },
+  {
+    path: 'calendar-schedule',
+    loadChildren: () => import('./office-calendar/officecalendar.module')
+      .then(mod => mod.OfficeCalendarModule)
   },
   {
     path: 'office-calendar',
@@ -151,6 +217,11 @@ const appRoutes: Routes = [
       .then(mod => mod.PatientSearchModule)
   },
   {
+    path: 'patient-search-appointment',
+    loadChildren: () => import('./patient-search/patient-search.module')
+      .then(mod => mod.PatientSearchModule)
+  },
+  {
     path: 'party-ledger',
     loadChildren: () => import('./report/party-ledger/party-ledger.module')
       .then(mod => mod.PartyLedgerModule)
@@ -162,6 +233,11 @@ const appRoutes: Routes = [
   },
   {
     path: 'new-user',
+    loadChildren: () => import('./user/new-user/user.module')
+      .then(mod => mod.UserModule)
+  },
+  {
+    path: 'user',
     loadChildren: () => import('./user/new-user/user.module')
       .then(mod => mod.UserModule)
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PatientCptService } from '../../services/patient-cpt.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PatientCPTModel } from '../../models/PatientCPT.model';
@@ -33,7 +33,7 @@ export class PatientCptComponent implements OnInit {
   public tblVisibilityOnLoad = false;
   isPosCheckOut = false;
   pageOfItems: Array<any>;
-  @Input() patienthisttory : boolean =true ;
+  @Input() patienthisttory: boolean = true;
   constructor(private patientCptService: PatientCptService, public toastr: ToastrManager) { }
 
   ngOnInit() {
@@ -76,19 +76,23 @@ export class PatientCptComponent implements OnInit {
   }
 
   AddCPTDetails(cptId: string, cptCode: string, cptDesc: string) {
-    this.tblVisibility = true;
-    form.patchValue({ id: cptId, code: cptCode, desc: cptDesc });
+    if (this.cptDetails.length == 0) {
+      this.tblVisibility = true;
+      form.patchValue({ id: cptId, code: cptCode, desc: cptDesc });
 
-    this.isIdExist = false;
-    this.cptDetails.forEach(element => {
-      if (element.id === cptId) {
-        this.isIdExist = true;
+      this.isIdExist = false;
+      this.cptDetails.forEach(element => {
+        if (element.id === cptId) {
+          this.isIdExist = true;
+        }
+      });
+
+      if (!this.isIdExist) {
+        this.cptDetails.push(form.value);
+        this.patientCptService.setCptDetailsByPatientId('cpt' + this.patientId, this.cptDetails);
       }
-    });
-
-    if (!this.isIdExist) {
-      this.cptDetails.push(form.value);
-      this.patientCptService.setCptDetailsByPatientId('cpt' + this.patientId, this.cptDetails);
+    }else{
+      this.toastr.warningToastr('Only one CPT requried..');
     }
   }
 
