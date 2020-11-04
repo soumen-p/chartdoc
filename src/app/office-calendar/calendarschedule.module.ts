@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from '../core/core.module';
-import { OfficeCalendarRoutingModule } from './officecalendar-routing.module'
-import { OfficeCalendarComponent } from './officecalendar.component';
-
+import { CalendarScheduleRoutingModule } from './calendarschedule.routing.module';
+import {CalendarScheduleComponent} from './calendarschedule.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppointmentService } from '../services/appointment.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -12,10 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FullCalendarModule } from '@fullcalendar/angular';
 @NgModule({
-  declarations: [OfficeCalendarComponent],
+  declarations: [CalendarScheduleComponent],
   imports: [
     CommonModule,
-    OfficeCalendarRoutingModule,
+    CalendarScheduleRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
@@ -24,6 +23,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     BsDatepickerModule.forRoot()
   ],
   providers:[AppointmentService,OfficeCalendarService],
-  exports: [OfficeCalendarComponent]
+  exports: [CalendarScheduleComponent]
 })
-export class OfficeCalendarModule { }
+export class CalendarscheduleModule { }

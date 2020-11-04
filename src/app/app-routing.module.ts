@@ -183,8 +183,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'calendar-schedule',
-    loadChildren: () => import('./office-calendar/officecalendar.module')
-      .then(mod => mod.OfficeCalendarModule)
+    loadChildren: () => import('./office-calendar/calendarschedule.module')
+      .then(mod => mod.CalendarscheduleModule)
   },
   {
     path: 'office-calendar',
