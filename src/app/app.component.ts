@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, Event } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +14,23 @@ export class AppComponent {
   constructor(private router: Router){
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
-        if (event['url'] == '/landing-page' || event['url'] == '/login' || event['url'] == '/' ) {
+        if ( event['url'] == '/login' || event['url'] == '/') {
           this.show = false;
         } else {
           // console.log("NU")
-          this.show = true;
+          router.events.pipe(
+            filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
+        ).subscribe((event: NavigationEnd) => {
+          if(event.urlAfterRedirects=="/" || event.urlAfterRedirects=='/login'){
+            this.show = false;
+          }else{
+            this.show = true;
+          }
+        })
+          
         }
       }
     });
   }
 }
+//event['url'] == '/landing-page' ||

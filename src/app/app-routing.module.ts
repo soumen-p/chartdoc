@@ -240,7 +240,10 @@ const appRoutes: Routes = [
     path: 'user',
     loadChildren: () => import('./user/new-user/user.module')
       .then(mod => mod.UserModule)
-  }
+  },
+  { path: '**', redirectTo: '' }
+  //{ path:'**', redirectTo: '/', pathMatch: 'full' }
+  // { path:'/landing-page', component:LandingPageComponent }
 ];
 
 @NgModule({

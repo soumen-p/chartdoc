@@ -1,6 +1,7 @@
 //import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { LandingPageModule } from './landing-page/landing-page.module';
 import { HttpClientModule } from '@angular/common/http';
