@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PatientSearchModule } from './patient-search/patient-search.module';
 import { LoginModule } from './login/login.module';
+import { LoginDuoModule } from './loginDuo/loginDuo.module';
 import { PatientProfileModule } from './patient-profile/patient-profile.module';
 import { PatientCreateModule } from './patient-create/patient-create.module';
 import { AppointmentModule } from './appointment/appointment.module'

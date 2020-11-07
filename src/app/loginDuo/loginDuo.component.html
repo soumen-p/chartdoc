@@ -1,0 +1,24 @@
+<style>
+    #duo_iframe {
+        width: 100%;
+        min-width: 304px;
+        max-width: 620px;
+        height: 330px;
+        border: none;
+    }
+</style>
+<div class="row">
+    <div class="col-xs-12">
+        <iframe id="duo_iframe">
+        </iframe>
+    </div>
+    
+</div>
+<script src="./assets/js/Duo-Web-v2.js" type="text/javascript"></script>
+<script>
+    Duo.init({
+        'host': 'api-f78177a8.duosecurity.com',
+        'sig_request': '@sig_request',
+        'post_action': '/Home/ResponseAction'
+    });
+</script>

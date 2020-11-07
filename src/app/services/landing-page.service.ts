@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 const userList = "api/ChartDoc/GetUserList";
+const userAccessList = "/api/ChartDoc/GetUserAccessDetails";
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,9 @@ export class LandingPageService {
   }
   public getUserList(): Observable<any> {
     return this.http.get(environment.baseUrl + userList );
+  }
+
+  public getUserAccessDetails(): Observable<any> {
+    return this.http.get(environment.baseUrl + userAccessList );
   }
 }

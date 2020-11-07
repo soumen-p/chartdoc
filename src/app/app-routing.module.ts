@@ -241,6 +241,11 @@ const appRoutes: Routes = [
     loadChildren: () => import('./user/new-user/user.module')
       .then(mod => mod.UserModule)
   },
+  {
+    path: 'loginDuo',
+    loadChildren: () => import('./loginDuo/loginDuo.module')
+      .then(mod => mod.LoginDuoModule)
+  },
   { path: '**', redirectTo: '' }
   //{ path:'**', redirectTo: '/', pathMatch: 'full' }
   // { path:'/landing-page', component:LandingPageComponent }

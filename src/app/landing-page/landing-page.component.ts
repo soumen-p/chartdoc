@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LandingPageService } from '../services/landing-page.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { User } from '../models/user.model';
+import { UserAccessDetails } from '../models/UserAccessDetails.model';
 
 @Component({
   selector: 'app-landing-page',
@@ -13,6 +14,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   doctorInfo: FormGroup;
   userList:User[]=[];
+  UserAccessDetailsList:UserAccessDetails[]=[];
   constructor(private router: Router,
     private landingPageService: LandingPageService,
     formBuilder: FormBuilder) {
@@ -26,6 +28,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getUserList();
+    this.getUserAccessDetails();
   }
 
   ngOnDestroy() {
@@ -45,6 +48,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     //this.router.navigateByUrl('/test');
   }
 
+  
   getUserList() {
     this.landingPageService.getUserList().subscribe((res) => {
       this.userList = res;
@@ -53,7 +57,14 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       
     });
   }
-
+  getUserAccessDetails() {
+    this.landingPageService.getUserAccessDetails().subscribe((res) => {
+      this.UserAccessDetailsList = res;
+      
+    }, err => {
+      
+    });
+  }
   picNotLoading(event){
     event.target.src = 'assets/images/icons8-male-user-50.png';
   }

@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     //this.isTextFieldType = !this.isTextFieldType;
   }
   ngOnDestroy() {
-    document.body.className = 'sidebar-collapse';
+   document.body.className = 'sidebar-collapse';
   }
 
   tryLogin() {
@@ -70,7 +70,8 @@ export class LoginComponent implements OnInit {
             userType: res.userType
           });
           this.loginService.setDoctorInformation('doctorInfo', this.doctorInfo.value);
-          this.router.navigateByUrl('/patient-flow-sheet');
+          //this.router.navigateByUrl('/patient-flow-sheet');
+          this.router.navigateByUrl('/loginDuo');
         } else {
           this.errorMsg = this.errorDesc;
         }
