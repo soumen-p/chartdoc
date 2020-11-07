@@ -4,11 +4,11 @@ import { PatientFlowSheetComponent } from './patient-flow-sheet.component';
 
 
 const flowSheetRoutes: Routes = [
-    {path:'patient-flow-sheet', component: PatientFlowSheetComponent}
+    {path:'', component: PatientFlowSheetComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(flowSheetRoutes)],
+  imports: [RouterModule.forChild(flowSheetRoutes)],
   exports: [RouterModule]
 })
 export class PatientFlowSheetRoutingModule { }

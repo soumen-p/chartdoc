@@ -24,11 +24,11 @@ export class RoleMasterService {
   }
   obj:any
   setRolebyid(value:any){
-    this.obj=value;
+    this.sharedService.setLocalItem("role", value);
 
   }
   getRolebyid(){
-    return this.obj
+    return this.sharedService.getLocalItem("role");
 
   }
 }

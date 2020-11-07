@@ -5,11 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 import {PaymentComponent} from './payment.component';
 import {PaymentService} from '../../services/payment.service';
 const paymentRoutes: Routes = [
-  {path:'payment', component: PaymentComponent},
+  {path:'', component: PaymentComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(paymentRoutes)],
+  imports: [RouterModule.forChild(paymentRoutes)],
   exports: [RouterModule],
   providers: [PaymentService]
 })

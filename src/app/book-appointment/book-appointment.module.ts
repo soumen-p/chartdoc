@@ -3,7 +3,6 @@ import { CoreModule } from '../core/core.module';
 import { CommonModule } from '@angular/common';
 import { BookAppointmentRoutingModule } from './book-appointment-routing.module';
 import { BookAppointmentComponent } from './book-appointment.component';
-import { ShellModule } from '../shell/shell.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // Datepicker module
@@ -16,10 +15,9 @@ import { OnlyNumber } from '../directives/number.directive';
     CommonModule,
     CoreModule,
     BookAppointmentRoutingModule,
-    ShellModule,
     ReactiveFormsModule,
     NgbModule,
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
     BsDatepickerModule.forRoot()
   ]
 })

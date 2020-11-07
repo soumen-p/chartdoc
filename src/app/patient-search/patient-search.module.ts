@@ -4,7 +4,6 @@ import { CoreModule } from '../core/core.module';
 import { PatientSearchComponent } from './patient-search.component';
 import { PatientSearchService } from '../services/patient-search.service';
 import { PatientSearchRoutingModule } from './patient-search-routing.module';
-import { ShellModule } from '../shell/shell.module';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 
 
@@ -14,7 +13,6 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
     CommonModule,
     CoreModule,
     PatientSearchRoutingModule,
-    ShellModule,
     ButtonsModule
   ],
   exports:[PatientSearchComponent],

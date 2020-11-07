@@ -4,11 +4,11 @@ import { PatientCreateComponent } from './patient-create.component';
 
 
 const patientCreateRoutes: Routes = [
-    {path:'patient-create', component: PatientCreateComponent}
+    {path:'', component: PatientCreateComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(patientCreateRoutes)],
+  imports: [RouterModule.forChild(patientCreateRoutes)],
   exports: [RouterModule]
 })
 export class PatientCreateRoutingModule { }

@@ -1,3 +1,14 @@
+<div *ngIf="show" class='page-topbar sidebar_shift'>
+    <div class='logo-area'>
+    </div>
+    <div class='quick-area'>
+        <app-header></app-header>
+    </div>
+</div>
+<div *ngIf="show" class="page-container row-fluid container-fluid">
+    <app-side-menu></app-side-menu>
+</div>  
+
 <router-outlet></router-outlet>
 
 <app-loader></app-loader>

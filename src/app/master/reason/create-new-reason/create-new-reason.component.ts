@@ -31,6 +31,7 @@ export class CreateNewReasonComponent implements OnInit {
     });
     this.activatedRoute.queryParams.subscribe(params => {
       if(this.reasonmasterService.getReasonbyid()!=undefined || this.reasonmasterService.getReasonbyid()!=null){
+        debugger;
       this.reasonForm.patchValue({
         reasonId:params['id'],
         reasonCode:this.reasonmasterService.getReasonbyid().reasonCode,

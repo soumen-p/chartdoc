@@ -21,11 +21,13 @@ export class ReasonMasterService {
   }
   obj:any
   setReasonbyid(value:any){
-    this.obj=value;
+    this.sharedService.setLocalItem("reason", value);
+    //this.obj=value;
 
   }
   getReasonbyid(){
-    return this.obj
+    return this.sharedService.getLocalItem("reason");
+    //return this.obj
 
   }
 }

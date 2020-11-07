@@ -5,11 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 import {PartyLedgerComponent} from './party-ledger.component';
 import {ReportService} from '../../services/report.service';
 const partyledgerRoutes: Routes = [
-  {path:'party-ledger', component: PartyLedgerComponent},
+  {path:'', component: PartyLedgerComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(partyledgerRoutes)],
+  imports: [RouterModule.forChild(partyledgerRoutes)],
   exports: [RouterModule],
   providers: [ReportService]
 })

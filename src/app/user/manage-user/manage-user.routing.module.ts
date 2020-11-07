@@ -4,11 +4,11 @@ import { ManageUserComponent } from './manage-user.component';
 
 
 const manageuserRoutes: Routes = [
-    {path:'manage-user', component: ManageUserComponent}
+    {path:'', component: ManageUserComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(manageuserRoutes)],
+  imports: [RouterModule.forChild(manageuserRoutes)],
   exports: [RouterModule],
   
 })

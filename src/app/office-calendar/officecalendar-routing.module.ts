@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { OfficeCalendarComponent } from './officecalendar.component';
-import {CalendarScheduleComponent} from './calendarschedule.component';
+//import {CalendarScheduleComponent} from './calendarschedule.component';
 
 const officecalendarRoutes: Routes = [
-    {path:'office-calendar', component: OfficeCalendarComponent},
-    {path:'calendar-schedule', component: CalendarScheduleComponent}
+ 
+    {path:'', component: OfficeCalendarComponent}
+
+    // {path:'office-calendar', component: OfficeCalendarComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(officecalendarRoutes)],
+  imports: [RouterModule.forChild(officecalendarRoutes)],
   exports: [RouterModule]
 })
 export class OfficeCalendarRoutingModule { }

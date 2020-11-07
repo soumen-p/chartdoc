@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SearchBillingInfoComponent } from './search-billing-info.component';
 
 const billingRoutes: Routes = [
-  { path: 'create-charge', component: SearchBillingInfoComponent },
+  { path: '', component: SearchBillingInfoComponent },
   { path: 'create-claim', component: SearchBillingInfoComponent },
   { path: 'manage-claim', component: SearchBillingInfoComponent },
   { path: 'resubmit-claim', component: SearchBillingInfoComponent },
@@ -12,7 +12,7 @@ const billingRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(billingRoutes)],
+  imports: [RouterModule.forChild(billingRoutes)],
   exports: [RouterModule]
 })
 export class SearchBillingRoutingModule { }

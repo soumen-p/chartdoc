@@ -6,13 +6,11 @@ import { AppointmentRoutingModule } from './appointment-routing.module';
 import { AppointmentComponent } from './appointment.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppointmentService } from '../services/appointment.service';
-import { ShellModule } from '../shell/shell.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [AppointmentComponent],
   imports: [
     CommonModule,
-    ShellModule,
     AppointmentRoutingModule,
     FormsModule,
     ReactiveFormsModule,

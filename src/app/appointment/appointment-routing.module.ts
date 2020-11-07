@@ -4,12 +4,12 @@ import { AppointmentComponent } from './appointment.component';
 
 
 const appointmentRoutes: Routes = [
-    {path:'appointment', component: AppointmentComponent},
+    {path:'', component: AppointmentComponent},
     {path:'appointment-search', component: AppointmentComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appointmentRoutes)],
+  imports: [RouterModule.forChild(appointmentRoutes)],
   exports: [RouterModule]
 })
 export class AppointmentRoutingModule { }

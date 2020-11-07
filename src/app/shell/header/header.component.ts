@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   }
 
   signOut(){
-    this.router.navigateByUrl('/landing-page');
+    this.router.navigateByUrl('/');
     this.sharedService.clearLocalItem();
   }
 }

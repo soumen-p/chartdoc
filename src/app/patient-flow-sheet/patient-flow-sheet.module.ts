@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ShellModule } from '../shell/shell.module';
 import { PatientFlowSheetComponent } from './patient-flow-sheet.component';
 import { PatientFlowSheetRoutingModule } from './patient-flow-sheet-routing.module';
 import { PatientFlowSheetService } from '../services/patient-flow-sheet.service';
@@ -12,7 +11,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [PatientFlowSheetComponent],
   imports: [
     CommonModule,
-    ShellModule,
     PatientFlowSheetRoutingModule,
     FormsModule,
     ReactiveFormsModule,
