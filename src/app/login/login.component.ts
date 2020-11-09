@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../models/user.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+import Duo from '../../assets/js/Duo-Web-v2.js';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +13,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  validOTP:boolean;
+  validUser:boolean;
+
   isNew: boolean;
   doctorName: string;
   doctorImg: string;
@@ -20,13 +26,25 @@ export class LoginComponent implements OnInit {
   errorDesc: string;
   doctorInfo: FormGroup;
   iconview:string="fa fa-fw fa-eye field-icon";
+
+  url: string = "https://www.uvanij.com"; // iframe url
+  urlSafe: SafeResourceUrl;
+
+  apiURL:string = "{your/api/url?params}";
+
   constructor(private router: Router,
+    public sanitizer: DomSanitizer,
     private loginService: AuthenticationService,
+    /* private http: HttpClient, */
     private formBuilder: FormBuilder) {
     document.body.className = 'login_page';
   }
 
   ngOnInit() {
+
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+
+    this.validUser = false;
     this.errorMsg = '';
     this.doctorInfo = this.formBuilder.group({
       doctorName: '',
@@ -69,13 +87,49 @@ export class LoginComponent implements OnInit {
             doctorId: res.iUserId,
             userType: res.userType
           });
-          this.loginService.setDoctorInformation('doctorInfo', this.doctorInfo.value);
+          //this.loginService.setDoctorInformation('doctorInfo', this.doctorInfo.value);
           //this.router.navigateByUrl('/patient-flow-sheet');
-          this.router.navigateByUrl('/loginDuo');
+          //this.router.navigateByUrl('/loginDuo');
+          
+          this.showOTPScreen();
+          
         } else {
           this.errorMsg = this.errorDesc;
         }
+
+        //console.log("this.errorCode ", this.errorCode, "->", this.errorMsg);
       });
+  }
+
+  showOTPScreen(){
+    //.. for component usage
+    this.validUser = true;
+
+
+    
+    //.. iframe location
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+
+    //.. send request to get otp
+    this.loginService.getDuoSignatureRequest();
+
+    //.. call in appropraite place: testing here
+    Duo.init({
+        'host': 'api-f78177a8.duosecurity.com',
+        'sig_request': '@sig_request',
+        'post_action': '/Home/ResponseAction'
+    });
+    console.log("Duo ", Duo);
+    
+    //this.loginService.nextCall();
+    
+  }
+
+  onOTPValidated(){
+    setTimeout(()=>{
+      this.loginService.setDoctorInformation('doctorInfo', this.doctorInfo.value);
+      this.router.navigateByUrl('/patient-flow-sheet');
+    }, 2500);
   }
 
   // get token(){

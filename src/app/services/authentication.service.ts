@@ -10,6 +10,9 @@ const BASE_URL = "api/chartdoc/getloginstatus";
   providedIn: 'root'
 })
 export class AuthenticationService {
+
+  otpData;
+
   constructor(private http: HttpClient,
               private sharedService: SharedService) { }
 
@@ -23,5 +26,20 @@ export class AuthenticationService {
 
   public setDoctorInformation(key: string, val: any){
     this.sharedService.setLocalItem(key, val);
+  }
+
+  public getDuoSignatureRequest(){
+
+    // otpData can be saved in shared service : TODO
+    this.http.get<any>('https://api.npms.io/v2/search?q=scope:angular').subscribe(data => {
+        this.otpData = data.total;
+        console.log("otpData ", data.total) // testing
+    })
+    
+    //return this.http.get(`http://182.18.157.229:8080/api/ChartDoc/GetDUOSignatureRequest?userName=suvresh.chatterjee@gmail.com`);
+  }
+
+  public nextCall(){
+    return "suvresh.chatterjee@gmail.com"
   }
 }

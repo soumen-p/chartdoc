@@ -35,6 +35,8 @@ import { ShellModule } from './shell/shell.module';
     
     LandingPageModule,
     
+    LoginDuoModule,
+
     HttpClientModule,
     CoreModule,
     ButtonsModule,

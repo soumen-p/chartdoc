@@ -79,4 +79,5 @@ export class SharedService {
   removeLocalStorage(key: string){
     localStorage.removeItem(key);
   }
+
 }

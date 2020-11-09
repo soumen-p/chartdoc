@@ -28,7 +28,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getUserList();
-    this.getUserAccessDetails();
+    //this.getUserAccessDetails();
   }
 
   ngOnDestroy() {

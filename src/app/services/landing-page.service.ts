@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 const userList = "api/ChartDoc/GetUserList";
-const userAccessList = "/api/ChartDoc/GetUserAccessDetails";
+const userAccessList = "api/ChartDoc/GetUserAccessDetails";
 
 @Injectable({
   providedIn: 'root'

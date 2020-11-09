@@ -3,6 +3,8 @@
     <div class="login-wrapper row">
         <div id="login" class="login loginpage offset-xl-4 offset-lg-3 offset-md-3 offset-0 col-12 col-md-6 col-xl-4">
             <h1><a href="#" title="Login Page" tabindex="-1">Complete Admin</a></h1>
+            
+            <div *ngIf="!validUser">
             <div *ngIf="isNew">
                 <form name="loginform" id="loginform">
                     <div class="form-group">
@@ -59,6 +61,31 @@
                         <button kendoButton class="btn btn-accent btn-block" value="Sign In" (click)="tryLogin()">Sign In</button>
                     </div>
                     </form>
+                </ul>
+            </div>
+
+            </div>
+
+            <div *ngIf="validUser">
+                
+                <ul class="list-unstyled notification-widgett">
+                    <li class="status-available">
+                        <a href="javascript:;">
+                        <div class="user-img">
+                            <!-- <img src="assets/images/face2.png" alt="user-image" class="rounded-circle img-inline"> -->
+                            <img src="{{doctorImg}}" alt="user-image" class="rounded-circle img-inline">
+                            </div>
+                        <div>
+                            <span class="name">
+                                <strong>{{doctorName}}</strong>
+                            </span>
+                        </div>
+                        </a>
+                    </li>
+                    <li>This is a valid user, enter OTP</li>
+                    <!-- <li><iframe id="duo_iframe" width="100%" height="100%" frameBorder="0" [src]="urlSafe"></iframe></li> -->
+                    <li><iframe id="duo_iframe" width="100%" height="100%" frameBorder="0"></iframe></li>
+            
                 </ul>
             </div>
         </div>
