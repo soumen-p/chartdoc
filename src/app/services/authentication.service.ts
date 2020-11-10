@@ -5,6 +5,7 @@ import { SharedService } from '../core/shared.service';
 import { environment } from 'src/environments/environment';
 
 const BASE_URL = "api/chartdoc/getloginstatus";
+const MENU = "api/chartdoc/GetMenudata";
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,8 @@ export class AuthenticationService {
 
   public setDoctorInformation(key: string, val: any){
     this.sharedService.setLocalItem(key, val);
+  }
+  public getmenu():Observable<any>{    
+    return this.http.get(environment.baseUrl + MENU );
   }
 }

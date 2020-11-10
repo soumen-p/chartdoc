@@ -69,6 +69,9 @@ export class LoginComponent implements OnInit {
             doctorId: res.iUserId,
             userType: res.userType
           });
+          this.loginService.getmenu().subscribe((res:any)=>{
+            this.loginService.setDoctorInformation('menu', res);
+          })
           this.loginService.setDoctorInformation('doctorInfo', this.doctorInfo.value);
           this.router.navigateByUrl('/patient-flow-sheet');
         } else {

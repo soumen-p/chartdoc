@@ -47,16 +47,14 @@
                     </li>
                 </ul>
             </li> -->
-            <li class="open">
+            <!-- <li class="open">
                 <a href="javascript:;">
                     <i class="fa fa-users"></i>
                     <span class="title">Patients</span>
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
-                    <!-- <li>
-                        <a class="" [routerLink]="['/patient-search']">All Patients</a>
-                    </li> -->
+                   
                     <li>
                         <a class="" [routerLink]="['/patient-create']">Add Patient</a>
                     </li>
@@ -67,17 +65,39 @@
                     <li class="">
                 
                         <a href=""  [routerLink]="['/patient-search']" [queryParams]="{mode: 'patient-history'}">
-                            <!-- <i class="fa fa-history"></i> -->
+                          
                             <span class="title" >View Patient History</span>
                             
                         </a>
                     </li>
-                    <!-- <li>
-                        <a class="" [routerLink]="['/patient-profile']">Patient Profile</a>
-                    </li> -->
+                   
                 </ul>
+            </li> -->
+            <li  class="open" *ngFor="let item of menulist"> 
+                <a href="javascript:;">
+                    <i [ngClass]="item.className"></i>
+                    <span class="title">{{item.menuName}}</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li  *ngFor="let data of submenulistdata(item.menuId)">
+                        
+                        <a  *ngIf="data.queryParamsvalue !='' && data.parentmenuId=='61'?true:false" [routerLink]="[data.submenuRoute]" [queryParams]="{mode:[data.queryParamsvalue]}">{{data.submenu}}</a>
+                        <a  *ngIf="data.queryParamsvalue !='' && data.parentmenuId=='66'?true:false" [routerLink]="[data.submenuRoute]" [queryParams]="{id:[data.queryParamsvalue]}" >{{data.submenu}}</a>
+                        <a  *ngIf="data.queryParamsvalue ==''?true:false"  [routerLink]="[data.submenuRoute]" >{{data.submenu}}</a>
+                    </li>
+                </ul>
+                <!-- <ul class="sub-menu">
+                    <li>
+                        <a class="" [routerLink]="['/appointment']">Doctor Schedule</a>
+                    </li>
+                    <li>
+                        <a class="" [routerLink]="['/patient-flow-sheet']">Flow Sheet</a>
+                    </li>
+                   
+                </ul> -->
             </li>
-            <li class="">
+            <!-- <li class="">
                 <a href="javascript:;">
                     <i class="fa fa-calendar-o"></i>
                     <span class="title">Appointment</span>
@@ -93,24 +113,7 @@
                    
                 </ul>
             </li>
-            <!-- <li class="">
-                <a href="javascript:;">
-                    <i class="fa fa-bar-chart"></i>
-                    <span class="title">Reports</span>
-                    <span class="arrow "></span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a class="" [routerLink]="">Patient</a>
-                    </li>
-                    <li>
-                        <a class="" [routerLink]="">Hospital</a>
-                    </li>
-                    <li>
-                        <a class="" [routerLink]="">Sales</a>
-                    </li>
-                </ul>
-            </li> -->
+            
             <li class="">
                 <a href="javascript:;">
                     <i class="fa fa-user "></i>
@@ -118,36 +121,14 @@
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
-                    <!-- <li>
-                        <a class="" [routerLink]="['/user']">New User</a>
-                    </li> -->
+                   
                     <li>
                         <a class="" [routerLink]="['/manage-user']">Manage user</a>
                     </li>
                 </ul>
             </li>
          
-            <!-- <li class="">
-                <a href="javascript:;">
-                    <i class="fa fa-users"></i>
-                    <span class="title">Hospital Staff</span>
-                    <span class="arrow "></span>
-                </a>
-                <ul class="sub-menu">
-                    <li> -->
-                        <!-- <a class="" href="hos-staffs.html" >All Staff Members</a> -->
-                    <!-- </li>
-                    <li> -->
-                        <!-- <a class="" href="hos-staff-add.html" >Add Staff Member</a> -->
-                    <!-- </li>
-                    <li> -->
-                        <!-- <a class="" href="hos-staff-edit.html" >Edit Staff Member</a> -->
-                    <!-- </li>
-                    <li> -->
-                        <!-- <a class="" href="hos-staff-profile.html" >Staff Member Profile</a> -->
-                    <!-- </li>
-                </ul>
-            </li> -->
+          
             <li class="">
                 <a href="javascript:;">
                     <i class="fa fa-calendar"></i>
@@ -164,21 +145,7 @@
                 </ul>
                 
             </li>
-            <!-- <li class="">
-                <a href=""  [routerLink]="['/calendar-schedule']">
-                    <i class="fa fa-calendar"></i>
-                    <span class="title" >Office Calendar</span>
-                    
-                </a>
-            </li>
-            <li class="">
-                <a href=""  [routerLink]="['/doctor-calendar']">
-                    <i class="fa fa-calendar"></i>
-                    <span class="title" >Doctor Calendar</span>
-                    
-                </a>
-            </li> -->
-           
+          
             <li class="">
                 <a href="javascript:;">
                     <i class="fa fa-database"></i>
@@ -239,15 +206,7 @@
                     <li>
                         <a [routerLink]="['/payment']" [queryParams]=" {id:10}" (click)="deleteData()">Payment</a>
                     </li>
-                    <!-- <li>
-                        <a class="disabledmenu" [routerLink]="">Payments</a>
-                    </li>
-                    <li>
-                        <a class="disabledmenu" [routerLink]="">Add Payment</a>
-                    </li>
-                    <li>
-                        <a class="disabledmenu" [routerLink]="">Patient Invoice</a>
-                    </li> -->
+                   
                 </ul>
             </li>
             <li class="">
@@ -265,7 +224,7 @@
                     </li>
                     
                 </ul>
-            </li>
+            </li> -->
         </ul>
        
     </div>
