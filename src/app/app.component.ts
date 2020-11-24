@@ -12,25 +12,57 @@ export class AppComponent {
   title = 'ChartDoc';
 
   constructor(private router: Router){
-    router.events.forEach((event) => {
-      if (event instanceof NavigationStart) {
-        if ( event['url'] == '/login' || event['url'] == '/') {
-          this.show = false;
-        } else {
-          // console.log("NU")
+    //console.log(router.events);
+
+    /* router.events.forEach((event) => {
+          console.log("NU ", event['url'])
           router.events.pipe(
             filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
         ).subscribe((event: NavigationEnd) => {
-          if(event.urlAfterRedirects=="/" || event.urlAfterRedirects=='/login'){
-            this.show = false;
-          }else{
-            this.show = true;
+          console.log("NU ", event['url'])
+          switch (event.urlAfterRedirects) {
+            case "/":
+            case "/login":
+            case "/forget-password":  
+              this.show = false;  
+              break;
+
+            default:
+              this.show = true;  
+              break;
+          }
+
+        })
+    }); */
+
+
+    
+    router.events.forEach((event) => {
+      if (event instanceof NavigationStart) {
+        if ( event['url'] == '/' || event['url'] == '/login') {
+          this.show = false;
+        } else {
+          console.log("NU ", event['url'])
+          router.events.pipe(
+            filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
+        ).subscribe((event: NavigationEnd) => {
+          switch (event.urlAfterRedirects) {
+            case "/":
+            case "/login":
+            case "/forget-password":  
+              this.show = false;  
+              break;
+              
+            default:
+              this.show = true;  
+              break;
           }
         })
           
         }
       }
     });
+  
   }
 }
 //event['url'] == '/landing-page' ||

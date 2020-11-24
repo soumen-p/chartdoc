@@ -4552,6 +4552,7 @@ body.login_page {
     /*background-color: #4a4c4d;*/
     background-color: #4a4c4d;
     background-image: url('../src/assets/images/login-bg.png');
+
     background-attachment: fixed;
     /*height: 100%;*/
     /*max-height: 100%;*/
@@ -8999,4 +9000,138 @@ td.fc-widget-content:first-child  {
     flex: 0 0 100%;
     max-width: 100%;
 }
+}
+html {
+    background: linear-gradient(rgba(0,0,0,1), rgba(27,27,27,1)) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+body.login_page {
+    background-color: transparent !important;
+    background-image: url('../src/assets/images/Bkgd-Dots-Transparent.png') !important;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+    min-height: 100%;
+    width: 100%;
+}
+.login {
+    border: 3px solid rgba(195,216,136,0.5);
+    background-color: rgba(0,0,0,0.75);
+}
+.loginpage h1 a {
+    background-size: 100% 68px !important;
+    min-height: 68px;
+    /* background-image: url(../src/assets/images/s_E_logo.png); */
+    background-image: url("../src/assets/images/chartDoc-Logo-Unauth.png");
+}
+.select-acclabel{
+    font-family: 'Open Sans', sans-serif;
+    color: #8A8B86;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+.notification-widget li .name {
+    color: #D5D6D1;
+}
+.loginpage #nav a, .loginpage a{
+    font-size: 18px;
+    color: #D5D6D1 !important;
+}
+.notification-widget li.status-available:first-child {
+    border-top: 1px solid #9A6AAA;
+}
+.notification-widget li.status-available {
+    border-bottom: 1px solid #9A6AAA;
+}
+.notification-widgett li.status-available {
+    border-bottom: none;
+}
+.notification-widget li.status-available:hover{
+    background-color: rgba(255,255,255,0.1);
+}
+.notification-widget{
+    margin-top: 40px;
+}
+.notification-widgett{
+    margin-top: 10px;
+}
+.notification-widget li {
+    padding: 20px 10px 10px 0px;
+}
+.notification-widgett li{
+    padding: 20px 10px 10px 0px;
+}
+.c-rightfooter{
+    text-align: center;
+    font-size: 13px;
+    margin-top: 8px;
+}
+ul.list-unstyled.notification-widget::-webkit-scrollbar {
+    width: 10px;
+  }
+  ul.list-unstyled.notification-widget::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  ul.list-unstyled.notification-widget::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  ul.list-unstyled.notification-widget::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  .loginpage, .loginpage form label, .loginpage form, .loginpage .message {
+    color: rgb(255 255 255);
+}
+.p-bord-control{
+    border-bottom: 1px solid #9A6AAA;
+    margin-bottom: 0;
+    padding-bottom: 15px;
+}
+.field-icon{
+    color: #000;
+    top: 10px;
+    right: 10px;
+}
+.loginpage label{
+    text-transform: capitalize;
+    font-size: 12px;
+}
+.loginpage form{
+    margin-top: 0;
+}
+.loginpage form .input, .loginpage input[type=text]{
+    margin-bottom: 0;
+}
+.mid-link {
+    margin: 0px 0 0px 0;
+    text-align: center;
+}
+.mid-link a{
+    text-decoration: none;
+    color: #5A87E3 !important;
+    font-size: 17px;
+}
+.signinbutton{
+    width: 212px;
+    border: 2px solid #C4D988;
+    border-radius: 8px;
+    background-color: #C4D988;
+    font-family: 'Open Sans', sans-serif;
+    color: #3B3C3A;
+    font-size: 17px;
+    text-align: center;
+    font-weight: 600;
+    display: block;
+    margin: 30px auto 0;
+    cursor: pointer;
+}
+.login-button-div{
+    text-align: center;
+    border-bottom: 1px solid #9A6AAA;
+    clear: both;
+    padding-bottom: 20px;
+    margin-bottom: 15px;
 }

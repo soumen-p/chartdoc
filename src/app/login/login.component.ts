@@ -52,6 +52,11 @@ export class LoginComponent implements OnInit {
     document.body.className = 'sidebar-collapse';
   }
 
+  forgetPassword(){
+    this.router.navigateByUrl('/forget-password');
+    //this.router.navigateByUrl('/patient-flow-sheet');
+  }
+
   tryLogin() {
     if (this.userName === undefined) {
       this.userName = this.doctorName;

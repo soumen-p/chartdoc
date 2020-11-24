@@ -3,6 +3,7 @@
     <div class="login-wrapper row">
         <div id="login" class="login loginpage offset-xl-4 offset-lg-3 offset-md-3 offset-0 col-12 col-md-6 col-xl-4">
             <h1><a href="#" title="Login Page" tabindex="-1">Complete Admin</a></h1>
+            <h3 class="select-acclabel p-bord-control">Enter Password</h3>
             <div *ngIf="isNew">
                 <form name="loginform" id="loginform">
                     <div class="form-group">
@@ -11,7 +12,7 @@
                             <input type="text" name="log" id="user_login" class="input" value="" size="20" (input)="userName = $event.target.value" />
                         </div>
                         </label>                                          
-                        <label class="col-md-12 control-label paddingLeft0 paddingRight0" for="user_pass">Password
+                        <label class="col-md-12 control-label paddingLeft0 paddingRight0" for="user_pass">Enter Password
                         <div class="col-md-12 paddingLeft0 paddingRight0">
                             <input #input type="password" name="pwd" id="user_pass" class="input" value="" size="20" (input)="password = $event.target.value" />
                             <span><i class="fa fa-fw fa-eye field-icon" aria-hidden="true" (click)="togglePasswordFieldType(input)"></i></span>
@@ -48,19 +49,25 @@
                     </li>
                     <form name="loginform" id="loginform" action="dashboard.html" method="post">
                         <div class="form-group">
-                        <label class="col-md-12 control-label paddingLeft0 paddingRight0" for="user_pass">Password
+                            <span class="name1"><strong>{{errorMsg}}</strong></span> 
+                        <label class="col-md-12 control-label paddingLeft0 paddingRight0" for="user_pass">Enter Password
                         <div class="col-md-12 paddingLeft0 paddingRight0">
                         <input #input type="password"  name="pwd" id="user_pass" class="input" value="" size="20" (input)="password = $event.target.value" />
                         <span><i [ngClass]="iconview" aria-hidden="true" (click)="togglePasswordFieldType(input)"></i></span>
                         </div>
                         </label>
+						<p class="mid-link"><a href="" title="Forgot your password?" [routerLink]="['/forget-password']">Forgot your password?</a></p>
                         <span class="name1"><strong>{{errorMsg}}</strong></span> 
                         <!-- <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-accent btn-block" value="Sign In" (click)="tryLogin()" /> -->
-                        <button kendoButton class="btn btn-accent btn-block" value="Sign In" (click)="tryLogin()">Sign In</button>
+                        <!-- <button kendoButton class="btn btn-accent btn-block" value="Sign In" (click)="tryLogin()">Sign In</button> -->
+						<div class="login-button-div"><button kendoButton class="btn btn-accent signinbutton" value="Log In" (click)="tryLogin()">Log In</button></div>
+                        <p class="mid-link"><a href="" title="Forgot your password?">Select different account</a></p>
                     </div>
                     </form>
                 </ul>
+                
             </div>
         </div>
     </div>
+    <div class="c-rightfooter">Copyright � 2021. chartDoc is a registered trademark. All rights reserved.</div>
 </div>

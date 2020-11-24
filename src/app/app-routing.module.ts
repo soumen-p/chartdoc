@@ -106,6 +106,11 @@ const appRoutes: Routes = [
       .then(mod => mod.LoginModule)
   },
   {
+    path: 'forget-password',
+    loadChildren: () => import('./forget-password/forget-password.module')
+      .then(mod => mod.ForgetPasswordModule)
+  },
+  {
     path: 'app-charge',
     loadChildren: () => import('./master/charge/charge.module')
       .then(mod => mod.ChargeModule)

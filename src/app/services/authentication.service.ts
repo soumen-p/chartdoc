@@ -24,4 +24,5 @@ export class AuthenticationService {
   public setDoctorInformation(key: string, val: any){
     this.sharedService.setLocalItem(key, val);
   }
+
 }
