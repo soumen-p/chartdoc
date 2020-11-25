@@ -69,15 +69,17 @@ export class LoginComponent implements OnInit {
             doctorId: res.iUserId,
             userType: res.userType
           });
-          this.loginService.getmenu().subscribe((res:any)=>{
-            this.loginService.setDoctorInformation('menu', res);
-          })
-          this.loginService.getUserAccessDetails(this.doctorInfo.value.userType).subscribe((res:any)=>{
+          this.loginService.getmenu().subscribe((res1:any)=>{
+            this.loginService.setDoctorInformation('menu', res1);
+            this.loginService.getUserAccessDetails(this.doctorInfo.value.userType).subscribe((res2:any)=>{
             
-            this.loginService.setDoctorInformation('useraccess', res);
+              this.loginService.setDoctorInformation('useraccess', res2);
+              
+              this.router.navigateByUrl('/patient-flow-sheet');
+            })
           })
+         
           this.loginService.setDoctorInformation('doctorInfo', this.doctorInfo.value);
-          this.router.navigateByUrl('/patient-flow-sheet');
         } else {
           this.errorMsg = this.errorDesc;
         }
