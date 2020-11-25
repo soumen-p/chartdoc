@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CoreModule } from '../core/core.module';
 import { ForgetPasswordRoutingModule } from './forget-password-routing.module';
 import { ForgetPasswordComponent } from './forget-password.component';
-
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -11,7 +11,10 @@ import { ForgetPasswordComponent } from './forget-password.component';
   imports: [
     CommonModule,
     CoreModule,
-    ForgetPasswordRoutingModule
+    ForgetPasswordRoutingModule,
+
+    RecaptchaModule, 
+    RecaptchaFormsModule    
   ],
   exports: [ForgetPasswordComponent]
 })

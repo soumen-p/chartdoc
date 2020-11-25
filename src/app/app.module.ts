@@ -1,6 +1,7 @@
 //import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { LandingPageModule } from './landing-page/landing-page.module';
@@ -37,6 +38,9 @@ import { ShellModule } from './shell/shell.module';
     ReactiveFormsModule,
     CKEditorModule,
     
+    RecaptchaModule,  //this is the recaptcha main module
+    RecaptchaFormsModule, //this is the module for form incase form validation
+
     ShellModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),

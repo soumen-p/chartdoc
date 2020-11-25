@@ -11,58 +11,38 @@ export class AppComponent {
   show: boolean = false;
   title = 'ChartDoc';
 
-  constructor(private router: Router){
-    //console.log(router.events);
+  constructor(private router: Router) {
 
-    /* router.events.forEach((event) => {
-          console.log("NU ", event['url'])
-          router.events.pipe(
-            filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
-        ).subscribe((event: NavigationEnd) => {
-          console.log("NU ", event['url'])
-          switch (event.urlAfterRedirects) {
-            case "/":
-            case "/login":
-            case "/forget-password":  
-              this.show = false;  
-              break;
-
-            default:
-              this.show = true;  
-              break;
-          }
-
-        })
-    }); */
-
-
-    
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
-        if ( event['url'] == '/' || event['url'] == '/login') {
+        if (event['url'] == '/' || event['url'] == '/login') {
           this.show = false;
         } else {
-          console.log("NU ", event['url'])
+          //console.log("NU ", event['url'])
           router.events.pipe(
             filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
-        ).subscribe((event: NavigationEnd) => {
-          switch (event.urlAfterRedirects) {
-            case "/":
-            case "/login":
-            case "/forget-password":  
-              this.show = false;  
-              break;
-              
-            default:
-              this.show = true;  
-              break;
-          }
-        })
-          
+          ).subscribe((event: NavigationEnd) => {
+            switch (event.urlAfterRedirects) {
+              case "/":
+              case "/login":
+              case "/forget-password":
+                this.show = false;
+                break;
+
+              default:
+                this.show = true;
+                break;
+            }
+          })
         }
       }
     });
-  
+
   }
+
+  resolved(captchaResponse: string, res) {
+    console.log(`Resolved response token: ${captchaResponse}`); 
+  }
+
 }
 //event['url'] == '/landing-page' ||
