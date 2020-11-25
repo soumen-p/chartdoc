@@ -11,7 +11,7 @@ import { AppointmentService } from '../services/appointment.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { AuthenticationService } from '../services/authentication.service';
 import { OthersServiceService } from '../services/others-service.service';
-
+import { SharedService } from 'src/app/core/shared.service';
 @Component({
   selector: 'app-patient-flow-sheet',
   templateUrl: './patient-flow-sheet.component.html',
@@ -19,10 +19,13 @@ import { OthersServiceService } from '../services/others-service.service';
 })
 export class PatientFlowSheetComponent implements OnInit {
 
+  useraccess: any = [];
   constructor(private patientFlowSheetService: PatientFlowSheetService, private appointmentService: AppointmentService,
     private router: Router, public toastr: ToastrManager, private loginService: AuthenticationService,
-    private OthersService: OthersServiceService) {
+    private OthersService: OthersServiceService,
+    private sharedService: SharedService) {
     this.getRoomNumber();
+    this.useraccess = this.sharedService.getLocalItem('useraccess');
   }
   @ViewChild(FullCalendarComponent, { static: false }) calendarComponent: any; // the #calendar in the template
   // @ViewChild('external', { static: false }) external: ElementRef;
@@ -228,9 +231,11 @@ export class PatientFlowSheetComponent implements OnInit {
     this.bindEvents();
   }
   dragdate(arg: any) {
+
     this.calendarArgs = arg;
     this.roomNumber = '0';
     this.appoinmentId = arg.oldEvent._def.extendedProps.appoinmentId;
+    let accessObj :any;
     // tslint:disable-next-line: radix
     if (parseInt(arg.newResource._resource.id) === 1) {
       this.flowArea = 'Appointment';
@@ -243,9 +248,24 @@ export class PatientFlowSheetComponent implements OnInit {
       // tslint:disable-next-line: radix
     } else if (parseInt(arg.newResource._resource.id) === 4) {
       this.flowArea = 'Finish';
-
     }
-
+    
+    if((parseInt(arg.oldResource._resource.id)) === 1 && this.useraccess.filter((x=>x.ID==33))[0]["Status"]=="0"){
+      arg.revert();
+      return;
+    }
+    else if((parseInt(arg.oldResource._resource.id)) === 2 && this.useraccess.filter((x=>x.ID==34))[0]["Status"]=="0"){
+      arg.revert();
+      return;
+    }
+    else if((parseInt(arg.oldResource._resource.id)) === 3 && this.useraccess.filter((x=>x.ID==35))[0]["Status"]=="0"){
+      arg.revert();
+      return;
+    }
+    else if((parseInt(arg.oldResource._resource.id)) === 4 && this.useraccess.filter((x=>x.ID==36))[0]["Status"]=="0"){
+      arg.revert();
+      return;
+    }
     const today = new Date();
     const ddToday = String(today.getDate()).padStart(2, '0');
     const mmToday = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
@@ -290,7 +310,22 @@ export class PatientFlowSheetComponent implements OnInit {
   }
   rowclick(arg: any) {
     this.appoinmentId = arg.event.extendedProps.appoinmentId;
-
+    if((parseInt(arg.event.extendedProps.HeaderId)) === 1 && this.useraccess.filter((x=>x.ID==33))[0]["Status"]=="0"){
+      
+      return;
+    }
+    else if((parseInt(arg.event.extendedProps.HeaderId)) === 2 && this.useraccess.filter((x=>x.ID==34))[0]["Status"]=="0"){
+    
+      return;
+    }
+    else if((parseInt(arg.event.extendedProps.HeaderId)) === 3 && this.useraccess.filter((x=>x.ID==35))[0]["Status"]=="0"){
+     
+      return;
+    }
+    else if((parseInt(arg.event.extendedProps.HeaderId)) === 4 && this.useraccess.filter((x=>x.ID==36))[0]["Status"]=="0"){
+      
+      return;
+    }
     this.clickCount++;
     const self = this;
     if (this.clickCount === 1) {

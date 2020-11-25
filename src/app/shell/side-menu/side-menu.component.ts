@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { retry } from 'rxjs/operators';
 import { CommonService } from 'src/app/core/common.service';
 import { SharedService } from 'src/app/core/shared.service';
 
@@ -12,17 +13,18 @@ export class SideMenuComponent implements OnInit {
 
   drName: string;
   drImagePath: string;
-  menulist:any=[];
-  submenulist:any=[];
-  constructor(private commService: CommonService, private sharedService: SharedService) { 
-    // this.menulist=[{"menuID":"1","menuname":"Patients","class":"fa fa-users"},
-    // {"menuID":"2","menuname":"Appointment","class":"fa fa-calendar-o"} ]; 
-    // this.submenulist=[{"menuID":"1","submenu":"Add Patient","submenuRoute":"/patient-create","queryParamsvalue":"","event":""}
-    //         ,{"menuID":"1","submenu":"Edit Patient","submenuRoute":"/patient-search","queryParamsvalue":"edit-patient","event":""}
-    //       ,{"menuID":"2","submenu":"Doctor Schedule","submenuRoute":"/appointment","queryParamsvalue":"","event":""}];
-    this.menulist=this.sharedService.getLocalItem('menu').clsMenu
-    this.submenulist=this.sharedService.getLocalItem('menu').clssubMenu
-  
+  menulist: any = [];
+  submenulist: any = [];
+  useraccess: any = [];
+  constructor(private commService: CommonService, private sharedService: SharedService) {
+
+    this.menulist = this.sharedService.getLocalItem('menu').clsMenu
+    this.submenulist = this.sharedService.getLocalItem('menu').clssubMenu
+    this.useraccess = this.sharedService.getLocalItem('useraccess');
+    this.submenulist.forEach(element => {
+      element.Status= this.useraccess.filter((x:any)=>x.ID==element.menuId)[0]["Status"];
+    });
+    console.log(this.submenulist);
   }
 
   ngOnInit() {
@@ -31,13 +33,23 @@ export class SideMenuComponent implements OnInit {
   }
   deleteData() {
     this.sharedService.removeLocalStorage('patientInfo');
-    this.sharedService.removeLocalStorage('dateInfo'); 
+    this.sharedService.removeLocalStorage('dateInfo');
   }
-  submenulistdata(menuid:any){
-    var data=this.submenulist.filter((x:any)=>x.parentmenuId==menuid);
-    console.log(data);
+  submenulistdata(menuid: any) {
+    var data = this.submenulist.filter((x: any) => x.parentmenuId == menuid);
+
     return data;
 
   }
-  
+  menudisabled(menuid: number): string {
+   
+    let obj=this.useraccess.filter((x: any) => x.ID == Number(menuid) && x.Status == "1");
+    if (obj.length>0) {
+      console.log(obj)
+      return "disabled";
+    }
+    else {
+      return "";
+    }
+  }
 }

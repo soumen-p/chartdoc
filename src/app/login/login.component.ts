@@ -72,6 +72,10 @@ export class LoginComponent implements OnInit {
           this.loginService.getmenu().subscribe((res:any)=>{
             this.loginService.setDoctorInformation('menu', res);
           })
+          this.loginService.getUserAccessDetails(this.doctorInfo.value.userType).subscribe((res:any)=>{
+            
+            this.loginService.setDoctorInformation('useraccess', res);
+          })
           this.loginService.setDoctorInformation('doctorInfo', this.doctorInfo.value);
           this.router.navigateByUrl('/patient-flow-sheet');
         } else {

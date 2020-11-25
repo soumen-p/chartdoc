@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 
 const BASE_URL = "api/chartdoc/getloginstatus";
 const MENU = "api/chartdoc/GetMenudata";
-
+const GetUserAccessDetails = "api/chartdoc/GetUserAccessDetails?userTypeId=";
 @Injectable({
   providedIn: 'root'
 })
@@ -27,5 +27,8 @@ export class AuthenticationService {
   }
   public getmenu():Observable<any>{    
     return this.http.get(environment.baseUrl + MENU );
+  }
+  public getUserAccessDetails(usertypeid:any):Observable<any>{    
+    return this.http.get(environment.baseUrl + GetUserAccessDetails+ usertypeid);
   }
 }

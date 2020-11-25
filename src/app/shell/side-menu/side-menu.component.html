@@ -20,59 +20,7 @@
         </div>
         <!-- USER INFO - END -->
         <ul class='wraplist'>
-            <!-- <li class="">
-                <a [routerLink]="">
-                    <i class="fa fa-dashboard"></i>
-                    <span class="title">Dashboard</span>
-                </a>
-            </li>
-            <li class="">
-                <a href="javascript:;">
-                    <i class="fa fa-user-md"></i>
-                    <span class="title">Doctors</span>
-                    <span class="arrow "></span>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a class="" [routerLink]="">All Doctors</a>
-                    </li>
-                    <li>
-                        <a class="" [routerLink]="">Add Doctor</a>
-                    </li>
-                    <li>
-                        <a class="" [routerLink]="">Edit Doctor</a>
-                    </li>
-                    <li>
-                        <a class="" [routerLink]="">Doctor Profile</a>
-                    </li>
-                </ul>
-            </li> -->
-            <!-- <li class="open">
-                <a href="javascript:;">
-                    <i class="fa fa-users"></i>
-                    <span class="title">Patients</span>
-                    <span class="arrow "></span>
-                </a>
-                <ul class="sub-menu">
-                   
-                    <li>
-                        <a class="" [routerLink]="['/patient-create']">Add Patient</a>
-                    </li>
-                    <li>
-                        <a class="" [routerLink]="['/patient-search']" [queryParams]="{mode: 'edit-patient'}">Edit
-                            Patient</a>
-                    </li>
-                    <li class="">
-                
-                        <a href=""  [routerLink]="['/patient-search']" [queryParams]="{mode: 'patient-history'}">
-                          
-                            <span class="title" >View Patient History</span>
-                            
-                        </a>
-                    </li>
-                   
-                </ul>
-            </li> -->
+           
             <li  class="open" *ngFor="let item of menulist"> 
                 <a href="javascript:;">
                     <i [ngClass]="item.className"></i>
@@ -80,11 +28,12 @@
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
-                    <li  *ngFor="let data of submenulistdata(item.menuId)">
-                        
-                        <a  *ngIf="data.queryParamsvalue !='' && data.parentmenuId=='61'?true:false" [routerLink]="[data.submenuRoute]" [queryParams]="{mode:[data.queryParamsvalue]}">{{data.submenu}}</a>
-                        <a  *ngIf="data.queryParamsvalue !='' && data.parentmenuId=='66'?true:false" [routerLink]="[data.submenuRoute]" [queryParams]="{id:[data.queryParamsvalue]}" >{{data.submenu}}</a>
-                        <a  *ngIf="data.queryParamsvalue ==''?true:false"  [routerLink]="[data.submenuRoute]" >{{data.submenu}}</a>
+                    <li  *ngFor="let data of submenulistdata(item.menuId)" > 
+                        <span >
+                        <a [class]="data.Status==0?'disabled':''" *ngIf="data.queryParamsvalue !='' && data.parentmenuId=='61'?true:false" [routerLink]="[data.submenuRoute]" [queryParams]="{mode:[data.queryParamsvalue]}">{{data.submenu}}</a>
+                        <a  [class]="data.Status==0?'disabled':''" *ngIf="data.queryParamsvalue !='' && data.parentmenuId=='66'?true:false" [routerLink]="[data.submenuRoute]" [queryParams]="{id:[data.queryParamsvalue]}" >{{data.submenu}}</a>
+                        <a  [class]="data.Status==0?'disabled':''" *ngIf="data.queryParamsvalue ==''?true:false"  [routerLink]="[data.submenuRoute]" >{{data.submenu}}</a>
+                    </span>
                     </li>
                 </ul>
                 <!-- <ul class="sub-menu">
