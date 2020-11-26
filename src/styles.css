@@ -9001,6 +9001,11 @@ td.fc-widget-content:first-child  {
     max-width: 100%;
 }
 }
+
+
+
+
+
 html {
     background: linear-gradient(rgba(0,0,0,1), rgba(27,27,27,1)) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -9020,26 +9025,40 @@ body.login_page {
 .login {
     border: 3px solid rgba(195,216,136,0.5);
     background-color: rgba(0,0,0,0.75);
+    width: 850px;
+    margin: 40px auto !important;
+    border-radius: 12px;
+}
+.loginpage{
+    padding: 0 200px;
 }
 .loginpage h1 a {
-    background-size: 100% 68px !important;
+    background-size: 87% 68px !important;
     min-height: 68px;
     /* background-image: url(../src/assets/images/s_E_logo.png); */
     background-image: url("../src/assets/images/chartDoc-Logo-Unauth.png");
+    margin-top: 46px;
 }
 .select-acclabel{
     font-family: 'Open Sans', sans-serif;
     color: #8A8B86;
-    font-size: 30px;
+    font-size: 27px;
     text-align: center;
     font-weight: 600;
 }
 .notification-widget li .name {
-    color: #D5D6D1;
+    color: #D5D6D1;  
+    padding-top: 15px;
+}
+.notification-widgett li .name{
+    color: #D5D6D1;  
+    top: 15px;
+    position: relative;
 }
 .loginpage #nav a, .loginpage a{
-    font-size: 18px;
     color: #D5D6D1 !important;
+    font-size:30px;
+    font-weight: 100 !important;
 }
 .notification-widget li.status-available:first-child {
     border-top: 1px solid #9A6AAA;
@@ -9060,15 +9079,16 @@ body.login_page {
     margin-top: 10px;
 }
 .notification-widget li {
-    padding: 20px 10px 10px 0px;
+    padding: 25px 10px 15px 10px;
 }
 .notification-widgett li{
-    padding: 20px 10px 10px 0px;
+    padding: 25px 10px 20px 0px;
 }
-.c-rightfooter{
+.c-rightfooter {
     text-align: center;
-    font-size: 13px;
-    margin-top: 8px;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 35px;
 }
 ul.list-unstyled.notification-widget::-webkit-scrollbar {
     width: 10px;
@@ -9083,12 +9103,12 @@ ul.list-unstyled.notification-widget::-webkit-scrollbar {
     background: #555; 
   }
   .loginpage, .loginpage form label, .loginpage form, .loginpage .message {
-    color: rgb(255 255 255);
+    color: #CFB9D5;
 }
 .p-bord-control{
     border-bottom: 1px solid #9A6AAA;
     margin-bottom: 0;
-    padding-bottom: 15px;
+    padding-bottom: 25px;
 }
 .field-icon{
     color: #000;
@@ -9112,7 +9132,8 @@ ul.list-unstyled.notification-widget::-webkit-scrollbar {
 .mid-link a{
     text-decoration: none;
     color: #5A87E3 !important;
-    font-size: 17px;
+    font-size: 18px;
+    font-weight: 600 !important;
 }
 .signinbutton{
     width: 212px;
@@ -9120,18 +9141,53 @@ ul.list-unstyled.notification-widget::-webkit-scrollbar {
     border-radius: 8px;
     background-color: #C4D988;
     font-family: 'Open Sans', sans-serif;
-    color: #3B3C3A;
-    font-size: 17px;
+    color: #3B3C3A !important;
+    font-size: 20px;
     text-align: center;
     font-weight: 600;
     display: block;
     margin: 30px auto 0;
     cursor: pointer;
+    padding:5px 5px;
 }
 .login-button-div{
     text-align: center;
     border-bottom: 1px solid #9A6AAA;
     clear: both;
-    padding-bottom: 20px;
-    margin-bottom: 15px;
+    padding-bottom: 30px;
+    margin-bottom: 35px;
+}
+.notification-widget li .user-img img{
+    width:73px;
+    height:73px;
+}
+.notification-widget{
+    height: 507px;
+}
+.notification-widgett li .user-img img{
+    width:73px;
+    height:73px;
+}
+.loginpage form .input, .loginpage input[type=text] {
+    box-shadow: inset 0 4px 6px rgba(0,0,0,0.55);
+    background: #fff !important;
+    height: 51px;
+    border-radius: 10px;
+}
+.status-available-fp{
+    font-family: 'Open Sans', sans-serif;
+    color: #8A8B86;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    font-weight: 400;
+    width: 430px;
+    margin: 0px auto 20px;
+}
+li.status-available-fp{
+    padding: 10px 0px 10px 0px;
+    margin-bottom: 10px;
+}
+.pb-custom{
+    padding-bottom: 60px;
 }

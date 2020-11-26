@@ -1,11 +1,19 @@
 
 <div class="container-fluid">
     <div class="login-wrapper row">
-        <div id="login" class="login loginpage offset-xl-4 offset-lg-3 offset-md-3 offset-0 col-12 col-md-6 col-xl-4">
+        <div id="login" class="login loginpage">
             <h1><a href="#" title="Login Page" tabindex="-1">Complete Admin</a></h1>
             <h3 class="select-acclabel p-bord-control">Enter Password</h3>
             <div *ngIf="isNew">
                 <form name="loginform" id="loginform">
+                    <div class="form-group">
+                        Add the new design
+                    </div>                
+                </form>
+    
+                
+                <!--dont delete the below-->
+                <!-- <form name="loginform" id="loginform">
                     <div class="form-group">
                         <label class="col-md-12 control-label paddingLeft0 paddingRight0" for="user_login">Username
                         <div class="col-md-12 paddingLeft0 paddingRight0">
@@ -22,7 +30,7 @@
                         <label class="icheck-label form-label" for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" class="icheck-minimal-aero" checked> Remember me</label>                      
                    
                         <button kendoButton class="btn btn-accent btn-block" value="Sign In" (click)="tryLogin()">Sign In</button>
-                        <!-- <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-accent btn-block" value="Sign In" (click)="tryLogin()" /> -->
+                        <!-// exclude this <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-accent btn-block" value="Sign In" (click)="tryLogin()" />
                     </div>                
                 </form>
     
@@ -30,7 +38,7 @@
                     <a class="float-left" href="#" title="Password Lost and Found">Forgot password?</a>
                     <a class="float-right" href="layout/ui-register.html" title="Sign Up">Sign Up</a>
                     <br/>
-                </p>
+                </p> -->
             </div>
             <div *ngIf="!isNew">
                 <ul class="list-unstyled notification-widgett">
@@ -69,5 +77,5 @@
             </div>
         </div>
     </div>
-    <div class="c-rightfooter">Copyright � 2021. chartDoc is a registered trademark. All rights reserved.</div>
+    <div class="c-rightfooter">Copyright &#169; 2021. chartDoc is a registered trademark. All rights reserved.</div>
 </div>
