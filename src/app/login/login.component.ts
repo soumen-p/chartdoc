@@ -18,6 +18,17 @@ export class LoginComponent implements OnInit {
   password: string;
   errorCode: string;
   errorDesc: string;
+  email: string;
+  emailValid:boolean;
+  codeSent:boolean;
+  code1: string;
+  code2: string;
+  code3: string;
+  code4: string;
+  code5: string;
+  code6: string;
+  finalCode: string;
+  validCode: boolean;
   doctorInfo: FormGroup;
   iconview:string="fa fa-fw fa-eye field-icon";
   constructor(private router: Router,
@@ -88,6 +99,57 @@ export class LoginComponent implements OnInit {
         }
       });
   }
+  
+  addUseremail() {
+	  if (this.email === undefined || this.email.trim() === '') {
+      this.errorMsg = 'Enter an email id. Email field empty';
+      return
+    }
+	else
+	{
+	const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	if( !regularExpression.test(String(this.email).toLowerCase())){
+		this.errorMsg = 'Email id not valid. Please check your email id';
+		return
+	}
+	}
+	const subscription = this.loginService.validateEmail(this.email)
+      .subscribe((res) => {
+        this.emailValid = true;
+        subscription.unsubscribe();
+      });
+  }
+  
+  validateCode(){
+	  if((this.code1 === undefined || this.code1.trim() === '') || (this.code2 === undefined || this.code2.trim() === '') || (this.code3 === undefined || this.code3.trim() === '') || (this.code4 === undefined || this.code4.trim() === '') || (this.code5 === undefined || this.code5.trim() === '') || (this.code6 === undefined || this.code6.trim() === ''))
+	  {
+		this.errorMsg = 'You have not entered all digits of code. Please check';
+		return
+	  }
+	  this.finalCode=this.code1.concat(this.code2).concat(this.code3).concat(this.code4).concat(this.code5).concat(this.code6);
+	  alert(this.finalCode);
+	  const subscription = this.loginService.validateCode(this.finalCode)
+      .subscribe((res) => {
+			  this.validCode = true;
+			  this.router.navigateByUrl('/patient-flow-sheet');
+			  subscription.unsubscribe();
+      });
+  }
+  
+  sendCode() {
+	  console.log("in send code");
+	  const subscription = this.loginService.sendCode()
+      .subscribe((res) => {
+		  if(this.codeSent==true)
+			this.errorMsg="the code has been sent again to your selected device";
+        this.codeSent = true;
+        subscription.unsubscribe();
+      });
+	  
+	  
+  }
+		
+  
 
   // get token(){
   //   let claims: any = this.oauthService.getIdentityClaims();

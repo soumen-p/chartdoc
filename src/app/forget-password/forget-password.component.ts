@@ -20,9 +20,16 @@ export class ForgetPasswordComponent implements OnInit {
 
   ngOnInit() {
     this.emailSent = false;
-	this.captcha_clicked=false;
+	  this.captcha_clicked=false;
     //console.log("forget-password component init");
     //this.router.navigateByUrl('/forget-password');
+    /*const test = this.loginService.test({
+      "compId": 10001,
+      "userId": 4
+    }).subscribe((res) => {
+      console.log('test called ', res);
+      test.unsubscribe();
+    })*/
   }
 
   resetPassword() {

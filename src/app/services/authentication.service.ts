@@ -33,7 +33,22 @@ export class AuthenticationService {
     //this.http.get(environment.baseUrl + RESET_PASSWORD + `/${userName}`);
     return interval(3000)
   }
+  
+  public validateEmail(email: string){ 
+    return interval(3000)
+  }
+  
+  public validateCode(finalCode: string){
+	
+		return interval(3000)
+	
+  }
+  
+  public sendCode(){ 
+    return interval(3000)
+  }
 
+  
   public getmenu():Observable<any>{    
     return this.http.get(environment.baseUrl + MENU );
   }
