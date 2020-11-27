@@ -9026,7 +9026,7 @@ html {
     -o-background-size: cover;
     background-size: cover;
 }
-body.login_page {
+body {
     background-color: transparent !important;
     background-image: url('../src/assets/images/Bkgd-Dots-Transparent.png') !important;
     background-attachment: fixed;
