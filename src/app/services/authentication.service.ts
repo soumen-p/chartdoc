@@ -4,7 +4,7 @@ import { Observable, interval } from 'rxjs';
 import { SharedService } from '../core/shared.service';
 import { environment } from 'src/environments/environment';
 
-const LOGIN_API = "api/chartdoc/getloginstatus";
+const LOGIN_API = "api/chartdoc/UserLogin";
 const RESET_PASSWORD = "api/chartdoc/resetPassword";
 
 const BASE_URL = "api/chartdoc/getloginstatus";
@@ -17,8 +17,18 @@ export class AuthenticationService {
   constructor(private http: HttpClient,
               private sharedService: SharedService) { }
 
+    // API reference 182.18.157.229:8085/swagger/index.html 
+
   public getLoginCredentials(userName: string, password: string):Observable<any>{    
-    return this.http.get(environment.baseUrl + LOGIN_API + `/${userName}/${password}`);
+    //return this.http.get(environment.baseUrl + LOGIN_API + `/${userName}/${password}`);
+
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify({
+      "UserName": userName,
+      "Password": password
+    });
+    //console.log(body);
+    return this.http.post(environment.baseUrl + LOGIN_API, body, {'headers':headers})
   }
 
   public getLocalStorage(doctorInfo: string){
@@ -35,6 +45,7 @@ export class AuthenticationService {
   }
   
   public validateEmail(email: string){ 
+    
     return interval(3000)
   }
   
@@ -48,7 +59,6 @@ export class AuthenticationService {
     return interval(3000)
   }
 
-  
   public getmenu():Observable<any>{    
     return this.http.get(environment.baseUrl + MENU );
   }
