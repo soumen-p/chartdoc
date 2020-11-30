@@ -14,7 +14,7 @@
             <div class="page-title">
                 <div class="float-left">
                     <!-- PAGE HEADING TAG - START -->
-                    <h1 class="title">Doctor Schedule</h1>
+                    
                     <!-- PAGE HEADING TAG - END -->
                 </div>
             </div>
@@ -26,11 +26,12 @@
             <section class="box nobox ">
                 <div class="content-body">
                     <div class="row">
-                        <div class="col-3 col-lg-3" style="padding-top:58px">
+                        <div class="col-3 col-lg-3 pr-0" style="padding-top:0px">
+                            <h1 class="title mt-0 mb-4 sch-font">Scheduling</h1>
                             <form>
                                 <div class="form-group">
                                     <ngb-datepicker #dp [minDate]="minDate" (dateSelect)="datechange($event)"
-                                        style="background-color: white;"></ngb-datepicker>
+                                        style="background-color: transparent;"></ngb-datepicker>
                                 </div>
                                 <div #external id="external-events" style="display: none;"> 
                                     <div  id="external-events-list">
@@ -42,13 +43,31 @@
                                     </p>
                                 </div>
                             </form>
+                            <div class="filter-pannel">
+                                <h4>Views:</h4>
+                                <label class="custom-radio">All Doctors
+                                    <input type="radio" checked="checked" name="radio">
+                                    <span class="checkmark-radio"></span>
+                                  </label>
+                                  <label class="custom-radio">Select Doctors
+                                    <input type="radio" name="radio">
+                                    <span class="checkmark-radio"></span>
+                                  </label>
+                                  <div class="pl-3">
+                                    <label class="custom-checkbox">One
+                                        <input type="checkbox" checked="checked">
+                                        <span class="checkmark"></span>
+                                      </label>
+                                  </div>
+                               
+                            </div>
                         </div>
                         <div class="col-9 col-lg-9">
                             <div class='app-calendar' *ngIf="calendarVisible">
                                 <full-calendar #calendarComponent [allDaySlot]=false editable=true droppable=true
                                     schedulerLicenseKey="GPL-My-Project-Is-Open-Source"
                                     defaultView="resourceTimeGridDay" [header]="{
-                                        right: 'prev,next today',
+                                        right: 'prev,today,next',
                                         center: '',
                                         left: 'title'
                                       }" [defaultDate]="defaultDate" minTime="08:00:00" maxTime="18:00:00"

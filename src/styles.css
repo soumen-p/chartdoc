@@ -9028,10 +9028,10 @@ html {
 }
 body {
     background-color: transparent !important;
-    background-image: url('../src/assets/images/Bkgd-Dots-Transparent.png') !important;
+    background-image: url('../src/assets/images/Bkgd-Dots-Transparent-light.png') !important;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    background-size: cover !important;
+    background-size:cover !important;
     min-height: 100%;
     width: 100%;
 }
@@ -9204,3 +9204,195 @@ li.status-available-fp{
 .pb-custom{
     padding-bottom: 60px;
 }
+.fc-unthemed th, .fc-unthemed td, .fc-unthemed hr, .fc-unthemed thead, .fc-unthemed tbody, .fc-unthemed .fc-row, .fc-unthemed .fc-popover{
+    border-color: #545451;
+}
+td.fc-widget-content {
+    color: #9fa09b !important;
+    background-color: rgb(62 62 62 / 0.5) !important;
+}
+.fc-resource-cell:nth-child(even){
+    background-color:#c4d988;
+}
+.fc-resource-cell:nth-child(odd){
+    background-color:#b1cb66;
+}
+.fc th{
+    font-weight: 600;
+}
+.fc-widget-header{
+    background-color: rgb(62 62 62 / 0.5) !important;
+}
+.fc-time-grid .fc-slats td{
+    height: 2.5em;
+}
+.sch-font{
+    color:#dadcd7;
+    font-size: 32px;
+}
+.fc-toolbar h2 {
+    font-size: 1.5em;
+    margin: 0 0 0 35px;
+    color: #8a8b86;
+}
+.fc-today-button{
+    background:#313131;
+    border:1px solid #4a5652;
+    margin: 0 3px;
+}
+.fc-time{
+    border-width:0 !important;
+}
+.btn-light.ng-star-inserted.bg-primary.text-white{
+    background: #c3d888 !important;
+    padding: 0px 8px;
+    color: #040404 !important;
+    border-radius: 50% !important;
+}
+/* The container */
+.custom-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .custom-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .custom-checkbox input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .custom-checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .custom-radio {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default radio button */
+  .custom-radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark-radio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .custom-radio:hover input ~ .checkmark-radio {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .custom-radio input:checked ~ .checkmark-radio {
+    background-color: #2196F3;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark-radio:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .custom-radio input:checked ~ .checkmark-radio:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .custom-radio .checkmark-radio:after {
+       top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+  }
+  .pop-upclose-button {
+    background-color: #bbdc82;
+    color: #333;
+    font-size: 18px;
+    border: none;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 4px 40px;
+}
+  .validate-modal-header{
+      color:#7f7f7f;
+      font-size: 25px;
+      font-weight: 600;
+  }
+  .cus-width{
+      width:580px
+  }
