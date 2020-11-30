@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-password',
@@ -7,9 +8,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatePasswordComponent implements OnInit {
 
-  constructor() { }
+  errorMsg: string = '';
+  iconview:string="fa fa-fw fa-eye field-icon";
+  password: string;
+  re_password: string;
+
+   constructor(private router: Router) {
+    
+  }
 
   ngOnInit() {
+	  this.password='';
+	  this.re_password='';
+  }
+  togglePasswordFieldType(input: any){
+    input.type = input.type === 'password' ? 'text' : 'password';
+    this.iconview = input.type === 'password' ? 'fa fa-fw fa-eye field-icon' : 'fa fa-fw fa-eye-slash field-icon';
+    //this.isTextFieldType = !this.isTextFieldType;
+  }
+  set_password(){
+	  console.log("in set password");
+	   if (this.password === undefined || this.password.trim() === '') {
+      this.errorMsg = 'Please enter the password';
+      return
+    }
+	if (this.re_password === undefined || this.re_password.trim() === '') {
+      this.errorMsg = 'Please confirm your password';
+      return
+    }
+	if (this.re_password != this.password) {
+      this.errorMsg = 'Your passwords dont match';
+      return
+    }
+	const caps = /^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/;
+	const number = [0-9];
+	
+	if( !caps.test(String(this.password))){
+		this.errorMsg = 'Password not valid';
+		return
+	}
+	
+	this.router.navigateByUrl('/patient-flow-sheet');
   }
 
 }

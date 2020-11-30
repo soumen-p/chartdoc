@@ -131,6 +131,29 @@ body.boxed {
     -moz-box-shadow: 0px 0px 5px rgba(86, 96, 117, 0.15);
     -webkit-box-shadow: 0px 0px 5px rgba(86, 96, 117, 0.15);
 }
+.password-text {
+	font-family: 'Open Sans', sans-serif;
+	color: #FFFFFF;
+	font-size: 18px;
+	text-align: center;
+	font-weight: 400;
+}
+.password-reqs {
+	margin: 12px 0 18px 0;
+}
+.requirements {
+	font-family: 'Open Sans', sans-serif;
+	color: #FFFFFF;
+	font-size: 16px;
+	text-align: center;
+	font-weight: 400;
+	display: inline-block;
+	width: 33%;
+}
+
+.req-red {
+	color: #ff0000;
+}
 body.boxed .page-topbar {
     max-width: 90%;
     width: 90%;
@@ -4488,7 +4511,7 @@ a.cke_button_off:hover, .cke_hc a.cke_button_off:focus, .cke_hc a.cke_button_off
     text-transform: uppercase;
     font-weight: 500;
 }
-.loginpage form .input, .loginpage form input[type=checkbox], .loginpage input[type=text] {
+.loginpage form .input, .loginpage form input[type=checkbox], .loginpage input[type=text], .loginpage input[type=password] {
     -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
     -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
@@ -4498,7 +4521,7 @@ a.cke_button_off:hover, .cke_hc a.cke_button_off:focus, .cke_hc a.cke_button_off
     
     font-weight: 500;
 }
-.loginpage form .input, .loginpage input[type=text] {
+.loginpage form .input, .loginpage input[type=text], .loginpage input[type=password] {
     font-size: 19px;
     width: 100%;
     padding: 9px;
@@ -4506,7 +4529,7 @@ a.cke_button_off:hover, .cke_hc a.cke_button_off:focus, .cke_hc a.cke_button_off
     margin: 5px 0 15px 0;
     border: 1px solid #D7D7D7;
 }
-.loginpage form .input, .loginpage form input[type=checkbox], .loginpage input[type=text] {
+.loginpage form .input, .loginpage form input[type=checkbox], .loginpage input[type=text], .loginpage input[type=password] {
     color: #000;
     /*#E91E63*/
     background: #fbfbfb;
@@ -4531,7 +4554,7 @@ a.cke_button_off:hover, .cke_hc a.cke_button_off:focus, .cke_hc a.cke_button_off
     
     ;
 }
-.loginpage form .input, .loginpage form input[type=checkbox], .loginpage input[type=text] {
+.loginpage form .input, .loginpage form input[type=checkbox], .loginpage input[type=text], .loginpage input[type=password] {
     background-color: rgba(255, 255, 255, 0.8);
     /*#ffffff*/
     
@@ -9026,9 +9049,9 @@ html {
     -o-background-size: cover;
     background-size: cover;
 }
-body.login_page {
+body {
     background-color: transparent !important;
-    background-image: url('../src/assets/images/Bkgd-Dots-Transparent.png') !important;
+    background-image: url('../src/assets/images/Bkgd-Dots-Transparent-light.png') !important;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover !important;
@@ -9135,7 +9158,7 @@ ul.list-unstyled.notification-widget::-webkit-scrollbar {
 .loginpage form{
     margin-top: 0;
 }
-.loginpage form .input, .loginpage input[type=text]{
+.loginpage form .input, .loginpage input[type=text], .loginpage input[type=password]{
     margin-bottom: 0;
 }
 .mid-link {
@@ -9181,7 +9204,7 @@ ul.list-unstyled.notification-widget::-webkit-scrollbar {
     width:73px;
     height:73px;
 }
-.loginpage form .input, .loginpage input[type=text] {
+.loginpage form .input, .loginpage input[type=text], .loginpage input[type=password] {
     box-shadow: inset 0 4px 6px rgba(0,0,0,0.55);
     background: #fff !important;
     height: 51px;
@@ -9203,4 +9226,283 @@ li.status-available-fp{
 }
 .pb-custom{
     padding-bottom: 60px;
+}
+.fc-unthemed th, .fc-unthemed td, .fc-unthemed hr, .fc-unthemed thead, .fc-unthemed tbody, .fc-unthemed .fc-row, .fc-unthemed .fc-popover{
+    border-color: #545451;
+}
+td.fc-widget-content {
+    color: #9fa09b !important;
+    background-color: rgb(62 62 62 / 0.5) !important;
+}
+.fc-resource-cell:nth-child(even){
+    background-color:#c4d988;
+}
+.fc-resource-cell:nth-child(odd){
+    background-color:#b1cb66;
+}
+.fc th{
+    font-weight: 600;
+}
+.fc-widget-header{
+    background-color: rgb(62 62 62 / 0.5) !important;
+}
+.fc-time-grid .fc-slats td{
+    height: 2.5em;
+}
+.sch-font{
+    color:#dadcd7;
+    font-size: 32px;
+}
+.fc-toolbar h2 {
+    font-size: 1.5em;
+    margin: 0 0 0 35px;
+    color: #8a8b86;
+}
+.fc-today-button{
+    background:#313131;
+    border:1px solid #4a5652;
+    margin: 0 3px;
+}
+.fc-time{
+    border-width:0 !important;
+}
+.btn-light.ng-star-inserted.bg-primary.text-white{
+    background: #c3d888 !important;
+    padding: 0px 8px;
+    color: #040404 !important;
+    border-radius: 50% !important;
+}
+/* The container */
+.custom-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .custom-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .custom-checkbox input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .custom-checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .custom-radio {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default radio button */
+  .custom-radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark-radio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .custom-radio:hover input ~ .checkmark-radio {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .custom-radio input:checked ~ .checkmark-radio {
+    background-color: #2196F3;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark-radio:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .custom-radio input:checked ~ .checkmark-radio:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .custom-radio .checkmark-radio:after {
+       top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+  }
+  .pop-upclose-button {
+    background-color: #bbdc82;
+    color: #333;
+    font-size: 16px;
+    border: none;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 4px 60px;
+    cursor: pointer;
+}
+  .validate-modal-header{
+      color:#7f7f7f;
+      font-size: 27px;
+      font-weight: 600;
+  }
+  @media (min-width: 576px){
+  .cus-width{
+      max-width:580px;
+  }
+}
+.modal-in-p{
+    color: #6d6d6d                ;
+    text-align:left;
+    font-size: 20px;
+    font-weight: 800;
+}
+.modal-in-p span{
+    color: #7a7a7a;
+    font-size: 17px;
+    margin-left: 5px;
+}
+.srch-th tr th{
+    border-top:2px solid #423145 !important;
+    border-bottom:2px solid #423145 !important;
+    border-left:1px solid #484848 !important;
+    font-size: 16px;
+}
+.srch-th tr th:last-child{
+    border-right:1px solid #484848 !important;
+}
+.name-last-appointment {
+    font-size: 22px;
+}
+.name-last-appointment span{
+    font-size: 15px;
+    color: #ababab;
+}
+.srch-tbody tr td{
+    vertical-align: middle;
+    border-color: #484848 !important;
+}
+.achover-open{
+    width:150px;
+    min-height: 40px;
+    background-color: #fff;
+    border-radius: 7px;  
+    padding: 5px 0; 
+    top: 35px;
+    left: -40px; 
+    display: none;
+}
+.achover-open::before{
+    content: "\f0de";
+    font-family: FontAwesome;
+    position: absolute;
+    top: -7px;
+    font-size: 25px;
+}
+.achover:hover .achover-open{
+    display: block;
+}
+.achover:hover:hover action-label{
+    border:1px solid #fff;
+    border-radius: 5px;
+    padding:2px 7px;
+}
+/* .action-label:hover{
+    border:1px solid #ffff;
+    border-radius: 7px;
+} */
+.action-list{
+    color:#333;
+    text-align: left;
+    padding: 2px 7px;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: 400;
+    font-weight: 600;
+    cursor: pointer;
+}
+.action-list:hover{
+    background-color: #C1E0D9;
+}
+
+.pr-t{
+    position: relative;
+    top:10px;
+}
+.search-history-label{
+    font-size: 36px;
+}
+.showing-result{
+    font-size: 18px;
 }

@@ -20,6 +20,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.doctorInfo = formBuilder.group({
       doctorName: '',
       doctorImage: '',
+      doctorEmail: '',
+      doctorPhone: '',
       roleType:''
     })
   }
@@ -32,11 +34,13 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     document.body.className = "";
   }
 
-  onClick(doctorName: string, doctorImg: string,roleType:string) {
+  onClick(user:any) {
     this.doctorInfo.setValue({
-      doctorName: doctorName,
-      doctorImage: doctorImg,
-      roleType:roleType
+      doctorName: user.doctorName,
+      doctorImage: user.doctorImage,
+      doctorEmail: user.email,
+      doctorPhone: user.phone,
+      roleType:user.roleType
     });
 
     this.landingPageService.setDoctorInfo('doctorInfo', this.doctorInfo.value);

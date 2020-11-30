@@ -5,7 +5,7 @@
             <h3 class="select-acclabel">Select Account</h3>
             <ul class="list-unstyled notification-widget">
                 <li class="status-available" *ngFor="let user of userList">
-                    <a href="javascript:;" (click)="onClick(user.doctorName,user.doctorImage,user.roleType)">
+                    <a href="javascript:;" (click)="onClick(user)">
                         <div class="user-img">
                             <!-- <img src="{{user.DoctorImage}}" alt="user-image" class="rounded-circle img-inline"> -->
                             <!-- <img src="../../assets/images/{{user.DoctorImage}}" alt="user-image" class="rounded-circle img-inline"> -->

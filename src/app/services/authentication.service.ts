@@ -5,7 +5,7 @@ import { SharedService } from '../core/shared.service';
 import { environment } from 'src/environments/environment';
 
 const LOGIN_API = "api/chartdoc/UserLogin";
-const RESET_PASSWORD = "api/chartdoc/resetPassword";
+const RESET_PASSWORD = "api/ChartDoc/ValidateUserEmail";
 
 const BASE_URL = "api/chartdoc/getloginstatus";
 const MENU = "api/chartdoc/GetMenudata";
@@ -39,20 +39,25 @@ export class AuthenticationService {
     this.sharedService.setLocalItem(key, val);
   }
 
-  public resetPassword(userName: string){  
-    //this.http.get(environment.baseUrl + RESET_PASSWORD + `/${userName}`);
-    return interval(3000)
+  public resetPassword(userName: string):Observable<any>{    
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify({
+      "email": userName
+    });
+    return this.http.post(environment.baseUrl + RESET_PASSWORD, body, {'headers':headers})
   }
   
   public validateEmail(email: string){ 
     
-    return interval(3000)
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify({
+      "email": email
+    });
+    return this.http.post(environment.baseUrl + RESET_PASSWORD, body, {'headers':headers})
   }
   
   public validateCode(finalCode: string){
-	
 		return interval(3000)
-	
   }
   
   public sendCode(){ 

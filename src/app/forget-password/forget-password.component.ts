@@ -52,7 +52,14 @@ export class ForgetPasswordComponent implements OnInit {
     }
     const subscription = this.loginService.resetPassword(this.userName)
       .subscribe((res) => {
-        this.emailSent = true;
+		  if(res.data.Valid)
+			  this.emailSent = true;
+		  else
+		  {
+			  this.emailSent=false;
+			  this.errorMsg=res.data.Message;
+		  }
+			  
         subscription.unsubscribe();
       });
 
@@ -67,7 +74,8 @@ export class ForgetPasswordComponent implements OnInit {
 	  this.resendMsg= 'The email has been sent again';
 	  const subscription = this.loginService.resetPassword(this.userName)
       .subscribe((res) => {
-        this.emailSent = true;
+        if(!res.data.Valid)
+			  this.resendMsg=res.data.Message;
         subscription.unsubscribe();
       });
   }

@@ -1,24 +1,26 @@
-
 <div class="container-fluid">
     <div class="login-wrapper row">
         <div id="login" class="login loginpage">
             <h1><a href="#" title="Login Page" tabindex="-1">Complete Admin</a></h1>
             <h3 class="select-acclabel p-bord-control">Enter Login Credentials</h3>
             <div *ngIf="isNew && !emailValid">
-			<ul class="list-unstyled notification-widgett">
-			<span class="name1"><strong>{{errorMsg}}</strong></span> 
-		<form (ngSubmit)="addUseremail()" name="loginform" id="loginform" >
-            <div class="form-group">
-                
-                    <label for="email" class="label-input">Enter email address</label>
-                    <input type="text" id="email" name="" title="Enter email address" (input)="email = $event.target.value" autofocus>
-                    <div class="login-button-div"><input class="btn btn-accent signinbutton" type="submit" value="Continue" title="Continue"></div>
-              
-            </div><!--email-box-->
-			  </form>
-</ul>
-    
-                
+                <ul class="list-unstyled notification-widgett">
+                    <span class="name1"><strong>{{errorMsg}}</strong></span>
+                    <form (ngSubmit)="addUseremail()" name="loginform" id="loginform">
+                        <div class="form-group">
+
+                            <label for="email" class="label-input">Enter email address</label>
+                            <input type="text" id="email" name="" title="Enter email address"
+                                (input)="email = $event.target.value" autofocus>
+                            <div class="login-button-div"><input class="btn btn-accent signinbutton" type="submit"
+                                    value="Continue" title="Continue"></div>
+
+                        </div>
+                        <!--email-box-->
+                    </form>
+                </ul>
+
+
                 <!--dont delete the below-->
                 <!-- <form name="loginform" id="loginform">
                     <div class="form-group">
@@ -47,79 +49,100 @@
                     <br/>
                 </p> -->
             </div>
-            <div *ngIf="!isNew">
+            <div *ngIf="!isNew && !emailValid">
                 <ul class="list-unstyled notification-widgett">
                     <li class="status-available">
                         <a href="javascript:;">
-                        <div class="user-img">
-                            <!-- <img src="assets/images/face2.png" alt="user-image" class="rounded-circle img-inline"> -->
-                            <img src="{{doctorImg}}" alt="user-image" class="rounded-circle img-inline">
+                            <div class="user-img">
+                                <!-- <img src="assets/images/face2.png" alt="user-image" class="rounded-circle img-inline"> -->
+                                <img src="{{doctorImage}}" alt="user-image" class="rounded-circle img-inline">
                             </div>
-                        <div>
-                            <span class="name">
-                                <strong>{{doctorName}}</strong>
-                            </span>
-                        </div>
+                            <div>
+                                <span class="name">
+                                    <strong>{{doctorName}}</strong>
+                                </span>
+                            </div>
                         </a>
                     </li>
                     <form name="loginform" id="loginform" action="dashboard.html" method="post">
                         <div class="form-group">
-                            <span class="name1"><strong>{{errorMsg}}</strong></span> 
-                        <label class="col-md-12 control-label paddingLeft0 paddingRight0" for="user_pass">Enter Password
-                        <div class="col-md-12 paddingLeft0 paddingRight0">
-                        <input #input type="password"  name="pwd" id="user_pass" class="input" value="" size="20" (input)="password = $event.target.value" />
-                        <span><i [ngClass]="iconview" aria-hidden="true" (click)="togglePasswordFieldType(input)"></i></span>
+                            <span class="name1"><strong>{{errorMsg}}</strong></span>
+                            <label class="col-md-12 control-label paddingLeft0 paddingRight0" for="user_pass">Enter
+                                Password
+                                <div class="col-md-12 paddingLeft0 paddingRight0">
+                                    <input #input type="password" name="pwd" id="user_pass" class="input" value=""
+                                        size="20" (input)="password = $event.target.value" />
+                                    <span><i [ngClass]="iconview" aria-hidden="true"
+                                            (click)="togglePasswordFieldType(input)"></i></span>
+                                </div>
+                            </label>
+                            <p class="mid-link"><a href="" title="Forgot your password?"
+                                    [routerLink]="['/forget-password']">Forgot your password?</a></p>
+                            <span class="name1"><strong>{{errorMsg}}</strong></span>
+                            <!-- <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-accent btn-block" value="Sign In" (click)="tryLogin()" /> -->
+                            <!-- <button kendoButton class="btn btn-accent btn-block" value="Sign In" (click)="tryLogin()">Sign In</button> -->
+                            <div class="login-button-div"><button kendoButton class="btn btn-accent signinbutton"
+                                    value="Log In" (click)="tryLogin()">Log In</button></div>
+                            <p class="mid-link"><a href="" title="Select different account">Select different account</a>
+                            </p>
                         </div>
-                        </label>
-						<p class="mid-link"><a href="" title="Forgot your password?" [routerLink]="['/forget-password']">Forgot your password?</a></p>
-                        <span class="name1"><strong>{{errorMsg}}</strong></span> 
-                        <!-- <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-accent btn-block" value="Sign In" (click)="tryLogin()" /> -->
-                        <!-- <button kendoButton class="btn btn-accent btn-block" value="Sign In" (click)="tryLogin()">Sign In</button> -->
-						<div class="login-button-div"><button kendoButton class="btn btn-accent signinbutton" value="Log In" (click)="tryLogin()">Log In</button></div>
-                        <p class="mid-link"><a href="" title="Select different account">Select different account</a></p>
-                    </div>
                     </form>
                 </ul>
-                
+
             </div>
-			
-			<div *ngIf="emailValid && !codeSent">
-            
-            <h3 class="select-acclabel p-bord-control">Verfication</h3>
-            <ul class="list-unstyled notification-widgett">
-                <p class="top-message text-left">It looks like you are trying to log in to your account for the first time or from a different computer or device.<br><br>To protect your account we first need to verify that it is you.</p>
-				<form (ngSubmit)="sendCode()" action="" name="loginform" id="loginform">
-				<div class="form-group">
-                    <p class="form-message">Send verification code to:</p>
-                    <label class="label-radio" for="mobile">
-					<input type="radio" id="" name="device" value="mobile" title="Mobile" checked="true">  Mobile: (xxx) xxx-1234</label><br>
-                    <label class="label-radio" for="email">
-					<input type="radio" id="" name="device" value="email" title="Email">  Email: *********mp@gmail.com</label>
-                     <div class="login-button-div"><input class="btn btn-accent signinbutton" type="submit" value="Send Code" title="Send Code"></div>                
-				</div>
-				</form>
-            </ul><!--profile-box-->
-			</div>
-			
-			<div *ngIf="codeSent">
-            
-            <h3 class="select-acclabel p-bord-control">Verfication</h3>
-            <ul class="list-unstyled notification-widgett">
-                <p class="top-message">Enter the 6-digit verification code:</p>
-				<span class="name1"><strong>{{errorMsg}}</strong></span> 
-				<form action="" (ngSubmit)="validateCode()" name="loginform" id="loginform">
-				<div class="segmented-input">
-                    
-                    <input type="text" id="" name="" maxlength="1" (input)="code1 = $event.target.value" autofocus><input type="text" id="" name="" maxlength="1" (input)="code2 = $event.target.value"><input type="text" id="" name="" maxlength="1" (input)="code3 = $event.target.value"><input type="text" id="" name="" maxlength="1" (input)="code4 = $event.target.value"><input type="text" id="" name="" maxlength="1" (input)="code5 = $event.target.value"><input type="text" id="" name="" maxlength="1" (input)="code6 = $event.target.value">
-					<div> <br/></div>
-					<p class="mid-link"><a  (click)="sendCode()" title="Resend code">Resend code</a></p>
-                     <div class="login-button-div"><input class="btn btn-accent signinbutton" type="submit" value="Submit" title="Submit"></div>                
-				</div>
-				</form>
-            </ul><!--profile-box-->
-			</div>
-			
-			
+
+            <div *ngIf="emailValid && !codeSent">
+
+                <h3 class="select-acclabel p-bord-control">Verfication</h3>
+                <ul class="list-unstyled notification-widgett">
+                    <p class="top-message text-left">It looks like you are trying to log in to your account for the
+                        first time or from a different computer or device.<br><br>To protect your account we first need
+                        to verify that it is you.</p>
+                    <form (ngSubmit)="sendCode()" action="" name="loginform" id="loginform">
+                        <div class="form-group">
+                            <p class="form-message">Send verification code to:</p>
+                            <label class="label-radio" for="mobile">
+                                <input type="radio" id="" name="device" value="mobile" title="Mobile" checked="true">
+                                Mobile: {{doctorPhone}}</label><br>
+                            <label class="label-radio" for="email">
+                                <input type="radio" id="" name="device" value="email" title="Email"> Email:
+                                {{doctorEmail}}</label>
+                            <div class="login-button-div"><input class="btn btn-accent signinbutton" type="submit"
+                                    value="Send Code" title="Send Code"></div>
+                        </div>
+                    </form>
+                </ul>
+                <!--profile-box-->
+            </div>
+
+            <div *ngIf="codeSent">
+
+                <h3 class="select-acclabel p-bord-control">Verfication</h3>
+                <ul class="list-unstyled notification-widgett">
+                    <p class="top-message">Enter the 6-digit verification code:</p>
+                    <span class="name1"><strong>{{errorMsg}}</strong></span>
+                    <form (ngSubmit)="validateCode()" action="create-password" method="post" name="loginform"
+                        id="loginform">
+                        <div class="segmented-input">
+
+                            <input type="text" id="" name="" maxlength="1" (input)="code1 = $event.target.value"
+                                autofocus><input type="text" id="" name="" maxlength="1"
+                                (input)="code2 = $event.target.value"><input type="text" id="" name="" maxlength="1"
+                                (input)="code3 = $event.target.value"><input type="text" id="" name="" maxlength="1"
+                                (input)="code4 = $event.target.value"><input type="text" id="" name="" maxlength="1"
+                                (input)="code5 = $event.target.value"><input type="text" id="" name="" maxlength="1"
+                                (input)="code6 = $event.target.value">
+                            <div> <br /></div>
+                            <p class="mid-link"><a (click)="sendCode()" title="Resend code">Resend code</a></p>
+                            <div class="login-button-div"><input class="btn btn-accent signinbutton" type="submit"
+                                    value="Submit" title="Submit"></div>
+                        </div>
+                    </form>
+                </ul>
+                <!--profile-box-->
+            </div>
+
+
         </div>
     </div>
     <div class="c-rightfooter">Copyright &#169; 2021. chartDoc is a registered trademark. All rights reserved.</div>
