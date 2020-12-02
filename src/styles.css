@@ -9280,10 +9280,16 @@ ngb-datepicker{
 }
 [ngbDatepickerDayView]{
     border-radius: 50% !important;
+    width: 1.8rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+}
+[ngbDatepickerDayView]:hover{
+    background-color: #C1E0D9 !important;
 }
 .ngb-dp-day, .ngb-dp-week-number, .ngb-dp-weekday {
     width: 2.3rem !important;
-    height: 2.3rem !important;
+    height: 1.6rem !important;
 }
 .btn-light.ng-star-inserted.bg-primary.text-white{
     background: #c3d888 !important;
@@ -9697,4 +9703,58 @@ ngb-datepicker{
   .controls::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
- 
+  .scroll-style::-webkit-scrollbar {
+    width: 10px;
+  }
+  .scroll-style::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  .scroll-style::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  .scroll-style::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  .drlist{
+      max-height: 150px;
+      overflow-x: hidden;
+      overflow-y: auto;
+  }
+  a.fc-time-grid-event {
+    border-width: 2px !important;
+    background: rgba(0,0,0,0.2) !important;
+    border-radius: 10px !important;
+    padding-left: 5px;
+}
+.fc-time-grid-event:before {
+    content: "\f142";
+    font-family: FontAwesome;
+    position: absolute;
+    z-index: 99;
+    right: 4px;
+    top: 0px;
+    font-size: 15px;
+    color:#808080;
+}
+.fc-time-grid-event:after {
+    content: "\f142";
+    font-family: FontAwesome;
+    position: absolute;
+    z-index: 99;
+    right: 10px;
+    top: 0;
+    font-size: 15px;
+    color:#808080;
+}
+ngb-datepicker-navigation-select>.custom-select {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 0 .5rem;
+    font-size: .875rem;
+    height: 1.85rem;
+    margin: 0 7px !important;
+    padding: 0 10px !important;
+}
+.ngb-dp-arrow-btn{
+    color: #fff !important;
+}

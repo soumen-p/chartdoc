@@ -219,8 +219,8 @@ export class AppointmentComponent implements OnInit {
                         tempdata.push({
                             resourceId: element.schduleAppoinment.doctorId,
                             title: element.schduleAppoinment.patientName + AppointmentId,
-                            start: strdate1 + 'T' + element.schduleAppoinment.fromTime,
-                            end: strdate1 + 'T' + element.schduleAppoinment.toTime,
+                            // start: strdate1 + 'T' + element.schduleAppoinment.fromTime,
+                            // end: strdate1 + 'T' + element.schduleAppoinment.toTime,
                             patientName: element.schduleAppoinment.patientName,
                             appointmentId: element.schduleAppoinment.appointmentId,
                             patientID: element.schduleAppoinment.patientId,
