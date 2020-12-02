@@ -8223,7 +8223,7 @@ p.form-control-static {
     content: "";
     position: absolute;
     left: 0;
-    height: 85px;
+    height: 105px;
     border-left: 1px solid #ADB2B5;
     margin-top: 0px;
 }
@@ -8303,7 +8303,7 @@ p.form-control-static {
     font-weight: bold;
 }
 .tile_count .tile_stats_count .count {
-font-size: 25px;
+font-size: 22px;
 line-height: 40px;
 font-weight: 540;
 }
@@ -9181,6 +9181,9 @@ ul.list-unstyled.notification-widget::-webkit-scrollbar {
     width:73px;
     height:73px;
 }
+.views-text{
+    font-size: 20px;
+}
 .loginpage form .input, .loginpage input[type=text] {
     box-shadow: inset 0 4px 6px rgba(0,0,0,0.55);
     background: #fff !important;
@@ -9237,11 +9240,33 @@ td.fc-widget-content {
 }
 .fc-today-button{
     background:#313131;
-    border:1px solid #4a5652;
-    margin: 0 3px;
+    margin: 0 3px !important;
+    margin-left: 2px !important;
+}
+.fc-button {
+    border: 1px solid #535f5c !important;
+}
+.fc-prev-button{
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.fc-next-button{
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 .fc-time{
     border-width:0 !important;
+}
+.ngb-dp-header{
+    background-color: transparent !important;
+}
+.ngb-dp-weekdays{
+    background-color: transparent !important;
+}
+.ngb-dp-weekday{
+    color: #fff !important;
+    font-style: normal !important;
+    text-transform: uppercase;
 }
 .btn-light.ng-star-inserted.bg-primary.text-white{
     background: #c3d888 !important;
@@ -9253,10 +9278,10 @@ td.fc-widget-content {
 .custom-checkbox {
     display: block;
     position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    padding-left: 27px;
+    margin-bottom:8px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -9273,47 +9298,47 @@ td.fc-widget-content {
   }
   
   /* Create a custom checkbox */
-  .checkmark {
+  .checkmark-chk {
     position: absolute;
     top: 0;
     left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: #eee;
+    height: 16px;
+    width: 16px;
+    background-image: linear-gradient(to bottom right, #9ba9b9, #b3c9e4);
+    border-radius: 4px;
   }
   
   /* On mouse-over, add a grey background color */
-  .custom-checkbox:hover input ~ .checkmark {
+  .custom-checkbox:hover input ~ .checkmark-chk {
     background-color: #ccc;
   }
   
   /* When the checkbox is checked, add a blue background */
-  .custom-checkbox input:checked ~ .checkmark {
+  .custom-checkbox input:checked ~ .checkmark-chk {
     background-color: #2196F3;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
+  .checkmark-chk:after {
     content: "";
     position: absolute;
     display: none;
   }
   
   /* Show the checkmark when checked */
-  .custom-checkbox input:checked ~ .checkmark:after {
+  .custom-checkbox input:checked ~ .checkmark-chk:after {
     display: block;
   }
   
   /* Style the checkmark/indicator */
-  .custom-checkbox .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
+  .custom-checkbox .checkmark-chk:after {
+    left: 6px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid #253d71;
+    border-width: 0 2px 2px 0;
     -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
 
@@ -9323,7 +9348,7 @@ td.fc-widget-content {
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 16px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -9342,10 +9367,11 @@ td.fc-widget-content {
     position: absolute;
     top: 0;
     left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
+    height: 23px;
+    width: 23px;
+    background-color: transparent;
     border-radius: 50%;
+    border:2px solid #516692
   }
   
   /* On mouse-over, add a grey background color */
@@ -9355,7 +9381,8 @@ td.fc-widget-content {
   
   /* When the radio button is checked, add a blue background */
   .custom-radio input:checked ~ .checkmark-radio {
-    background-color: #2196F3;
+    /* background-color: #2196F3; */
+    background-image: linear-gradient(to bottom right, #ccc, #888);
   }
   
   /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -9371,14 +9398,14 @@ td.fc-widget-content {
   }
   
   /* Style the indicator (dot/circle) */
-  .custom-radio .checkmark-radio:after {
+  /* .custom-radio .checkmark-radio:after {
        top: 9px;
       left: 9px;
       width: 8px;
       height: 8px;
       border-radius: 50%;
       background: white;
-  }
+  } */
   .pop-upclose-button {
     background-color: #bbdc82;
     color: #333;
@@ -9483,3 +9510,173 @@ td.fc-widget-content {
 .showing-result{
     font-size: 18px;
 }
+.title-count-new .tile_stats_count{
+    background-color: transparent;
+}
+.ntab-d{
+    display: flex;
+}
+.ntab-d li{
+    flex: 1;
+}
+.ntab-d li a{
+    font-weight: 600;
+    font-size: 17px;
+    padding:8px 25px 14px 25px;
+}
+.ntab-d li .active{
+    position: relative;
+}
+.ntab-d li .active:before{
+    content: "\f0d7";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 25px;
+    font-size: 25px;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    color:#CDB2D1;
+}
+.profile-pic-img{
+    width:100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.profile_info-new span{
+    font-size: 17px;
+}
+.profile_info-new h2{
+    font-size: 20px;
+}
+.lastdr-name{
+    background-color:#1e1e1e !important;
+}
+.change-provider{
+    font-size: 13px;
+    line-height: 25px;
+}
+.tabtitle-open{
+    font-size: 23px;
+    padding-bottom: 0 !important;
+}
+/* The container */
+.container-chkbox {
+    display: block;
+   position: relative;
+   padding-left: 27px;
+   margin-bottom: 10px;
+   cursor: pointer;
+   font-size: 17px;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   color: #fff;
+}
+
+/* Hide the browser's default checkbox */
+.container-chkbox input {
+ position: absolute;
+ opacity: 0;
+ cursor: pointer;
+ height: 0;
+ width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+ position: absolute;
+ top: 0;
+ left: 0;
+ height: 17px;
+ width: 17px;
+ background-color: #575859;
+ border:1px solid #1b6c7d;
+}
+
+/* On mouse-over, add a grey background color */
+.container-chkbox:hover input ~ .checkmark {
+ background-color: #575859;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-chkbox input:checked ~ .checkmark {
+ background-color: #575859;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+ content: "";
+ position: absolute;
+ display: none;
+}
+
+/* Show the checkmark when checked */
+.container-chkbox input:checked ~ .checkmark:after {
+ display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-chkbox .checkmark:after {
+    left: 5px;
+    top: 0px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.li-type-width{
+    display: inline-block;
+    vertical-align: top;
+    width:50%;
+}
+.rounded-accordian .card-body{
+    background-color: #272726;
+}
+.rounded-accordian .card{
+    border:none;
+    background-color: transparent;
+}
+.rounded-accordian .card-header{
+    background-color: #686868;
+    border-radius: 50px;
+    padding:0 10px;
+    cursor: pointer;
+}
+.rounded-accordian .card-header h2{
+    line-height: 20px;
+}
+.rounded-accordian .card-header button {
+    color: #d8d5d5 !important;
+    font-size: 17px;
+    padding: 0 10px;
+    font-weight: 400;
+    text-decoration: none !important;
+}
+.rounded-accordian .card-header[aria-expanded="true"]{
+    background-color: #547399;
+  }
+.badgestyle{
+    float: right;
+    margin-top: 4px;
+    font-weight: 600;
+}
+.ntab-d.nav-tabs > li > a:hover, .nav-tabs > li > a:focus{
+    border-color:none ;
+    background-color: transparent;
+}
+.controls::-webkit-scrollbar {
+    width: 10px;
+  }
+  .controls::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  .controls::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  .controls::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

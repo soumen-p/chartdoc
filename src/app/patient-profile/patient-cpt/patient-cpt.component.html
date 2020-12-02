@@ -7,24 +7,25 @@
                         <div class="row">
                             <div class="col-xl-12">
                                 <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                                     <tr>
-                                        <td>
-                                            <h2 class="title float-left">
+                                    <tr>
+                                        <td style="border-bottom: 0 !important;">
+                                            <h2 class="title float-left tabtitle-open">
                                                 Select CPT Codes
                                             </h2>
                                         </td>
-                                        <td style="text-align: right;">
+                                        <!-- <td style="text-align: right;border-bottom: 0 !important;">
                                             <button *ngIf="patienthisttory" kendoButton class="btn btn-success btn-corner"
                                                 [disabled]="isPosCheckOut" style="width:120px; font-size: 16px;"
                                                 (click)="saveCptDetails($event)">Save</button>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 </table>
+
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <div class="controls" style="height: 600px;overflow-y:scroll;">
-                                        <div *ngIf="tblVisibility" id="div5" class="targetDiv">
+                                    <div class="controls" style="height: 400px;overflow-y:auto;padding: 15px;">
+                                        <!-- <div *ngIf="tblVisibility" id="div5" class="targetDiv">
                                             <table class="icd dt-responsive display" cellspacing="0" width="100%">
                                                 <tbody>
                                                     <tr *ngFor="let cpt of cptDetails">
@@ -39,7 +40,233 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                        </div> -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox" checked="checked">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox" checked>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label><label class="container-chkbox li-type-width">**** 99201 NP OV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +275,7 @@
                 </section>
             </div>
             <div class="col-xl-6">
-                <section class="box nobox ">
+                <!-- <section class="box nobox ">
                     <div class="content-body">
                         <div class="row">
                             <div class="col-12">
@@ -96,7 +323,123 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
+
+                <div class="form-group">
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                            <td style="border-bottom: 0 !important;">
+                                <h2 class="title float-left tabtitle-open">
+                                    Assign CPT Codes
+                                </h2>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <div class="controls" style="height: 400px;overflow-y:auto;padding:15px;">
+                        <div class="accordion rounded-accordian" id="accordionExample">
+                            <div class="card mb-2">
+                                <div class="card-header" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne" id="headingOne">
+                                    <h2 class="mb-0 mt-0">
+                                        <button class="btn btn-link mt-0">
+                                            **** 99201 NP OV
+                                        </button>
+                                        <span class="badge badge-pill badge-secondary badgestyle">2 Selected</span>
+                                    </h2>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show pb-1" aria-labelledby="headingOne"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body pb-1">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label class="container-chkbox">12159 MN99201
+                                                    <input type="checkbox" checked>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                    industry.</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label class="container-chkbox">12159 MN99201
+                                                    <input type="checkbox" >
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                    industry.</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label class="container-chkbox">12159 MN99201
+                                                    <input type="checkbox" checked>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                    industry.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2">
+                                <div class="card-header" id="headingTwo" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <h2 class="mb-0 mt-0">
+                                        <button class="btn btn-link collapsed">
+                                            **** 99201 NP OV
+                                        </button>
+                                        <span class="badge badge-pill badge-secondary badgestyle">1 Selected</span>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse pb-1" aria-labelledby="headingTwo"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body pb-1">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label class="container-chkbox">12159 MN99201
+                                                    <input type="checkbox" checked>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                    industry.</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label class="container-chkbox">12159 MN99201
+                                                    <input type="checkbox" >
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                    industry.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
