@@ -36,11 +36,11 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   onClick(user:any) {
     this.doctorInfo.setValue({
-      doctorName: user.doctorName,
-      doctorImage: user.doctorImage,
-      doctorEmail: user.email,
-      doctorPhone: user.phone,
-      roleType:user.roleType
+      doctorName: user ? user.doctorName : '',
+      doctorImage: user ? user.doctorImage : '',
+      doctorEmail: user ? user.email : '',
+      doctorPhone: user ? user.phone : '',
+      roleType: user ? user.roleType : '' 
     });
 
     this.landingPageService.setDoctorInfo('doctorInfo', this.doctorInfo.value);

@@ -1,21 +1,22 @@
 <div class='col-12'>
     <div class="page-title">
-        <div class="float-left">
+        <div class="float-left mt-3">
             <h1 class="title">{{patientName}}</h1>
         </div>
         <div class="clearfix"></div>
-        <div class="col-xs-12">
-            <ul class="row  tile_count">
+        <div class="col-xs-12 mt-3">
+            <ul class="row  tile_count title-count-new pl-2">
                 <li class="col-xl-3 tile_stats_count">
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="{{patientImage}}" class="img-circle profile_img"
-                                alt="" />
+                            <!-- <img src="{{patientImage}}" class="img-circle profile_img"
+                                alt="" /> -->
+                                <img src="assets/images/Dr_Marc_Polimeni.jpg" alt="Loader" class="img-fluid profile-pic-img">
                         </div>
-                        <div class="profile_info">
-                            <span style="font-size: 26px;">{{patientGender}}</span>
-                            <h2 style="margin-top: -10px;">{{patientAge}} years old</h2>
-                            <button kendoButton class="btn btn-warning" (click)="viewDetails()">View History</button>
+                        <div class="profile_info mt-0 profile_info-new">
+                            <span>{{patientGender}}</span>
+                            <h2>{{patientAge}} years old</h2>
+                            <button kendoButton class="pop-upclose-button pl-3 pt-1 pb-1 pr-3" (click)="viewDetails()">View History</button>
                         </div>
                     </div>
                 </li>
@@ -81,23 +82,30 @@
 
                     </div>
                 </li>
-                <li class="col-sm-3 tile_stats_count">
-                    <span class="count_top" style="font-size: 24px;">{{doctorName}}</span>
-                    <p>Change Provider</p>
-                    <button *ngIf="ispatienthisttory" type="button" style="font-size: 24px;padding: 0px 42px;" [disabled]="isPosCheckOut"
+                <li class="col-sm-3 tile_stats_count lastdr-name">
+                    <label class="count_top pt-1 mb-0" style="font-size: 20px;">{{doctorName}}</label>
+                    <p class="mb-0 change-provider">Change Provider</p>
+                    <button *ngIf="ispatienthisttory" type="button" style="font-size: 19px;padding: 0px 55px;" [disabled]="isPosCheckOut"
                         class="btn btn-warning" (click)="saveObservation()">Finish</button> <br><br>
                     <!-- <button type="button" [disabled]="!isPosCheckOut" (click)="goToCheckOut()" class="btn">Back</button> -->
-                    <button  type="button" (click)="goToCheckOut()" class="btn">Back</button>
+                    
                 </li>
+               
             </ul>
+            <!-- <div class="row">
+                <div class="col p-0 mb-3 text-right">
+                    <button  type="button" (click)="goToCheckOut()" class="btn">Back</button>
+                </div>
+               
+            </div> -->
         </div>
         <div style="color:green; text-align: center;">{{message}}</div>
-        <div *ngIf="!isView" class="col-12">
+        <div *ngIf="!isView" class="">
             <div class="tabs">
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs ntab-d mt-2 mb-2">
                     <li>
                         <a href="#cc" class="active" data-toggle="tab">
-                            CC :<br> <span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                            CC:<br> <span class="menu-active"><i class="fa fa-caret-down"></i></span>
                         </a>
                     </li>
                     <li>
@@ -121,8 +129,7 @@
                         </a>
                     </li>
                     <li [ngClass]="{'disabled': !isDoctor}">
-                        <a href="#cpt" data-toggle="tab">
-                            CPT<br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
+                        <a href="#cpt" data-toggle="tab">CPT <br><span class="menu-active"><i class="fa fa-caret-down"></i></span>
                         </a>
                     </li>
                     <li [ngClass]="{'disabled': !isDoctor}">

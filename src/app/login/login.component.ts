@@ -103,9 +103,9 @@ export class LoginComponent implements OnInit {
             this.loginService.setDoctorInformation('useraccess', res);
           })
           this.loginService.setDoctorInformation('doctorInfo', this.doctorInfo.value);
-          //this.router.navigateByUrl('/patient-flow-sheet');
-          this.emailValid = true;
-          this.codeSent = false;
+          this.router.navigateByUrl('/patient-flow-sheet');
+          //this.emailValid = true;
+          //this.codeSent = false;
         } else {
           this.errorMsg = this.errorDesc;
         }
@@ -126,14 +126,13 @@ export class LoginComponent implements OnInit {
     }
     const subscription = this.loginService.validateEmail(this.email)
       .subscribe((res) => {
-        /* if (res.data.Valid) {
+        if (res['data'].Valid) {
           this.errorMsg = '';
           this.router.navigateByUrl('/create-password');
         } else{
           this.errorMsg = 'This Email Id does not exist. Check with admin';
-        } */
-          
-        subscription.unsubscribe();
+        }
+        //subscription.unsubscribe();
       });
   }
 
@@ -161,11 +160,7 @@ export class LoginComponent implements OnInit {
         this.codeSent = true;
         subscription.unsubscribe();
       });
-
-
   }
-
-
 
   // get token(){
   //   let claims: any = this.oauthService.getIdentityClaims();

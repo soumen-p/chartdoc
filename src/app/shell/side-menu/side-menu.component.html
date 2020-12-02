@@ -30,9 +30,9 @@
                 <ul class="sub-menu">
                     <li  *ngFor="let data of submenulistdata(item.menuId)" > 
                         <span >
-                        <a [class]="data.Status==0?'disabled':''" *ngIf="data.queryParamsvalue !='' && data.parentmenuId=='61'?true:false" [routerLink]="[data.submenuRoute]" [queryParams]="{mode:[data.queryParamsvalue]}">{{data.submenu}}</a>
-                        <a  [class]="data.Status==0?'disabled':''" *ngIf="data.queryParamsvalue !='' && data.parentmenuId=='66'?true:false" [routerLink]="[data.submenuRoute]" [queryParams]="{id:[data.queryParamsvalue]}" >{{data.submenu}}</a>
-                        <a  [class]="data.Status==0?'disabled':''" *ngIf="data.queryParamsvalue ==''?true:false"  [routerLink]="[data.submenuRoute]" >{{data.submenu}}</a>
+                        <a [class]="data.Status==0?'disabled1':''" *ngIf="data.queryParamsvalue !='' && data.parentmenuId=='61'?true:false" [routerLink]="[data.submenuRoute]" [queryParams]="{mode:[data.queryParamsvalue]}">{{data.submenu}}</a>
+                        <a  [class]="data.Status==0?'disabled1':''" *ngIf="data.queryParamsvalue !='' && data.parentmenuId=='66'?true:false" [routerLink]="[data.submenuRoute]" [queryParams]="{id:[data.queryParamsvalue]}" >{{data.submenu}}</a>
+                        <a  [class]="data.Status==0?'disabled1':''" *ngIf="data.queryParamsvalue ==''?true:false"  [routerLink]="[data.submenuRoute]" >{{data.submenu}}</a>
                     </span>
                     </li>
                 </ul>

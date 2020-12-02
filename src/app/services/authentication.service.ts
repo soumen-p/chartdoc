@@ -3,9 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, interval } from 'rxjs';
 import { SharedService } from '../core/shared.service';
 import { environment } from 'src/environments/environment';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 const LOGIN_API = "api/chartdoc/UserLogin";
-const RESET_PASSWORD = "api/ChartDoc/ValidateUserEmail";
+const VALIDATE_USER = "api/ChartDoc/ValidateUserEmail";
+const CHANGE_PASSWORD = "api/ChartDoc/ChangePassword";
+
 
 const BASE_URL = "api/chartdoc/getloginstatus";
 const MENU = "api/chartdoc/GetMenudata";
@@ -39,12 +42,22 @@ export class AuthenticationService {
     this.sharedService.setLocalItem(key, val);
   }
 
-  public resetPassword(userName: string):Observable<any>{    
+  public resetPassword(user: string):Observable<any>{    
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify({
-      "email": userName
+      "email": user
     });
-    return this.http.post(environment.baseUrl + RESET_PASSWORD, body, {'headers':headers})
+    return this.http.post(environment.baseUrl + VALIDATE_USER, body, {'headers':headers})
+  }
+
+  public changePassword(user):Observable<any>{    
+    let {email, password} = user;
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify({
+      email,
+      password
+    });
+    return this.http.post(environment.baseUrl + CHANGE_PASSWORD, body, {'headers':headers})
   }
   
   public validateEmail(email: string){ 
@@ -53,7 +66,7 @@ export class AuthenticationService {
     const body=JSON.stringify({
       "email": email
     });
-    return this.http.post(environment.baseUrl + RESET_PASSWORD, body, {'headers':headers})
+    return this.http.post(environment.baseUrl + VALIDATE_USER, body, {'headers':headers})
   }
   
   public validateCode(finalCode: string){

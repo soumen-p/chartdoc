@@ -8246,7 +8246,7 @@ p.form-control-static {
     content: "";
     position: absolute;
     left: 0;
-    height: 85px;
+    height: 105px;
     border-left: 1px solid #ADB2B5;
     margin-top: 0px;
 }
@@ -8326,7 +8326,7 @@ p.form-control-static {
     font-weight: bold;
 }
 .tile_count .tile_stats_count .count {
-font-size: 25px;
+font-size: 22px;
 line-height: 40px;
 font-weight: 540;
 }
@@ -9506,3 +9506,267 @@ td.fc-widget-content {
 .showing-result{
     font-size: 18px;
 }
+.title-count-new .tile_stats_count{
+    background-color: transparent;
+}
+.ntab-d{
+    display: flex;
+}
+.ntab-d li{
+    flex: 1;
+}
+.ntab-d li a{
+    font-weight: 600;
+    font-size: 17px;
+    padding:8px 25px 14px 25px;
+}
+.ntab-d li .active{
+    position: relative;
+}
+.ntab-d li .active:before{
+    content: "\f0d7";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 25px;
+    font-size: 25px;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    color:#CDB2D1;
+}
+.profile-pic-img{
+    width:100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.profile_info-new span{
+    font-size: 17px;
+}
+.profile_info-new h2{
+    font-size: 20px;
+}
+.lastdr-name{
+    background-color:#1e1e1e !important;
+}
+.change-provider{
+    font-size: 13px;
+    line-height: 25px;
+}
+.tabtitle-open{
+    font-size: 23px;
+    padding-bottom: 0 !important;
+}
+/* The container */
+.container-chkbox {
+    display: block;
+   position: relative;
+   padding-left: 27px;
+   margin-bottom: 10px;
+   cursor: pointer;
+   font-size: 17px;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   color: #fff;
+}
+
+/* Hide the browser's default checkbox */
+.container-chkbox input {
+ position: absolute;
+ opacity: 0;
+ cursor: pointer;
+ height: 0;
+ width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+ position: absolute;
+ top: 0;
+ left: 0;
+ height: 17px;
+ width: 17px;
+ background-color: #575859;
+ border:1px solid #1b6c7d;
+}
+
+/* On mouse-over, add a grey background color */
+.container-chkbox:hover input ~ .checkmark {
+ background-color: #575859;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-chkbox input:checked ~ .checkmark {
+ background-color: #575859;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+ content: "";
+ position: absolute;
+ display: none;
+}
+
+/* Show the checkmark when checked */
+.container-chkbox input:checked ~ .checkmark:after {
+ display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-chkbox .checkmark:after {
+    left: 5px;
+    top: 0px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.li-type-width{
+    display: inline-block;
+    vertical-align: top;
+    width:50%;
+}
+.rounded-accordian .card-body{
+    background-color: #272726;
+}
+.rounded-accordian .card{
+    border:none;
+    background-color: transparent;
+}
+.rounded-accordian .card-header{
+    background-color: #686868;
+    border-radius: 50px;
+    padding:0 10px;
+    cursor: pointer;
+}
+.rounded-accordian .card-header h2{
+    line-height: 20px;
+}
+.rounded-accordian .card-header button {
+    color: #d8d5d5 !important;
+    font-size: 17px;
+    padding: 0 10px;
+    font-weight: 400;
+    text-decoration: none !important;
+}
+.rounded-accordian .card-header[aria-expanded="true"]{
+    background-color: #547399;
+  }
+.badgestyle{
+    float: right;
+    margin-top: 4px;
+    font-weight: 600;
+}
+.ntab-d.nav-tabs > li > a:hover, .nav-tabs > li > a:focus{
+    border-color:none ;
+    background-color: transparent;
+}
+.controls::-webkit-scrollbar {
+    width: 10px;
+  }
+  .controls::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  .controls::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  .controls::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+
+
+/* from Ketan */
+.fc table {
+    width: 100%;
+    box-sizing: border-box;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 1em;
+}
+.fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead{
+    border: 0;
+}
+.fc th {
+    text-align: center;
+    padding: 5px;
+    font-weight: 500;
+    font-size: 20px;
+    color: #000;
+    background: green;
+    border-radius: 15px 15px 0 0;
+    border: 0;
+}
+.fc-widget-header {
+    background-color: transparent;
+}
+
+td.fc-widget-content:first-child {
+    background-color: #292929;
+    border: 0;
+    padding: 0;
+    width: 25%;
+}
+td.fc-widget-content {
+    background: #292929;
+    border: 0;
+    border-right: 5px solid #090909;
+    opacity: 0.8;
+}
+.fc-time-grid table {
+    border: 0 hidden transparent;
+}
+.fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-popover .fc-header {
+    background: transparent;
+}
+
+th.fc-resource-cell[data-resource-id="1"] {
+    background: #99c455;
+       border-right: 5px solid #090909;
+}
+th.fc-resource-cell[data-resource-id="2"] {
+    background: #f2cb5b;
+       border-right: 5px solid #090909;
+}
+th.fc-resource-cell[data-resource-id="3"] {
+    background: #be95cc;
+       border-right: 5px solid #090909;
+}
+th.fc-resource-cell[data-resource-id="4"] {
+    background: #c0dfd8;
+}
+
+/*--new added---*/
+.fc-event-container a.fc-draggable{
+    top: 0px;
+    bottom: 0;
+    z-index: 1;
+    left: 0%;
+    right: 0%;
+    display: block;
+    height: min-content;
+    padding: 10px;
+    background: transparent;
+    border-radius: 6px;
+}
+
+.fc-time-grid-event.fc-short .fc-title {
+    font-size: 1.2em;
+    text-transform: capitalize;
+}
+.new{
+    background: #c6c6c6;
+    padding: 10px;
+    border-radius: 10px;
+    color: #000;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.fc-content{
+    display: flex;
+}
+
