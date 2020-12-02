@@ -9234,9 +9234,10 @@ td.fc-widget-content {
     font-size: 32px;
 }
 .fc-toolbar h2 {
-    font-size: 1.5em;
+    font-size: 28px;
     margin: 0 0 0 35px;
     color: #8a8b86;
+    font-weight: 600;
 }
 .fc-today-button{
     background:#313131;
@@ -9245,14 +9246,15 @@ td.fc-widget-content {
 }
 .fc-button {
     border: 1px solid #535f5c !important;
+    background: #313131;
 }
 .fc-prev-button{
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 .fc-next-button{
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 .fc-time{
     border-width:0 !important;
@@ -9267,6 +9269,21 @@ td.fc-widget-content {
     color: #fff !important;
     font-style: normal !important;
     text-transform: uppercase;
+    font-size: 14px;
+}
+ngb-datepicker{
+    border:none !important;
+    display: block;
+}
+[ngbDatepickerDayView]{
+    color:#fff;
+}
+[ngbDatepickerDayView]{
+    border-radius: 50% !important;
+}
+.ngb-dp-day, .ngb-dp-week-number, .ngb-dp-weekday {
+    width: 2.3rem !important;
+    height: 2.3rem !important;
 }
 .btn-light.ng-star-inserted.bg-primary.text-white{
     background: #c3d888 !important;
@@ -9680,3 +9697,4 @@ td.fc-widget-content {
   .controls::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+ 
