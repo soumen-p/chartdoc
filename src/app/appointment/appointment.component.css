@@ -1,6 +1,10 @@
 .fc-time-grid .fc-slats td {
     height: 3.5em;
 }
+.fc-event{
+    border: 2px solid #F00;
+}
+
 .textcolor{
     color:black
 }
