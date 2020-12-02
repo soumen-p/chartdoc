@@ -8,6 +8,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 import { DatePipe } from '@angular/common';
 import { AppointmentService } from '../services/appointment.service';
 import { PatientSearchService } from '../services/patient-search.service';
+import { PatientInsuranceinfoService }  from '../services/patient-insuranceinfo.service';
 @Component({
   selector: 'app-book-appointment',
   templateUrl: './book-appointment.component.html',
@@ -43,6 +44,13 @@ export class BookAppointmentComponent implements OnInit {
     gender: '',
     address: ''
   };
+  isActiveInsurance: boolean;
+  validatedInsurance: boolean;
+  hasInsuranceData: boolean;
+  insuranceProvidor: String;
+  policyHolder: String;
+  coPAyAmount: String;
+  expiryDate: String;
   pipe = new DatePipe('en-US'); // Use your own locale
   reasons = [];
   appointmentReasons = [];
@@ -90,6 +98,7 @@ export class BookAppointmentComponent implements OnInit {
     //dobminDate = new Date(String(this.year - 100 + "-" + this.month + "-" + this.day));
     dobminDate = String(this.year - 100 + "-" + this.month + "-" + this.day);
   constructor(private bookAppointmentService: BookAppointmentService, private patientSearchService: PatientSearchService,
+	private patientInsuranceinfoService: PatientInsuranceinfoService,
     private avRoute: ActivatedRoute,
     private appointmentService: AppointmentService, private router: Router,
     public toastr: ToastrManager
@@ -97,7 +106,13 @@ export class BookAppointmentComponent implements OnInit {
     this.formData = new FormData();
     const current = new Date();
     this.minDate = current;
-
+	this.isActiveInsurance=false;
+	this.validatedInsurance=false;
+	this.hasInsuranceData=false;
+	this.insuranceProvidor="";
+	this.policyHolder="";
+	this.coPAyAmount="";
+	this.expiryDate="";
     
    
 
@@ -670,6 +685,42 @@ export class BookAppointmentComponent implements OnInit {
       email:""
     })
   }
+  
+  validateInsurance() {
+	  const subscription = this.patientInsuranceinfoService.validateInsurance(this.patientId)
+      .subscribe((res) => {
+			this.isActiveInsurance = res.IsActiveInsurance;
+			this.validatedInsurance = true;
+			this.hasInsuranceData = res.HasInsuranceData;
+			if(this.hasInsuranceData && this.isActiveInsurance)
+			{
+				this.coPAyAmount=res.data.CoPAyAmount;
+				this.insuranceProvidor=res.data.InsuranceProvidor;
+				this.policyHolder=res.data.PolicyHolder;
+			}
+			if(this.hasInsuranceData && !this.isActiveInsurance)
+			{
+				this.insuranceProvidor=res.data.InsuranceProvidor;
+				this.policyHolder=res.data.PolicyHolder;
+				this.expiryDate=res.data.ExpirationDate;
+			}
+			
+        subscription.unsubscribe();
+      });
+	  
+  }
+  
+  validateInsclose() {
+	  console.log("inside close");
+	  this.isActiveInsurance=false;
+	this.validatedInsurance=false;
+	this.hasInsuranceData=false;
+	this.insuranceProvidor="";
+	this.policyHolder="";
+	this.coPAyAmount="";
+	this.expiryDate="";
+  }
+	  
   public changedtotime(): void {
     if (this.appointmentFormGroup.controls['toTime'].value == null) {
     } else {

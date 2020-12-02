@@ -161,7 +161,7 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <!-- <button type="button" class="btn btn-primary" [disabled]="(isflowsheet==1 )?false:true"   style="margin-right: 10px;"  >Validate Insurance</button>   -->
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vlinsurance" style="margin-right: 10px;"  >Validate Insurance</button>  
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vlinsurance" style="margin-right: 10px;"  (click) = "validateInsurance()">Validate Insurance</button>  
                                         </div>
                                         <div class="col-sm-3">
                                             <button type="button" class="btn btn-primary"  [disabled]="(isflowsheet==1 )?false:true"  style="margin-right: 10px;"  (click)="acceptcopay()">Accept Co Pay</button>
@@ -315,44 +315,56 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div> -->
+		
+		<div *ngIf="!validatedInsurance">
         <div class="modal-body border-0 p-0 text-center mb-4 ">
           <h2 class="validate-modal-header">One moment as we validate insurance...</h2>
           <img src="./assets/images/loader.gif" alt="Loader" class="img-fluid">
         </div>
-        <div class="modal-body border-0 p-0 text-center mb-4 d-none">
+		</div>
+		<div *ngIf="validatedInsurance && !isActiveInsurance && hasInsuranceData">
+        <div class="modal-body border-0 p-0 text-center mb-4">
             <h2 class="validate-modal-header">This insurance is not active</h2>
            <div class="row mt-3">
                <div class="col-md-4">
                 <img src="./assets/images/close.png" alt="Loader" class="img-fluid w-100">
                </div>
                <div class="col-md-8 mt-4">
-               <p class="modal-in-p">Insurance Provider:<span>Cigna</span></p>
-               <p class="modal-in-p">Policy Holder:<span>Craig Marcus</span></p>
-               <p class="modal-in-p">Expired<span>October 31,2020</span></p>
+               <p class="modal-in-p">Insurance Provider:<span>{{insuranceProvidor}}</span></p>
+               <p class="modal-in-p">Policy Holder:<span>{{policyHolder}}</span></p>
+               <p class="modal-in-p">Expired<span>{{expiryDate}}</span></p>
                </div>
            </div>
           </div>
-          <div class="modal-body border-0 p-0 text-center mb-4 d-none">
+		  
+		  </div>
+		  
+		  <div *ngIf="validatedInsurance && !hasInsuranceData">
+          <div class="modal-body border-0 p-0 text-center mb-4 ">
             <h2 class="validate-modal-header">There is no record of this insurance.</h2>
             <div class="col-md-4 offset-md-4 mt-4 mb-4">
                 <img src="./assets/images/close.png" alt="Loader" class="img-fluid w-100">
             </div>
           </div>
-          <div class="modal-body border-0 p-0 text-center mb-4 d-none">
+		  </div>
+		  
+		  <div *ngIf="validatedInsurance && isActiveInsurance && hasInsuranceData">
+          <div class="modal-body border-0 p-0 text-center mb-4 ">
             <h2 class="validate-modal-header">This insurance is Currently Valid.</h2>
            <div class="row mt-3">
                <div class="col-md-4">
                 <img src="./assets/images/valid.png" alt="Loader" class="img-fluid w-100">
                </div>
                <div class="col-md-8 mt-4">
-               <p class="modal-in-p">Insurance Provider:<span>Cigna</span></p>
-               <p class="modal-in-p">Policy Holder:<span>Craig Marcus</span></p>
-               <p class="modal-in-p">Copay<span>$30</span></p>
+               <p class="modal-in-p">Insurance Provider:<span>{{insuranceProvidor}}</span></p>
+               <p class="modal-in-p">Policy Holder:<span>{{policyHolder}}</span></p>
+               <p class="modal-in-p">Copay<span>{{coPAyAmount}}</span></p>
                </div>
            </div>
           </div>
+		  </div>
         <div class="text-center">
-          <button type="button" class="pop-upclose-button" data-dismiss="modal">Close</button>
+          <button type="button" class="pop-upclose-button" data-dismiss="modal" (click)="validateInsclose()">Close</button>
         </div>
       </div>
     </div>

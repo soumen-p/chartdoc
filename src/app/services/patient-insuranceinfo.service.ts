@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 
 
 const baseEndPoint = 'api/ChartDoc/GetInsurance';
+const validateIns= 'api/ChartDoc/ValidateInsurance';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,10 @@ export class PatientInsuranceinfoService {
   }
   getPatientDetails(patientInfo: string) {
     return this.sharedService.getLocalItem(patientInfo);
+  }
+  
+  validateInsurance(patientId: string): Observable<any> {
+    patientId = btoa(patientId);
+    return this.httpClient.get(environment.baseUrl + validateIns + `/${patientId}`);
   }
 }
