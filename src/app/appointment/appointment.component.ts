@@ -213,6 +213,7 @@ export class AppointmentComponent implements OnInit {
                 const strdate1 = yyyy + '-' + mm + '-' + dd;
 
                 res.forEach((element: any) => {
+                    console.log("colorCode ", element.schduleAppoinment)
                     if (element.schduleAppoinment.doctorId != '') {
                         const AppointmentId = String(element.schduleAppoinment.appointmentId) != '0' ? '/' +
                             String(element.schduleAppoinment.appointmentId) : '';

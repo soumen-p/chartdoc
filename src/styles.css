@@ -154,6 +154,11 @@ body.boxed {
 .req-red {
 	color: #ff0000;
 }
+
+.req-green {
+	color: #00ff00;
+}
+
 body.boxed .page-topbar {
     max-width: 90%;
     width: 90%;
@@ -9204,6 +9209,9 @@ ul.list-unstyled.notification-widget::-webkit-scrollbar {
     width:73px;
     height:73px;
 }
+.views-text{
+    font-size: 20px;
+}
 .loginpage form .input, .loginpage input[type=text], .loginpage input[type=password] {
     box-shadow: inset 0 4px 6px rgba(0,0,0,0.55);
     background: #fff !important;
@@ -9254,17 +9262,62 @@ td.fc-widget-content {
     font-size: 32px;
 }
 .fc-toolbar h2 {
-    font-size: 1.5em;
+    font-size: 28px;
     margin: 0 0 0 35px;
     color: #8a8b86;
+    font-weight: 600;
 }
 .fc-today-button{
     background:#313131;
-    border:1px solid #4a5652;
-    margin: 0 3px;
+    margin: 0 3px !important;
+    margin-left: 2px !important;
+}
+.fc-button {
+    border: 1px solid #535f5c !important;
+    background: #313131;
+}
+.fc-prev-button{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.fc-next-button{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 .fc-time{
     border-width:0 !important;
+}
+.ngb-dp-header{
+    background-color: transparent !important;
+}
+.ngb-dp-weekdays{
+    background-color: transparent !important;
+}
+.ngb-dp-weekday{
+    color: #fff !important;
+    font-style: normal !important;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+ngb-datepicker{
+    border:none !important;
+    display: block;
+}
+[ngbDatepickerDayView]{
+    color:#fff;
+}
+[ngbDatepickerDayView]{
+    border-radius: 50% !important;
+    width: 1.8rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+}
+[ngbDatepickerDayView]:hover{
+    background-color: #C1E0D9 !important;
+}
+.ngb-dp-day, .ngb-dp-week-number, .ngb-dp-weekday {
+    width: 2.3rem !important;
+    height: 1.6rem !important;
 }
 .btn-light.ng-star-inserted.bg-primary.text-white{
     background: #c3d888 !important;
@@ -9276,10 +9329,10 @@ td.fc-widget-content {
 .custom-checkbox {
     display: block;
     position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    padding-left: 27px;
+    margin-bottom:8px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -9296,47 +9349,47 @@ td.fc-widget-content {
   }
   
   /* Create a custom checkbox */
-  .checkmark {
+  .checkmark-chk {
     position: absolute;
     top: 0;
     left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: #eee;
+    height: 16px;
+    width: 16px;
+    background-image: linear-gradient(to bottom right, #9ba9b9, #b3c9e4);
+    border-radius: 4px;
   }
   
   /* On mouse-over, add a grey background color */
-  .custom-checkbox:hover input ~ .checkmark {
+  .custom-checkbox:hover input ~ .checkmark-chk {
     background-color: #ccc;
   }
   
   /* When the checkbox is checked, add a blue background */
-  .custom-checkbox input:checked ~ .checkmark {
+  .custom-checkbox input:checked ~ .checkmark-chk {
     background-color: #2196F3;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
+  .checkmark-chk:after {
     content: "";
     position: absolute;
     display: none;
   }
   
   /* Show the checkmark when checked */
-  .custom-checkbox input:checked ~ .checkmark:after {
+  .custom-checkbox input:checked ~ .checkmark-chk:after {
     display: block;
   }
   
   /* Style the checkmark/indicator */
-  .custom-checkbox .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
+  .custom-checkbox .checkmark-chk:after {
+    left: 6px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid #253d71;
+    border-width: 0 2px 2px 0;
     -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
 
@@ -9346,7 +9399,7 @@ td.fc-widget-content {
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 16px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -9365,10 +9418,11 @@ td.fc-widget-content {
     position: absolute;
     top: 0;
     left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
+    height: 23px;
+    width: 23px;
+    background-color: transparent;
     border-radius: 50%;
+    border:2px solid #516692
   }
   
   /* On mouse-over, add a grey background color */
@@ -9378,7 +9432,8 @@ td.fc-widget-content {
   
   /* When the radio button is checked, add a blue background */
   .custom-radio input:checked ~ .checkmark-radio {
-    background-color: #2196F3;
+    /* background-color: #2196F3; */
+    background-image: linear-gradient(to bottom right, #ccc, #888);
   }
   
   /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -9394,14 +9449,14 @@ td.fc-widget-content {
   }
   
   /* Style the indicator (dot/circle) */
-  .custom-radio .checkmark-radio:after {
+  /* .custom-radio .checkmark-radio:after {
        top: 9px;
       left: 9px;
       width: 8px;
       height: 8px;
       border-radius: 50%;
       background: white;
-  }
+  } */
   .pop-upclose-button {
     background-color: #bbdc82;
     color: #333;
@@ -9676,10 +9731,64 @@ td.fc-widget-content {
   .controls::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+.scroll-style::-webkit-scrollbar {
+    width: 10px;
+  }
+  .scroll-style::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  .scroll-style::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  .scroll-style::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  .drlist{
+      max-height: 150px;
+      overflow-x: hidden;
+      overflow-y: auto;
+  }
+  a.fc-time-grid-event {
+    border-width: 2px !important;
+    background: rgba(0,0,0,0.2) !important;
+    border-radius: 10px !important;
+    padding-left: 5px;
+}
+.fc-time-grid-event:before {
+    content: "\f142";
+    font-family: FontAwesome;
+    position: absolute;
+    z-index: 99;
+    right: 4px;
+    top: 0px;
+    font-size: 15px;
+    color:#808080;
+}
+.fc-time-grid-event:after {
+    content: "\f142";
+    font-family: FontAwesome;
+    position: absolute;
+    z-index: 99;
+    right: 10px;
+    top: 0;
+    font-size: 15px;
+    color:#808080;
+}
+ngb-datepicker-navigation-select>.custom-select {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 0 .5rem;
+    font-size: .875rem;
+    height: 1.85rem;
+    margin: 0 7px !important;
+    padding: 0 10px !important;
+}
+.ngb-dp-arrow-btn{
+    color: #fff !important;
+}
 
 
-
-/* from Ketan */
+/* from Ketan 
 .fc table {
     width: 100%;
     box-sizing: border-box;
@@ -9726,7 +9835,7 @@ td.fc-widget-content {
 
 th.fc-resource-cell[data-resource-id="1"] {
     background: #99c455;
-       border-right: 5px solid #090909;
+    border-right: 5px solid #090909;
 }
 th.fc-resource-cell[data-resource-id="2"] {
     background: #f2cb5b;
@@ -9734,16 +9843,14 @@ th.fc-resource-cell[data-resource-id="2"] {
 }
 th.fc-resource-cell[data-resource-id="3"] {
     background: #be95cc;
-       border-right: 5px solid #090909;
+    border-right: 5px solid #090909;
 }
 th.fc-resource-cell[data-resource-id="4"] {
     background: #c0dfd8;
 }
 
-/*--new added---*/
+/*--new added---*
 .fc-event-container a.fc-draggable{
-    top: 0px;
-    bottom: 0;
     z-index: 1;
     left: 0%;
     right: 0%;
@@ -9757,6 +9864,8 @@ th.fc-resource-cell[data-resource-id="4"] {
 .fc-time-grid-event.fc-short .fc-title {
     font-size: 1.2em;
     text-transform: capitalize;
+    font-weight: 600;
+    color:#fff;
 }
 .new{
     background: #c6c6c6;
@@ -9770,3 +9879,59 @@ th.fc-resource-cell[data-resource-id="4"] {
     display: flex;
 }
 
+.fc-content-col{
+	display: flex;
+}
+.room{
+    background: #585857;
+    color: #fff;
+    border-radius: 5px;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    padding: 7px;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: normal;
+}
+
+.fc-event-container{
+	width: 100%;
+}
+
+.dots{
+display: inline;
+    width: 10%;
+}
+.dots ul {
+    text-align: right;
+    margin: 0;
+    line-height: 0;
+    height: 9.5px;
+}
+.dots ul li {
+    height: 5px;
+    width: 5px;
+    background-color: #666665;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 3px 4px 0px 0px;
+    padding: 0.3px;
+}
+.fc-event{
+	border: 1px solid transparent;
+}
+
+.green-border{
+	border:1px solid #99c455;
+}
+.yellow-border{
+	border:1px solid #f2cb5b;
+}
+.purple-border{
+	border:1px solid #be95cc;
+}
+.skyblue-border{
+	border:1px solid #c0dfd8;
+}
+
+ */

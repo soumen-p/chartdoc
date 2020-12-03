@@ -103,9 +103,9 @@ export class LoginComponent implements OnInit {
             this.loginService.setDoctorInformation('useraccess', res);
           })
           this.loginService.setDoctorInformation('doctorInfo', this.doctorInfo.value);
-          this.router.navigateByUrl('/patient-flow-sheet');
-          //this.emailValid = true;
-          //this.codeSent = false;
+          //this.router.navigateByUrl('/patient-flow-sheet');
+          this.emailValid = true;
+          this.codeSent = false;
         } else {
           this.errorMsg = this.errorDesc;
         }
@@ -142,7 +142,7 @@ export class LoginComponent implements OnInit {
       return
     }
     this.finalCode = this.code1.concat(this.code2).concat(this.code3).concat(this.code4).concat(this.code5).concat(this.code6);
-    alert(this.finalCode);
+    //alert(this.finalCode);
     const subscription = this.loginService.validateCode(this.finalCode)
       .subscribe((res) => {
         this.validCode = true;
