@@ -1381,7 +1381,7 @@ border: 1px solid #cdb2d1;
 	width: 68px !important;
 	height: 68px !important;
 	padding: 0 !important;
-	margin: 0 3px !important;
+	margin: 1px 3px !important;
 	border-radius: 0 !important;
 	font-family: 'Open Sans', sans-serif !important;
 	color: #8A8B86 !important;
@@ -9086,6 +9086,7 @@ body {
     font-size: 27px;
     text-align: center;
     font-weight: 600;
+    margin-top: 15px;
 }
 .notification-widget li .name {
     color: #D5D6D1;  
@@ -9221,8 +9222,8 @@ ul.list-unstyled.notification-widget::-webkit-scrollbar {
 .status-available-fp{
     font-family: 'Open Sans', sans-serif;
     color: #8A8B86;
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 22px;
+    line-height: 26px;
     text-align: center;
     font-weight: 400;
     width: 430px;
@@ -9786,7 +9787,13 @@ ngb-datepicker-navigation-select>.custom-select {
 .ngb-dp-arrow-btn{
     color: #fff !important;
 }
-
+.mark-chkbox {
+    font-size: 19px !important;
+    color: #8a8b86 !important;
+}
+ .otp-text {
+    border-radius: 8px !important;
+}
 
 /* from Ketan 
 .fc table {
