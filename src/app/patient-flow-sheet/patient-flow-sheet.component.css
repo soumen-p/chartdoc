@@ -27,6 +27,14 @@
 
 /* css from Ketan -- below*/
 
+.req-blue {
+    color:blue;
+}
+
+.req-green {
+    color:purple;
+}
+
  .fc table {
     width: 100%;
     box-sizing: border-box;
@@ -35,6 +43,7 @@
     border-spacing: 0;
     font-size: 1em;
 }
+
 .fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead{
     border: 0;
 }
