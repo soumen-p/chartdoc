@@ -44,45 +44,26 @@
                             <div class="filter-pannel">
                                 <h4 class="views-text">Views:</h4>
                                 <label class="custom-radio">All Doctors
-                                    <input type="radio" checked="checked" name="radio">
+                                    <input type="radio" checked="checked" name="radio" (change)= "checkAll($event)">
                                     <span class="checkmark-radio"></span>
                                   </label>
-                                  <label class="custom-radio">Select Doctors
-                                    <input type="radio" name="radio">
+								  <label class="custom-radio">Select Doctors
+                                    <input type="radio" name="radio" (change)= "checkSelect($event)">
                                     <span class="checkmark-radio"></span>
                                   </label>
-                                  <div class="pl-3 drlist scroll-style">
-                                    <label class="custom-checkbox">Dr. Polimeni
-                                        <input type="checkbox">
-                                        <span class="checkmark-chk"></span>
-                                      </label>
-                                      <label class="custom-checkbox">Dr. Gupta
-                                        <input type="checkbox">
-                                        <span class="checkmark-chk"></span>
-                                      </label>
-                                      <label class="custom-checkbox">Dr. Wells
-                                        <input type="checkbox">
-                                        <span class="checkmark-chk"></span>
-                                      </label>
-                                      <label class="custom-checkbox">Dr. Weheller
-                                        <input type="checkbox">
-                                        <span class="checkmark-chk"></span>
-                                      </label>
-                                      <label class="custom-checkbox">Dr. Polimeni
-                                        <input type="checkbox">
-                                        <span class="checkmark-chk"></span>
-                                      </label>
-                                      <label class="custom-checkbox">Dr. Poantera
-                                        <input type="checkbox">
-                                        <span class="checkmark-chk"></span>
-                                      </label>
-                                      <label class="custom-checkbox">Dr. Rosendrof
-                                        <input type="checkbox">
-                                        <span class="checkmark-chk"></span>
-                                      </label>
-                                      
+								  <div *ngIf="selecteddoctors" class="pl-3 drlist scroll-style">
+								  
+								  <form>
+									<label class="custom-checkbox" *ngFor="let doctor of doctorsData">
+									{{doctor.title}}
+									<input #checkboxes type="checkbox" value="{{doctor.id}}" (change)= "checkDoctor($event)" >
+									<span class="checkmark-chk"></span>
+									</label>
+									</form>
                                   </div>
-                               
+								  <div class="login-button-div" *ngIf="selecteddoctors">
+                               <input class="btn btn-accent signinbutton" type="submit" value="Apply" (click)="selectDoctorapply()" />
+							   </div>
                             </div>
                         </div>
                         <div class="col-9 col-lg-9">
@@ -94,7 +75,7 @@
                                         center: 'title',
                                         left: ''
                                       }" [defaultDate]="defaultDate" minTime="08:00:00" maxTime="13:15:00"
-                                    slotDuration="00:15:00" slotLabelInterval="00:15" [resources]="calendarreSources"
+                                    slotDuration="00:15:00" slotLabelInterval="00:15" [resources]="(doctorsRes1.length>0 )? doctorsRes1:doctorsData"
                                     [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents"
                                     (eventClick)="rowclick($event)" (eventDrop)="eventDrop($event)" [selectable]="selectable"
                                     (drop)="drop($event)"(select) ="select($event)"></full-calendar>

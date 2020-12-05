@@ -112,6 +112,10 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  devSkip(){
+    this.router.navigateByUrl('/patient-flow-sheet');
+  }
+
   addUseremail() {
     if (this.email === undefined || this.email.trim() === '') {
       this.errorMsg = 'Enter an email id. Email field empty';
@@ -134,6 +138,18 @@ export class LoginComponent implements OnInit {
         }
         //subscription.unsubscribe();
       });
+  }
+  
+  keytab(event,count){
+	  let nextInput=null;
+	  if(event.keyCode>=97 && event.keyCode<=105 && count!=6)
+     nextInput = event.srcElement.nextElementSibling;
+	else if(event.keyCode==8)
+		nextInput = event.srcElement.previousSibling;
+	  if(nextInput == null)
+        return;
+    else
+        nextInput.focus();
   }
 
   validateCode() {

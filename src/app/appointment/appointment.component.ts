@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../models/user.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder,FormArray,FormControl,ValidatorFn,FormsModule } from '@angular/forms';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -19,6 +19,7 @@ import { preserveWhitespacesDefault } from '@angular/compiler';
     styleUrls: ['./appointment.component.css']
 })
 export class AppointmentComponent implements OnInit {
+	@ViewChildren("checkboxes") checkboxes: QueryList<ElementRef>;
     constructor(private router: Router,
         private loginService: AuthenticationService,
         private formBuilder: FormBuilder,
@@ -31,6 +32,8 @@ export class AppointmentComponent implements OnInit {
             month: current.getMonth() + 1,
             day: current.getDate()
         };
+		this.alldoctors=false;
+		this.selecteddoctors=false;
         const today = new Date();
         const dd = String(today.getDate()).padStart(2, '0');
         const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
@@ -50,7 +53,11 @@ export class AppointmentComponent implements OnInit {
     password: string;
     errorCode: string;
     errorDesc: string;
-    doctorInfo: FormGroup;
+	doctorsData=[];
+  doctorsRes=[];
+  doctorsRes1=[];
+  alldoctors: boolean;
+  selecteddoctors: boolean;
     defaultDate: any;
     @ViewChild(FullCalendarComponent, { static: false }) calendarComponent: any; // the #calendar in the template
     @ViewChild('external', { static: false }) external: ElementRef;
@@ -60,7 +67,6 @@ export class AppointmentComponent implements OnInit {
     calendarWeekends = true;
     calendarEvents: EventInput[] = [];
     minDate = undefined;
-    calendarreSources: EventInput[] = [];
     clickCount = 0;
     singleClickTimer: any;
     // tslint:disable-next-line: use-lifecycle-interface
@@ -100,6 +106,56 @@ export class AppointmentComponent implements OnInit {
     ngOnDestroy() {
         // document.body.className = "sidebar-collapse";
     }
+	uncheckAll() {
+    this.checkboxes.forEach((element) => {
+      element.nativeElement.checked = false;
+    });
+  }
+	checkAll(event: any){
+   this.alldoctors=true;
+   this.selecteddoctors=false;
+   this.doctorsRes=this.doctorsData;
+   this.uncheckAll();
+}
+checkSelect(event: any){
+   this.alldoctors=false;
+   this.selecteddoctors=true;
+   this.doctorsRes=[];
+   this.doctorsRes1=[];
+   this.uncheckAll();
+}
+
+calendarvis() {
+	this.calendarVisible=true;
+}
+
+selectDoctorapply(){
+	this.calendarVisible=false;
+	this.doctorsRes1=this.doctorsRes;
+	this.doctorsRes=[];
+	this.calendarvis();
+	this.uncheckAll();
+}
+
+checkDoctor(event: any) {
+	function match(element, index, array) {		
+	return (Number(element.id) == Number(event.target.value)); 
+	}
+	function unmatch(element, index, array) { 
+	return (Number(element.id) != Number(event.target.value)); 
+	}
+	if(this.doctorsRes.length>0 && this.doctorsRes.filter(match).length>0)
+		this.doctorsRes=this.doctorsRes.filter(unmatch);
+	else if(this.doctorsRes.length>0)
+	{
+		let tempdata=this.doctorsRes;
+		tempdata.push(this.doctorsData.filter(match)[0]);
+		this.doctorsRes=tempdata;
+	}
+	else
+		this.doctorsRes=this.doctorsData.filter(match);
+}
+
     rowclick(arg: any) {
         this.clickCount++;
         const self = this;
@@ -184,6 +240,8 @@ export class AppointmentComponent implements OnInit {
         this.calendarComponent.calendar.gotoDate(this.defaultDate);
         this.getDoctorList(strdate);
         this.getAppointment(strdate);
+		this.doctorsRes=[];
+		this.uncheckAll();
     }
     getDoctorList(strdate: any) {
         this.appointmentService.getDoctorList(strdate)
@@ -194,7 +252,7 @@ export class AppointmentComponent implements OnInit {
                 });
                 var doctorInfo= this.appointmentService.getBookingInfo("doctorInfo");
                 //this.calendarreSources = tempdata.filter((x:any)=>x.id==doctorInfo.doctorId);
-                this.calendarreSources = tempdata;
+				this.doctorsData = tempdata;
             },
                 err => {
                    

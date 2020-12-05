@@ -26,101 +26,13 @@
 }
 
 /* css from Ketan -- below*/
-
+/* 
 .req-blue {
     color:blue;
 }
 
 .req-green {
-    color:purple;
-}
+    color:cyan;
+} */
 
- .fc table {
-    width: 100%;
-    box-sizing: border-box;
-    table-layout: fixed;
-    border-collapse: collapse;
-    border-spacing: 0;
-    font-size: 1em;
-}
 
-.fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead{
-    border: 0;
-}
-.fc th {
-    text-align: center;
-    padding: 5px;
-    font-weight: 500;
-    font-size: 20px;
-    color: #000;
-    background: green;
-    border-radius: 15px 15px 0 0;
-    border: 0;
-}
-.fc-widget-header {
-    background-color: transparent;
-}
-
-td.fc-widget-content:first-child {
-    background-color: #292929;
-    border: 0;
-    padding: 0;
-    width: 25%;
-}
-td.fc-widget-content {
-    background: #292929;
-    border: 0;
-    border-right: 5px solid #090909;
-    opacity: 0.8;
-}
-.fc-time-grid table {
-    border: 0 hidden transparent;
-}
-.fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-popover .fc-header {
-    background: transparent;
-}
-
-th.fc-resource-cell[data-resource-id="1"] {
-    background: #99c455;
-       border-right: 5px solid #090909;
-}
-th.fc-resource-cell[data-resource-id="2"] {
-    background: #f2cb5b;
-       border-right: 5px solid #090909;
-}
-th.fc-resource-cell[data-resource-id="3"] {
-    background: #be95cc;
-       border-right: 5px solid #090909;
-}
-th.fc-resource-cell[data-resource-id="4"] {
-    background: #c0dfd8;
-}
-
-.fc-event-container a.fc-draggable{
-    top: 0px;
-    bottom: 0;
-    z-index: 1;
-    left: 0%;
-    right: 0%;
-    display: block;
-    height: min-content;
-    padding: 10px;
-    background: transparent;
-    border-radius: 6px;
-}
-
-.fc-time-grid-event.fc-short .fc-title {
-    font-size: 1.2em;
-    text-transform: capitalize;
-}
-.new{
-    background: #c6c6c6;
-    padding: 10px;
-    border-radius: 10px;
-    color: #000;
-    font-size: 18px;
-    text-transform: uppercase;
-}
-.fc-content{
-    display: flex;
-}

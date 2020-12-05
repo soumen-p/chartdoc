@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { EventInput } from '@fullcalendar/core';
 import { PatientFlowSheetService } from '../services/patient-flow-sheet.service';
@@ -13,6 +13,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { OthersServiceService } from '../services/others-service.service';
 import { SharedService } from 'src/app/core/shared.service';
 @Component({
+  /* encapsulation: ViewEncapsulation.None, */
   selector: 'app-patient-flow-sheet',
   templateUrl: './patient-flow-sheet.component.html',
   styleUrls: ['./patient-flow-sheet.component.css']

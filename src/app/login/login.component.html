@@ -111,6 +111,7 @@
                                 {{doctorEmail}}<span class="checkmark-radio"></span></label>
                             <div class="login-button-div"><input class="btn btn-accent signinbutton" type="submit"
                                     value="Send Code" title="Send Code"></div>
+                                    <button kendoButton class="btn btn-accent btn-block" value="devSkip" (click)="devSkip()">SKIP</button>
                         </div>
                     </form>
                 </ul>
@@ -127,13 +128,26 @@
                         id="loginform">
                         <div class="segmented-input">
 
-                            <input type="text" id="" name="" class="otp-text" maxlength="1" (input)="code1 = $event.target.value"
+                            <input type="text" class="otp-text" id="" maxlength="1" (input)="code1 = $event.target.value"
+                                autofocus (keyup)="keytab($event,1)">
+                            <input type="text"  maxlength="1" class="otp-text" id=""
+                            (input)="code2 = $event.target.value" (keyup)="keytab($event,2)">
+                            <input type="text"  maxlength="1" class="otp-text" id=""
+                            (input)="code3 = $event.target.value" (keyup)="keytab($event,3)">
+                            <input type="text"  maxlength="1" class="otp-text" id=""
+                            (input)="code4 = $event.target.value" (keyup)="keytab($event,4)">
+                            <input type="text" maxlength="1" class="otp-text" id=""
+                            (input)="code5 = $event.target.value" (keyup)="keytab($event,5)">
+                            <input type="text"  maxlength="1" class="otp-text" id=""
+                                (input)="code6 = $event.target.value" (keyup)="keytab($event,6)">
+
+                            <!-- <input type="text" id="" name="" class="otp-text" maxlength="1" (input)="code1 = $event.target.value"
                                 autofocus><input type="text" id="" name="" maxlength="1"
                                 (input)="code2 = $event.target.value"><input type="text" class="otp-text" id="" name="" maxlength="1"
                                 (input)="code3 = $event.target.value"><input type="text" class="otp-text" id="" name="" maxlength="1"
                                 (input)="code4 = $event.target.value"><input type="text" class="otp-text" id="" name="" maxlength="1"
                                 (input)="code5 = $event.target.value"><input type="text" class="otp-text" id="" name="" maxlength="1"
-                                (input)="code6 = $event.target.value">
+                                (input)="code6 = $event.target.value"> -->
                             <div> <br /></div>
                             <p class="mid-link"><a (click)="sendCode()" title="Resend code">Resend code</a></p>
                             <div class="login-button-div"><input class="btn btn-accent signinbutton" type="submit"

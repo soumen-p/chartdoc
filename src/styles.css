@@ -9795,8 +9795,44 @@ ngb-datepicker-navigation-select>.custom-select {
     border-radius: 8px !important;
 }
 
-/* from Ketan 
-.fc table {
+
+.flowsheetcalender td.fc-axis.fc-widget-content {
+    display: none !important;
+    }
+    .flowsheetcalender th.fc-resource-cell[data-resource-id="1"] {
+    background: #99c455;
+    border-right: 4px solid #090909 !important;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    }
+    .flowsheetcalender th.fc-resource-cell[data-resource-id="2"] {
+    background: #f2cb5b;
+    border-right: 4px solid #090909 !important;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    }
+    .flowsheetcalender th.fc-resource-cell[data-resource-id="3"] {
+    background: #be95cc;
+    border-right: 4px solid #090909 !important;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    }
+    .flowsheetcalender th.fc-resource-cell[data-resource-id="4"] {
+    background: #c0dfd8;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    }
+    .flowsheetcalender .fc-widget-content{
+    border-right: 5px solid #090909 !important;
+    border-bottom: none !important;
+    border-top: none !important;
+    border-left: 1px solid #383838 !important;
+    }
+
+
+    /* from Ketan 
+    
+ .fc table {
     width: 100%;
     box-sizing: border-box;
     table-layout: fixed;
@@ -9804,6 +9840,7 @@ ngb-datepicker-navigation-select>.custom-select {
     border-spacing: 0;
     font-size: 1em;
 }
+
 .fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead{
     border: 0;
 }
@@ -9842,7 +9879,7 @@ td.fc-widget-content {
 
 th.fc-resource-cell[data-resource-id="1"] {
     background: #99c455;
-    border-right: 5px solid #090909;
+       border-right: 5px solid #090909;
 }
 th.fc-resource-cell[data-resource-id="2"] {
     background: #f2cb5b;
@@ -9850,14 +9887,15 @@ th.fc-resource-cell[data-resource-id="2"] {
 }
 th.fc-resource-cell[data-resource-id="3"] {
     background: #be95cc;
-    border-right: 5px solid #090909;
+       border-right: 5px solid #090909;
 }
 th.fc-resource-cell[data-resource-id="4"] {
     background: #c0dfd8;
 }
 
-/*--new added---*
 .fc-event-container a.fc-draggable{
+    top: 0px;
+    bottom: 0;
     z-index: 1;
     left: 0%;
     right: 0%;
@@ -9871,8 +9909,6 @@ th.fc-resource-cell[data-resource-id="4"] {
 .fc-time-grid-event.fc-short .fc-title {
     font-size: 1.2em;
     text-transform: capitalize;
-    font-weight: 600;
-    color:#fff;
 }
 .new{
     background: #c6c6c6;
@@ -9886,59 +9922,4 @@ th.fc-resource-cell[data-resource-id="4"] {
     display: flex;
 }
 
-.fc-content-col{
-	display: flex;
-}
-.room{
-    background: #585857;
-    color: #fff;
-    border-radius: 5px;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    padding: 7px;
-    font-weight: 600;
-    font-size: 18px;
-    letter-spacing: normal;
-}
-
-.fc-event-container{
-	width: 100%;
-}
-
-.dots{
-display: inline;
-    width: 10%;
-}
-.dots ul {
-    text-align: right;
-    margin: 0;
-    line-height: 0;
-    height: 9.5px;
-}
-.dots ul li {
-    height: 5px;
-    width: 5px;
-    background-color: #666665;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 3px 4px 0px 0px;
-    padding: 0.3px;
-}
-.fc-event{
-	border: 1px solid transparent;
-}
-
-.green-border{
-	border:1px solid #99c455;
-}
-.yellow-border{
-	border:1px solid #f2cb5b;
-}
-.purple-border{
-	border:1px solid #be95cc;
-}
-.skyblue-border{
-	border:1px solid #c0dfd8;
-}
-
- */
+*/
