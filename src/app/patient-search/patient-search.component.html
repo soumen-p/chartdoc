@@ -92,6 +92,7 @@
                                                 </div>
                                             </form>
                                         </div>
+                                        <!-- old -->
                                         <div class="col-md-12 col-lg-12 col-xl-12" *ngIf="isRecordFound">
                                             <table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
                                                 <thead style="background: #678680;">
@@ -104,7 +105,7 @@
                                                         <th>Gender</th>
                                                         <th>Email</th>
                                                         <th>Mobile No</th>
-                                                        <!-- <th>Identifier</th> -->
+                                                        
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -141,7 +142,7 @@
                                         <div class="col-md-12 col-lg-12 col-xl-12" *ngIf="!isRecordFound">
                                             <span>{{errMsg}}</span>
                                         </div>
-
+                                    <!-- old -->
                                     </div>
                                     <!-- <div class="row">  
                                         <div class="col-lg-8 col-md-10 ml-auto mr-auto">  
@@ -162,10 +163,11 @@
         </section>
         <div class="col-md-12 mt-5">
             <div class="mt-2 mb-5">
-            <h1 class="search-history-label">Patient Search Result For: Barbara Marcus</h1>
-            <span class="showing-result">Showing 5 of 5 results</span>
+            <h1 class="search-history-label">Patient Search Result For: {{firstName.value}}</h1>
+            <span class="showing-result" *ngIf="isRecordFound">Showing {{patientList.length}} of {{patientList.length}} results</span>
+            <span class="showing-result" *ngIf="!isRecordFound">No search result found</span>
         </div>
-        <table class="table table-hover col-md-12">
+        <table class="table table-hover col-md-12" *ngIf="this.patientList.length > 0">
             <thead class="srch-th">
               <tr>
                 <th scope="col" class="text-left" style="width:41%">Name</th>
@@ -175,15 +177,15 @@
                 <th scope="col" class="text-center" style="width:14%">Billing</th>
               </tr>
             </thead>
-            <tbody class="srch-tbody">
+            <tbody class="srch-tbody" *ngFor="let patient of patientList; let i = index">
               <tr>
-                <td><img src="assets/images/Donna-Photo.png" alt="Loader" class="img-fluid mr-2"> <label class="pr-t name-last-appointment">Barbara E. Marcus<br/><span>Last appointment: Oct 24, 2020</span></label></td>
-                <td class="text-center"><label class="name-last-appointment ">Aug 20, 1956</label></td>
+                <td><img src="{{patient.imagePath}}" alt="Loader" class="img-fluid mr-2"> <label class="pr-t name-last-appointment">{{patient.firstName}} {{patient.lastName}}<br/><span>Last appointment: Oct 24, 2020</span></label></td>
+                <td class="text-center"><label class="name-last-appointment ">{{patient.dob}}</label></td>
                 <td class="text-center achover">
                     <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
                         <div class="position-absolute achover-open">
-                            <p class="action-list">Edit Info</p>
-                            <p class="action-list">Disable Patient</p>
+                            <p class="action-list" (click)="processAction('editinfo',i)">Edit Info</p>
+                            <p class="action-list" (click)="processAction('disablepatient',i)">Disable Patient</p>
                     </div>
                     </label>
                     
@@ -191,9 +193,9 @@
                 <td class="text-center achover">
                     <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
                         <div class="position-absolute achover-open">
-                            <p class="action-list">Open Encounter</p>
-                            <p class="action-list">Refill Rx</p>
-                            <p class="action-list">View History</p>
+                            <p class="action-list" (click)="processAction('openencounter',i)">Open Encounter</p>
+                            <p class="action-list" (click)="processAction('refillrx',i)">Refill Rx</p>
+                            <p class="action-list" (click)="processAction('viewhistory',i)">View History</p>
                     </div>
                     </label>
                     
@@ -201,136 +203,8 @@
                 <td class="text-center achover">
                     <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
                         <div class="position-absolute achover-open">
-                            <p class="action-list">Create Claim</p>
-                            <p class="action-list">View All Claims</p>
-                    </div>
-                    </label>
-                    
-                </td>
-              </tr>
-              <tr>
-                <td><img src="assets/images/Donna-Photo.png" alt="Loader" class="img-fluid mr-2"> <label class="pr-t name-last-appointment">Barbara E. Marcus<br/><span>Last appointment: Oct 24, 2020</span></label></td>
-                <td class="text-center"><label class="name-last-appointment ">Aug 20, 1956</label></td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Edit Info</p>
-                            <p class="action-list">Disable Patient</p>
-                    </div>
-                    </label>
-                    
-                </td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Open Encounter</p>
-                            <p class="action-list">Refill Rx</p>
-                            <p class="action-list">View History</p>
-                    </div>
-                    </label>
-                    
-                </td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Create Claim</p>
-                            <p class="action-list">View All Claims</p>
-                    </div>
-                    </label>
-                    
-                </td>
-              </tr>
-              <tr>
-                <td><img src="assets/images/Donna-Photo.png" alt="Loader" class="img-fluid mr-2"> <label class="pr-t name-last-appointment">Barbara E. Marcus<br/><span>Last appointment: Oct 24, 2020</span></label></td>
-                <td class="text-center"><label class="name-last-appointment ">Aug 20, 1956</label></td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Edit Info</p>
-                            <p class="action-list">Disable Patient</p>
-                    </div>
-                    </label>
-                    
-                </td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Open Encounter</p>
-                            <p class="action-list">Refill Rx</p>
-                            <p class="action-list">View History</p>
-                    </div>
-                    </label>
-                    
-                </td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Create Claim</p>
-                            <p class="action-list">View All Claims</p>
-                    </div>
-                    </label>
-                    
-                </td>
-              </tr>
-              <tr>
-                <td><img src="assets/images/Donna-Photo.png" alt="Loader" class="img-fluid mr-2"> <label class="pr-t name-last-appointment">Barbara E. Marcus<br/><span>Last appointment: Oct 24, 2020</span></label></td>
-                <td class="text-center"><label class="name-last-appointment ">Aug 20, 1956</label></td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Edit Info</p>
-                            <p class="action-list">Disable Patient</p>
-                    </div>
-                    </label>
-                    
-                </td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Open Encounter</p>
-                            <p class="action-list">Refill Rx</p>
-                            <p class="action-list">View History</p>
-                    </div>
-                    </label>
-                    
-                </td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Create Claim</p>
-                            <p class="action-list">View All Claims</p>
-                    </div>
-                    </label>
-                    
-                </td>
-              </tr>
-              <tr>
-                <td><img src="assets/images/Donna-Photo.png" alt="Loader" class="img-fluid mr-2"> <label class="pr-t name-last-appointment">Barbara E. Marcus<br/><span>Last appointment: Oct 24, 2020</span></label></td>
-                <td class="text-center"><label class="name-last-appointment ">Aug 20, 1956</label></td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Edit Info</p>
-                            <p class="action-list">Disable Patient</p>
-                    </div>
-                    </label>
-                    
-                </td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Open Encounter</p>
-                            <p class="action-list">Refill Rx</p>
-                            <p class="action-list">View History</p>
-                    </div>
-                    </label>
-                    
-                </td>
-                <td class="text-center achover">
-                    <label class="action-label position-relative">ACTION&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i>
-                        <div class="position-absolute achover-open">
-                            <p class="action-list">Create Claim</p>
-                            <p class="action-list">View All Claims</p>
+                            <p class="action-list" (click)="processAction('createclaim',i)">Create Claim</p>
+                            <p class="action-list" (click)="processAction('viewallclaim',i)">View All Claims</p>
                     </div>
                     </label>
                     

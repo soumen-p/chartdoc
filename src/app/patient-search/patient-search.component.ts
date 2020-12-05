@@ -264,4 +264,17 @@ export class PatientSearchComponent implements OnInit {
     // update current page of items
     this.pageOfItems = pageOfItems;
   }
+
+  processAction(actionName, index) {
+    console.log('Perform ' + actionName + ' on patient ', this.patientList[index]);
+    /* Action Names
+    editinfo
+    disablepatient
+    openencounter
+    refillrx
+    viewhistory
+    createclaim
+    viewallclaim
+    */
+  }
 }
