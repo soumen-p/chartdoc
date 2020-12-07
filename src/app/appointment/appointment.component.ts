@@ -253,6 +253,10 @@ checkDoctor(event: any) {
                 var doctorInfo= this.appointmentService.getBookingInfo("doctorInfo");
                 //this.calendarreSources = tempdata.filter((x:any)=>x.id==doctorInfo.doctorId);
 				this.doctorsData = tempdata;
+				if(this.alldoctors)
+				this.doctorsRes=this.doctorsData;
+				else
+					this.doctorsRes=[];
             },
                 err => {
                    
