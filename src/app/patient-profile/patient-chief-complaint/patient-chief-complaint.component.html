@@ -1,8 +1,8 @@
-<div class="tab-content primary">
+<div class="tab-content primary" style="border:1px solid #5d6154;">
     <div class="tab-pane fade active show" id="profile-0">
         <div class="row margin-0">
             <div class="col-xl-12">
-                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                <!-- <table width="100%" cellspacing="0" cellpadding="0" border="0">
                     <tr>
                         <td colspan="2" style="color: green;">
                             {{message}}
@@ -21,12 +21,14 @@
                             (click)="saveCc()">Save</button>
                         </td>
                     </tr>
-                </table>                    
+                </table>                     -->
+
+
             </div>
             <div class="col-xl-12">
                 <section class="box nobox ">
                     <div class="content-body">
-                        <div class="row">
+                        <!-- <div class="row">
                             
                                     <div class="col-12">
                                     <div class="form-group">
@@ -35,9 +37,310 @@
                                             [(ngModel)]="ckEditorContent"
                                             (ready)="onReady($event)"
                                             (change)="onChange($event)"
-                                            class="form-control" cols="12" ></ckeditor>                                       
+                                            class="form-control" style="border:1px solid #5d6154 !important" cols="12" ></ckeditor>                                       
                                     </div>
-                                <!-- </form> -->
+                                </form>
+                            </div>
+                        </div> -->
+                        <div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <h3 class="mt-4 mb-3 cc-heading">Chief Complaint</h3>
+                                    <div class="cc-boby1 mb-4 p-4">
+                                        <ul class="pl-4 prev-list">
+                                            <li>Swollen Left Knee</li>
+                                            <li>Pain</li>
+                                            <li>Limping</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 p-0">
+                                    <div class="wid-notification wid-notification-cc">
+                                        <div class="row m-0 pt-3 pb-3">
+                                            <div class="col-md-2">
+                                                <h3 class="mt-1 mb-2 cc-heading">Load:</h3>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <ul class="nav nav-tabs cc-nav-tabs">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" data-toggle="tab"
+                                                            href="#home">Template</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-toggle="tab" href="#menu1">Previous
+                                                            Encounter</a>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                        <!-- Nav tabs -->
+
+                                        <!-- Tab panes -->
+                                        <div class="tab-content cc-tab-content">
+                                            <div class="tab-pane active" id="home">
+                                                <div class="">
+                                                    <div class="input-group pl-3 pr-3">
+                                                        <input
+                                                            style="border-radius: 10px; background: #fff; color: #000;"
+                                                            type="text" class="form-control"
+                                                            placeholder="Search Templates"
+                                                            aria-describedby="basic-addon2">
+                                                        <i class="fa fa-search icon"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-3 scroll-style" style="height: 250px;overflow-y:auto;overflow-x:hidden;">
+                                                    <div class="accordion-group">
+                                                        <div class="card bg-transparent border-bottom-0">
+                                                            <div class="card-header">
+                                                                <div class="row">
+                                                                    <div class="col-12 p-0">
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                           
+                                                                            <div class="col-9">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                                <span class="date-cc-span">Description</span>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                           
+                                                                            <div class="col-9">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                                <span class="date-cc-span">Description</span>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                           
+                                                                            <div class="col-9">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                                <span class="date-cc-span">Description</span>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                           
+                                                                            <div class="col-9">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                                <span class="date-cc-span">Description</span>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                           
+                                                                            <div class="col-9">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                                <span class="date-cc-span">Description</span>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                           
+                                                                            <div class="col-9">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                                <span class="date-cc-span">Description</span>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                           
+                                                                            <div class="col-9">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                                <span class="date-cc-span">Description</span>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="menu1">
+                                                <div class="">
+                                                    <div class="input-group pl-3 pr-3">
+                                                        <input
+                                                            style="border-radius: 10px; background: #fff; color: #000;"
+                                                            type="text" class="form-control"
+                                                            placeholder="Search Previous Encounters"
+                                                            aria-describedby="basic-addon2">
+                                                        <i class="fa fa-search icon"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-3 scroll-style" style="height: 250px;overflow-y:auto;overflow-x:hidden;">
+                                                    <div class="accordion-group">
+                                                        <div class="card bg-transparent border-bottom-0">
+                                                            <div class="card-header">
+                                                                <div class="row">
+                                                                    <div class="col-12 p-0">
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <p class="date-cc-p">Aug 20,2020</p>
+                                                                                <span class="date-cc-span">Sre throt, Fecer</span>
+                                                                            </div>
+                                                                            <div class="col-5">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <p class="date-cc-p">Aug 20,2020</p>
+                                                                                <span class="date-cc-span">Sre throt, Fecer</span>
+                                                                            </div>
+                                                                            <div class="col-5">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <p class="date-cc-p">Aug 20,2020</p>
+                                                                                <span class="date-cc-span">Sre throt, Fecer</span>
+                                                                            </div>
+                                                                            <div class="col-5">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <p class="date-cc-p">Aug 20,2020</p>
+                                                                                <span class="date-cc-span">Sre throt, Fecer</span>
+                                                                            </div>
+                                                                            <div class="col-5">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <p class="date-cc-p">Aug 20,2020</p>
+                                                                                <span class="date-cc-span">Sre throt, Fecer</span>
+                                                                            </div>
+                                                                            <div class="col-5">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <p class="date-cc-p">Aug 20,2020</p>
+                                                                                <span class="date-cc-span">Sre throt, Fecer</span>
+                                                                            </div>
+                                                                            <div class="col-5">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-row form-row-cc m-0">
+                                                                            <div class="col-1 pl-3">
+                                                                                <i class="fa fa-chevron-down"></i>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <p class="date-cc-p">Aug 20,2020</p>
+                                                                                <span class="date-cc-span">Sre throt, Fecer</span>
+                                                                            </div>
+                                                                            <div class="col-5">
+                                                                                <p class="date-cc-p">Dr.Polimoni</p>
+                                                                            </div>
+                                                                            <div class="col-2 pr-3">
+                                                                                <button type="button"
+                                                                                    class="showSingle addbutton float-right" data-toggle="modal" data-target="#ccmodal">+</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -46,3 +349,42 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="ccmodal" tabindex="-1" role="dialog" aria-labelledby="ccmodal" aria-hidden="true" style="z-index: 1099;">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content p-3" style="width:100%">
+       
+        <div class="modal-body border-0 p-0 text-center mb-4">
+            <h2 class="validate-modal-header">Load Previous Encounter</h2>
+            <h2 class="validate-modal-header" style="display: none;">Load Hypertension Management Template</h2>
+           <div class="row mt-3">
+                <p class="modal-in-p text-center w-100" style="font-weight: 600;"><span>This will Create a new Encounter that You can Easily edit.<br>Select areas to Load:</span></p>
+                
+                <div class="row w-100">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <label class="custom-checkbox ccchkbox-label"> Chief Complaint  <input  type="checkbox"><span class="checkmark-chk"></span></label>
+                        <label class="custom-checkbox ccchkbox-label"> Exam Note  <input  type="checkbox"><span class="checkmark-chk"></span></label> 
+                        <label class="custom-checkbox ccchkbox-label"> Inspiration/Plan  <input  type="checkbox" checked><span class="checkmark-chk"></span></label>
+                        <label class="custom-checkbox ccchkbox-label"> ICD  <input  type="checkbox" checked><span class="checkmark-chk"></span></label>
+                        <label class="custom-checkbox ccchkbox-label"> CPT <input  type="checkbox" checked><span class="checkmark-chk"></span></label>
+                        <label class="custom-checkbox ccchkbox-label"> Follow Up  <input  type="checkbox"><span class="checkmark-chk"></span></label>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+           </div>
+          </div>
+		  
+		 
+		 
+		  
+		 
+        <div class="text-center">
+          <button type="button" class="pop-upclose-button pl-4 pr-4" >Load Encounter</button><br>
+          <a href="#" data-dismiss="modal" style="color:#53a0e4 !important;top:10px;font-weight:600;position:relative">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

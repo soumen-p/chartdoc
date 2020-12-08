@@ -9063,6 +9063,9 @@ body {
     min-height: 100%;
     width: 100%;
 }
+.modal-backdrop.show {
+    opacity: 0.8;
+}
 .login {
     border: 3px solid rgba(195,216,136,0.5);
     background-color: rgba(0,0,0,0.75);
@@ -9923,3 +9926,96 @@ th.fc-resource-cell[data-resource-id="4"] {
 }
 
 */
+.cc-tab-content .form-control::placeholder {
+    color: #000;
+    font-size: 18px;
+  }
+.cc-heading{
+    font-size: 22px;
+}
+.cc-boby1{
+    border:1px solid #5d6154;
+    min-height: 300px;  
+}
+.prev-list li{
+    font-size: 20px;
+    color: #dadada;
+    line-height: 34px;
+}
+.wid-notification-cc{
+    padding: 0;
+    background-color: #3c3c3c;
+}
+.cc-tab-content{
+    background-color: transparent;
+    border:none;
+    border-radius: 0;
+}
+.cc-nav-tabs{
+    border: 1px solid #89aece;
+    border-radius: 8px;
+}
+.cc-nav-tabs li{
+    width: 50% !important;
+    padding:0 !important;
+    border-radius: 0 !important;
+}
+.cc-nav-tabs li:first-child a{
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    border-top-right-radius: 0px !important;
+}
+.cc-nav-tabs li:nth-child(2) a{
+    border-top-right-radius: 8px !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-right-radius: 8px !important;
+}
+.cc-nav-tabs li a{
+    font-size: 15px;
+    padding: 5px 0;
+    font-weight: 600;
+}
+.cc-nav-tabs.nav-item.show .nav-link, .cc-nav-tabs .nav-link.active {
+    color: #656565 ;
+    background-color: #fff;
+    border-color: transparent;
+    /* font-size: 15px !important; */
+}
+.date-cc-p{
+    margin-bottom: 0;
+}
+.date-cc-span{
+    color:#8c8c8c
+}
+.bg-transparent{
+    background-color: transparent !important;
+}
+.form-row-cc{
+    border-bottom: 1px solid #5b5b5a;
+}
+.ccchkbox-label{
+color: #7a7a7a;
+font-weight: 600;
+padding-left: 25px;
+font-size: 16px;
+text-align: left;
+}
+.ccchkbox-label .checkmark-chk {
+
+    top:3px;
+    background-image: none;
+    border-radius: 3px;
+    background: #eaeaea;
+    border: 1px solid #6fa4b0;
+}
+.ccchkbox-label input:checked ~ .checkmark-chk {
+     background-color: #eaeaea; 
+}
+.ccchkbox-label .checkmark-chk:after {
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid #54ab54;
+    border-width: 0 2px 2px 0;
+}
