@@ -9928,7 +9928,7 @@ th.fc-resource-cell[data-resource-id="4"] {
 */
 .cc-tab-content .form-control::placeholder {
     color: #000;
-    font-size: 18px;
+    font-size: 18px
   }
 .cc-heading{
     font-size: 22px;
